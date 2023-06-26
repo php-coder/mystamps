@@ -41,8 +41,9 @@ fatal() {
 export GH_NO_UPDATE_NOTIFIER=yes
 
 # NOTE: requires `gh auth login --hostname github.com --git-protocol https --web` prior executing the script
-export GH_TOKEN="$(gh auth token)"
+GH_TOKEN="$(gh auth token)"
 [ -n "$GH_TOKEN" ] ||  fatal 'gh auth token returns an empty string'
+export GH_TOKEN
 
 # DEBUG (deprecated): set to "1", "true", or "yes" to enable verbose output on standard error.
 # GH_DEBUG: set to a truthy value to enable verbose output on standard error. Set to "api" to additionally log details of HTTP traffic.
@@ -57,6 +58,8 @@ ENABLE_DEBUG=
 # What a label to put on the issue
 ISSUE_LABEL=techdebt
 
+# We intentionally use single quotes as the real values will be substituted during `eval` call later
+# shellcheck disable=SC2016
 ISSUE_BODY_TEMPLATE='echo "The puzzle \`${PUZZLE_ID}\` from #$ORIG_ISSUE has to be resolved:
 
 https://github.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/${PUZZLE_FILE}#L${PUZZLE_LINE_START}-L${PUZZLE_LINE_END}
@@ -80,16 +83,18 @@ fi
 PUZZLES_COUNT=0
 NEW_ISSUES_COUNT=0
 
-while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
-    PUZZLES_COUNT=$[PUZZLES_COUNT + 1]
+# UNUSED_REST is really unused but without it, read appends the rest of a line to the last variable
+# shellcheck disable=SC2034
+while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
+    PUZZLES_COUNT=$((PUZZLES_COUNT + 1))
 
     # unescape CSV: "a ""quoted"" string" => a "quoted" string
     TITLE="$(echo "$TITLE" | sed -e 's|^"||;' -e 's|"$||' -e 's|""|"|g')"
 
     debug "$PUZZLE_ID: has title: '$TITLE'"
-    MAPPING="$(grep --max-count=1 '^'$PUZZLE_ID'[[:space:]]' "$MAPPING_FILE" || :)"
+    MAPPING="$(grep --max-count=1 "^${PUZZLE_ID}[[:space:]]" "$MAPPING_FILE" || :)"
     if [ -n "$MAPPING" ]; then
-        IFS=$'\t' read ID ISSUE_ID REST <<<"$MAPPING"
+        IFS=$'\t' read -r UNUSED_PUZZLE_ID ISSUE_ID UNUSED_REST <<<"$MAPPING"
         info "$PUZZLE_ID => #$ISSUE_ID: is already linked"
         continue
     fi
@@ -128,11 +133,11 @@ while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
     # 2) For each puzzle id we have to make 2 search requests instead of one because there is no possibility to use logical OR
     #    (body contains OR title equals) in a search query. As result, we might get "HTTP 403: API rate limit exceeded" error more often
     #    if we have a lot of issues to process or we re-run the script frequently.
-    JSON="$(echo "$SEARCH_BY_BODY\n$SEARCH_BY_TITLE" | sed -e 's|\\n| |g' -e 's|\\r||g' -e 's|`||g' | jq --slurp 'add | unique_by(.number)')"
+    JSON="$(echo -e "$SEARCH_BY_BODY\n$SEARCH_BY_TITLE" | sed -e 's|\\n| |g' -e 's|\\r||g' -e 's|`||g' | jq --slurp 'add | unique_by(.number)')"
     ISSUES_COUNT="$(echo "$JSON" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_COUNT issue(s) overall"
     debug "$PUZZLE_ID: result=$JSON"
-    if [ $ISSUES_COUNT -gt 1 ]; then
+    if [ "$ISSUES_COUNT" -gt 1 ]; then
         # LATER: include in the output type of match -- in:title or in:body
         error ''
         error "$PUZZLE_ID: found $ISSUES_COUNT issues that match the criterias:"
@@ -141,19 +146,25 @@ while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
         error "Ways to resolve:"
         error "    1) modify a body of one of the tickets to not contain puzzle id (or to have a different title)"
         error "    2) manually create a mapping between this puzzle and one of the issues:"
-        echo "$CANDIDATES" | while read ISSUE_ID ISSUE_STATE REST; do
+        # UNUSED_REST is really unused but without it, read appends the rest of a line to the last variable
+        # shellcheck disable=SC2034
+        echo "$CANDIDATES" | while read -r ISSUE_ID ISSUE_STATE UNUSED_REST; do
             error "       echo '$PUZZLE_ID\t$ISSUE_ID\t$ISSUE_STATE\tmanually' >>$MAPPING_FILE"
         done
         fatal ''
     fi
 
-    if [ $ISSUES_COUNT -le 0 ]; then
+    if [ "$ISSUES_COUNT" -le 0 ]; then
         info "$PUZZLE_ID: no related issues found. Need to create a new issue: $TITLE"
 
-        IFS=$'\t' read SKIP_PUZZLE_ID ORIG_ISSUE SKIP_TITLE PUZZLE_FILE PUZZLE_LINES < <(grep --max-count=1 "^$PUZZLE_ID" "$DIR/todos-in-code.tsv")
+        # These variables are needed for eval-ing ISSUE_BODY_TEMPLATE
+        # shellcheck disable=SC2034
+        IFS=$'\t' read -r UNUSED_PUZZLE_ID ORIG_ISSUE UNUSED_TITLE PUZZLE_FILE PUZZLE_LINES < <(grep --max-count=1 "^$PUZZLE_ID" "$DIR/todos-in-code.tsv")
 
         # "50-51" => {50, 51}
-        IFS='-' read PUZZLE_LINE_START PUZZLE_LINE_END < <(echo "$PUZZLE_LINES")
+        # These variables are needed for eval-ing ISSUE_BODY_TEMPLATE
+        # shellcheck disable=SC2034
+        IFS='-' read -r PUZZLE_LINE_START PUZZLE_LINE_END < <(echo "$PUZZLE_LINES")
 
         ISSUE_BODY="$(eval "$ISSUE_BODY_TEMPLATE")"
         debug "$PUZZLE_ID: issue body:"
@@ -168,11 +179,11 @@ while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
 
         info "$PUZZLE_ID => #$ISSUE_ID: link with $ISSUE_ID (just created)"
         printf '%s\t%s\topen\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" >> "$MAPPING_FILE"
-        NEW_ISSUES_COUNT=$[NEW_ISSUES_COUNT + 1]
+        NEW_ISSUES_COUNT=$((NEW_ISSUES_COUNT + 1))
         continue
     fi
 
-    if [ $ISSUES_COUNT -eq 1 ]; then
+    if [ "$ISSUES_COUNT" -eq 1 ]; then
         ISSUE_ID="$(echo "$JSON" | jq '.[0] | .number')"
         ISSUE_URL="$(echo "$JSON" | jq --raw-output '.[0] | .url')"
 
