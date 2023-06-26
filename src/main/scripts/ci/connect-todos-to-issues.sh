@@ -133,7 +133,7 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
     # 2) For each puzzle id we have to make 2 search requests instead of one because there is no possibility to use logical OR
     #    (body contains OR title equals) in a search query. As result, we might get "HTTP 403: API rate limit exceeded" error more often
     #    if we have a lot of issues to process or we re-run the script frequently.
-    JSON="$(echo -e "$SEARCH_BY_BODY\n$SEARCH_BY_TITLE" | sed -e 's|\\n| |g' -e 's|\\r||g' -e 's|`||g' | jq --slurp 'add | unique_by(.number)')"
+    JSON="$(echo "$SEARCH_BY_BODY$SEARCH_BY_TITLE" | sed -e 's|\\n| |g' -e 's|\\r||g' -e 's|`||g' | jq --slurp 'add | unique_by(.number)')"
     ISSUES_COUNT="$(echo "$JSON" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_COUNT issue(s) overall"
     debug "$PUZZLE_ID: result=$JSON"
