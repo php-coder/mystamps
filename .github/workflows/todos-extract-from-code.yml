@@ -78,6 +78,7 @@ jobs:
             PUZZLES_FILES_MODIFIED=yes
           elif ! diff --brief generated-todos/pdd.xml pdd.xml >/dev/null; then
             echo 'pdd.xml has been modified'
+            mv pdd.xml generated-todos/pdd.xml
             PUZZLES_FILES_MODIFIED=yes
           fi
 
@@ -87,6 +88,7 @@ jobs:
             PUZZLES_FILES_MODIFIED=yes
           elif ! diff --brief generated-todos/todos-in-code.tsv todos-in-code.tsv >/dev/null; then
             echo 'todos-in-code.tsv has been modified'
+            mv todos-in-code.tsv generated-todos/todos-in-code.tsv
             PUZZLES_FILES_MODIFIED=yes
           fi
 
