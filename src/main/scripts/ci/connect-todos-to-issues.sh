@@ -124,17 +124,19 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
     ISSUES_BY_BODY_COUNT="$(echo "$SEARCH_BY_BODY" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_BY_BODY_COUNT issue(s) by body"
 
+    # KNOWN ISSUE:
+    # As there is no way to search in title with exact match, it's possible to find more than one issue if their titles are similar.
+    # For example, when lookup for "Add validation", it finds an issue with a title "Add validation" and "Add validation for e-mail".
+    # In this case, we let a user to choose which one is needed.
+    # @todo #1060 Add a workaround for GitHub search by filtering out issues with titles that don't match exactly
     SEARCH_BY_TITLE="$(gh search issues --repo "$GITHUB_REPOSITORY" --json number,state,url,title,body --match title "$TITLE")"
     ISSUES_BY_TITLE_COUNT="$(echo "$SEARCH_BY_TITLE" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_BY_TITLE_COUNT issue(s) by title"
 
-    # KNOWN ISSUES:
-    # 1) As there is no way to search in title with exact match, it's possible to find more than one issue if their titles are similar.
-    #    For example, when lookup for "Add validation", it finds an issue with a title "Add validation" and "Add validation for e-mail".
-    #    In this case, we let a user to choose which one is needed.
-    # 2) For each puzzle id we have to make 2 search requests instead of one because there is no possibility to use logical OR
-    #    (body contains OR title equals) in a search query. As result, we might get "HTTP 403: API rate limit exceeded" error more often
-    #    if we have a lot of issues to process or we re-run the script frequently.
+    # KNOWN ISSUE:
+    # For each puzzle id we have to make 2 search requests instead of one because there is no possibility to use logical OR
+    # (body contains OR title equals) in a search query. As result, we might get "HTTP 403: API rate limit exceeded" error more often
+    # if we have a lot of issues to process or we re-run the script frequently.
     JSON="$(echo "$SEARCH_BY_BODY$SEARCH_BY_TITLE" | sed -e 's|\\n| |g' -e 's|\\r||g' -e 's|`||g' | jq --slurp 'add | unique_by(.number)')"
     ISSUES_COUNT="$(echo "$JSON" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_COUNT issue(s) overall"
