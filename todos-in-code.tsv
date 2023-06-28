@@ -126,6 +126,7 @@ Id	Ticket	"Title"	File	Lines
 1057-ae51bd20	1057	"SeriesSaleImportForm: add tests"	src/main/frontend/src/components/SeriesSaleImportForm.js	6-6
 1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	858-858
 1057-ea0a43ea	1057	"SeriesSaleImportForm: wait until setState() finishes"	src/main/frontend/src/components/SeriesSaleImportForm.js	32-32
+1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	131-131
 1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1328-1328
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	638-638
 1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	136-136
