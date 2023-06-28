@@ -130,8 +130,8 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
 
     # KNOWN ISSUES:
     # 1) As there is no way to search in title with exact match, it's possible to find more than one issue if their titles are similar.
-    #    For example, when lookup for "Add validation", it find an issue with the title "Add validation" and "Add validation for e-mail".
-    #    In this case, we let the user to choose which one is needed.
+    #    For example, when lookup for "Add validation", it finds an issue with a title "Add validation" and "Add validation for e-mail".
+    #    In this case, we let a user to choose which one is needed.
     # 2) For each puzzle id we have to make 2 search requests instead of one because there is no possibility to use logical OR
     #    (body contains OR title equals) in a search query. As result, we might get "HTTP 403: API rate limit exceeded" error more often
     #    if we have a lot of issues to process or we re-run the script frequently.
