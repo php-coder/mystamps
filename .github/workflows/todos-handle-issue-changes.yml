@@ -40,8 +40,8 @@ jobs:
 
       - name: Update issue state
         env:
-          ISSUE_ID: {{ github.event.issue.number }}
-          NEW_STATE: {{ github.event.action }}
+          ISSUE_ID: ${{ github.event.issue.number }}
+          NEW_STATE: ${{ github.event.action }}
         run: >-
           awk \
             -v issue_id="$ISSUE_ID" \
