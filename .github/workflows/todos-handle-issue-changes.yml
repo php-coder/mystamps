@@ -37,3 +37,45 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+
+      - name: Update issue state
+        env:
+          ISSUE_ID: {{ github.event.issue.number }}
+          NEW_STATE: {{ github.event.action }}
+        run: >-
+          awk \
+            -v issue_id="$ISSUE_ID" \
+            -v new_state="$NEW_STATE" \
+            'BEGIN { FS="\t"; OFS="\t" } { if ($2 == issue_id && $3 != new_state) { $3=new_state }; print $0 }' \
+            todos-on-github.tsv \
+            > todos-on-github.tsv.new
+
+      - name: Check for the changes
+        run: |
+          if ! diff --brief todos-on-github.tsv todos-on-github.tsv.new >/dev/null; then
+            echo 'todos-on-github.tsv has been modified'
+            mv todos-on-github.tsv.new todos-on-github.tsv
+            PUZZLES_MAPPING_MODIFIED=yes
+          else
+            PUZZLES_MAPPING_MODIFIED=no
+          fi
+
+          # Make variable available for the next steps
+          echo "PUZZLES_MAPPING_MODIFIED=$PUZZLES_MAPPING_MODIFIED" | tee -a "$GITHUB_ENV"
+
+      - name: Commit updated mapping
+        if: env.PUZZLES_MAPPING_MODIFIED == 'yes'
+        env:
+            GIT_AUTHOR_NAME: 'GitHub Action'
+            GIT_COMMITTER_NAME: 'GitHub Action'
+            GIT_AUTHOR_EMAIL: 'slava.semushin+ghaction@gmail.com'
+            GIT_COMMITTER_EMAIL: 'slava.semushin+ghaction@gmail.com'
+        run: |
+          git add todos-on-github.tsv
+          git commit todos-on-github.tsv -m 'chore: update issues state'
+          git push
+
+      - name: Cleanup
+        if: always()
+        run: |
+          [ ! -f todos-on-github.tsv.new ] || rm -fv todos-on-github.tsv.new
