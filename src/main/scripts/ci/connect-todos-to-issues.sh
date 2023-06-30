@@ -213,10 +213,10 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
             error "    2) investigate and manually resolve this collision"
             fatal ''
 
-        elif [ "$ISSUE_STATE" != 'open' ]; then
+        elif [ "$ISSUE_STATE" != 'open' ] && [ "$ISSUE_STATE" != 'reopen' ]; then
             error ''
             error "$PUZZLE_ID => #$ISSUE_ID: $ISSUE_URL has unknown state"
-            error "Expected: 'open' or 'closed'"
+            error "Expected: 'open', 'reopen' or 'closed'"
             error "Found:    $ISSUE_STATE"
             fatal ''
         fi
