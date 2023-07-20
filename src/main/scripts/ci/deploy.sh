@@ -38,6 +38,13 @@ fi
 openssl aes-256-cbc -K "$encrypted_bf07cb25089f_key" -iv "$encrypted_bf07cb25089f_iv" -in "$PRIVATE_KEY.enc" -out "$PRIVATE_KEY" -d
 chmod 600 "$PRIVATE_KEY"
 
-ansible-playbook --inventory="$INVENTORY" "$PLAYBOOK" --syntax-check
+ansible-playbook \
+	--inventory="$INVENTORY" \
+	"$PLAYBOOK" \
+	--syntax-check
 
-exec ansible-playbook --inventory="$INVENTORY" "$PLAYBOOK" --private-key="$PRIVATE_KEY"
+exec \
+	ansible-playbook \
+	--inventory="$INVENTORY" \
+	"$PLAYBOOK" \
+	--private-key="$PRIVATE_KEY"
