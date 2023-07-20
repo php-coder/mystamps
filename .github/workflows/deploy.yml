@@ -1,0 +1,57 @@
+name: Deploy
+
+on:
+  push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
+    branches:
+      - prod
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  contents: read # for "git clone"
+
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
+jobs:
+  deploy:
+    name: Deploy
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+
+      - name: Clone source code
+        uses: actions/checkout@v3.5.2 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+
+      - name: Install JDK
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
+        with:
+          distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
+          java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
+          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+
+      - name: Build WAR file
+        # NOTE: we use -Dmaven.test.skip=true instead of -DskipUnitTests=true
+        # in order to skip both compilation and execution of the tests
+        run: >-
+          mvn \
+            --batch-mode \
+            -Denforcer.skip=true \
+            -Dmaven.test.skip=true \
+            package
+
+      - name: Install ansible
+        run: pip3 install --user ansible==2.9.27
+
+      - name: Run deploy.sh
+        env:
+          # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+          VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
+        run: ./src/main/scripts/ci/deploy.sh
