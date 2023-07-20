@@ -1281,8 +1281,8 @@
 	</issueManagement>
 	
 	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.com/php-coder/mystamps</url>
+		<system>GitHub Actions</system>
+		<url>https://github.com/php-coder/mystamps/actions</url>
 	</ciManagement>
 	
 	<scm>
