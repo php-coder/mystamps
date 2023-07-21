@@ -30,7 +30,7 @@ export ANSIBLE_HOST_KEY_CHECKING=False
 # See: https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#envvar-ANSIBLE_STDOUT_CALLBACK
 export ANSIBLE_STDOUT_CALLBACK=debug
 
-if [ -z "$VAULT_PASSWORD" ]; then
+if [ -z "${VAULT_PASSWORD:-}" ]; then
 	echo >&2 "ERROR: env variable VAULT_PASSWORD is empty!"
 	exit 1
 fi
