@@ -2,6 +2,83 @@
 <?xml-stylesheet type='text/xsl' href='http://pdd-xsl.teamed.io/0.23.1.xsl'?>
 <puzzles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://pdd-xsd.teamed.io/0.23.1.xsd" version="0.23.1">
   <puzzle>
+    <ticket>971</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>971-7e983586</id>
+    <lines>896-896</lines>
+    <body>Document ErrorProne tool</body>
+    <file>pom.xml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1170</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1170-64f18d35</id>
+    <lines>900-900</lines>
+    <body>ErrorProne: activate experimental checks</body>
+    <file>pom.xml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1060</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1060-e52eab60</id>
+    <lines>1328-1328</lines>
+    <body>Document usage of frontend-maven-plugin</body>
+    <file>pom.xml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1610</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1610-3bdaa3a0</id>
+    <lines>69-69</lines>
+    <body>Close an issue or post a comment when a puzzle got removed from code</body>
+    <file>.github/workflows/todos-extract-from-code.yml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1610</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1610-40bd5b91</id>
+    <lines>70-70</lines>
+    <body>Post a comment when issue got closed without removing a puzzle</body>
+    <file>.github/workflows/todos-extract-from-code.yml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1154</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1154-3fe7f1f2</id>
+    <lines>65-65</lines>
+    <body>Set charset of MySQL container by providing a custom my.cnf</body>
+    <file>.github/workflows/integration-tests-mysql.yml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>705</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>705-eb60edc9</id>
+    <lines>64-64</lines>
+    <body>remote-backup.sh: find a way to protect duplicity against ps</body>
+    <file>infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
     <ticket>1034</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -9,17 +86,6 @@
     <lines>7-8</lines>
     <body>Document how to run with PostgreSQL and docker-compose</body>
     <file>infra/docker/postgres.yml</file>
-    <author>@php-coder</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1268</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1268-64454c39</id>
-    <lines>2-2</lines>
-    <body>Update Terraform to 0.15.x</body>
-    <file>infra/terraform/versions.tf</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -53,138 +119,248 @@
     <lines>3-3</lines>
     <body>Terraform: add Mailgun</body>
     <file>infra/terraform/my-stamps.tf</file>
-    <author>@php-coder</author>
+    <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>705</ticket>
+    <ticket>1268</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>705-eb60edc9</id>
-    <lines>64-64</lines>
-    <body>remote-backup.sh: find a way to protect duplicity against ps</body>
-    <file>infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml</file>
-    <author>@php-coder</author>
+    <id>1268-64454c39</id>
+    <lines>2-2</lines>
+    <body>Update Terraform to 0.15.x</body>
+    <file>infra/terraform/versions.tf</file>
+    <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>785</ticket>
+    <ticket>687</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>785-4e1225ab</id>
+    <id>687-994e661c</id>
+    <lines>62-62</lines>
+    <body>Random.STATUSES: reduce duplication by using EnumSet.allOf()</body>
+    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>769</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>769-4310f3c0</id>
+    <lines>96-96</lines>
+    <body>Random.price(): return randomized values</body>
+    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>738</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>738-13880c1a</id>
+    <lines>190-191</lines>
+    <body>Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)</body>
+    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>734</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>734-10236b8a</id>
+    <lines>307-307</lines>
+    <body>TestObjects.createAddSeriesDto(): return randomized values</body>
+    <file>src/test/java/ru/mystamps/web/service/TestObjects.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>749</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>749-2a40850f</id>
     <lines>39-39</lines>
-    <body>Update series: add integration test for required "op" field</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>@php-coder</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>785</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>785-140bc7bd</id>
-    <lines>43-43</lines>
-    <body>Update series: add integration test for non-empty "path" field</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>@php-coder</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>785</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>785-c0b6c3f6</id>
-    <lines>47-47</lines>
-    <body>Update series: add integration test for non-empty "value" field</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>@php-coder</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1447</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1447-3c055652</id>
-    <lines>52-52</lines>
-    <body>Add test to ensure that catalog numbers are trimmed</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>@php-coder</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>785</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>785-70fca94a</id>
-    <lines>54-54</lines>
-    <body>Improve error handling for requests with a list of objects</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/mvc/ValidationErrors.java</file>
+    <body>/series/{id}: add integration test that import info is only visible to admin</body>
+    <file>src/test/robotframework/series/import/request-logic.robot</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1513</ticket>
+    <ticket>857</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1513-5b274200</id>
+    <id>857-719bea28</id>
+    <lines>130-130</lines>
+    <body>Check that a just created seller belongs to the "example.com" group</body>
+    <file>src/test/robotframework/series/import/request-logic.robot</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>869</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>869-90e5e0f1</id>
+    <lines>16-16</lines>
+    <body>show-spring-boot-version-diff.sh: properly handle recursive properties</body>
+    <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>109</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>109-a721e051</id>
+    <lines>63-63</lines>
+    <body>Check src/main/config/nginx/503.*html by html5validator</body>
+    <file>src/main/scripts/execute-command.sh</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-eb735e9f</id>
+    <lines>64-64</lines>
+    <body>/series/import/request/{id}: use divs instead of table for elements aligning</body>
+    <file>src/main/scripts/execute-command.sh</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1060</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1060-c9ead0b8</id>
+    <lines>131-131</lines>
+    <body>Add a workaround for GitHub search by filtering out issues with titles that don't match exactly</body>
+    <file>src/main/scripts/ci/connect-todos-to-issues.sh</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1282</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1282-0969f19a</id>
+    <lines>178-178</lines>
+    <body>Consider adding a field with an image used for preview</body>
+    <file>src/main/resources/sql/series_dao_queries.properties</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1054</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1054-41eae704</id>
+    <lines>10-10</lines>
+    <body>Extract part of spring.messages configuration to a common profile</body>
+    <file>src/main/resources/application-postgres.properties</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1054</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1054-7817233c</id>
+    <lines>19-19</lines>
+    <body>Extract part of Thymeleaf configuration to a common profile</body>
+    <file>src/main/resources/application-postgres.properties</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1054</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1054-0d061f99</id>
+    <lines>25-25</lines>
+    <body>Introduce "mailgun-mock" profile</body>
+    <file>src/main/resources/application-postgres.properties</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1054</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1054-d4786412</id>
     <lines>29-29</lines>
-    <body>Add integration test to check that prices accept a decimal comma</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java</file>
+    <body>Introduce profiles for liquibase contexts</body>
+    <file>src/main/resources/application-postgres.properties</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1160</ticket>
+    <ticket>1054</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1160-545c948a</id>
-    <lines>160-160</lines>
-    <body>ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java</file>
+    <id>1054-1c349c8e</id>
+    <lines>44-44</lines>
+    <body>Extract list of exclusions to a common profile</body>
+    <file>src/main/resources/application-postgres.properties</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>226</ticket>
+    <ticket>1154</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>226-af195ad8</id>
-    <lines>93-93</lines>
-    <body>Introduce app.use-public-hostname property</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
+    <id>1154-b99af137</id>
+    <lines>2-2</lines>
+    <body>Rename profile "travis" to "mysql"</body>
+    <file>src/main/resources/application-travis.properties</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1149</ticket>
+    <ticket>819</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1149-f52d6199</id>
-    <lines>108-108</lines>
-    <body>Move feature-specific rules to the dedicated packages</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
+    <id>819-38c578c8</id>
+    <lines>95-95</lines>
+    <body>CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
+    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1161</ticket>
+    <ticket>517</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1161-69decc53</id>
-    <lines>172-172</lines>
-    <body>Add Feature-Policy header</body>
-    <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
+    <id>517-d58933f7</id>
+    <lines>203-203</lines>
+    <body>Add integration tests for category suggestion</body>
+    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>592</ticket>
+    <ticket>517</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>592-8fadbb56</id>
-    <lines>35-35</lines>
-    <body>GroupByParent: add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java</file>
+    <id>517-49fc5900</id>
+    <lines>221-221</lines>
+    <body>CategoryService.suggestCategoryForUser(): suggest a last created category</body>
+    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>517</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>517-385bf5f0</id>
+    <lines>222-222</lines>
+    <body>CategoryService.suggestCategoryForUser(): suggest the most popular category</body>
+    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -192,10 +368,32 @@
     <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>927-e9697c74</id>
+    <id>927-285714a8</id>
     <lines>1-1</lines>
-    <body>Move report package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/report/package-info.java</file>
+    <body>Move category package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/category/package-info.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1303</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1303-c2bfae4d</id>
+    <lines>108-108</lines>
+    <body>FilesystemImagePersistenceStrategy.replace(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1303</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1303-59dd45e7</id>
+    <lines>133-133</lines>
+    <body>FilesystemImagePersistenceStrategy.replacePreview(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -233,6 +431,17 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
+    <ticket>927</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>927-61bc647b</id>
+    <lines>1-1</lines>
+    <body>Move image package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/image/package-info.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
     <ticket>1303</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -255,28 +464,6 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1303</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1303-c2bfae4d</id>
-    <lines>108-108</lines>
-    <body>FilesystemImagePersistenceStrategy.replace(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1303</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1303-59dd45e7</id>
-    <lines>133-133</lines>
-    <body>FilesystemImagePersistenceStrategy.replacePreview(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
     <ticket>1054</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -291,10 +478,21 @@
     <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>927-61bc647b</id>
+    <id>927-664a2788</id>
     <lines>1-1</lines>
-    <body>Move image package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/image/package-info.java</file>
+    <body>Move participant package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/participant/package-info.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>857</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>857-83098214</id>
+    <lines>98-98</lines>
+    <body>TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service</body>
+    <file>src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -302,32 +500,76 @@
     <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>927-5e01dc83</id>
+    <id>927-e31062c0</id>
     <lines>1-1</lines>
-    <body>Move site package to one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/site/package-info.java</file>
+    <body>Move account package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/account/package-info.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>665</ticket>
+    <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>665-32370c4c</id>
-    <lines>30-30</lines>
-    <body>TimedDownloaderService: add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java</file>
+    <id>927-0de549b6</id>
+    <lines>1-1</lines>
+    <body>Move collection package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/package-info.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1326</ticket>
+    <ticket>1123</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1326-4794f854</id>
-    <lines>72-72</lines>
-    <body>Series sale import: add integration test for series condition</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java</file>
+    <id>1123-296bb340</id>
+    <lines>136-136</lines>
+    <body>CollectionService.findSeriesInstances(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1605</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1605-c1ea4a5f</id>
+    <lines>213-213</lines>
+    <body>CollectionService.findAllForSitemap(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>477</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>477-6f081e18</id>
+    <lines>31-31</lines>
+    <body>Add to collection: integration test for invisible quantity for a series with 1 stamp</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>663</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>663-2b32ef86</id>
+    <lines>32-32</lines>
+    <body>Add to collection: add integration test for specifying a price</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>663</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>663-8bbd6c00</id>
+    <lines>47-47</lines>
+    <body>/series/{id}(price): must be greater than zero</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -394,6 +636,61 @@
     <lines>60-60</lines>
     <body>AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1326</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1326-4794f854</id>
+    <lines>72-72</lines>
+    <body>Series sale import: add integration test for series condition</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1303</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1303-015294f3</id>
+    <lines>67-67</lines>
+    <body>Replace image: add integration test for mandatory imageId</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddImageForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1303</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1303-c0d00ebb</id>
+    <lines>68-68</lines>
+    <body>Replace image: validate that image id is valid</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddImageForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>927</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>927-0bf380a9</id>
+    <lines>1-1</lines>
+    <body>Move series package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/package-info.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>665</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>665-32370c4c</id>
+    <lines>30-30</lines>
+    <body>TimedDownloaderService: add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -475,72 +772,6 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1277</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1277-5efa16a9</id>
-    <lines>99-99</lines>
-    <body>/series/add: add integration test to check that Michel numbers may contain letter</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>671</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>671-aade0c20</id>
-    <lines>106-106</lines>
-    <body>/series/add: add integration test to check that Scott numbers may contain letters</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>671</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>671-e8c4f51d</id>
-    <lines>107-107</lines>
-    <body>/series/add: add integration test for Scott numbers error message</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1421</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1421-f0722df3</id>
-    <lines>114-114</lines>
-    <body>/series/add: add integration test to check that Yvert numbers may contain letters</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>770</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>770-3251a080</id>
-    <lines>127-128</lines>
-    <body>/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>769</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>769-d2cdc518</id>
-    <lines>135-136</lines>
-    <body>/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
     <ticket>1098</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -559,28 +790,6 @@
     <lines>656-656</lines>
     <body>Mark similar series: gracefully handle error when value mismatches to type</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesController.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1411</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1411-1e303594</id>
-    <lines>35-35</lines>
-    <body>Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/SeriesService.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>694</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>694-5e76eadc</id>
-    <lines>61-61</lines>
-    <body>CatalogUtils.toShortForm(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/CatalogUtils.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -640,35 +849,233 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>785</ticket>
+    <ticket>801</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>785-c33d2a08</id>
-    <lines>149-149</lines>
-    <body>Update series: handle refuse to update an existing comment gracefully</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
+    <id>801-b1837c29</id>
+    <lines>25-25</lines>
+    <body>TimedSiteParser: add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1343</ticket>
+    <ticket>1281</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1343-c710f5d6</id>
-    <lines>167-167</lines>
-    <body>Update series: handle refuse to update an existing release year gracefully</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
+    <id>1281-8f164ecd</id>
+    <lines>62-62</lines>
+    <body>Add integration test for import with seller-url-locator</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1340</ticket>
+    <ticket>979</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1340-1b97f079</id>
-    <lines>377-377</lines>
-    <body>Update series: handle refuse to update an existing price gracefully</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
+    <id>979-ca86046a</id>
+    <lines>65-65</lines>
+    <body>Add integration test for import of series with currency-locator</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>975</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>975-e76660de</id>
+    <lines>33-33</lines>
+    <body>SiteParserServiceImpl.findForUrl(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>975</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>975-d6c13208</id>
+    <lines>54-54</lines>
+    <body>SiteParserServiceImpl.findParserNames(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>975</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>975-c9aec551</id>
+    <lines>64-64</lines>
+    <body>SiteParserServiceImpl: add unit tests for constructor</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>694</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>694-d17b3e39</id>
+    <lines>199-199</lines>
+    <body>Support for a separate locator for a field with michel numbers</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1326</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1326-2cfe45cd</id>
+    <lines>286-286</lines>
+    <body>JsoupSiteParser.extractCondition(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>995</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>995-950efed9</id>
+    <lines>42-42</lines>
+    <body>SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>995</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>995-dfb3dc6f</id>
+    <lines>61-61</lines>
+    <body>SiteParser: introduce a method for parsing only sales-related info</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>995</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>995-a90e239c</id>
+    <lines>85-85</lines>
+    <body>SeriesInfoExtractorService: introduce a method for parsing only sales-related info</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>834</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>834-3f317328</id>
+    <lines>98-98</lines>
+    <body>SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>694</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>694-2b8246eb</id>
+    <lines>201-201</lines>
+    <body>SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>857</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>857-a6f9cdd0</id>
+    <lines>214-214</lines>
+    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for seller group</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1230</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1230-9685721f</id>
+    <lines>229-230</lines>
+    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1326</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1326-2bc92a3c</id>
+    <lines>237-237</lines>
+    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for condition</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>684</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>684-0b0d5497</id>
+    <lines>244-245</lines>
+    <body>Series import: add integration test for the case when parsed value doesn't match database</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-6636bb5e</id>
+    <lines>253-253</lines>
+    <body>Remove hasAtLeastOneFieldFilled() methods from DTOs</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>687</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>687-c6d33b89</id>
+    <lines>30-30</lines>
+    <body>replace set of strings by enum</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>927</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>927-9e515adc</id>
+    <lines>97-97</lines>
+    <body>Extract logic to a separate method or add to SeriesImportService.addRequest()</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1254</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1254-f96635a2</id>
+    <lines>105-105</lines>
+    <body>Update workflow to mention RetryDownloading event</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -937,259 +1344,6 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-18c5a29c</id>
-    <lines>31-31</lines>
-    <body>/series/import/request/{id}: seller's name and url are required when sellerId is empty</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-0c97d8b1</id>
-    <lines>32-33</lines>
-    <body>/series/import/request/{id}(seriesSale): add integration test for validation of required fields</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1230</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1230-8769330d</id>
-    <lines>48-48</lines>
-    <body>/series/import/request/{id}: validate that both alt price/currency are present or absent</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1326</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1326-e5faca08</id>
-    <lines>52-52</lines>
-    <body>Series import: add integration test for series condition</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>995</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>995-950efed9</id>
-    <lines>42-42</lines>
-    <body>SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>995</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>995-dfb3dc6f</id>
-    <lines>61-61</lines>
-    <body>SiteParser: introduce a method for parsing only sales-related info</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>995</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>995-a90e239c</id>
-    <lines>85-85</lines>
-    <body>SeriesInfoExtractorService: introduce a method for parsing only sales-related info</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>834</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>834-3f317328</id>
-    <lines>98-98</lines>
-    <body>SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>694</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>694-2b8246eb</id>
-    <lines>201-201</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>857</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>857-a6f9cdd0</id>
-    <lines>214-214</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for seller group</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1230</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1230-9685721f</id>
-    <lines>229-230</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1326</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1326-2bc92a3c</id>
-    <lines>237-237</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for condition</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>684</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>684-0b0d5497</id>
-    <lines>244-245</lines>
-    <body>Series import: add integration test for the case when parsed value doesn't match database</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-6636bb5e</id>
-    <lines>253-253</lines>
-    <body>Remove hasAtLeastOneFieldFilled() methods from DTOs</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>687</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>687-c6d33b89</id>
-    <lines>30-30</lines>
-    <body>replace set of strings by enum</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-7d753493</id>
-    <lines>28-28</lines>
-    <body>/series/import/request/{id}(seller.name): add validation against short values</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-3605c681</id>
-    <lines>29-29</lines>
-    <body>/series/import/request/{id}(seller.name): add validation against long values</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-f2940c60</id>
-    <lines>32-32</lines>
-    <body>/series/import/request/{id}(seller.url): add validation for valid url</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-3e442dbc</id>
-    <lines>33-33</lines>
-    <body>/series/import/request/{id}(seller.url): add validation against long values</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>857</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>857-34fbb536</id>
-    <lines>36-36</lines>
-    <body>/series/import/request/{id}(seller.group): add validation against negative values</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>857</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>857-aa59724c</id>
-    <lines>37-37</lines>
-    <body>/series/import/request/{id}(seller.group): add validation for existing group</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>927</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>927-9e515adc</id>
-    <lines>97-97</lines>
-    <body>Extract logic to a separate method or add to SeriesImportService.addRequest()</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1254</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1254-f96635a2</id>
-    <lines>105-105</lines>
-    <body>Update workflow to mention RetryDownloading event</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
     <ticket>660</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -1197,17 +1351,6 @@
     <lines>150-150</lines>
     <body>JdbcSeriesImportDao.addRawContent(): introduce dao</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-c3acafce</id>
-    <lines>28-28</lines>
-    <body>SeriesImportService.addSeries(): introduce DTO object</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -1355,94 +1498,6 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>975</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>975-e76660de</id>
-    <lines>33-33</lines>
-    <body>SiteParserServiceImpl.findForUrl(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>975</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>975-d6c13208</id>
-    <lines>54-54</lines>
-    <body>SiteParserServiceImpl.findParserNames(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>801</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>801-b1837c29</id>
-    <lines>25-25</lines>
-    <body>TimedSiteParser: add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>975</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>975-c9aec551</id>
-    <lines>64-64</lines>
-    <body>SiteParserServiceImpl: add unit tests for constructor</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>694</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>694-d17b3e39</id>
-    <lines>199-199</lines>
-    <body>Support for a separate locator for a field with michel numbers</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1326</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1326-2cfe45cd</id>
-    <lines>286-286</lines>
-    <body>JsoupSiteParser.extractCondition(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1281</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1281-8f164ecd</id>
-    <lines>62-62</lines>
-    <body>Add integration test for import with seller-url-locator</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>979</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>979-ca86046a</id>
-    <lines>65-65</lines>
-    <body>Add integration test for import of series with currency-locator</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
     <ticket>690</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -1450,6 +1505,127 @@
     <lines>38-38</lines>
     <body>HasSiteParserValidator: introduce SiteParserService.hasParserForUrl()</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/HasSiteParserValidator.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-7d753493</id>
+    <lines>28-28</lines>
+    <body>/series/import/request/{id}(seller.name): add validation against short values</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-3605c681</id>
+    <lines>29-29</lines>
+    <body>/series/import/request/{id}(seller.name): add validation against long values</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-f2940c60</id>
+    <lines>32-32</lines>
+    <body>/series/import/request/{id}(seller.url): add validation for valid url</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-3e442dbc</id>
+    <lines>33-33</lines>
+    <body>/series/import/request/{id}(seller.url): add validation against long values</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>857</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>857-34fbb536</id>
+    <lines>36-36</lines>
+    <body>/series/import/request/{id}(seller.group): add validation against negative values</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>857</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>857-aa59724c</id>
+    <lines>37-37</lines>
+    <body>/series/import/request/{id}(seller.group): add validation for existing group</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-18c5a29c</id>
+    <lines>31-31</lines>
+    <body>/series/import/request/{id}: seller's name and url are required when sellerId is empty</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-0c97d8b1</id>
+    <lines>32-33</lines>
+    <body>/series/import/request/{id}(seriesSale): add integration test for validation of required fields</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1230</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1230-8769330d</id>
+    <lines>48-48</lines>
+    <body>/series/import/request/{id}: validate that both alt price/currency are present or absent</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1326</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1326-e5faca08</id>
+    <lines>52-52</lines>
+    <body>Series import: add integration test for series condition</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>695</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>695-c3acafce</id>
+    <lines>28-28</lines>
+    <body>SeriesImportService.addSeries(): introduce DTO object</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -1498,24 +1674,123 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1303</ticket>
+    <ticket>694</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1303-015294f3</id>
-    <lines>67-67</lines>
-    <body>Replace image: add integration test for mandatory imageId</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddImageForm.java</file>
+    <id>694-5e76eadc</id>
+    <lines>61-61</lines>
+    <body>CatalogUtils.toShortForm(): add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/CatalogUtils.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1303</ticket>
+    <ticket>785</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1303-c0d00ebb</id>
-    <lines>68-68</lines>
-    <body>Replace image: validate that image id is valid</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/AddImageForm.java</file>
+    <id>785-c33d2a08</id>
+    <lines>149-149</lines>
+    <body>Update series: handle refuse to update an existing comment gracefully</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1343</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1343-c710f5d6</id>
+    <lines>167-167</lines>
+    <body>Update series: handle refuse to update an existing release year gracefully</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1340</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1340-1b97f079</id>
+    <lines>377-377</lines>
+    <body>Update series: handle refuse to update an existing price gracefully</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1277</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1277-5efa16a9</id>
+    <lines>99-99</lines>
+    <body>/series/add: add integration test to check that Michel numbers may contain letter</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>671</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>671-aade0c20</id>
+    <lines>106-106</lines>
+    <body>/series/add: add integration test to check that Scott numbers may contain letters</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>671</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>671-e8c4f51d</id>
+    <lines>107-107</lines>
+    <body>/series/add: add integration test for Scott numbers error message</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1421</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1421-f0722df3</id>
+    <lines>114-114</lines>
+    <body>/series/add: add integration test to check that Yvert numbers may contain letters</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>770</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>770-3251a080</id>
+    <lines>127-128</lines>
+    <body>/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>769</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>769-d2cdc518</id>
+    <lines>135-136</lines>
+    <body>/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1411</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1411-1e303594</id>
+    <lines>35-35</lines>
+    <body>Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties</body>
+    <file>src/main/java/ru/mystamps/web/feature/series/SeriesService.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -1523,65 +1798,10 @@
     <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>927-0bf380a9</id>
+    <id>927-e9697c74</id>
     <lines>1-1</lines>
-    <body>Move series package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/package-info.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1123</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1123-296bb340</id>
-    <lines>136-136</lines>
-    <body>CollectionService.findSeriesInstances(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1605</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1605-c1ea4a5f</id>
-    <lines>213-213</lines>
-    <body>CollectionService.findAllForSitemap(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>477</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>477-6f081e18</id>
-    <lines>31-31</lines>
-    <body>Add to collection: integration test for invisible quantity for a series with 1 stamp</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>663</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>663-2b32ef86</id>
-    <lines>32-32</lines>
-    <body>Add to collection: add integration test for specifying a price</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>663</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>663-8bbd6c00</id>
-    <lines>47-47</lines>
-    <body>/series/{id}(price): must be greater than zero</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
+    <body>Move report package one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/report/package-info.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -1589,43 +1809,10 @@
     <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>927-0de549b6</id>
+    <id>927-5e01dc83</id>
     <lines>1-1</lines>
-    <body>Move collection package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/package-info.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>927</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>927-e31062c0</id>
-    <lines>1-1</lines>
-    <body>Move account package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/account/package-info.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>857</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>857-83098214</id>
-    <lines>98-98</lines>
-    <body>TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service</body>
-    <file>src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>927</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>927-664a2788</id>
-    <lines>1-1</lines>
-    <body>Move participant package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/participant/package-info.java</file>
+    <body>Move site package to one level up</body>
+    <file>src/main/java/ru/mystamps/web/feature/site/package-info.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -1652,61 +1839,6 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>819</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>819-38c578c8</id>
-    <lines>95-95</lines>
-    <body>CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>517</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>517-d58933f7</id>
-    <lines>203-203</lines>
-    <body>Add integration tests for category suggestion</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>517</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>517-49fc5900</id>
-    <lines>221-221</lines>
-    <body>CategoryService.suggestCategoryForUser(): suggest a last created category</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>517</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>517-385bf5f0</id>
-    <lines>222-222</lines>
-    <body>CategoryService.suggestCategoryForUser(): suggest the most popular category</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>927</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>927-285714a8</id>
-    <lines>1-1</lines>
-    <body>Move category package one level up</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/package-info.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
     <ticket>1161</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -1714,6 +1846,171 @@
     <lines>31-31</lines>
     <body>Consider using spring.task.execution properties instead of manual configuration</body>
     <file>src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1513</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1513-5b274200</id>
+    <lines>29-29</lines>
+    <body>Add integration test to check that prices accept a decimal comma</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>785</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>785-70fca94a</id>
+    <lines>54-54</lines>
+    <body>Improve error handling for requests with a list of objects</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/mvc/ValidationErrors.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>785</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>785-4e1225ab</id>
+    <lines>39-39</lines>
+    <body>Update series: add integration test for required "op" field</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>785</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>785-140bc7bd</id>
+    <lines>43-43</lines>
+    <body>Update series: add integration test for non-empty "path" field</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>785</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>785-c0b6c3f6</id>
+    <lines>47-47</lines>
+    <body>Update series: add integration test for non-empty "value" field</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1447</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1447-3c055652</id>
+    <lines>52-52</lines>
+    <body>Add test to ensure that catalog numbers are trimmed</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1160</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1160-545c948a</id>
+    <lines>160-160</lines>
+    <body>ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>226</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>226-af195ad8</id>
+    <lines>93-93</lines>
+    <body>Introduce app.use-public-hostname property</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1149</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1149-f52d6199</id>
+    <lines>108-108</lines>
+    <body>Move feature-specific rules to the dedicated packages</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1161</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1161-69decc53</id>
+    <lines>172-172</lines>
+    <body>Add Feature-Policy header</body>
+    <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>592</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>592-8fadbb56</id>
+    <lines>35-35</lines>
+    <body>GroupByParent: add unit tests</body>
+    <file>src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>892</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>892-9e92b338</id>
+    <lines>101-101</lines>
+    <body>Add integration tests for showing a link to collection estimation page</body>
+    <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1123</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1123-42494b3d</id>
+    <lines>161-161</lines>
+    <body>/collection/{slug}: show "New" badge only once</body>
+    <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>511</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>511-f20a64c0</id>
+    <lines>162-162</lines>
+    <body>/collection/{slug}: wrap a long caption</body>
+    <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>884</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>884-03637f5c</id>
+    <lines>118-118</lines>
+    <body>/collection/{slug}/estimation: optimize summing of prices</body>
+    <file>src/main/webapp/WEB-INF/views/collection/estimation.html</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -1795,288 +2092,13 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>884</ticket>
+    <ticket>1455</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>884-03637f5c</id>
-    <lines>118-118</lines>
-    <body>/collection/{slug}/estimation: optimize summing of prices</body>
-    <file>src/main/webapp/WEB-INF/views/collection/estimation.html</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>892</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>892-9e92b338</id>
-    <lines>101-101</lines>
-    <body>Add integration tests for showing a link to collection estimation page</body>
-    <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1123</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1123-42494b3d</id>
-    <lines>161-161</lines>
-    <body>/collection/{slug}: show "New" badge only once</body>
-    <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>511</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>511-f20a64c0</id>
-    <lines>162-162</lines>
-    <body>/collection/{slug}: wrap a long caption</body>
-    <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1282</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1282-0969f19a</id>
-    <lines>178-178</lines>
-    <body>Consider adding a field with an image used for preview</body>
-    <file>src/main/resources/sql/series_dao_queries.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1054</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1054-41eae704</id>
-    <lines>10-10</lines>
-    <body>Extract part of spring.messages configuration to a common profile</body>
-    <file>src/main/resources/application-postgres.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1054</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1054-7817233c</id>
-    <lines>19-19</lines>
-    <body>Extract part of Thymeleaf configuration to a common profile</body>
-    <file>src/main/resources/application-postgres.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1054</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1054-0d061f99</id>
-    <lines>25-25</lines>
-    <body>Introduce "mailgun-mock" profile</body>
-    <file>src/main/resources/application-postgres.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1054</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1054-d4786412</id>
-    <lines>29-29</lines>
-    <body>Introduce profiles for liquibase contexts</body>
-    <file>src/main/resources/application-postgres.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1054</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1054-1c349c8e</id>
-    <lines>44-44</lines>
-    <body>Extract list of exclusions to a common profile</body>
-    <file>src/main/resources/application-postgres.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1154</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1154-b99af137</id>
-    <lines>2-2</lines>
-    <body>Rename profile "travis" to "mysql"</body>
-    <file>src/main/resources/application-travis.properties</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>869</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>869-90e5e0f1</id>
-    <lines>16-16</lines>
-    <body>show-spring-boot-version-diff.sh: properly handle recursive properties</body>
-    <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1060</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1060-c9ead0b8</id>
-    <lines>131-131</lines>
-    <body>Add a workaround for GitHub search by filtering out issues with titles that don't match exactly</body>
-    <file>src/main/scripts/ci/connect-todos-to-issues.sh</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>109</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>109-a721e051</id>
-    <lines>63-63</lines>
-    <body>Check src/main/config/nginx/503.*html by html5validator</body>
-    <file>src/main/scripts/execute-command.sh</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-eb735e9f</id>
-    <lines>64-64</lines>
-    <body>/series/import/request/{id}: use divs instead of table for elements aligning</body>
-    <file>src/main/scripts/execute-command.sh</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1280</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1280-9a82bce8</id>
-    <lines>6-6</lines>
-    <body>SimilarSeriesForm: add tests</body>
-    <file>src/main/frontend/src/components/SimilarSeriesForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1057</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1057-ae51bd20</id>
-    <lines>6-6</lines>
-    <body>SeriesSaleImportForm: add tests</body>
-    <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1057</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1057-ea0a43ea</id>
-    <lines>32-32</lines>
-    <body>SeriesSaleImportForm: wait until setState() finishes</body>
-    <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1341</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1341-d3b9ba1b</id>
-    <lines>6-6</lines>
-    <body>AddCatalogNumbersForm: add tests</body>
-    <file>src/main/frontend/src/components/AddCatalogNumbersForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1329</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1329-5cbf2e5d</id>
-    <lines>6-6</lines>
-    <body>SeriesSalesList: add tests</body>
-    <file>src/main/frontend/src/components/SeriesSalesList.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1489</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1489-42680117</id>
-    <lines>57-57</lines>
-    <body>Use toHaveErrorMessage() or toHaveDescription() for checking error messages</body>
-    <file>src/main/frontend/src/components/AddCommentForm.test.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1383</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1383-68064f45</id>
-    <lines>7-7</lines>
-    <body>HideImageForm: add tests</body>
-    <file>src/main/frontend/src/components/HideImageForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1342</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1342-c6d2f2ba</id>
-    <lines>5-5</lines>
-    <body>AddCatalogPriceForm: add tests</body>
-    <file>src/main/frontend/src/components/AddCatalogPriceForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1388</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1388-110ff48f</id>
-    <lines>6-6</lines>
-    <body>AddCatalogPriceForm: consider using a tooltip for currency</body>
-    <file>src/main/frontend/src/components/AddCatalogPriceForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1338</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1338-4f752b8a</id>
-    <lines>7-7</lines>
-    <body>AddCommentForm: add tests</body>
-    <file>src/main/frontend/src/components/AddCommentForm.js</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1344</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1344-fb12fdf0</id>
-    <lines>6-6</lines>
-    <body>AddReleaseYearForm: add tests</body>
-    <file>src/main/frontend/src/components/AddReleaseYearForm.js</file>
+    <id>1455-dfea25aa</id>
+    <lines>4-4</lines>
+    <body>Remove export of components to window</body>
+    <file>src/main/frontend/webpack.config.js</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -2114,13 +2136,123 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
-    <ticket>1455</ticket>
+    <ticket>1344</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1455-dfea25aa</id>
-    <lines>4-4</lines>
-    <body>Remove export of components to window</body>
-    <file>src/main/frontend/webpack.config.js</file>
+    <id>1344-fb12fdf0</id>
+    <lines>6-6</lines>
+    <body>AddReleaseYearForm: add tests</body>
+    <file>src/main/frontend/src/components/AddReleaseYearForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1383</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1383-68064f45</id>
+    <lines>7-7</lines>
+    <body>HideImageForm: add tests</body>
+    <file>src/main/frontend/src/components/HideImageForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1341</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1341-d3b9ba1b</id>
+    <lines>6-6</lines>
+    <body>AddCatalogNumbersForm: add tests</body>
+    <file>src/main/frontend/src/components/AddCatalogNumbersForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1280</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1280-9a82bce8</id>
+    <lines>6-6</lines>
+    <body>SimilarSeriesForm: add tests</body>
+    <file>src/main/frontend/src/components/SimilarSeriesForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1342</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1342-c6d2f2ba</id>
+    <lines>5-5</lines>
+    <body>AddCatalogPriceForm: add tests</body>
+    <file>src/main/frontend/src/components/AddCatalogPriceForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1388</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1388-110ff48f</id>
+    <lines>6-6</lines>
+    <body>AddCatalogPriceForm: consider using a tooltip for currency</body>
+    <file>src/main/frontend/src/components/AddCatalogPriceForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1338</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1338-4f752b8a</id>
+    <lines>7-7</lines>
+    <body>AddCommentForm: add tests</body>
+    <file>src/main/frontend/src/components/AddCommentForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1489</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1489-42680117</id>
+    <lines>57-57</lines>
+    <body>Use toHaveErrorMessage() or toHaveDescription() for checking error messages</body>
+    <file>src/main/frontend/src/components/AddCommentForm.test.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1057</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1057-ae51bd20</id>
+    <lines>6-6</lines>
+    <body>SeriesSaleImportForm: add tests</body>
+    <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1057</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1057-ea0a43ea</id>
+    <lines>32-32</lines>
+    <body>SeriesSaleImportForm: wait until setState() finishes</body>
+    <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1329</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1329-5cbf2e5d</id>
+    <lines>6-6</lines>
+    <body>SeriesSalesList: add tests</body>
+    <file>src/main/frontend/src/components/SeriesSalesList.js</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -2187,138 +2319,6 @@
     <lines>280-280</lines>
     <body>SuspiciousActivityDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>734</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>734-10236b8a</id>
-    <lines>307-307</lines>
-    <body>TestObjects.createAddSeriesDto(): return randomized values</body>
-    <file>src/test/java/ru/mystamps/web/service/TestObjects.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>687</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>687-994e661c</id>
-    <lines>62-62</lines>
-    <body>Random.STATUSES: reduce duplication by using EnumSet.allOf()</body>
-    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>769</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>769-4310f3c0</id>
-    <lines>96-96</lines>
-    <body>Random.price(): return randomized values</body>
-    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>738</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>738-13880c1a</id>
-    <lines>190-191</lines>
-    <body>Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)</body>
-    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>749</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>749-2a40850f</id>
-    <lines>39-39</lines>
-    <body>/series/{id}: add integration test that import info is only visible to admin</body>
-    <file>src/test/robotframework/series/import/request-logic.robot</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>857</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>857-719bea28</id>
-    <lines>130-130</lines>
-    <body>Check that a just created seller belongs to the "example.com" group</body>
-    <file>src/test/robotframework/series/import/request-logic.robot</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>971</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>971-7e983586</id>
-    <lines>896-896</lines>
-    <body>Document ErrorProne tool</body>
-    <file>pom.xml</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1170</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1170-64f18d35</id>
-    <lines>900-900</lines>
-    <body>ErrorProne: activate experimental checks</body>
-    <file>pom.xml</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1060</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1060-e52eab60</id>
-    <lines>1328-1328</lines>
-    <body>Document usage of frontend-maven-plugin</body>
-    <file>pom.xml</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1610</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1610-3bdaa3a0</id>
-    <lines>69-69</lines>
-    <body>Close an issue or post a comment when a puzzle got removed from code</body>
-    <file>.github/workflows/todos-extract-from-code.yml</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1610</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1610-40bd5b91</id>
-    <lines>70-70</lines>
-    <body>Post a comment when issue got closed without removing a puzzle</body>
-    <file>.github/workflows/todos-extract-from-code.yml</file>
-    <author>Slava Semushin</author>
-    <email>slava.semushin@gmail.com</email>
-  </puzzle>
-  <puzzle>
-    <ticket>1154</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1154-3fe7f1f2</id>
-    <lines>65-65</lines>
-    <body>Set charset of MySQL container by providing a custom my.cnf</body>
-    <file>.github/workflows/integration-tests-mysql.yml</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
