@@ -228,14 +228,7 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		<!--
-			Required for "postgres" profile (see src/main/resources/application-postgres.properties).
-			Perhaps, you would need to override the following properties as by default it's
-			configured for TravisCI environment:
-			- spring.datasource.url
-			- spring.datasource.username
-			- spring.datasource.password
-		-->
+		<!-- Required for "postgres" profile (see src/main/resources/application-postgres.properties) -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

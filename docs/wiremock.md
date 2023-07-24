@@ -4,7 +4,7 @@
 WireMock is a simulator for HTTP-based APIs. We use this tool in the integration tests for mocking
 external services. For example, for testing import of the stamps series from sites.
 
-## Running on TravisCI
+## Running on CI
 WireMock is automatically running/stopping during integration tests execution (`./mvnw verify`).
 
 ## Running manually

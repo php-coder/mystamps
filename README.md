@@ -1,6 +1,8 @@
 # My Stamps
 
-[![Build Status](https://api.travis-ci.com/php-coder/mystamps.svg?branch=master)](https://app.travis-ci.com/github/php-coder/mystamps)
+[![Integration Tests](https://github.com/php-coder/mystamps/actions/workflows/integration-tests-h2.yml/badge.svg?branch=master)](https://github.com/php-coder/mystamps/actions/workflows/integration-tests-h2.yml)
+[![Unit Tests](https://github.com/php-coder/mystamps/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/php-coder/mystamps/actions/workflows/unit-tests.yml)
+[![Static Analysis](https://github.com/php-coder/mystamps/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/php-coder/mystamps/actions/workflows/static-analysis.yml)
 [![Uptime Statistic](https://badgen.net/uptime-robot/month/ur243278-551fbb732949dbdee27c7552)](https://stats.uptimerobot.com/1jXAjFpgP)
 
 ## What is it?

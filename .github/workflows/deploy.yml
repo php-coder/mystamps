@@ -17,6 +17,7 @@ defaults:
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
     shell: bash
 
+# @todo #1154 Deploy should depend on successful execution of the other pipelines
 jobs:
   deploy:
     name: Deploy
