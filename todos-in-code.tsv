@@ -103,7 +103,7 @@ Id	Ticket	"Title"	File	Lines
 927-d8dc99c9	927	"Move country package one level up"	src/main/java/ru/mystamps/web/feature/country/package-info.java	1-1
 927-e31062c0	927	"Move account package one level up"	src/main/java/ru/mystamps/web/feature/account/package-info.java	1-1
 927-e9697c74	927	"Move report package one level up"	src/main/java/ru/mystamps/web/feature/report/package-info.java	1-1
-971-7e983586	971	"Document ErrorProne tool"	pom.xml	896-896
+971-7e983586	971	"Document ErrorProne tool"	pom.xml	889-889
 975-c9aec551	975	"SiteParserServiceImpl: add unit tests for constructor"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	64-64
 975-d6c13208	975	"SiteParserServiceImpl.findParserNames(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	54-54
 975-e76660de	975	"SiteParserServiceImpl.findForUrl(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	33-33
@@ -127,17 +127,18 @@ Id	Ticket	"Title"	File	Lines
 1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	858-858
 1057-ea0a43ea	1057	"SeriesSaleImportForm: wait until setState() finishes"	src/main/frontend/src/components/SeriesSaleImportForm.js	32-32
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	131-131
-1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1328-1328
+1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1321-1321
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	638-638
 1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	136-136
 1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	108-108
 1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	65-65
+1154-ac29fbc0	1154	"Deploy should depend on successful execution of the other pipelines"	.github/workflows/deploy.yml	20-20
 1154-b99af137	1154	"Rename profile ""travis"" to ""mysql"""	src/main/resources/application-travis.properties	2-2
 1160-545c948a	1160	"ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz"	src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java	160-160
 1161-69decc53	1161	"Add Feature-Policy header"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	172-172
 1161-a2706b18	1161	"Consider using spring.task.execution properties instead of manual configuration"	src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java	31-31
-1170-64f18d35	1170	"ErrorProne: activate experimental checks"	pom.xml	900-900
+1170-64f18d35	1170	"ErrorProne: activate experimental checks"	pom.xml	893-893
 1230-8769330d	1230	"/series/import/request/{id}: validate that both alt price/currency are present or absent"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	48-48
 1230-9685721f	1230	"SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	229-230
 1254-f96635a2	1254	"Update workflow to mention RetryDownloading event"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java	105-105

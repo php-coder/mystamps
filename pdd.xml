@@ -6,7 +6,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>971-7e983586</id>
-    <lines>896-896</lines>
+    <lines>889-889</lines>
     <body>Document ErrorProne tool</body>
     <file>pom.xml</file>
     <author>@php-coder</author>
@@ -17,7 +17,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1170-64f18d35</id>
-    <lines>900-900</lines>
+    <lines>893-893</lines>
     <body>ErrorProne: activate experimental checks</body>
     <file>pom.xml</file>
     <author>@php-coder</author>
@@ -28,9 +28,20 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-e52eab60</id>
-    <lines>1328-1328</lines>
+    <lines>1321-1321</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
+    <author>@php-coder</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1154</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1154-ac29fbc0</id>
+    <lines>20-20</lines>
+    <body>Deploy should depend on successful execution of the other pipelines</body>
+    <file>.github/workflows/deploy.yml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
@@ -108,7 +119,7 @@
     <lines>2-2</lines>
     <body>Terraform: add UptimeRobot</body>
     <file>infra/terraform/my-stamps.tf</file>
-    <author>@php-coder</author>
+    <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
