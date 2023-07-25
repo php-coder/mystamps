@@ -53,8 +53,7 @@ ansible-playbook \
 	"$PLAYBOOK" \
 	--syntax-check
 
-exec \
-	ansible-playbook \
+ansible-playbook \
 	--inventory="$INVENTORY" \
 	"$PLAYBOOK" \
 	--private-key="$PRIVATE_KEY"
