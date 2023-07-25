@@ -3,12 +3,11 @@
 - hosts: all
   gather_facts: no
   remote_user: mystamps
+  vars_files:
+    - prod_vars.yml
   vars:
     local_war_dir: "{{ playbook_dir }}/../../../../../target"
     remote_war_dir: /data/mystamps
-    uptimerobot:
-      monitorid: 'MyStamps'
-      apikey: "{{ lookup('env', 'UPTIMEROBOT_APIKEY') }}"
   tasks:
 
   - name: Getting info about WAR file

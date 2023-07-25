@@ -14,10 +14,11 @@ CURRENT_DIR="$(dirname "${0:-.}")"
 INVENTORY="$CURRENT_DIR/ansible/mystamps.inventory"
 PLAYBOOK="$CURRENT_DIR/ansible/deploy.yml"
 PRIVATE_KEY="$CURRENT_DIR/ansible/mystamps_rsa"
+VARS_FILE="$CURRENT_DIR/ansible/prod_vars.yml"
 PASS_FILE="$CURRENT_DIR/vault-pass.txt"
 
 cleanup() {
-	rm -f "$PRIVATE_KEY" "$PASS_FILE"
+	rm -f "$PRIVATE_KEY" "$PASS_FILE" "$VARS_FILE"
 	exit
 }
 trap 'cleanup' EXIT SIGHUP SIGINT SIGTERM
@@ -35,15 +36,17 @@ if [ -z "${VAULT_PASSWORD:-}" ]; then
 	exit 1
 fi
 
-# Decrypt private key
 echo -n "$VAULT_PASSWORD" >"$PASS_FILE"
 
-ansible-vault decrypt \
-	--vault-password-file "$PASS_FILE" \
-	--output "$PRIVATE_KEY" \
-	"${PRIVATE_KEY}.enc"
-
-chmod 600 "$PRIVATE_KEY"
+for FILE in "$PRIVATE_KEY" "$VARS_FILE"; do
+	FILENAME="$(basename "$FILE")"
+	echo "Decrypting ${FILENAME}.enc to $FILENAME"
+	ansible-vault decrypt \
+		--vault-password-file "$PASS_FILE" \
+		--output "$FILE" \
+		"${FILE}.enc"
+	chmod 600 "$FILE"
+done
 
 ansible-playbook \
 	--inventory="$INVENTORY" \
