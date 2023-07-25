@@ -41,6 +41,7 @@ infra/docker/mysql_backup_mystamps.sql.gz
 
 # created by src/main/scripts/ci/deploy.sh
 vault-pass.txt
+mystamps_rsa
 prod_vars.yml
 
 # maven-wrapper
