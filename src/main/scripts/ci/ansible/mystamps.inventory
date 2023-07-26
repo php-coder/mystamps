@@ -1,3 +1,10 @@
 # Ansible inventory file
 # See: https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html
+
+[prod]
 my-stamps.ru
+
+[all:vars]
+# https://docs.ansible.com/ansible/2.9/reference_appendices/python_3_support.html#using-python-3-on-the-managed-machines-with-commands-and-playbooks
+# https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html
+ansible_python_interpreter=/usr/bin/python3
