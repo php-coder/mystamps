@@ -24,7 +24,7 @@ import ru.mystamps.web.common.JdbcUtils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -38,7 +38,7 @@ public class MapIntegerIntegerResultSetExtractor
 	public Map<Integer, Integer> extractData(ResultSet rs)
 		throws SQLException, DataAccessException {
 		
-		Map<Integer, Integer> result = new HashMap<>();
+		Map<Integer, Integer> result = new LinkedHashMap<>();
 		
 		while (rs.next()) {
 			Integer key   = JdbcUtils.getInteger(rs, keyFieldName);

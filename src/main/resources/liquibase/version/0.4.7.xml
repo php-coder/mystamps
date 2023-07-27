@@ -8,5 +8,6 @@
 	<include file="0.4.7/2021-07-18--series_import_parsed_image_urls.xml" relativeToChangelogFile="true" />
 	<include file="0.4.7/2021-11-28--series_and_nullable_perforated_field.xml" relativeToChangelogFile="true" />
 	<include file="0.4.7/2022-09-08--re_apply_column_comments.xml" relativeToChangelogFile="true" />
+	<include file="0.4.7/2023-07-27--collection_added_at.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

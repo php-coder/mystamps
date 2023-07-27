@@ -65,6 +65,7 @@ public class CollectionServiceImpl implements CollectionService {
 		log.info("Collection #{} has been created ({})", id, collection);
 	}
 	
+	// @todo #1621 Add 3 integration tests to check that the last added series is shown first
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
@@ -74,10 +75,12 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(dto.getNumberOfStamps() != null, "Number of stamps must be non null");
 		Validate.isTrue(dto.getSeriesId() != null, "Series id must be non null");
 		
+		Date now = new Date();
 		AddToCollectionDbDto collectionDto = new AddToCollectionDbDto();
 		collectionDto.setOwnerId(userId);
 		collectionDto.setSeriesId(dto.getSeriesId());
 		collectionDto.setNumberOfStamps(dto.getNumberOfStamps());
+		collectionDto.setAddedAt(now);
 		
 		if (dto.getPrice() != null) {
 			Validate.validState(
@@ -89,7 +92,7 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 		
 		Integer seriesInstanceId = collectionDao.addSeriesToUserCollection(collectionDto);
-		collectionDao.markAsModified(userId, new Date());
+		collectionDao.markAsModified(userId, now);
 		
 		log.info(
 			"Series #{} ({}) has been added to collection: #{}",

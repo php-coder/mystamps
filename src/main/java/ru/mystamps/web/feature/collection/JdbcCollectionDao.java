@@ -248,6 +248,7 @@ public class JdbcCollectionDao implements CollectionDao {
 		params.put("number_of_stamps", dto.getNumberOfStamps());
 		params.put("price", dto.getPrice());
 		params.put("currency", dto.getCurrency());
+		params.put("added_at", dto.getAddedAt());
 		
 		KeyHolder holder = new GeneratedKeyHolder();
 		

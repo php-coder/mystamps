@@ -282,5 +282,16 @@
 		<Class name="ru.mystamps.web.feature.site.SuspiciousActivityDto" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
+	<Match>
+		<!--
+			@todo #1621 AddToCollectionDbDto: port to a new datetime API
+		-->
+		<Class name="ru.mystamps.web.feature.collection.AddToCollectionDbDto" />
+		<Or>
+			<Method name="getAddedAt" />
+			<Method name="setAddedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
 	
 </FindBugsFilter>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+	
+	<changeSet id="add-added_at-field-to-collections_series" author="php-coder" context="scheme">
+		
+		<addColumn tableName="collections_series">
+			<column name="added_at" type="DATETIME" />
+		</addColumn>
+
+		<!-- Unfortunately, H2 doesn't support UPDATE with JOIN -->
+		<sql>
+			UPDATE collections_series cs
+			SET added_at = (
+				SELECT c.updated_at
+				FROM collections c
+				WHERE c.id = cs.collection_id
+			)
+		</sql>
+		
+		<addNotNullConstraint
+			tableName="collections_series"
+			columnDataType="DATETIME"
+			columnName="added_at" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

@@ -4,6 +4,7 @@
 - (infrastructure) discontinue usage of Danger
 - (infrastructure) discontinue usage of 0pdd
 - (infrastructure) migrate CI from Travis to GitHub Actions
+- (improvement) show last added series first on the pages with a collection info, series info and collection estimation
 
 0.4.6
 - (feature)        users can add a comment to a series

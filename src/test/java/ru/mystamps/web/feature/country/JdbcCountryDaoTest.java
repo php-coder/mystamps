@@ -68,8 +68,11 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-6-france-qty6.sql"
 		},
 		statements =  {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 4, 5), (1, 5, 4), (1, 6, 6)"
+			// CheckStyle: ignore LineLength for next 1 line
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
+				+ "  (1, 4, 5, CURRENT_TIMESTAMP())"
+				+ ", (1, 5, 4, CURRENT_TIMESTAMP())"
+				+ ", (1, 6, 6, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void countCountriesOfCollectionWithMultipleSeriesFromEachCountry() {
@@ -90,8 +93,10 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-3-sport-qty7.sql"
 		},
 		statements =  {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 2, 3), (1, 3, 7)"
+			// CheckStyle: ignore LineLength for next 1 line
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
+				+ "  (1, 2, 3, CURRENT_TIMESTAMP())"
+				+ ", (1, 3, 7, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void countCountriesOfCollectionWithSeriesFromUnknownCountries() {
@@ -132,8 +137,11 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-6-france-qty6.sql"
 		},
 		statements =  {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 4, 5), (1, 5, 4), (1, 6, 6)"
+			// CheckStyle: ignore LineLength for next 1 line
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
+				+ "  (1, 4, 5, CURRENT_TIMESTAMP())"
+				+ ", (1, 5, 4, CURRENT_TIMESTAMP())"
+				+ ", (1, 6, 6, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfWithSeriesWithAllStamps() {
@@ -159,8 +167,8 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-4-italy-qty5.sql"
 		},
 		statements =  {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 4, 2)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 4, 2, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfWithIncompleteSeries() {
@@ -180,8 +188,8 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-1-fauna-qty5.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 1, 5)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 1, 5, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfWithSeriesWithoutCountry() {
@@ -204,8 +212,8 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-4-italy-qty5.sql"
 		},
 		statements =  {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 4, 5)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 4, 5, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfInRussian() {
@@ -226,8 +234,8 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-5-france-qty4.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 5, 4)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 5, 4, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfInRussianWithFallbackToEnglish() {
@@ -248,8 +256,8 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-5-france-qty4.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 5, 4)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 5, 4, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfInUnsupportedLanguageWithFallbackToEnglish() {

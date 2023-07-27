@@ -193,6 +193,7 @@ class CollectionServiceImplTest extends Specification {
 				assert dto.ownerId == expectedUserId
 				assert dto.seriesId == expectedSeriesId
 				assert dto.numberOfStamps == expectedNumberOfStamps
+				assert DateUtils.roughlyEqual(dto.addedAt, new Date())
 				return true
 			}) >> Random.id()
 		and:

@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -30,4 +31,5 @@ public class AddToCollectionDbDto {
 	private Integer numberOfStamps;
 	private BigDecimal price;
 	private String currency;
+	private Date addedAt;
 }

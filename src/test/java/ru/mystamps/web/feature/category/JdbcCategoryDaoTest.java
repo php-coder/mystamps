@@ -67,8 +67,11 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/series-3-sport-qty7.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 1, 5), (1, 2, 3), (1, 3, 7)"
+			// CheckStyle: ignore LineLength for next 1 line
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
+				+ "  (1, 1, 5, CURRENT_TIMESTAMP())"
+				+ ", (1, 2, 3, CURRENT_TIMESTAMP())"
+				+ ", (1, 3, 7, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfWithSeriesWithAllStamps() {
@@ -93,8 +96,8 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/series-1-fauna-qty5.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 1, 2)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 1, 2, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfWithIncompleteSeries() {
@@ -114,8 +117,8 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/series-1-fauna-qty5.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 1, 5)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 1, 5, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfInRussian() {
@@ -135,8 +138,8 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/series-2-sport-qty3.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 2, 3)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 2, 3, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfInRussianWithFallbackToEnglish() {
@@ -156,8 +159,8 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/series-1-fauna-qty5.sql"
 		},
 		statements = {
-			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
-				+ "VALUES (1, 1, 5)"
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) "
+				+ "VALUES (1, 1, 5, CURRENT_TIMESTAMP())"
 		}
 	)
 	public void getStatisticsOfInUnsupportedLanguageWithFallbackToEnglish() {
