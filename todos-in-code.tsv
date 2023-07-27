@@ -129,7 +129,7 @@ Id	Ticket	"Title"	File	Lines
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	131-131
 1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1321-1321
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	638-638
-1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	136-136
+1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	139-139
 1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	108-108
 1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	65-65
@@ -208,6 +208,8 @@ Id	Ticket	"Title"	File	Lines
 1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	57-57
 1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	320-320
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	29-29
-1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	213-213
+1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	216-216
 1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	69-69
 1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	70-70
+1621-71a788b3	1621	"AddToCollectionDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	287-287
+1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	68-68

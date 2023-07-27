@@ -530,11 +530,22 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
+    <ticket>1621</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1621-b132f9e0</id>
+    <lines>68-68</lines>
+    <body>Add 3 integration tests to check that the last added series is shown first</body>
+    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
     <ticket>1123</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1123-296bb340</id>
-    <lines>136-136</lines>
+    <lines>139-139</lines>
     <body>CollectionService.findSeriesInstances(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -545,7 +556,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1605-c1ea4a5f</id>
-    <lines>213-213</lines>
+    <lines>216-216</lines>
     <body>CollectionService.findAllForSitemap(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -2329,6 +2340,17 @@
     <id>493-2b6007d4</id>
     <lines>280-280</lines>
     <body>SuspiciousActivityDto: port to a new datetime API</body>
+    <file>src/main/config/spotbugs-filter.xml</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1621</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1621-71a788b3</id>
+    <lines>287-287</lines>
+    <body>AddToCollectionDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
