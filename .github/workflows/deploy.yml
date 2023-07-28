@@ -49,7 +49,9 @@ jobs:
             package
 
       - name: Install ansible
-        run: pip3 install --user ansible==2.10.17
+        # The command pip3 install --user ansible==2.10.17 doesn't work as we have an old version
+        # See https://docs.ansible.com/ansible/2.10/installation_guide/intro_installation.html#installing-devel-from-github-with-pip
+        run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
 
       - name: Run deploy.sh
         env:
