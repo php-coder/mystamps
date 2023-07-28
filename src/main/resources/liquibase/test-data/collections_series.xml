@@ -15,19 +15,23 @@
 			<column name="number_of_stamps" valueNumeric="1" />
 			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
 		</insert>
+
+		<!--
+			Add incomplete instance of series #3
+			NOTE: the order is important as this instance will be shown last (smaller id)
+			and src/test/robotframework/collection/remove-series/logic.robot relies on that
+		-->
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
+			<column name="number_of_stamps" valueNumeric="2" />
+			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
+		</insert>
 		
 		<insert tableName="collections_series">
 			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
 			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
 			<column name="number_of_stamps" valueNumeric="3" />
-			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
-		</insert>
-		
-		<!-- Add another instance (incomplete) of series #3 -->
-		<insert tableName="collections_series">
-			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
-			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
-			<column name="number_of_stamps" valueNumeric="2" />
 			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
 		</insert>
 		
