@@ -19,4 +19,7 @@
 	<!-- Depends on: series_import_requests, transaction_participants -->
 	<include file="test-data/series_sales_import_parsed_data.xml" relativeToChangelogFile="true" />
 	
+	<!-- Depends on: collections, series -->
+	<include file="test-data/collections_series.xml" relativeToChangelogFile="true" />
+	
 </databaseChangeLog>

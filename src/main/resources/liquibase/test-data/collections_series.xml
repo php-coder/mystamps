@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-series-to-seriesowner-collection" author="php-coder" context="test-data">
+		
+		<comment>Adds series #1 and #3 to the collection of "seriesowner"</comment>
+		
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
+			<column name="series_id" valueNumeric="1" />
+			<column name="number_of_stamps" valueNumeric="1" />
+			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
+		</insert>
+		
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
+			<column name="number_of_stamps" valueNumeric="3" />
+			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
+		</insert>
+		
+		<!-- Add another instance (incomplete) of series #3 -->
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
+			<column name="number_of_stamps" valueNumeric="2" />
+			<column name="added_at" valueComputed="(SELECT updated_at FROM collections WHERE slug = 'seriesowner')" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>
