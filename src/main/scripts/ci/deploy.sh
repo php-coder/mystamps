@@ -24,11 +24,11 @@ cleanup() {
 trap 'cleanup' EXIT SIGHUP SIGINT SIGTERM
 
 # Disable host key checking to suppress interactive prompt.
-# See: https://docs.ansible.com/ansible/2.9/user_guide/connection_details.html#host-key-checking
+# See: https://docs.ansible.com/ansible/2.10/user_guide/connection_details.html#managing-host-key-checking
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 # Make the output of a failed task human readable.
-# See: https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#envvar-ANSIBLE_STDOUT_CALLBACK
+# See: https://docs.ansible.com/ansible/2.10/reference_appendices/config.html#envvar-ANSIBLE_STDOUT_CALLBACK
 export ANSIBLE_STDOUT_CALLBACK=debug
 
 if [ -z "${VAULT_PASSWORD:-}" ]; then

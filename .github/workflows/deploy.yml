@@ -49,7 +49,7 @@ jobs:
             package
 
       - name: Install ansible
-        run: pip3 install --user ansible==2.9.27
+        run: pip3 install --user ansible==2.10.17
 
       - name: Run deploy.sh
         env:
