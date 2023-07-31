@@ -672,7 +672,7 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
 		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
-		<spring-framework.version>5.2.24.RELEASE</spring-framework.version>
+		<spring-framework.version>5.2.25.RELEASE</spring-framework.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
 		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
