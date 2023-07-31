@@ -58,6 +58,10 @@ jobs:
       - name: Install community.general collection for UptimeRobot
         run: ansible-galaxy collection install community.general:==1.3.6
 
+      # https://docs.ansible.com/ansible/2.10/collections/ansible/posix/debug_callback.html
+      - name: Install ansible.posix.debug for debug callback
+        run: ansible-galaxy collection install ansible.posix:==1.1.1
+
       - name: Run deploy.sh
         env:
           # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
