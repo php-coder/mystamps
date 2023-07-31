@@ -1414,7 +1414,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>694-5ff627a7</id>
-    <lines>327-327</lines>
+    <lines>329-329</lines>
     <body>SeriesInfoExtractorServiceImpl: support for a single Michel number</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1425,7 +1425,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>694-d39599f4</id>
-    <lines>328-328</lines>
+    <lines>330-330</lines>
     <body>SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1436,7 +1436,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-acc3d320</id>
-    <lines>357-357</lines>
+    <lines>359-359</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1447,7 +1447,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>978-63d2b8ea</id>
-    <lines>365-365</lines>
+    <lines>367-367</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSeller(): validate name</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1458,7 +1458,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-ee1c9a1a</id>
-    <lines>406-406</lines>
+    <lines>408-408</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1469,7 +1469,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-b081f579</id>
-    <lines>407-407</lines>
+    <lines>409-409</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1480,7 +1480,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-1c6fc247</id>
-    <lines>418-418</lines>
+    <lines>420-420</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1491,7 +1491,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-c38ae205</id>
-    <lines>419-419</lines>
+    <lines>421-421</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1502,7 +1502,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-30836e69</id>
-    <lines>473-473</lines>
+    <lines>475-475</lines>
     <body>SeriesInfoExtractorServiceImpl.extractPrice(): filter out values &lt;= 0</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>
@@ -1513,7 +1513,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1326-d460ac09</id>
-    <lines>535-535</lines>
+    <lines>537-537</lines>
     <body>SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
     <author>Slava Semushin</author>

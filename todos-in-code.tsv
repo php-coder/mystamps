@@ -27,30 +27,30 @@ Id	Ticket	"Title"	File	Lines
 694-35aab30a	694	"CatalogUtils: consider introducing toLongForm(String) method"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	58-58
 694-424e441b	694	"Import series: add support for Yvert catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	102-102
 694-5e76eadc	694	"CatalogUtils.toShortForm(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/CatalogUtils.java	61-61
-694-5ff627a7	694	"SeriesInfoExtractorServiceImpl: support for a single Michel number"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	327-327
+694-5ff627a7	694	"SeriesInfoExtractorServiceImpl: support for a single Michel number"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	329-329
 694-6574cec0	694	"ExpandCatalogNumbersEditor: add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	35-35
 694-8e1ac4c4	694	"Import series: add support for Scott catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	101-101
 694-993ff349	694	"/series/import/request/{id}: add integration test for trimming of michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	56-57
 694-b7a345ad	694	"/series/import/request/{id}(michelNumbers): add integration test for validation"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	106-106
 694-d17b3e39	694	"Support for a separate locator for a field with michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	199-199
 694-d360b036	694	"Import series: add support for Gibbons catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	103-103
-694-d39599f4	694	"SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	328-328
+694-d39599f4	694	"SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	330-330
 694-d3adec03	694	"ExpandCatalogNumbersEditor: find a better way of editors composition"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	50-50
 694-f7d3a238	694	"Import series: add support for Solovyov catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	105-105
 695-0c97d8b1	695	"/series/import/request/{id}(seriesSale): add integration test for validation of required fields"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	32-33
 695-18c5a29c	695	"/series/import/request/{id}: seller's name and url are required when sellerId is empty"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	31-31
-695-1c6fc247	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	418-418
-695-30836e69	695	"SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	473-473
+695-1c6fc247	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	420-420
+695-30836e69	695	"SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	475-475
 695-3605c681	695	"/series/import/request/{id}(seller.name): add validation against long values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	29-29
 695-3e442dbc	695	"/series/import/request/{id}(seller.url): add validation against long values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	33-33
 695-6636bb5e	695	"Remove hasAtLeastOneFieldFilled() methods from DTOs"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	253-253
 695-7d753493	695	"/series/import/request/{id}(seller.name): add validation against short values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	28-28
-695-acc3d320	695	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	357-357
-695-b081f579	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	407-407
-695-c38ae205	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	419-419
+695-acc3d320	695	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	359-359
+695-b081f579	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	409-409
+695-c38ae205	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	421-421
 695-c3acafce	695	"SeriesImportService.addSeries(): introduce DTO object"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java	28-28
 695-eb735e9f	695	"/series/import/request/{id}: use divs instead of table for elements aligning"	src/main/scripts/execute-command.sh	64-64
-695-ee1c9a1a	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	406-406
+695-ee1c9a1a	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	408-408
 695-f2940c60	695	"/series/import/request/{id}(seller.url): add validation for valid url"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	32-32
 705-eb60edc9	705	"remote-backup.sh: find a way to protect duplicity against ps"	infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml	64-64
 709-2eff2f2e	709	"/series/import/request/{id}(quantity): add integration test for max value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	62-62
@@ -107,7 +107,7 @@ Id	Ticket	"Title"	File	Lines
 975-c9aec551	975	"SiteParserServiceImpl: add unit tests for constructor"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	64-64
 975-d6c13208	975	"SiteParserServiceImpl.findParserNames(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	54-54
 975-e76660de	975	"SiteParserServiceImpl.findForUrl(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	33-33
-978-63d2b8ea	978	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	365-365
+978-63d2b8ea	978	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	367-367
 979-ca86046a	979	"Add integration test for import of series with currency-locator"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java	65-65
 995-71e1e7c8	995	"Series sale import: add support for new sellers"	src/main/webapp/WEB-INF/views/series/info.html	857-857
 995-950efed9	995	"SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	42-42
@@ -175,7 +175,7 @@ Id	Ticket	"Title"	File	Lines
 1326-2bc92a3c	1326	"SeriesImportServiceImpl.saveParsedData(): add unit test for condition"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	237-237
 1326-2cfe45cd	1326	"JsoupSiteParser.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	286-286
 1326-4794f854	1326	"Series sale import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java	72-72
-1326-d460ac09	1326	"SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	535-535
+1326-d460ac09	1326	"SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	537-537
 1326-e5faca08	1326	"Series import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	52-52
 1329-5cbf2e5d	1329	"SeriesSalesList: add tests"	src/main/frontend/src/components/SeriesSalesList.js	6-6
 1338-4f752b8a	1338	"AddCommentForm: add tests"	src/main/frontend/src/components/AddCommentForm.js	7-7
