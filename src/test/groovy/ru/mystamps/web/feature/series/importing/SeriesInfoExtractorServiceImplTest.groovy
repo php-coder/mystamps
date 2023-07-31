@@ -466,6 +466,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'без зуб'          | _
 			'без зубцов'       | _
 			'Динозавры (б\\з)' | _
+			'neperf.'          | _
 			'Динозавры (неперфорированный, красный)' | _
 	}
 	

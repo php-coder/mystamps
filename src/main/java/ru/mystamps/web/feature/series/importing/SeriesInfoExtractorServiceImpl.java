@@ -312,7 +312,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			"БЕЗ ПЕРФ.",
 			"НЕПЕРФОРИРОВАННЫЙ",
 			"Б/ПЕРФОРАЦИИ",
-			"БЕЗ ПЕРФОРАЦИИ"
+			"БЕЗ ПЕРФОРАЦИИ",
+			"NEPERF."
 		);
 		if (withoutPerforation) {
 			log.debug("Perforation is false");
