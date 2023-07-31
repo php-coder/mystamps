@@ -53,6 +53,11 @@ jobs:
         # See https://docs.ansible.com/ansible/2.10/installation_guide/intro_installation.html#installing-devel-from-github-with-pip
         run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
 
+      # https://docs.ansible.com/ansible/2.10/collections/community/general/uptimerobot_module.html
+      # https://docs.ansible.com/ansible/latest/collections_guide/collections_installing.html#installing-an-older-version-of-a-collection
+      - name: Install community.general collection for UptimeRobot
+        run: ansible-galaxy collection install community.general:==1.3.6
+
       - name: Run deploy.sh
         env:
           # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
