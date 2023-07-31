@@ -460,6 +460,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'беззубцовые'      | _
 			'беззубцовых'      | _
 			'БЕЗЗУБЦОВЫЕ'      | _
+			'Беззубц.'         | _
 			'Без перфорации'   | _
 			'б/перфорации'     | _
 			'без перф.'        | _
