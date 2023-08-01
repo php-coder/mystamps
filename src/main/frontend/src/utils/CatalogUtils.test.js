@@ -62,6 +62,14 @@ describe("CatalogUtils.expandNumbers()", function() {
 		expect(CatalogUtils.expandNumbers("1-3,5-6,8-9")).toEqual("1,2,3,5,6,8,9");
 	});
 	
+	it("should return '989,1166,1167' for '989,1166-1167'", function() {
+		expect(CatalogUtils.expandNumbers("989,1166-1167")).toEqual("989,1166,1167");
+	});
+	
+	it("should return '989,1166,1167' for '989,1166-1167'", function() {
+		expect(CatalogUtils.expandNumbers(" 989,1166-1167")).toEqual("989,1166,1167");
+	});
+	
 	it("should return 'test 1-3' for 'test 1-3'", function() {
 		expect(CatalogUtils.expandNumbers("test 1-3")).toEqual("test 1-3");
 	});
