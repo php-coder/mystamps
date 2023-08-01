@@ -12,6 +12,7 @@
 		</addColumn>
 
 		<!-- Unfortunately, H2 doesn't support UPDATE with JOIN -->
+		<!-- NOTE: In PostgreSQL it is illegal to prefix columns with table alias in a SET clause -->
 		<sql>
 			UPDATE collections_series cs
 			SET added_at = (
