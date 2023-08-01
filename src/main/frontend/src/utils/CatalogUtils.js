@@ -21,7 +21,6 @@ var CatalogUtils = {
 		
 		var ranges = input.replace(' ', '').split(','),
 			result = [];
-		// FIXME: use jQuery.each() + jQuery.map()
 		for (var i = 0; i < ranges.length; i++) {
 			var range = ranges[i];
 			result.push(this.expandRange(range));
