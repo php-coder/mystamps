@@ -18,6 +18,7 @@
 package ru.mystamps.web.feature.country;
 
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -37,6 +38,7 @@ public interface CountryDao {
 	List<Integer> findIdsByNames(List<String> names);
 	List<Integer> findIdsByNamePattern(String pattern);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<SitemapInfoDto> findAllForSitemap();
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	String findCountryOfLastCreatedSeriesByUser(Integer userId);
 	String findPopularCountryInCollection(Integer userId);

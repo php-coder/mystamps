@@ -18,6 +18,7 @@
 package ru.mystamps.web.feature.country;
 
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,9 @@ public interface CountryService {
 	List<Integer> findIdsByNames(List<String> names);
 	List<Integer> findIdsWhenNameStartsWith(String name);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<SitemapInfoDto> findAllForSitemap();
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
+
 	long countAll();
 	long countCountriesOf(Integer collectionId);
 	long countBySlug(String slug);

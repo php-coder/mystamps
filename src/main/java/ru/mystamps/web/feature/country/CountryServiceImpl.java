@@ -25,6 +25,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
@@ -114,6 +115,13 @@ public class CountryServiceImpl implements CountryService {
 	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return countryDao.findAllAsLinkEntities(lang);
+	}
+	
+	// @todo #1605 CountryService.findAllForSitemap(): add unit test
+	@Override
+	@Transactional(readOnly = true)
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return countryDao.findAllForSitemap();
 	}
 	
 	@Override

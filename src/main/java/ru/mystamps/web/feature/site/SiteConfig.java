@@ -84,6 +84,7 @@ public class SiteConfig {
 			return new SitemapController(
 				categoryService,
 				collectionService,
+				countryService,
 				seriesService
 			);
 		}

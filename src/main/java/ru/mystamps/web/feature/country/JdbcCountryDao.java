@@ -28,6 +28,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.RowMappers;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.support.spring.jdbc.MapStringIntegerResultSetExtractor;
 
 import java.util.Collections;
@@ -55,6 +56,7 @@ public class JdbcCountryDao implements CountryDao {
 	private final String findIdsByNamesSql;
 	private final String findIdsByNamePatternSql;
 	private final String findCountriesNamesWithSlugSql;
+	private final String findAllForSitemapSql;
 	private final String findCountryLinkEntityBySlugSql;
 	@SuppressWarnings("PMD.LongVariable")
 	private final String findFromLastCreatedSeriesByUserSql;
@@ -78,6 +80,7 @@ public class JdbcCountryDao implements CountryDao {
 		this.findIdsByNamesSql                  = env.getRequiredProperty("country.find_ids_by_names");
 		this.findIdsByNamePatternSql            = env.getRequiredProperty("country.find_ids_by_name_pattern");
 		this.findCountriesNamesWithSlugSql      = env.getRequiredProperty("country.find_all_countries_names_with_slug");
+		this.findAllForSitemapSql               = env.getRequiredProperty("country.find_all_for_sitemap");
 		this.findCountryLinkEntityBySlugSql     = env.getRequiredProperty("country.find_country_link_info_by_slug");
 		this.findFromLastCreatedSeriesByUserSql = env.getRequiredProperty("country.find_from_last_created_series_by_user");
 		this.findPopularCountryInCollectionSql  = env.getRequiredProperty("country.find_popular_country_from_user_collection");
@@ -212,6 +215,15 @@ public class JdbcCountryDao implements CountryDao {
 		);
 	}
 	
+	@Override
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return jdbcTemplate.query(
+			findAllForSitemapSql,
+			Collections.emptyMap(),
+			RowMappers::forSitemapInfoDto
+		);
+	}
+
 	@Override
 	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
 		Map<String, Object> params = new HashMap<>();

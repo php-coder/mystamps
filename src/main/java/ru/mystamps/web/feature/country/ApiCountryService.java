@@ -24,6 +24,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -69,6 +70,11 @@ public class ApiCountryService implements CountryService {
 	
 	@Override
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public List<SitemapInfoDto> findAllForSitemap() {
 		throw new UnsupportedOperationException();
 	}
 	

@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.support.togglz.Features;
 
 import java.util.Date;
@@ -76,6 +77,14 @@ public class TogglzWithFallbackCountryService implements CountryService {
 		return executeOneOf(
 			() ->      apiService.findAllAsLinkEntities(lang),
 			() -> fallbackService.findAllAsLinkEntities(lang)
+		);
+	}
+	
+	@Override
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return executeOneOf(
+			apiService::findAllForSitemap,
+			fallbackService::findAllForSitemap
 		);
 	}
 	

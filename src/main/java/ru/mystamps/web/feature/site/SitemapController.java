@@ -27,6 +27,7 @@ import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.collection.CollectionUrl;
+import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.SeriesUrl;
 
@@ -53,6 +54,7 @@ public class SitemapController {
 	
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
+	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
 	@GetMapping(SiteUrl.SITEMAP_XML)
@@ -84,6 +86,11 @@ public class SitemapController {
 			for (SitemapInfoDto item : categoryService.findAllForSitemap()) {
 				// CheckStyle: ignore LineLength for next 1 line
 				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_CATEGORY_PAGE, "{slug}"));
+			}
+
+			for (SitemapInfoDto item : countryService.findAllForSitemap()) {
+				// CheckStyle: ignore LineLength for next 1 line
+				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_COUNTRY_PAGE, "{slug}"));
 			}
 			
 			writer.print("</urlset>\n");
