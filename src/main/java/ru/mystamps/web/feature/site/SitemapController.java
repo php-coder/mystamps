@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.mystamps.web.common.SitemapInfoDto;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.series.SeriesService;
@@ -50,6 +51,7 @@ public class SitemapController {
 		+ SiteUrl.PUBLIC_URL + SiteUrl.INDEX_PAGE
 		+ "</loc></url>\n";
 	
+	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final SeriesService seriesService;
 	
@@ -77,6 +79,11 @@ public class SitemapController {
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
 				// CheckStyle: ignore LineLength for next 1 line
 				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_SERIES_PAGE, "{id}"));
+			}
+
+			for (SitemapInfoDto item : categoryService.findAllForSitemap()) {
+				// CheckStyle: ignore LineLength for next 1 line
+				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_CATEGORY_PAGE, "{slug}"));
 			}
 			
 			writer.print("</urlset>\n");

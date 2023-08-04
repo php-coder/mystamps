@@ -29,6 +29,7 @@ import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.RowMappers;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.support.spring.jdbc.MapStringIntegerResultSetExtractor;
 
 import java.util.Collections;
@@ -56,6 +57,7 @@ public class JdbcCategoryDao implements CategoryDao {
 	private final String findIdsByNamesSql;
 	private final String findIdsByNamePatternSql;
 	private final String findCategoriesNamesWithSlugSql;
+	private final String findAllForSitemapSql;
 	private final String findLinkEntityBySlugSql;
 	@SuppressWarnings("PMD.LongVariable")
 	private final String findCategoriesWithParentNamesSql;
@@ -77,6 +79,7 @@ public class JdbcCategoryDao implements CategoryDao {
 		this.findIdsByNamesSql                  = env.getRequiredProperty("category.find_ids_by_names");
 		this.findIdsByNamePatternSql            = env.getRequiredProperty("category.find_ids_by_name_pattern");
 		this.findCategoriesNamesWithSlugSql     = env.getRequiredProperty("category.find_all_categories_names_with_slug");
+		this.findAllForSitemapSql               = env.getRequiredProperty("category.find_all_for_sitemap");
 		this.findLinkEntityBySlugSql            = env.getRequiredProperty("category.find_category_link_info_by_slug");
 		this.findCategoriesWithParentNamesSql   = env.getRequiredProperty("category.find_categories_with_parent_names");
 		this.findFromLastCreatedSeriesByUserSql = env.getRequiredProperty("category.find_from_last_created_series_by_user");
@@ -207,6 +210,15 @@ public class JdbcCategoryDao implements CategoryDao {
 			findCategoriesNamesWithSlugSql,
 			Collections.singletonMap("lang", lang),
 			RowMappers::forLinkEntityDto
+		);
+	}
+	
+	@Override
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return jdbcTemplate.query(
+			findAllForSitemapSql,
+			Collections.emptyMap(),
+			RowMappers::forSitemapInfoDto
 		);
 	}
 	

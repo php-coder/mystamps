@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -70,6 +71,11 @@ public class ApiCategoryService implements CategoryService {
 	
 	@Override
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public List<SitemapInfoDto> findAllForSitemap() {
 		throw new UnsupportedOperationException();
 	}
 	

@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.category;
 
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,7 @@ public interface CategoryDao {
 	List<Integer> findIdsByNames(List<String> names);
 	List<Integer> findIdsByNamePattern(String pattern);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<SitemapInfoDto> findAllForSitemap();
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	List<EntityWithParentDto> findCategoriesWithParents(String lang);
 	String findCategoryOfLastCreatedSeriesByUser(Integer userId);

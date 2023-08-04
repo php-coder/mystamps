@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
@@ -114,6 +115,13 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return categoryDao.findAllAsLinkEntities(lang);
+	}
+
+	// @todo #1605 CategoryService.findAllForSitemap(): add unit test
+	@Override
+	@Transactional(readOnly = true)
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return categoryDao.findAllForSitemap();
 	}
 	
 	@Override

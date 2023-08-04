@@ -82,6 +82,7 @@ public class SiteConfig {
 		@Bean
 		public SitemapController sitemapController() {
 			return new SitemapController(
+				categoryService,
 				collectionService,
 				seriesService
 			);
