@@ -57,6 +57,7 @@ public class SitemapController {
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
+	// @todo #1605 sitemap.xml: consider adding "priority" and "changefreq" attributes
 	@GetMapping(SiteUrl.SITEMAP_XML)
 	public void generateSitemapXml(HttpServletResponse response) {
 		response.setContentType(MediaType.APPLICATION_XML_VALUE);
