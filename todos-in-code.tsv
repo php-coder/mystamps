@@ -8,9 +8,9 @@ Id	Ticket	"Title"	File	Lines
 493-bc96ed45	493	"AddCountryDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	249-249
 493-f666e113	493	"AddCategoryDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	236-236
 511-f20a64c0	511	"/collection/{slug}: wrap a long caption"	src/main/webapp/WEB-INF/views/collection/info.html	162-162
-517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	222-222
-517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	221-221
-517-d58933f7	517	"Add integration tests for category suggestion"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	203-203
+517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	230-230
+517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	229-229
+517-d58933f7	517	"Add integration tests for category suggestion"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	211-211
 592-8fadbb56	592	"GroupByParent: add unit tests"	src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java	35-35
 660-32942e08	660	"JdbcSeriesImportDao.addRawContent(): introduce dao"	src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java	150-150
 663-2b32ef86	663	"Add to collection: add integration test for specifying a price"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	32-32
@@ -81,8 +81,8 @@ Id	Ticket	"Title"	File	Lines
 785-c33d2a08	785	"Update series: handle refuse to update an existing comment gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	149-149
 801-b1837c29	801	"TimedSiteParser: add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java	25-25
 803-64628226	803	"SeriesInfoExtractorServiceImpl.extract(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	107-107
-819-04650c42	819	"CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	95-95
-819-38c578c8	819	"CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	95-95
+819-04650c42	819	"CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	96-96
+819-38c578c8	819	"CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	96-96
 834-3f317328	834	"SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	98-98
 857-34fbb536	857	"/series/import/request/{id}(seller.group): add validation against negative values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	36-36
 857-719bea28	857	"Check that a just created seller belongs to the ""example.com"" group"	src/test/robotframework/series/import/request-logic.robot	130-130
@@ -208,6 +208,9 @@ Id	Ticket	"Title"	File	Lines
 1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	57-57
 1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	320-320
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	29-29
+1605-1a43eb84	1605	"sitemap.xml: consider adding ""priority"" and ""changefreq"" attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60
+1605-7e6638bf	1605	"CategoryService.findAllForSitemap(): add unit test"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	120-120
+1605-8a636eb1	1605	"CountryService.findAllForSitemap(): add unit test"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	120-120
 1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	216-216
 1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	69-69
 1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	70-70
