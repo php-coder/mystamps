@@ -1,5 +1,8 @@
 0.x (upcoming release)
 
+
+0.4.7
+
 - (infrastructure) port JavaScript unit tests from Jasmine to Jest
 - (infrastructure) discontinue usage of Danger
 - (infrastructure) discontinue usage of 0pdd
