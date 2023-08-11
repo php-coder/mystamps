@@ -55,7 +55,9 @@ jobs:
         run: tfenv --version
 
       - name: Run terraform init
+        working-directory: infra/terraform
         run: terraform init
 
       - name: Run terraform plan
+        working-directory: infra/terraform
         run: terraform plan
