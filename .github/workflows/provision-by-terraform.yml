@@ -28,6 +28,21 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
 
+      # https://github.com/tfutils/tfenv#manual
+      - name: Install tfenv
+        uses: actions/checkout@v3.5.2
+        with:
+          # https://github.com/actions/checkout#checkout-multiple-repos-nested
+          repository: tfutils/tfenv
+          path: tfenv
+          ref: v3.0.0
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-system-path
+      - name: Add tfenv directory to PATH
+        run: echo "$GITHUB_WORKSPACE/tfenv/bin" >> $GITHUB_PATH
+
       - name: Install terraform
         working-directory: infra/terraform
         run: tfenv install
