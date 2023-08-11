@@ -52,7 +52,9 @@ jobs:
           tfenv use
 
       - name: Show tools versions
-        run: tfenv --version
+        run: |
+          tfenv --version
+          terraform -version
 
       - name: Run terraform init
         working-directory: infra/terraform
