@@ -45,7 +45,9 @@ jobs:
 
       - name: Install terraform
         working-directory: infra/terraform
-        run: tfenv install
+        run: |
+          tfenv install
+          tfenv use
 
       - name: Show tools versions
         run: |
