@@ -43,6 +43,8 @@ jobs:
       - name: Add tfenv directory to PATH
         run: echo "$GITHUB_WORKSPACE/tfenv/bin" >> $GITHUB_PATH
 
+      # https://github.com/tfutils/tfenv#tfenv-install-version
+      # https://github.com/tfutils/tfenv#tfenv-use-version
       - name: Install terraform
         working-directory: infra/terraform
         run: |
