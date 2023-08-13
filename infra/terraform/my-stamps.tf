@@ -3,6 +3,7 @@
 # @todo #1000 Terraform: add Mailgun
 
 variable "do_token" {
+  # How to obtain a token: https://docs.digitalocean.com/reference/api/create-personal-access-token/
   description = "Digital Ocean Personal Access Token"
   type        = string
 }
