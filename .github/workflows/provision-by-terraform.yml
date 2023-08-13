@@ -62,4 +62,4 @@ jobs:
 
       - name: Run terraform plan
         working-directory: infra/terraform
-        run: terraform plan
+        run: terraform plan -detailed-exitcode
