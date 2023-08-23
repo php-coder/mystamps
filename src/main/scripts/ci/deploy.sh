@@ -45,7 +45,6 @@ for FILE in "$PRIVATE_KEY" "$VARS_FILE"; do
 		--vault-password-file "$PASS_FILE" \
 		--output "$FILE" \
 		"${FILE}.enc"
-	chmod 600 "$FILE"
 done
 
 ansible-playbook \
