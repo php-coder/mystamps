@@ -29,6 +29,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout terraform data to a subdirectory
+        working-directory: infra/terraform
         run: |
           git fetch --depth=1 origin generated-terraform
           git worktree add terraform-data generated-terraform
@@ -56,10 +57,32 @@ jobs:
           tfenv install
           tfenv use
 
+      - name: Install ansible-vault
+        # The command pip3 install --user ansible==2.10.17 doesn't work as we have an old version
+        # See https://docs.ansible.com/ansible/2.10/installation_guide/intro_installation.html#installing-devel-from-github-with-pip
+        run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
+
       - name: Show tools versions
         run: |
           tfenv --version
           terraform -version
+          ansible-vault --version
+
+      - name: Decrypt terraform files
+        working-directory: infra/terraform
+        env:
+          # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+          VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
+        run |
+          echo -n "$VAULT_PASSWORD" >vault-pass.txt
+
+          for FILENAME in terraform.tfstate terraform.tfvars; do
+            echo "Decrypting ${FILENAME}.enc to $FILENAME"
+            ansible-vault decrypt \
+              --vault-password-file vault-pass.txt \
+              --output "terraform-data/$FILENAME" \
+              "terraform-data/${FILENAME}.enc"
+          done
 
       - name: Run terraform init
         working-directory: infra/terraform
@@ -67,9 +90,19 @@ jobs:
 
       - name: Run terraform plan
         working-directory: infra/terraform
-        run: terraform plan -detailed-exitcode
+        run: >-
+          terraform plan \
+            -detailed-exitcode \
+            -var-file terraform-data/terraform.tfvars \
+            -state terraform-data/terraform.tfstate \
+            -out terraform.tfplan
+
 
       - name: Cleanup
         if: always()
+        working-directory: infra/terraform
         run: |
+          for FILENAME in vault-pass.txt terraform.tfplan terraform-data/terraform.tfstate terraform-data/terraform.tfvars; do
+            [ ! -f "$FILE" ] || rm -fv "$FILE"
+          done
           [ ! -d terraform-data ] || git worktree remove terraform-data

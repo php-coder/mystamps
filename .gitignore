@@ -39,8 +39,10 @@ infra/terraform/terraform.tfstate.backup
 infra/docker/application-prod.properties
 infra/docker/mysql_backup_mystamps.sql.gz
 
-# created by src/main/scripts/ci/deploy.sh
+# created by src/main/scripts/ci/deploy.sh or .github/workflows/provision-by-terraform.yml
 vault-pass.txt
+
+# created by src/main/scripts/ci/deploy.sh
 mystamps_rsa
 prod_vars.yml
 
