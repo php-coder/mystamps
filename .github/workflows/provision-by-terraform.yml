@@ -63,6 +63,9 @@ jobs:
         run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
 
       - name: Show tools versions
+        env:
+          # https://developer.hashicorp.com/terraform/cli/commands#upgrade-and-security-bulletin-checks
+          CHECKPOINT_DISABLE: true
         run: |
           tfenv --version
           terraform -version
