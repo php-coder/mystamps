@@ -105,7 +105,7 @@ jobs:
         if: always()
         working-directory: infra/terraform
         run: |
-          for FILENAME in vault-pass.txt terraform.tfplan terraform-data/terraform.tfstate terraform-data/terraform.tfvars; do
+          for FILE in vault-pass.txt terraform.tfplan terraform-data/terraform.tfstate terraform-data/terraform.tfvars; do
             [ ! -f "$FILE" ] || rm -fv "$FILE"
           done
           [ ! -d terraform-data ] || git worktree remove terraform-data
