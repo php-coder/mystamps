@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# @todo #1244 Retrofit show-spring-boot-version-diff.sh script to work with a new format of the file
+
 # Treat unset variables and parameters as an error when performing parameter expansion
 set -o nounset
 

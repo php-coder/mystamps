@@ -1,8 +1,7 @@
 0.x (upcoming release)
-
+- (infrastructure) migrate to Spring Boot 2.3
 
 0.4.7
-
 - (infrastructure) port JavaScript unit tests from Jasmine to Jest
 - (infrastructure) discontinue usage of Danger
 - (infrastructure) discontinue usage of 0pdd
