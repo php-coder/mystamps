@@ -365,11 +365,22 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
+    <ticket>1244</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1244-070a6baf</id>
+    <lines>3-3</lines>
+    <body>Retrofit show-spring-boot-version-diff.sh script to work with a new format of the file</body>
+    <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
     <ticket>869</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>869-90e5e0f1</id>
-    <lines>16-16</lines>
+    <lines>18-18</lines>
     <body>show-spring-boot-version-diff.sh: properly handle recursive properties</body>
     <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
     <author>Slava Semushin</author>
