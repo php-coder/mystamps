@@ -22,7 +22,7 @@ printf "Comparing with Spring Boot %s (project vs spring versions)\\n\\n" "$SPRI
 # shellcheck disable=SC2002
 join \
 	<(cat    "$PROJECT_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version$/{print $2, $3}' | sort) \
-	<(curl -s "$SPRING_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version$/{print $2, $3}' | sort) \
+	<(curl -sS --fail-with-body "$SPRING_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version$/{print $2, $3}' | sort) \
 	| awk '
 			{
 				if ($2 != $3){
