@@ -93,8 +93,8 @@ jobs:
           fi
 
           if [ "$PUZZLES_FILES_MODIFIED" = 'yes' ]; then
-            printf 'pdd.xml: %d puzzles\n' "$(grep -c '<puzzle>' pdd.xml)"
-            printf 'todos-in-code.tsv: %d todos\n' "$(sed 1d todos-in-code.tsv | wc -l)"
+            printf 'pdd.xml: %d puzzles\n' "$(grep -c '<puzzle>' generated-todos/pdd.xml)"
+            printf 'todos-in-code.tsv: %d todos\n' "$(sed 1d generated-todos/todos-in-code.tsv | wc -l)"
           else
             echo 'neither pdd.xml nor todos-in-code.tsv have been modified'
           fi
