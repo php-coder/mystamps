@@ -3,8 +3,8 @@
 	
 	<!--
 		See for details:
-		https://docs.spring.io/spring-boot/docs/2.2.x/reference/html/howto.html#howto-configure-logback-for-logging
-		https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback/base.xml
+		https://docs.spring.io/spring-boot/docs/2.3.x/reference/html/howto.html#howto-configure-logback-for-logging
+		https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback/base.xml
 	-->
 	
 	<!--

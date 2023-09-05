@@ -79,7 +79,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -91,13 +91,13 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jdbc/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jetty/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
@@ -117,19 +117,19 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-logging/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-security/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-security/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-thymeleaf/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -141,7 +141,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-web/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -469,7 +469,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-test/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-test/build.gradle -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -518,7 +518,7 @@
 		
 	</dependencies>
 	
-	<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
+	<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/build.gradle -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -527,7 +527,7 @@
 	
 	<!--
 		All default versions from Spring Boot can be found there:
-		https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml
+		https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-dependencies/build.gradle
 	-->
 	<properties>
 		<!--
@@ -592,7 +592,7 @@
 		
 		<!--
 			Redefine default value from spring-boot-starter-parent:
-			https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
+			https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/build.gradle
 		-->
 		<java.version>1.8</java.version>
 		
@@ -682,7 +682,7 @@
 		
 		<!--
 			Define default value for spring-boot-starter-parent:
-			https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
+			https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/build.gradle
 		-->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
