@@ -113,12 +113,11 @@ Id	Ticket	"Title"	File	Lines
 995-950efed9	995	"SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	42-42
 995-a90e239c	995	"SeriesInfoExtractorService: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	85-85
 995-dfb3dc6f	995	"SiteParser: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	61-61
-1000-66d57f44	1000	"Terraform: add Mailgun"	infra/terraform/my-stamps.tf	3-3
-1000-6a846ef7	1000	"Terraform: add UptimeRobot"	infra/terraform/my-stamps.tf	2-2
+1000-66d57f44	1000	"Terraform: add Mailgun"	infra/terraform/my-stamps.tf	2-2
 1000-7b4c3a87	1000	"CI: validate and check Terraform configuration"	infra/terraform/my-stamps.tf	1-1
 1034-0016977f	1034	"Document how to run with PostgreSQL and docker-compose"	infra/docker/postgres.yml	7-8
 1054-0d061f99	1054	"Introduce ""mailgun-mock"" profile"	src/main/resources/application-postgres.properties	25-25
-1054-1c349c8e	1054	"Extract list of exclusions to a common profile"	src/main/resources/application-postgres.properties	44-44
+1054-1c349c8e	1054	"Extract list of exclusions to a common profile"	src/main/resources/application-postgres.properties	48-48
 1054-33066ab3	1054	"Introduce profiles for image persistence strategies"	src/main/java/ru/mystamps/web/feature/image/ImageConfig.java	80-80
 1054-41eae704	1054	"Extract part of spring.messages configuration to a common profile"	src/main/resources/application-postgres.properties	10-10
 1054-7817233c	1054	"Extract part of Thymeleaf configuration to a common profile"	src/main/resources/application-postgres.properties	19-19
