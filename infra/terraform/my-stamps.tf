@@ -1,10 +1,18 @@
 # @todo #1000 CI: validate and check Terraform configuration
-# @todo #1000 Terraform: add UptimeRobot
 # @todo #1000 Terraform: add Mailgun
 
 variable "do_token" {
   # How to obtain a token: https://docs.digitalocean.com/reference/api/create-personal-access-token/
   description = "Digital Ocean Personal Access Token"
+  type        = string
+}
+
+variable "uptimerobot_token" {
+  # How to create API Key:
+  # - open https://uptimerobot.com/dashboard
+  # - go to MySettings
+  # - scroll down to API Settings and select "Main API Key"
+  description = "UptimeRobot API key"
   type        = string
 }
 
@@ -107,3 +115,33 @@ resource "digitalocean_record" "domain_key" {
   value  = "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDLo/TZgHYIM7xrU9dBJCJTTsP90rGhHuyTqSrC3LT+T3vsH5azrz1+9Dm86xz6TpcmrHV1WgmSnw72C++AXstlS8CEg6Z6XVuxMDKsMnMVEWDm1bpESy+h29Ns3kY/EzMTaF1V88ICmr6fSpQIOd9u/lZpsABjfh2wfag1rqWcGwIDAQAB"
 }
 
+
+# UptimeRobot provider docs: https://registry.terraform.io/providers/vexxhost/uptimerobot/0.8.2/docs
+provider "uptimerobot" {
+  api_key = var.uptimerobot_token
+}
+
+# https://registry.terraform.io/providers/vexxhost/uptimerobot/0.8.2/docs/resources/alert_contact
+resource "uptimerobot_alert_contact" "email" {
+  value         = "slava.semushin@gmail.com"
+  type          = "e-mail"
+  friendly_name = "slava.semushin@gmail.com"
+}
+
+# https://registry.terraform.io/providers/vexxhost/uptimerobot/0.8.2/docs/resources/monitor
+resource "uptimerobot_monitor" "mystamps" {
+  url           = "https://my-stamps.ru"
+  type          = "http"
+  friendly_name = "MyStamps"
+  interval      = 300 # 300 seconds by default
+
+  alert_contact {
+    id = uptimerobot_alert_contact.email.id
+  }
+}
+
+# https://registry.terraform.io/providers/vexxhost/uptimerobot/0.8.2/docs/resources/status_page
+resource "uptimerobot_status_page" "status_page" {
+  friendly_name = "MyStamps Site Status"
+  monitors = [ uptimerobot_monitor.mystamps.id ]
+}
