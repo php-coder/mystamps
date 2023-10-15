@@ -77,7 +77,7 @@ jobs:
           # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
           VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
         run: |
-          echo -n "$VAULT_PASSWORD" >vault-pass.txt
+          printf '%s' "$VAULT_PASSWORD" >vault-pass.txt
 
           for FILENAME in terraform.tfstate terraform.tfvars; do
             echo "Decrypting ${FILENAME}.enc to $FILENAME"

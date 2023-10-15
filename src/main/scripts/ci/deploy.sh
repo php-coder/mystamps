@@ -36,7 +36,7 @@ if [ -z "${VAULT_PASSWORD:-}" ]; then
 	exit 1
 fi
 
-echo -n "$VAULT_PASSWORD" >"$PASS_FILE"
+printf '%s' "$VAULT_PASSWORD" >"$PASS_FILE"
 
 for FILE in "$PRIVATE_KEY" "$VARS_FILE"; do
 	FILENAME="$(basename "$FILE")"
