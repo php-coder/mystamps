@@ -33,6 +33,33 @@ jobs:
         # See https://docs.ansible.com/ansible/2.10/installation_guide/intro_installation.html#installing-devel-from-github-with-pip
         run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
 
-      - name: Run ansible in syntax check mode
-        run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory --syntax-check
+      - name: Show ansible version
+        run: ansible --version
+
+      - name: Decrypt ansible files
         working-directory: infra/vagrant
+        env:
+          # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+          VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
+        run: |
+          printf '%s' "$VAULT_PASSWORD" >vault-pass.txt
+
+          for FILENAME in provisioning/vars/prod.yml; do
+            echo "Decrypting ${FILENAME}.enc to $FILENAME"
+            ansible-vault decrypt \
+              --vault-password-file vault-pass.txt \
+              --output "$FILENAME" \
+              "${FILENAME}.enc"
+          done
+
+      - name: Run ansible in syntax check mode
+        working-directory: infra/vagrant
+        run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory --syntax-check
+
+      - name: Cleanup
+        if: always()
+        working-directory: infra/vagrant
+        run: |
+          for FILE in vault-pass.txt provisioning/vars/prod.yml; do
+            [ ! -f "$FILE" ] || rm -fv "$FILE"
+          done

@@ -21,7 +21,6 @@ src/main/frontend/node_modules/
 # Vagrant related files
 .vagrant/
 infra/vagrant/provisioning/vagrant.retry
-infra/vagrant/provisioning/prod.inventory
 infra/vagrant/provisioning/vars/prod.yml
 infra/vagrant/provisioning/roles/php-coder.oraclejdk/
 infra/vagrant/provisioning/roles/php-coder.nginx/
@@ -39,7 +38,10 @@ infra/terraform/terraform.tfstate.backup
 infra/docker/application-prod.properties
 infra/docker/mysql_backup_mystamps.sql.gz
 
-# created by src/main/scripts/ci/deploy.sh or .github/workflows/provision-by-terraform.yml
+# created by:
+# src/main/scripts/ci/deploy.sh
+# .github/workflows/provision-by-ansible.yml
+# .github/workflows/provision-by-terraform.yml
 vault-pass.txt
 
 # created by src/main/scripts/ci/deploy.sh
