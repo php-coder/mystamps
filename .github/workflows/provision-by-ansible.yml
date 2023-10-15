@@ -54,7 +54,7 @@ jobs:
 
       - name: Install required collections
         working-directory: infra/vagrant
-        run: ansible-galaxy collection install --requirements-file requirements.yml --collections-path provisioning/roles
+        run: ansible-galaxy role install --role-file requirements.yml --roles-path provisioning/roles
 
       - name: Run ansible in syntax check mode
         working-directory: infra/vagrant
