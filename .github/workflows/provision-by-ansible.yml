@@ -52,6 +52,10 @@ jobs:
               "${FILENAME}.enc"
           done
 
+      - name: Install required collections
+        working-directory: infra/vagrant
+        run: ansible-galaxy collection install --requirements-file requirements.yml --collections-path provisioning/roles
+
       - name: Run ansible in syntax check mode
         working-directory: infra/vagrant
         run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory --syntax-check
