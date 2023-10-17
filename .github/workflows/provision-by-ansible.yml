@@ -60,9 +60,9 @@ jobs:
         working-directory: infra/vagrant
         run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory --syntax-check
 
-      - name: Run ansible in check mode
+      - name: Run ansible
         working-directory: infra/vagrant
-        run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory --check
+        run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory
 
       - name: Cleanup
         if: always()
