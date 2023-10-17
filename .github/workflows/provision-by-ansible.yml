@@ -62,6 +62,10 @@ jobs:
 
       - name: Run ansible
         working-directory: infra/vagrant
+        env:
+          # Disable host key checking to suppress interactive prompt.
+          # See: https://docs.ansible.com/ansible/2.10/user_guide/connection_details.html#managing-host-key-checking
+          ANSIBLE_HOST_KEY_CHECKING: 'False'
         run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory
 
       - name: Cleanup
