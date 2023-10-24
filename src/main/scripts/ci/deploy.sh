@@ -38,6 +38,8 @@ fi
 
 printf '%s' "$VAULT_PASSWORD" >"$PASS_FILE"
 
+# LATER: consider specifying private key via env variable
+# https://docs.ansible.com/ansible/2.10/reference_appendices/config.html#envvar-ANSIBLE_PRIVATE_KEY_FILE
 for FILE in "$PRIVATE_KEY" "$VARS_FILE"; do
 	FILENAME="$(basename "$FILE")"
 	echo "Decrypting ${FILENAME}.enc to $FILENAME"

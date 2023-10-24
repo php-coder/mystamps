@@ -5,8 +5,6 @@
 my-stamps.ru ansible_host=46.101.232.167
 
 [all:vars]
-ansible_ssh_private_key_file=/Users/coder/.ssh/mystamps_rsa
-
 # https://docs.ansible.com/ansible/2.10/reference_appendices/python_3_support.html#using-python-3-on-the-managed-machines-with-commands-and-playbooks
 # https://docs.ansible.com/ansible/2.10/reference_appendices/interpreter_discovery.html
 ansible_python_interpreter=/usr/bin/python3

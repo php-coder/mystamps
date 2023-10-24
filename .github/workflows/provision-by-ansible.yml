@@ -44,7 +44,7 @@ jobs:
         run: |
           printf '%s' "$VAULT_PASSWORD" >vault-pass.txt
 
-          for FILENAME in provisioning/vars/prod.yml; do
+          for FILENAME in provisioning/vars/prod.yml provisioning/coder_rsa; do
             echo "Decrypting ${FILENAME}.enc to $FILENAME"
             ansible-vault decrypt \
               --vault-password-file vault-pass.txt \
@@ -66,12 +66,14 @@ jobs:
           # Disable host key checking to suppress interactive prompt.
           # See: https://docs.ansible.com/ansible/2.10/user_guide/connection_details.html#managing-host-key-checking
           ANSIBLE_HOST_KEY_CHECKING: 'False'
+          # See: https://docs.ansible.com/ansible/2.10/reference_appendices/config.html#envvar-ANSIBLE_PRIVATE_KEY_FILE
+          ANSIBLE_PRIVATE_KEY_FILE: 'provisioning/coder_rsa'
         run: ansible-playbook provisioning/prod.yml -i provisioning/prod.inventory
 
       - name: Cleanup
         if: always()
         working-directory: infra/vagrant
         run: |
-          for FILE in vault-pass.txt provisioning/vars/prod.yml; do
+          for FILE in vault-pass.txt provisioning/vars/prod.yml provisioning/coder_rsa; do
             [ ! -f "$FILE" ] || rm -fv "$FILE"
           done

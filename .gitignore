@@ -44,6 +44,9 @@ infra/docker/mysql_backup_mystamps.sql.gz
 # .github/workflows/provision-by-terraform.yml
 vault-pass.txt
 
+# created by .github/workflows/provision-by-ansible.yml
+coder_rsa
+
 # created by src/main/scripts/ci/deploy.sh
 mystamps_rsa
 prod_vars.yml
