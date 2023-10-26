@@ -625,7 +625,7 @@
 		<minify.plugin.version>1.7.6</minify.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<mysql.version>5.1.46</mysql.version>
+		<mysql.version>5.1.49</mysql.version>
 		
 		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<owasp-plugin.version>3.0.2</owasp-plugin.version>
