@@ -174,7 +174,7 @@ jobs:
           persist-credentials: false
       - name: Install ansible-lint
         # Pin rich version to workaround https://github.com/ansible/ansible-lint/issues/1795
-        run: pip3 install --user rich<11.0.0 ansible-lint==4.3.7
+        run: pip3 install --user 'rich<11.0.0' ansible-lint==4.3.7
       - name: Run ansible-lint
         run: ./src/main/scripts/execute-command.sh ansible-lint
 
