@@ -8,7 +8,11 @@ updates:
     directory: "/"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#allow
     allow:
+      - dependency-name: "net.coobird:thumbnailator"
+      - dependency-name: "org.apache.commons:commons-lang3"
+      - dependency-name: "org.apache.commons:commons-text"
       - dependency-name: "org.jsoup:jsoup"
+      - dependency-name: "org.projectlombok:lombok"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval
     schedule:
       interval: "daily"
