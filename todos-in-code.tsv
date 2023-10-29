@@ -1,5 +1,5 @@
 Id	Ticket	"Title"	File	Lines
-109-a721e051	109	"Check src/main/config/nginx/503.*html by html5validator"	src/main/scripts/execute-command.sh	63-63
+109-a721e051	109	"Check src/main/config/nginx/503.*html by html5validator"	src/main/scripts/execute-command.sh	64-64
 226-af195ad8	226	"Introduce app.use-public-hostname property"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	93-93
 477-6f081e18	477	"Add to collection: integration test for invisible quantity for a series with 1 stamp"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	31-31
 493-2b6007d4	493	"SuspiciousActivityDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	280-280
@@ -49,7 +49,7 @@ Id	Ticket	"Title"	File	Lines
 695-b081f579	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	409-409
 695-c38ae205	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	421-421
 695-c3acafce	695	"SeriesImportService.addSeries(): introduce DTO object"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java	28-28
-695-eb735e9f	695	"/series/import/request/{id}: use divs instead of table for elements aligning"	src/main/scripts/execute-command.sh	64-64
+695-eb735e9f	695	"/series/import/request/{id}: use divs instead of table for elements aligning"	src/main/scripts/execute-command.sh	65-65
 695-ee1c9a1a	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	408-408
 695-f2940c60	695	"/series/import/request/{id}(seller.url): add validation for valid url"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	32-32
 705-eb60edc9	705	"remote-backup.sh: find a way to protect duplicity against ps"	infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml	64-64
