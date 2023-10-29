@@ -16,7 +16,7 @@ MVN=mvn
 case ${1:-} in
 	'ansible-lint')
 		exec ansible-lint \
-			-x role-name \
+			-x 106 \
 			"$ROOTDIR/infra/vagrant/provisioning/prod.yml" \
 			"$ROOTDIR/infra/vagrant/provisioning/vagrant.yml" \
 			"$ROOTDIR/infra/vagrant/provisioning/bootstrap.yml" \
