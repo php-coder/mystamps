@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
+import java.util.Objects;
+
 @RestController
 @RequiredArgsConstructor
 class SuggestionController {
@@ -32,7 +34,7 @@ class SuggestionController {
 	
 	@GetMapping(CategoryUrl.SUGGEST_SERIES_CATEGORY)
 	public String suggestCategoryForUser(@AuthenticationPrincipal CustomUserDetails currentUser) {
-		return StringUtils.defaultString(
+		return Objects.toString(
 			categoryService.suggestCategoryForUser(currentUser.getUserId()),
 			StringUtils.EMPTY
 		);

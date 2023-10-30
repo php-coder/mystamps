@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @RestController
@@ -49,7 +50,7 @@ public class CspController {
 		@RequestHeader(name = HttpHeaders.USER_AGENT, defaultValue = UNKNOWN) String userAgent) {
 		
 		if (LOG.isWarnEnabled()) {
-			String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
+			String ip = Objects.toString(request.getRemoteAddr(), UNKNOWN);
 			LOG.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
 
 			// Omit "original-policy" as it's quite long and it's useless most of the time

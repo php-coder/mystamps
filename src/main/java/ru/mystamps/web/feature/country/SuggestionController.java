@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
+import java.util.Objects;
+
 @RestController
 @RequiredArgsConstructor
 class SuggestionController {
@@ -36,7 +38,7 @@ class SuggestionController {
 	 */
 	@GetMapping(CountryUrl.SUGGEST_SERIES_COUNTRY)
 	public String suggestCountryForUser(@AuthenticationPrincipal CustomUserDetails currentUser) {
-		return StringUtils.defaultString(
+		return Objects.toString(
 			countryService.suggestCountryForUser(currentUser.getUserId()),
 			StringUtils.EMPTY
 		);
