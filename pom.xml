@@ -557,7 +557,7 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<commons-lang3.version>3.8</commons-lang3.version>
 		
-		<commons.text.version>1.4</commons.text.version>
+		<commons.text.version>1.11.0</commons.text.version>
 		<compiler.plugin.version>3.8.1</compiler.plugin.version>
 		<datagen.version>2.5.1</datagen.version>
 		
