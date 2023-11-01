@@ -73,7 +73,9 @@ public class ReportServiceImpl implements ReportService {
 		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
 		put(ctx, "bad_request_cnt", -1L);  // FIXME: #122
 
-		return new StringSubstitutor(ctx).replace(template);
+		StringSubstitutor substitutor = new StringSubstitutor(ctx);
+		substitutor.setEnableUndefinedVariableException(true);
+		return substitutor.replace(template);
 	}
 
 	private static void put(Map<String, String> ctx, String key, long value) {

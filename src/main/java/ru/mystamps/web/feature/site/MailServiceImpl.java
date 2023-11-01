@@ -135,6 +135,7 @@ public class MailServiceImpl implements MailService {
 		ctx.put("expire_after_days", String.valueOf(CronService.PURGE_AFTER_DAYS));
 		
 		StringSubstitutor substitutor = new StringSubstitutor(ctx);
+		substitutor.setEnableUndefinedVariableException(true);
 		return substitutor.replace(template);
 	}
 	
@@ -151,6 +152,7 @@ public class MailServiceImpl implements MailService {
 		ctx.put("total_changes", String.valueOf(report.countTotalChanges()));
 		
 		StringSubstitutor substitutor = new StringSubstitutor(ctx);
+		substitutor.setEnableUndefinedVariableException(true);
 		return substitutor.replace(template);
 	}
 	
