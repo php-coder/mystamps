@@ -555,7 +555,7 @@
 		<codenarc.version>0.27.0</codenarc.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<commons-lang3.version>3.13.0</commons-lang3.version>
+		<commons-lang3.version>3.14.0</commons-lang3.version>
 		
 		<commons.text.version>1.11.0</commons.text.version>
 		<compiler.plugin.version>3.8.1</compiler.plugin.version>
