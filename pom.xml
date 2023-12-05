@@ -24,9 +24,9 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${javax-validation.version}</version>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta-validation.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -184,7 +184,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- https://docs.jboss.org/hibernate/validator/6.0/reference/en-US/html_single/#validator-annotation-processor -->
+		<!-- https://docs.jboss.org/hibernate/validator/6.1/reference/en-US/html_single/#validator-annotation-processor -->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
@@ -577,7 +577,7 @@
 		<h2.version>1.4.200</h2.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<hibernate-validator.version>6.0.22.Final</hibernate-validator.version>
+		<hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<hikaricp.version>4.0.3</hikaricp.version>
@@ -600,7 +600,7 @@
 		<javassist.version>3.21.0-GA</javassist.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<javax-validation.version>2.0.1.Final</javax-validation.version>
+		<jakarta-validation.version>2.0.2</jakarta-validation.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<jetty.version>9.4.19.v20190610</jetty.version>
