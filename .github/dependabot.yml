@@ -13,6 +13,11 @@ updates:
       - dependency-name: "org.apache.commons:commons-text"
       - dependency-name: "org.jsoup:jsoup"
       - dependency-name: "org.projectlombok:lombok"
+      - dependency-name: "org.hibernate.validator:hibernate-validator"
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#ignore
+    ignore:
+      - dependency-name: "org.hibernate.validator:hibernate-validator"
+        update-types: [ "version-update:semver-major", "version-update:semver-minor" ]
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval
     schedule:
       interval: "daily"
