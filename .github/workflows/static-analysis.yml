@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -137,7 +137,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -152,7 +152,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -167,7 +167,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -183,7 +183,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -202,7 +202,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -228,7 +228,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Clone source code
-        uses: actions/checkout@v4.1.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
