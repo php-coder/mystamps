@@ -1078,23 +1078,6 @@
 				<version>${jacoco.plugin.version}</version>
 			</plugin>
 			
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase.version}</version>
-				<configuration>
-					<changeLogFile>${basedir}/src/main/resources/liquibase/changelog.xml</changeLogFile>
-					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
-					<!-- See also application-prod.properties -->
-					<contexts>scheme,init-data,prod-data</contexts>
-					<!-- This configuration matches with infra/docker/prod.yml -->
-					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/mystamps?characterEncoding=UTF-8&amp;useSSL=false</url>
-					<username>mystamps</username>
-					<password>secret</password>
-				</configuration>
-			</plugin>
-			
 			<!--
 				Usage: ./mvnw org.owasp:dependency-check-maven:check
 				(analyze dependencies for vulnerabilities and creates report in target/dependency-check-report.html)
