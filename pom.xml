@@ -628,7 +628,6 @@
 		<mysql.version>5.1.49</mysql.version>
 		
 		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
-		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.12.0</pmd.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
@@ -1076,16 +1075,6 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.plugin.version}</version>
-			</plugin>
-			
-			<!--
-				Usage: ./mvnw org.owasp:dependency-check-maven:check
-				(analyze dependencies for vulnerabilities and creates report in target/dependency-check-report.html)
-			-->
-			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>${owasp-plugin.version}</version>
 			</plugin>
 			
 			<!--
