@@ -12,6 +12,7 @@ updates:
       - dependency-name: "org.apache.commons:commons-lang3"
       - dependency-name: "org.apache.commons:commons-text"
       - dependency-name: "org.jsoup:jsoup"
+      - dependency-name: "org.liquibase:liquibase-core"
       - dependency-name: "org.projectlombok:lombok"
       - dependency-name: "org.hibernate.validator:hibernate-validator"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#ignore
