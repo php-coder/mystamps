@@ -3,7 +3,9 @@
 		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+	
+	<removeChangeSetProperty change="addColumn" remove="beforeColumn" dbms="mysql,postgresql" />
 	
 	<changeSet id="add-seller_group_id-column-to-series_sales_import_parsed_data-table" author="php-coder" context="scheme">
 		
