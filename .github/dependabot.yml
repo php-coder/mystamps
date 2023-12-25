@@ -8,6 +8,7 @@ updates:
     directory: "/"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#allow
     allow:
+      - dependency-name: "com.h2database:h2"
       - dependency-name: "net.coobird:thumbnailator"
       - dependency-name: "org.apache.commons:commons-lang3"
       - dependency-name: "org.apache.commons:commons-text"
