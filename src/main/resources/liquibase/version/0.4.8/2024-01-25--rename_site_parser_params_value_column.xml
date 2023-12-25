@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+	
+	<!--
+		Rename column "value" as it's a reserved word in SQL.
+		Newer versions of H2 don't allow to use it as unquoted identifier.
+		See for details: https://github.com/h2database/h2database/issues/3954
+	-->
+	<changeSet id="rename-site_parser_params-value-field" author="php-coder" context="scheme">
+		
+		<!--
+			NOTE: columnDataType is only required for MySQL.
+			We specify NOT NULL constraint, in order to keep it, otherwise it gets discarded.
+			This happens because on MySQL < 8.0, there was no a dedicated command for column
+			renaming and ALTER TABLE column CHANGE has been used instead. The latter is designed
+			for modifying column's data type and that's why it requires a full column's definition.
+		-->
+		<renameColumn
+			tableName="site_parser_params"
+			oldColumnName="value"
+			newColumnName="val"
+			columnDataType="VARCHAR(100) NOT NULL" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

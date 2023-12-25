@@ -30,7 +30,7 @@ import java.util.Map;
 public class JdbcSiteParserDao implements SiteParserDao {
 	
 	private static final ResultSetExtractor<Map<String, String>> PARAMS_EXTRACTOR =
-		new MapStringStringResultSetExtractor("name", "value");
+		new MapStringStringResultSetExtractor("name", "val");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final String findParserIdByMatchedUrlSql;
