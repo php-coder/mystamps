@@ -21,6 +21,19 @@ jobs:
     name: Integration Tests
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-20.04
+    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+    strategy:
+      matrix:
+        # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#example-adding-configurations
+        include:
+          - java-version: '8'
+            allow-failure: false
+          - java-version: '11'
+            allow-failure: true
+          - java-version: '17'
+            allow-failure: true
+    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#handling-failures
+    continue-on-error: {{ matrix.allow-failure }}
     steps:
       - name: Clone source code
         uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
