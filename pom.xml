@@ -1315,6 +1315,19 @@
 			</build>
 		</profile>
 		<profile>
+			<id>darwin-aarch64</id>
+			<activation>
+				<os>
+					<family>mac</family>
+					<arch>aarch64</arch>
+				</os>
+			</activation>
+			<properties>
+				<!-- LATER: remove an override for the specific arch once nodejs is upgraded to the same version on all platforms -->
+				<nodejs.version>v16.19.1</nodejs.version>
+			</properties>
+		</profile>
+		<profile>
 			<id>frontend</id>
 			<activation>
 				<file>
