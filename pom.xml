@@ -1369,7 +1369,7 @@
 								</goals>
 								<phase>initialize</phase>
 								<configuration>
-									<arguments>ci</arguments>
+									<arguments>ci --no-fund</arguments>
 								</configuration>
 							</execution>
 							<execution>
