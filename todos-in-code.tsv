@@ -90,7 +90,7 @@ Id	Ticket	"Title"	File	Lines
 857-a6f9cdd0	857	"SeriesImportServiceImpl.saveParsedData(): add unit test for seller group"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	214-214
 857-aa59724c	857	"/series/import/request/{id}(seller.group): add validation for existing group"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	37-37
 869-7bf9fe59	869	"Find a better way to deal with SpotBugs warnings in DAO classes"	src/main/config/spotbugs-filter.xml	8-8
-869-90e5e0f1	869	"show-spring-boot-version-diff.sh: properly handle recursive properties"	src/main/scripts/show-spring-boot-version-diff.sh	18-18
+869-90e5e0f1	869	"show-spring-boot-version-diff.sh: properly handle recursive properties"	src/main/scripts/show-spring-boot-version-diff.sh	20-20
 884-03637f5c	884	"/collection/{slug}/estimation: optimize summing of prices"	src/main/webapp/WEB-INF/views/collection/estimation.html	118-118
 892-9e92b338	892	"Add integration tests for showing a link to collection estimation page"	src/main/webapp/WEB-INF/views/collection/info.html	101-101
 927-0bf380a9	927	"Move series package one level up"	src/main/java/ru/mystamps/web/feature/series/package-info.java	1-1

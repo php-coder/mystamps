@@ -2195,7 +2195,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>869-90e5e0f1</id>
-    <lines>18-18</lines>
+    <lines>20-20</lines>
     <body>show-spring-boot-version-diff.sh: properly handle recursive properties</body>
     <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
     <author>Slava Semushin</author>
