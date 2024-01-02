@@ -127,7 +127,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-e52eab60</id>
-    <lines>1341-1341</lines>
+    <lines>1354-1354</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
     <author>Slava Semushin</author>
