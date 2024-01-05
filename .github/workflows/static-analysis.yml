@@ -30,7 +30,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Run CheckStyle
         run: ./src/main/scripts/execute-command.sh checkstyle
 
@@ -49,7 +55,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Run PMD
         run: ./src/main/scripts/execute-command.sh pmd
 
@@ -68,7 +80,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Check license header
         run: ./src/main/scripts/execute-command.sh check-license
 
@@ -87,7 +105,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Check pom.xml
         run: ./src/main/scripts/execute-command.sh check-pom
 
@@ -192,7 +216,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Run maven-enforcer-plugin
         run: ./src/main/scripts/execute-command.sh enforcer
 
@@ -211,7 +241,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Compile sources
         run: >-
           mvn \
@@ -237,7 +273,13 @@ jobs:
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Compile sources
         run: >-
           mvn \

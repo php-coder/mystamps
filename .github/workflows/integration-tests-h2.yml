@@ -45,7 +45,13 @@ jobs:
         with:
           distribution: 'adopt'                    # https://github.com/actions/setup-java#supported-distributions
           java-version: ${{ matrix.java-version }} # https://github.com/actions/setup-java#supported-version-syntax
-          cache: 'maven'                           # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Restore existing cache
+        uses: actions/cache@v3.3.2 # https://github.com/actions/cache
+        with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
+          key: maven-repository-${{ hashFiles('pom.xml') }}
+          path: ~/.m2/repository
+          restore-keys: maven-repository-
       - name: Run integration tests
         run: ./src/main/scripts/execute-command.sh integration-tests
       - name: Save RobotFramework reports
