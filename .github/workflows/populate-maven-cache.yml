@@ -49,4 +49,4 @@ jobs:
           path: ~/.m2/repository
 
       - name: Download all dependencies
-        run: mvn dependency:resolve dependency:resolve-plugins
+        run: mvn --no-transfer-progress dependency:resolve dependency:resolve-plugins
