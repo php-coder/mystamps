@@ -45,8 +45,10 @@ jobs:
       - name: Restore existing cache
         uses: actions/cache@v3.3.2 # https://github.com/actions/cache
         with:
+          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
           key: maven-repository-${{ hashFiles('pom.xml') }}
           path: ~/.m2/repository
+          restore-keys: maven-repository-
 
       - name: Download all dependencies
         run: mvn --no-transfer-progress dependency:resolve dependency:resolve-plugins
