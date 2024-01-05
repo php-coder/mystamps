@@ -17,7 +17,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1154-3fe7f1f2</id>
-    <lines>64-64</lines>
+    <lines>70-70</lines>
     <body>Set charset of MySQL container by providing a custom my.cnf</body>
     <file>.github/workflows/integration-tests-mysql.yml</file>
     <author>@php-coder</author>
