@@ -51,4 +51,4 @@ jobs:
           restore-keys: maven-repository-
 
       - name: Download all dependencies
-        run: mvn dependency:resolve dependency:resolve-plugins
+        run: mvn dependency:go-offline
