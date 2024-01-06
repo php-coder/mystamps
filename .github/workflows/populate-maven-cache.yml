@@ -54,4 +54,4 @@ jobs:
         run: mvn dependency:go-offline
 
       - name: List downloaded artifacts
-        run: find ~/.m2/repository -type f
+        run: find ~/.m2/repository -type f -name '*.jar'
