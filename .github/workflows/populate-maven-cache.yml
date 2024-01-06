@@ -52,3 +52,6 @@ jobs:
 
       - name: Download all dependencies
         run: mvn dependency:go-offline
+
+      - name: List downloaded artifacts
+        run: find ~/.m2/repository
