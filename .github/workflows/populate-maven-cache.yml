@@ -53,5 +53,8 @@ jobs:
       - name: Download all dependencies
         run: mvn dependency:go-offline
 
+      - name: Install NodeJS and npm
+        run: mvn frontend:install-node-and-npm --activate-profiles frontend
+
       - name: List downloaded artifacts
         run: find ~/.m2/repository -type f -name '*.jar'
