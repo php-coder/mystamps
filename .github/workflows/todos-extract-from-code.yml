@@ -63,6 +63,10 @@ jobs:
       - name: Remove the current date from pdd.xml
         run: sed -i -E '/<time>[-0-9T:Z]+<\/time>/d;/<puzzles/s| date="[-0-9T:Z]+"||' pdd.xml
 
+      # Workaround for #1659
+      - name: Remove author and email
+        run: sed -i '/<author>/d;/<email>/d' pdd.xml
+
       - name: Generate todos-in-code.tsv
         run: ./src/main/scripts/ci/pdd-xml-to-json.sh pdd.xml | ./src/main/scripts/ci/pdd-json-to-tsv.sh > todos-in-code.tsv
 
