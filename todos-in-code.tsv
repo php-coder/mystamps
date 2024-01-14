@@ -212,7 +212,7 @@ Id	Ticket	"Title"	File	Lines
 1605-7e6638bf	1605	"CategoryService.findAllForSitemap(): add unit test"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	120-120
 1605-8a636eb1	1605	"CountryService.findAllForSitemap(): add unit test"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	120-120
 1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	216-216
-1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	69-69
-1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	70-70
+1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	73-73
+1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	74-74
 1621-71a788b3	1621	"AddToCollectionDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	287-287
 1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	68-68

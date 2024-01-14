@@ -9,8 +9,6 @@
     <lines>20-20</lines>
     <body>Deploy should depend on successful execution of the other pipelines</body>
     <file>.github/workflows/deploy.yml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1154</ticket>
@@ -20,30 +18,24 @@
     <lines>70-70</lines>
     <body>Set charset of MySQL container by providing a custom my.cnf</body>
     <file>.github/workflows/integration-tests-mysql.yml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1610</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1610-3bdaa3a0</id>
-    <lines>69-69</lines>
+    <lines>73-73</lines>
     <body>Close an issue or post a comment when a puzzle got removed from code</body>
     <file>.github/workflows/todos-extract-from-code.yml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1610</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1610-40bd5b91</id>
-    <lines>70-70</lines>
+    <lines>74-74</lines>
     <body>Post a comment when issue got closed without removing a puzzle</body>
     <file>.github/workflows/todos-extract-from-code.yml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1034</ticket>
@@ -53,8 +45,6 @@
     <lines>7-8</lines>
     <body>Document how to run with PostgreSQL and docker-compose</body>
     <file>infra/docker/postgres.yml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1000</ticket>
@@ -64,8 +54,6 @@
     <lines>1-1</lines>
     <body>CI: validate and check Terraform configuration</body>
     <file>infra/terraform/my-stamps.tf</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1000</ticket>
@@ -75,8 +63,6 @@
     <lines>2-2</lines>
     <body>Terraform: add Mailgun</body>
     <file>infra/terraform/my-stamps.tf</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1268</ticket>
@@ -86,8 +72,6 @@
     <lines>2-2</lines>
     <body>Update Terraform to 0.15.x</body>
     <file>infra/terraform/versions.tf</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>705</ticket>
@@ -97,8 +81,6 @@
     <lines>64-64</lines>
     <body>remote-backup.sh: find a way to protect duplicity against ps</body>
     <file>infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>971</ticket>
@@ -108,8 +90,6 @@
     <lines>887-887</lines>
     <body>Document ErrorProne tool</body>
     <file>pom.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1170</ticket>
@@ -119,8 +99,6 @@
     <lines>891-891</lines>
     <body>ErrorProne: activate experimental checks</body>
     <file>pom.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1060</ticket>
@@ -130,8 +108,6 @@
     <lines>1354-1354</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>869</ticket>
@@ -141,8 +117,6 @@
     <lines>8-8</lines>
     <body>Find a better way to deal with SpotBugs warnings in DAO classes</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>493</ticket>
@@ -152,8 +126,6 @@
     <lines>236-236</lines>
     <body>AddCategoryDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>493</ticket>
@@ -163,8 +135,6 @@
     <lines>249-249</lines>
     <body>AddCountryDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>493</ticket>
@@ -174,8 +144,6 @@
     <lines>262-262</lines>
     <body>AddCollectionDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>493</ticket>
@@ -185,8 +153,6 @@
     <lines>273-273</lines>
     <body>AddSuspiciousActivityDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>493</ticket>
@@ -196,8 +162,6 @@
     <lines>280-280</lines>
     <body>SuspiciousActivityDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1621</ticket>
@@ -207,8 +171,6 @@
     <lines>287-287</lines>
     <body>AddToCollectionDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1484</ticket>
@@ -218,8 +180,6 @@
     <lines>1-1</lines>
     <body>Document Jest usage</body>
     <file>src/main/frontend/jest.config.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1484</ticket>
@@ -229,8 +189,6 @@
     <lines>6-6</lines>
     <body>Find a better way to use ESM with Jest and replace jest-esm-transformer</body>
     <file>src/main/frontend/jest.config.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1484</ticket>
@@ -240,8 +198,6 @@
     <lines>11-11</lines>
     <body>Remove usage of jest-standard-reporter once facebook/jest#5064 is resolved</body>
     <file>src/main/frontend/jest.config.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1341</ticket>
@@ -251,8 +207,6 @@
     <lines>6-6</lines>
     <body>AddCatalogNumbersForm: add tests</body>
     <file>src/main/frontend/src/components/AddCatalogNumbersForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1342</ticket>
@@ -262,8 +216,6 @@
     <lines>5-5</lines>
     <body>AddCatalogPriceForm: add tests</body>
     <file>src/main/frontend/src/components/AddCatalogPriceForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1388</ticket>
@@ -273,8 +225,6 @@
     <lines>6-6</lines>
     <body>AddCatalogPriceForm: consider using a tooltip for currency</body>
     <file>src/main/frontend/src/components/AddCatalogPriceForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1338</ticket>
@@ -284,8 +234,6 @@
     <lines>7-7</lines>
     <body>AddCommentForm: add tests</body>
     <file>src/main/frontend/src/components/AddCommentForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1489</ticket>
@@ -295,8 +243,6 @@
     <lines>57-57</lines>
     <body>Use toHaveErrorMessage() or toHaveDescription() for checking error messages</body>
     <file>src/main/frontend/src/components/AddCommentForm.test.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1344</ticket>
@@ -306,8 +252,6 @@
     <lines>6-6</lines>
     <body>AddReleaseYearForm: add tests</body>
     <file>src/main/frontend/src/components/AddReleaseYearForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1383</ticket>
@@ -317,8 +261,6 @@
     <lines>7-7</lines>
     <body>HideImageForm: add tests</body>
     <file>src/main/frontend/src/components/HideImageForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1057</ticket>
@@ -328,8 +270,6 @@
     <lines>6-6</lines>
     <body>SeriesSaleImportForm: add tests</body>
     <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1057</ticket>
@@ -339,8 +279,6 @@
     <lines>32-32</lines>
     <body>SeriesSaleImportForm: wait until setState() finishes</body>
     <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1329</ticket>
@@ -350,8 +288,6 @@
     <lines>6-6</lines>
     <body>SeriesSalesList: add tests</body>
     <file>src/main/frontend/src/components/SeriesSalesList.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -361,8 +297,6 @@
     <lines>6-6</lines>
     <body>SimilarSeriesForm: add tests</body>
     <file>src/main/frontend/src/components/SimilarSeriesForm.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1455</ticket>
@@ -372,8 +306,6 @@
     <lines>4-4</lines>
     <body>Remove export of components to window</body>
     <file>src/main/frontend/webpack.config.js</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1161</ticket>
@@ -383,8 +315,6 @@
     <lines>31-31</lines>
     <body>Consider using spring.task.execution properties instead of manual configuration</body>
     <file>src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -394,8 +324,6 @@
     <lines>1-1</lines>
     <body>Move account package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/account/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>819</ticket>
@@ -405,8 +333,6 @@
     <lines>96-96</lines>
     <body>CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1605</ticket>
@@ -416,8 +342,6 @@
     <lines>120-120</lines>
     <body>CategoryService.findAllForSitemap(): add unit test</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>517</ticket>
@@ -427,8 +351,6 @@
     <lines>211-211</lines>
     <body>Add integration tests for category suggestion</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>517</ticket>
@@ -438,8 +360,6 @@
     <lines>229-229</lines>
     <body>CategoryService.suggestCategoryForUser(): suggest a last created category</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>517</ticket>
@@ -449,8 +369,6 @@
     <lines>230-230</lines>
     <body>CategoryService.suggestCategoryForUser(): suggest the most popular category</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -460,8 +378,6 @@
     <lines>1-1</lines>
     <body>Move category package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/category/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>477</ticket>
@@ -471,8 +387,6 @@
     <lines>31-31</lines>
     <body>Add to collection: integration test for invisible quantity for a series with 1 stamp</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>663</ticket>
@@ -482,8 +396,6 @@
     <lines>32-32</lines>
     <body>Add to collection: add integration test for specifying a price</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>663</ticket>
@@ -493,8 +405,6 @@
     <lines>47-47</lines>
     <body>/series/{id}(price): must be greater than zero</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1621</ticket>
@@ -504,8 +414,6 @@
     <lines>68-68</lines>
     <body>Add 3 integration tests to check that the last added series is shown first</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1123</ticket>
@@ -515,8 +423,6 @@
     <lines>139-139</lines>
     <body>CollectionService.findSeriesInstances(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1605</ticket>
@@ -526,8 +432,6 @@
     <lines>216-216</lines>
     <body>CollectionService.findAllForSitemap(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -537,8 +441,6 @@
     <lines>1-1</lines>
     <body>Move collection package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>819</ticket>
@@ -548,8 +450,6 @@
     <lines>96-96</lines>
     <body>CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
     <file>src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1605</ticket>
@@ -559,8 +459,6 @@
     <lines>120-120</lines>
     <body>CountryService.findAllForSitemap(): add unit test</body>
     <file>src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -570,8 +468,6 @@
     <lines>1-1</lines>
     <body>Move country package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/country/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -581,8 +477,6 @@
     <lines>67-67</lines>
     <body>DatabaseImagePersistenceStrategy.replace(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -592,8 +486,6 @@
     <lines>79-79</lines>
     <body>DatabaseImagePersistenceStrategy.replacePreview(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -603,8 +495,6 @@
     <lines>108-108</lines>
     <body>FilesystemImagePersistenceStrategy.replace(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -614,8 +504,6 @@
     <lines>133-133</lines>
     <body>FilesystemImagePersistenceStrategy.replacePreview(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1054</ticket>
@@ -625,8 +513,6 @@
     <lines>80-80</lines>
     <body>Introduce profiles for image persistence strategies</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageConfig.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -636,8 +522,6 @@
     <lines>83-83</lines>
     <body>ImageServiceImpl.replace(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -647,8 +531,6 @@
     <lines>84-84</lines>
     <body>ImageServiceImpl: reduce duplication between add() and replace()</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -658,8 +540,6 @@
     <lines>85-85</lines>
     <body>ImageServiceImpl.replace(): ensure that method cleanups file after exception</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -669,8 +549,6 @@
     <lines>1-1</lines>
     <body>Move image package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/image/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>857</ticket>
@@ -680,8 +558,6 @@
     <lines>98-98</lines>
     <body>TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service</body>
     <file>src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -691,8 +567,6 @@
     <lines>1-1</lines>
     <body>Move participant package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/participant/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -702,8 +576,6 @@
     <lines>1-1</lines>
     <body>Move report package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/report/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -713,8 +585,6 @@
     <lines>67-67</lines>
     <body>Replace image: add integration test for mandatory imageId</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddImageForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -724,8 +594,6 @@
     <lines>68-68</lines>
     <body>Replace image: validate that image id is valid</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddImageForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1277</ticket>
@@ -735,8 +603,6 @@
     <lines>99-99</lines>
     <body>/series/add: add integration test to check that Michel numbers may contain letter</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>671</ticket>
@@ -746,8 +612,6 @@
     <lines>106-106</lines>
     <body>/series/add: add integration test to check that Scott numbers may contain letters</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>671</ticket>
@@ -757,8 +621,6 @@
     <lines>107-107</lines>
     <body>/series/add: add integration test for Scott numbers error message</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1421</ticket>
@@ -768,8 +630,6 @@
     <lines>114-114</lines>
     <body>/series/add: add integration test to check that Yvert numbers may contain letters</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>770</ticket>
@@ -779,8 +639,6 @@
     <lines>127-128</lines>
     <body>/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>769</ticket>
@@ -790,8 +648,6 @@
     <lines>135-136</lines>
     <body>/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -801,8 +657,6 @@
     <lines>28-28</lines>
     <body>AddSimilarSeriesForm: series and similar series must be different</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -812,8 +666,6 @@
     <lines>33-33</lines>
     <body>AddSimilarSeriesForm: seriesId must exist</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -823,8 +675,6 @@
     <lines>37-37</lines>
     <body>AddSimilarSeriesForm: add integration test for mandatory similarSeriesId</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -834,8 +684,6 @@
     <lines>38-38</lines>
     <body>AddSimilarSeriesForm: similarSeriesId must exist</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1448</ticket>
@@ -845,8 +693,6 @@
     <lines>39-39</lines>
     <body>AddSimilarSeriesForm.similarSeriesId: remove deprecated member</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1448</ticket>
@@ -856,8 +702,6 @@
     <lines>60-60</lines>
     <body>AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -867,8 +711,6 @@
     <lines>61-61</lines>
     <body>CatalogUtils.toShortForm(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/CatalogUtils.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -878,8 +720,6 @@
     <lines>149-149</lines>
     <body>Update series: handle refuse to update an existing comment gracefully</body>
     <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1343</ticket>
@@ -889,8 +729,6 @@
     <lines>167-167</lines>
     <body>Update series: handle refuse to update an existing release year gracefully</body>
     <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1340</ticket>
@@ -900,8 +738,6 @@
     <lines>377-377</lines>
     <body>Update series: handle refuse to update an existing price gracefully</body>
     <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1339</ticket>
@@ -911,8 +747,6 @@
     <lines>49-49</lines>
     <body>Update series: add validation for catalog numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1340</ticket>
@@ -922,8 +756,6 @@
     <lines>50-50</lines>
     <body>Update series: add validation for a price</body>
     <file>src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1343</ticket>
@@ -933,8 +765,6 @@
     <lines>51-51</lines>
     <body>Update series: add validation for a release year</body>
     <file>src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -944,8 +774,6 @@
     <lines>71-71</lines>
     <body>Update series: properly fail on non-supported operations</body>
     <file>src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -955,8 +783,6 @@
     <lines>111-111</lines>
     <body>Update series: properly fail on invalid path</body>
     <file>src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1098</ticket>
@@ -966,8 +792,6 @@
     <lines>638-638</lines>
     <body>Optimize a search within user's collection</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -977,8 +801,6 @@
     <lines>656-656</lines>
     <body>Mark similar series: gracefully handle error when value mismatches to type</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1411</ticket>
@@ -988,8 +810,6 @@
     <lines>35-35</lines>
     <body>Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesService.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1343</ticket>
@@ -999,8 +819,6 @@
     <lines>145-145</lines>
     <body>SeriesServiceImpl.addReleaseYear(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1340</ticket>
@@ -1010,8 +828,6 @@
     <lines>167-167</lines>
     <body>SeriesServiceImpl.addPrice(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1339</ticket>
@@ -1021,8 +837,6 @@
     <lines>205-205</lines>
     <body>SeriesServiceImpl.addCatalogNumbers(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -1032,8 +846,6 @@
     <lines>252-252</lines>
     <body>SeriesServiceImpl.replaceImage(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1505</ticket>
@@ -1043,8 +855,6 @@
     <lines>320-320</lines>
     <body>Don't load a series comment for anonymous users</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -1054,8 +864,6 @@
     <lines>431-431</lines>
     <body>SeriesServiceImpl.markAsSimilar(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1448</ticket>
@@ -1065,8 +873,6 @@
     <lines>444-444</lines>
     <body>SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>665</ticket>
@@ -1076,8 +882,6 @@
     <lines>30-30</lines>
     <body>TimedDownloaderService: add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1087,8 +891,6 @@
     <lines>35-35</lines>
     <body>ExpandCatalogNumbersEditor: add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1098,8 +900,6 @@
     <lines>50-50</lines>
     <body>ExpandCatalogNumbersEditor: find a better way of editors composition</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1109,8 +909,6 @@
     <lines>56-57</lines>
     <body>/series/import/request/{id}: add integration test for trimming of michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1120,8 +918,6 @@
     <lines>58-58</lines>
     <body>CatalogUtils: consider introducing toLongForm(String) method</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>690</ticket>
@@ -1131,8 +927,6 @@
     <lines>38-38</lines>
     <body>HasSiteParserValidator: introduce SiteParserService.hasParserForUrl()</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/HasSiteParserValidator.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1142,8 +936,6 @@
     <lines>28-28</lines>
     <body>/series/import/request/{id}(seller.name): add validation against short values</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1153,8 +945,6 @@
     <lines>29-29</lines>
     <body>/series/import/request/{id}(seller.name): add validation against long values</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1164,8 +954,6 @@
     <lines>32-32</lines>
     <body>/series/import/request/{id}(seller.url): add validation for valid url</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1175,8 +963,6 @@
     <lines>33-33</lines>
     <body>/series/import/request/{id}(seller.url): add validation against long values</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>857</ticket>
@@ -1186,8 +972,6 @@
     <lines>36-36</lines>
     <body>/series/import/request/{id}(seller.group): add validation against negative values</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>857</ticket>
@@ -1197,8 +981,6 @@
     <lines>37-37</lines>
     <body>/series/import/request/{id}(seller.group): add validation for existing group</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1208,8 +990,6 @@
     <lines>44-44</lines>
     <body>/series/import/request/{id}: add integration tests for release day and month</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1219,8 +999,6 @@
     <lines>45-45</lines>
     <body>/series/import/request/{id}: month is required when day is specified</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1230,8 +1008,6 @@
     <lines>46-46</lines>
     <body>/series/import/request/{id}: year is required when month is specified</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1241,8 +1017,6 @@
     <lines>47-47</lines>
     <body>/series/import/request/{id}: release date should be in past</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1252,8 +1026,6 @@
     <lines>52-52</lines>
     <body>/series/import/request/{id}(category): add integration test for required field</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1263,8 +1035,6 @@
     <lines>60-60</lines>
     <body>/series/import/request/{id}(quantity): add integration test for required field</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1274,8 +1044,6 @@
     <lines>61-61</lines>
     <body>/series/import/request/{id}(quantity): add integration test for min value</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1285,8 +1053,6 @@
     <lines>62-62</lines>
     <body>/series/import/request/{id}(quantity): add integration test for max value</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1296,8 +1062,6 @@
     <lines>68-68</lines>
     <body>/series/import/request/{id}(perforated): add integration test for required field</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1307,8 +1071,6 @@
     <lines>73-73</lines>
     <body>/series/import/request/{id}(imageUrl): add validation for valid url</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1318,8 +1080,6 @@
     <lines>78-78</lines>
     <body>/series/import/request/{id}(day): add integration test for invalid day</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1329,8 +1089,6 @@
     <lines>82-82</lines>
     <body>/series/import/request/{id}(month): add integration test for invalid month</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1340,8 +1098,6 @@
     <lines>86-86</lines>
     <body>/series/import/request/{id}(year): add validation for min value</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1351,8 +1107,6 @@
     <lines>87-87</lines>
     <body>/series/import/request/{id}(year): add validation for year in future</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1362,8 +1116,6 @@
     <lines>94-94</lines>
     <body>/series/import/request/{id}(imageUrl): add integration test for required field</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1373,8 +1125,6 @@
     <lines>95-95</lines>
     <body>/series/import/request/{id}(imageUrl): add validation for non-empty file</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1384,8 +1134,6 @@
     <lines>96-96</lines>
     <body>/series/import/request/{id}(imageUrl): add validation for file size</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>709</ticket>
@@ -1395,8 +1143,6 @@
     <lines>97-97</lines>
     <body>/series/import/request/{id}(imageUrl): add validation for file type</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1406,8 +1152,6 @@
     <lines>101-101</lines>
     <body>Import series: add support for Scott catalog numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1417,8 +1161,6 @@
     <lines>102-102</lines>
     <body>Import series: add support for Yvert catalog numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1428,8 +1170,6 @@
     <lines>103-103</lines>
     <body>Import series: add support for Gibbons catalog numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1439,8 +1179,6 @@
     <lines>104-104</lines>
     <body>Import series: add support for Zagorski catalog numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1450,8 +1188,6 @@
     <lines>105-105</lines>
     <body>Import series: add support for Solovyov catalog numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1461,8 +1197,6 @@
     <lines>106-106</lines>
     <body>/series/import/request/{id}(michelNumbers): add integration test for validation</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1472,8 +1206,6 @@
     <lines>31-31</lines>
     <body>/series/import/request/{id}: seller's name and url are required when sellerId is empty</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1483,8 +1215,6 @@
     <lines>32-33</lines>
     <body>/series/import/request/{id}(seriesSale): add integration test for validation of required fields</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1230</ticket>
@@ -1494,8 +1224,6 @@
     <lines>48-48</lines>
     <body>/series/import/request/{id}: validate that both alt price/currency are present or absent</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1326</ticket>
@@ -1505,8 +1233,6 @@
     <lines>52-52</lines>
     <body>Series import: add integration test for series condition</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>660</ticket>
@@ -1516,8 +1242,6 @@
     <lines>150-150</lines>
     <body>JdbcSeriesImportDao.addRawContent(): introduce dao</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -1527,8 +1251,6 @@
     <lines>97-97</lines>
     <body>Extract logic to a separate method or add to SeriesImportService.addRequest()</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1254</ticket>
@@ -1538,8 +1260,6 @@
     <lines>105-105</lines>
     <body>Update workflow to mention RetryDownloading event</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>687</ticket>
@@ -1549,8 +1269,6 @@
     <lines>30-30</lines>
     <body>replace set of strings by enum</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1560,8 +1278,6 @@
     <lines>28-28</lines>
     <body>SeriesImportService.addSeries(): introduce DTO object</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1571,8 +1287,6 @@
     <lines>201-201</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>857</ticket>
@@ -1582,8 +1296,6 @@
     <lines>214-214</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit test for seller group</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1230</ticket>
@@ -1593,8 +1305,6 @@
     <lines>229-230</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1326</ticket>
@@ -1604,8 +1314,6 @@
     <lines>237-237</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit test for condition</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>684</ticket>
@@ -1615,8 +1323,6 @@
     <lines>244-245</lines>
     <body>Series import: add integration test for the case when parsed value doesn't match database</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1626,8 +1332,6 @@
     <lines>253-253</lines>
     <body>Remove hasAtLeastOneFieldFilled() methods from DTOs</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>803</ticket>
@@ -1637,8 +1341,6 @@
     <lines>107-107</lines>
     <body>SeriesInfoExtractorServiceImpl.extract(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1287</ticket>
@@ -1648,8 +1350,6 @@
     <lines>256-257</lines>
     <body>SeriesInfoExtractorServiceImpl.extractIssueDate(): filter out invalid day/month</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>782</ticket>
@@ -1659,8 +1359,6 @@
     <lines>294-294</lines>
     <body>Series import: add integration test for extracting perforation flag</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1670,8 +1368,6 @@
     <lines>329-329</lines>
     <body>SeriesInfoExtractorServiceImpl: support for a single Michel number</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1681,8 +1377,6 @@
     <lines>330-330</lines>
     <body>SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1692,8 +1386,6 @@
     <lines>359-359</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>978</ticket>
@@ -1703,8 +1395,6 @@
     <lines>367-367</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSeller(): validate name</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1714,8 +1404,6 @@
     <lines>408-408</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1725,8 +1413,6 @@
     <lines>409-409</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1736,8 +1422,6 @@
     <lines>420-420</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1747,8 +1431,6 @@
     <lines>421-421</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -1758,8 +1440,6 @@
     <lines>475-475</lines>
     <body>SeriesInfoExtractorServiceImpl.extractPrice(): filter out values &lt;= 0</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1326</ticket>
@@ -1769,8 +1449,6 @@
     <lines>537-537</lines>
     <body>SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>975</ticket>
@@ -1780,8 +1458,6 @@
     <lines>64-64</lines>
     <body>SiteParserServiceImpl: add unit tests for constructor</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>694</ticket>
@@ -1791,8 +1467,6 @@
     <lines>199-199</lines>
     <body>Support for a separate locator for a field with michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1326</ticket>
@@ -1802,8 +1476,6 @@
     <lines>286-286</lines>
     <body>JsoupSiteParser.extractCondition(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1281</ticket>
@@ -1813,8 +1485,6 @@
     <lines>62-62</lines>
     <body>Add integration test for import with seller-url-locator</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>979</ticket>
@@ -1824,8 +1494,6 @@
     <lines>65-65</lines>
     <body>Add integration test for import of series with currency-locator</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>975</ticket>
@@ -1835,8 +1503,6 @@
     <lines>33-33</lines>
     <body>SiteParserServiceImpl.findForUrl(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>975</ticket>
@@ -1846,8 +1512,6 @@
     <lines>54-54</lines>
     <body>SiteParserServiceImpl.findParserNames(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>801</ticket>
@@ -1857,8 +1521,6 @@
     <lines>25-25</lines>
     <body>TimedSiteParser: add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>995</ticket>
@@ -1868,8 +1530,6 @@
     <lines>42-42</lines>
     <body>SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>995</ticket>
@@ -1879,8 +1539,6 @@
     <lines>61-61</lines>
     <body>SiteParser: introduce a method for parsing only sales-related info</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>995</ticket>
@@ -1890,8 +1548,6 @@
     <lines>85-85</lines>
     <body>SeriesInfoExtractorService: introduce a method for parsing only sales-related info</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>834</ticket>
@@ -1901,8 +1557,6 @@
     <lines>98-98</lines>
     <body>SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -1912,8 +1566,6 @@
     <lines>1-1</lines>
     <body>Move series package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/series/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1326</ticket>
@@ -1923,8 +1575,6 @@
     <lines>72-72</lines>
     <body>Series sale import: add integration test for series condition</body>
     <file>src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1605</ticket>
@@ -1934,8 +1584,6 @@
     <lines>60-60</lines>
     <body>sitemap.xml: consider adding "priority" and "changefreq" attributes</body>
     <file>src/main/java/ru/mystamps/web/feature/site/SitemapController.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
@@ -1945,8 +1593,6 @@
     <lines>1-1</lines>
     <body>Move site package to one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/site/package-info.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1513</ticket>
@@ -1956,8 +1602,6 @@
     <lines>29-29</lines>
     <body>Add integration test to check that prices accept a decimal comma</body>
     <file>src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -1967,8 +1611,6 @@
     <lines>39-39</lines>
     <body>Update series: add integration test for required "op" field</body>
     <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -1978,8 +1620,6 @@
     <lines>43-43</lines>
     <body>Update series: add integration test for non-empty "path" field</body>
     <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -1989,8 +1629,6 @@
     <lines>47-47</lines>
     <body>Update series: add integration test for non-empty "value" field</body>
     <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1447</ticket>
@@ -2000,8 +1638,6 @@
     <lines>52-52</lines>
     <body>Add test to ensure that catalog numbers are trimmed</body>
     <file>src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>785</ticket>
@@ -2011,8 +1647,6 @@
     <lines>54-54</lines>
     <body>Improve error handling for requests with a list of objects</body>
     <file>src/main/java/ru/mystamps/web/support/spring/mvc/ValidationErrors.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1160</ticket>
@@ -2022,8 +1656,6 @@
     <lines>160-160</lines>
     <body>ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>226</ticket>
@@ -2033,8 +1665,6 @@
     <lines>93-93</lines>
     <body>Introduce app.use-public-hostname property</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1149</ticket>
@@ -2044,8 +1674,6 @@
     <lines>108-108</lines>
     <body>Move feature-specific rules to the dedicated packages</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1161</ticket>
@@ -2055,8 +1683,6 @@
     <lines>172-172</lines>
     <body>Add Feature-Policy header</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>592</ticket>
@@ -2066,8 +1692,6 @@
     <lines>35-35</lines>
     <body>GroupByParent: add unit tests</body>
     <file>src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1054</ticket>
@@ -2077,8 +1701,6 @@
     <lines>10-10</lines>
     <body>Extract part of spring.messages configuration to a common profile</body>
     <file>src/main/resources/application-postgres.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1054</ticket>
@@ -2088,8 +1710,6 @@
     <lines>19-19</lines>
     <body>Extract part of Thymeleaf configuration to a common profile</body>
     <file>src/main/resources/application-postgres.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1054</ticket>
@@ -2099,8 +1719,6 @@
     <lines>25-25</lines>
     <body>Introduce "mailgun-mock" profile</body>
     <file>src/main/resources/application-postgres.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1054</ticket>
@@ -2110,8 +1728,6 @@
     <lines>29-29</lines>
     <body>Introduce profiles for liquibase contexts</body>
     <file>src/main/resources/application-postgres.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1054</ticket>
@@ -2121,8 +1737,6 @@
     <lines>48-48</lines>
     <body>Extract list of exclusions to a common profile</body>
     <file>src/main/resources/application-postgres.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1154</ticket>
@@ -2132,8 +1746,6 @@
     <lines>2-2</lines>
     <body>Rename profile "travis" to "mysql"</body>
     <file>src/main/resources/application-travis.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1282</ticket>
@@ -2143,8 +1755,6 @@
     <lines>178-178</lines>
     <body>Consider adding a field with an image used for preview</body>
     <file>src/main/resources/sql/series_dao_queries.properties</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1060</ticket>
@@ -2154,8 +1764,6 @@
     <lines>131-131</lines>
     <body>Add a workaround for GitHub search by filtering out issues with titles that don't match exactly</body>
     <file>src/main/scripts/ci/connect-todos-to-issues.sh</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>109</ticket>
@@ -2165,8 +1773,6 @@
     <lines>64-64</lines>
     <body>Check src/main/config/nginx/503.*html by html5validator</body>
     <file>src/main/scripts/execute-command.sh</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>695</ticket>
@@ -2176,8 +1782,6 @@
     <lines>65-65</lines>
     <body>/series/import/request/{id}: use divs instead of table for elements aligning</body>
     <file>src/main/scripts/execute-command.sh</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1244</ticket>
@@ -2187,8 +1791,6 @@
     <lines>3-3</lines>
     <body>Retrofit show-spring-boot-version-diff.sh script to work with a new format of the file</body>
     <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>869</ticket>
@@ -2198,8 +1800,6 @@
     <lines>20-20</lines>
     <body>show-spring-boot-version-diff.sh: properly handle recursive properties</body>
     <file>src/main/scripts/show-spring-boot-version-diff.sh</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>884</ticket>
@@ -2209,8 +1809,6 @@
     <lines>118-118</lines>
     <body>/collection/{slug}/estimation: optimize summing of prices</body>
     <file>src/main/webapp/WEB-INF/views/collection/estimation.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>892</ticket>
@@ -2220,8 +1818,6 @@
     <lines>101-101</lines>
     <body>Add integration tests for showing a link to collection estimation page</body>
     <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1123</ticket>
@@ -2231,8 +1827,6 @@
     <lines>161-161</lines>
     <body>/collection/{slug}: show "New" badge only once</body>
     <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>511</ticket>
@@ -2242,8 +1836,6 @@
     <lines>162-162</lines>
     <body>/collection/{slug}: wrap a long caption</body>
     <file>src/main/webapp/WEB-INF/views/collection/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1303</ticket>
@@ -2253,8 +1845,6 @@
     <lines>167-167</lines>
     <body>Replace image form: arrange submit buttons in a one line</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1356</ticket>
@@ -2264,8 +1854,6 @@
     <lines>177-177</lines>
     <body>Hidden images: add integration tests</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1356</ticket>
@@ -2275,8 +1863,6 @@
     <lines>178-178</lines>
     <body>Hidden images: allow to replace a hidden image</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1356</ticket>
@@ -2286,8 +1872,6 @@
     <lines>179-179</lines>
     <body>Hidden images: protect hidden images from direct access</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>995</ticket>
@@ -2297,8 +1881,6 @@
     <lines>857-857</lines>
     <body>Series sale import: add support for new sellers</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1057</ticket>
@@ -2308,8 +1890,6 @@
     <lines>858-858</lines>
     <body>Series sale import form: show a message when JavaScript is disabled</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>1280</ticket>
@@ -2319,8 +1899,6 @@
     <lines>1289-1289</lines>
     <body>Mark similar series: add integration tests</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>734</ticket>
@@ -2330,8 +1908,6 @@
     <lines>307-307</lines>
     <body>TestObjects.createAddSeriesDto(): return randomized values</body>
     <file>src/test/java/ru/mystamps/web/service/TestObjects.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>687</ticket>
@@ -2341,8 +1917,6 @@
     <lines>62-62</lines>
     <body>Random.STATUSES: reduce duplication by using EnumSet.allOf()</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>769</ticket>
@@ -2352,8 +1926,6 @@
     <lines>96-96</lines>
     <body>Random.price(): return randomized values</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>738</ticket>
@@ -2363,8 +1935,6 @@
     <lines>190-191</lines>
     <body>Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>749</ticket>
@@ -2374,8 +1944,6 @@
     <lines>39-39</lines>
     <body>/series/{id}: add integration test that import info is only visible to admin</body>
     <file>src/test/robotframework/series/import/request-logic.robot</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
   <puzzle>
     <ticket>857</ticket>
@@ -2385,7 +1953,5 @@
     <lines>130-130</lines>
     <body>Check that a just created seller belongs to the "example.com" group</body>
     <file>src/test/robotframework/series/import/request-logic.robot</file>
-    <author>dependabot[bot]</author>
-    <email>49699333+dependabot[bot]@users.noreply.github.com</email>
   </puzzle>
 </puzzles>
