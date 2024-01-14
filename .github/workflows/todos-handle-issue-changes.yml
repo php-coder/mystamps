@@ -33,10 +33,10 @@ jobs:
           # https://github.com/actions/checkout#checkout-a-different-branch
           ref: generated-todos
 
-      - name: Show a payload
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      #- name: Show a payload
+      #  env:
+      #    GITHUB_CONTEXT: ${{ toJson(github) }}
+      #  run: echo "$GITHUB_CONTEXT"
 
       - name: Update issue state
         env:
