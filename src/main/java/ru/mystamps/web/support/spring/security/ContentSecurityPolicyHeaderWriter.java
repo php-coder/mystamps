@@ -102,7 +102,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'sha256-CDs...' is required for 'padding:0px' inline CSS
 	// - 'sha256-Jnn...' is required for 'padding:0;width:10px;height:10px;' inline CSS
 	// - 'sha256-yBh...' is required for 'margin: 20px' inline CSS
-	// - 'sha256-RZ7...' is required for 'color:gray' inline CSS (table.js:246:4)
+	// - 'sha256-RZ7...' is required for 'color:gray' inline CSS (table.js:220)
 	// - 'sha256-PGJ...' is required for 'width:200px;' inline CSS
 	private static final String STYLE_H2_CONSOLE =
 		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
