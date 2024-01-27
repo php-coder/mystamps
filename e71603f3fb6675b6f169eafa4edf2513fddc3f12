@@ -1,0 +1,11 @@
+Changelogs:
+- https://github.com/h2database/h2database/releases/tag/version-2.0.202
+- http://www.h2database.com/html/changelog.html
+
+Security issues:
+- 2.0.202: https://github.com/advisories/GHSA-7rpj-hg47-cx62
+- 2.0.206: https://github.com/advisories/GHSA-h376-j262-vhq6
+- 2.2.210: https://github.com/advisories/GHSA-45hx-wfhj-473x
+- 2.2.220: https://github.com/advisories/GHSA-22wj-vf5f-wrvj
+
+Fix #1555
