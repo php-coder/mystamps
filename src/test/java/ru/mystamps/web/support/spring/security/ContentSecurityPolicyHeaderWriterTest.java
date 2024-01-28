@@ -154,6 +154,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ " 'self'"
 					+ " https://www.gstatic.com"
 					+ " 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
+					+ " 'unsafe-hashes'"
 			)
 			.contains(
 				"script-src"
@@ -186,6 +187,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ " https://maxcdn.bootstrapcdn.com"
 					+ " https://www.gstatic.com"
 					+ " 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
+					+ " 'unsafe-hashes'"
 			)
 			.contains(
 				"script-src"
@@ -220,6 +222,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 						+ " https://cdn.jsdelivr.net"
 						+ " 'self'"
 						+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+						+ " 'unsafe-hashes'"
 				)
 				.contains("connect-src 'self'")
 				// hope that all other directives are the same as on the index page
@@ -248,6 +251,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 						+ " https://stamps.filezz.ru"
 						+ " https://maxcdn.bootstrapcdn.com"
 						+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+						+ " 'unsafe-hashes'"
 				)
 				.contains(
 					"script-src"
@@ -283,6 +287,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ " 'self'"
 					+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 					+ " https://cdnjs.cloudflare.com"
+					+ " 'unsafe-hashes'"
 			)
 			.contains(
 				"script-src"
@@ -316,6 +321,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ " https://maxcdn.bootstrapcdn.com"
 					+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 					+ " https://cdnjs.cloudflare.com"
+					+ " 'unsafe-hashes'"
 			)
 			.contains(
 				"script-src"
@@ -357,6 +363,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ " 'sha256-yBhVF062O1IGu3ZngyEhh9l561VFLsJpdSxVtbwisRY='"
 					+ " 'sha256-RZ7vfNSfdJtvDeBSz2SI5g3wroaD1A1SzsDb04Yw9V0='"
 					+ " 'sha256-PGJ8tjuz2DXGgB1Sie9pW8BrxBGK6EQndbLEkXd44T8='"
+					+ " 'unsafe-hashes'"
 			)
 			.contains("child-src 'self'")
 			// hope that all other directives are the same as on the index page

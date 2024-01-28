@@ -179,15 +179,18 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
 		  .append(STYLE_SRC).append(useSingleHost ? STYLES_SELF : STYLES_ALT);
 		
+		boolean hasHashes = false;
 		if (useCdn) {
 			sb.append(' ').append(STYLES_CDN);
 		}
 		
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
+			hasHashes = true;
 		
 		} else if (uri.matches(ADD_IMAGE_PAGE_PATTERN)) {
 			sb.append(STYLE_SERIES_ADD_IMAGE);
+			hasHashes = true;
 			
 			if (onAddSeriesPage) {
 				sb.append(STYLE_SERIES_ADD_PAGE);
@@ -195,6 +198,11 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		} else if (onH2ConsolePage) {
 			sb.append(STYLE_H2_CONSOLE);
+			hasHashes = true;
+		}
+		
+		if (hasHashes) {
+			sb.append(" 'unsafe-hashes'");
 		}
 		
 		sb.append(SEPARATOR)
