@@ -2,7 +2,7 @@
 # the "prod" profile.
 #
 # In order to get the effective configuration, run
-#   $ docker-compose -f docker-compose.yml -f prod.yml config
+#   docker-compose -f docker-compose.yml -f prod.yml config
 #
 version: '3'
 
