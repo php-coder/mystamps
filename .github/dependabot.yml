@@ -12,6 +12,7 @@ updates:
       - dependency-name: "net.coobird:thumbnailator"
       - dependency-name: "org.apache.commons:commons-lang3"
       - dependency-name: "org.apache.commons:commons-text"
+      - dependency-name: "org.apache.maven.plugins:maven-compiler-plugin"
       - dependency-name: "org.jsoup:jsoup"
       - dependency-name: "org.liquibase:liquibase-core"
       - dependency-name: "org.projectlombok:lombok"
