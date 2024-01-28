@@ -558,7 +558,7 @@
 		<commons-lang3.version>3.14.0</commons-lang3.version>
 		
 		<commons.text.version>1.11.0</commons.text.version>
-		<compiler.plugin.version>3.8.1</compiler.plugin.version>
+		<compiler.plugin.version>3.12.1</compiler.plugin.version>
 		<datagen.version>2.5.1</datagen.version>
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
@@ -877,7 +877,6 @@
 				<version>${compiler.plugin.version}</version>
 				<configuration>
 					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
 					<debug>false</debug>
 					<failOnWarning>true</failOnWarning>
 					<compilerArgs>
@@ -1025,6 +1024,14 @@
 				<configuration>
 					<!-- Exclude non-minified versions of resources -->
 					<warSourceExcludes>WEB-INF/static/styles/main.css</warSourceExcludes>
+					<!--
+						maven-compiler-plugin has parameter createMissingPackageInfoClass that is enabled by default.
+						Because of that, every package-info.java file become to package-info.class that is included
+						into resulted WAR file. If we turn this parameter off, incremental compilation won't work.
+						Here we exclude generated package-info.class files as they don't require for the application.
+						See also https://issues.apache.org/jira/browse/MCOMPILER-205
+					-->
+					<packagingExcludes>WEB-INF/classes/**/package-info.class</packagingExcludes>
 				</configuration>
 			</plugin>
 			
@@ -1266,8 +1273,6 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
 						<configuration>
-							<source>${java.version}</source>
-							<target>${java.version}</target>
 							<!-- Required for ErrorProne -->
 							<fork>true</fork>
 							<compilerArgs combine.children="append">
