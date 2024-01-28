@@ -118,19 +118,19 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 				"report-uri https://my-stamps.ru/site/csp/reports"
 			)
 			.contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
 			)
 			.contains(
-				"script-src "
-					+ "'report-sample' "
-					+ "'unsafe-inline' "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com "
-					+ "https://yandex.st"
+				"script-src"
+					+ " 'report-sample'"
+					+ " 'unsafe-inline'"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
+					+ " https://yandex.st"
 			)
 			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
@@ -148,19 +148,19 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		// test only the directives that differ from the index page
 		assertThat(directives)
 			.contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net "
-					+ "'self' "
-					+ "https://www.gstatic.com "
-					+ "'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
+					+ " 'self'"
+					+ " https://www.gstatic.com"
+					+ " 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
 			)
 			.contains(
-				"script-src "
-					+ "'report-sample' "
-					+ "'unsafe-inline' "
-					+ "'self' "
-					+ "https://www.gstatic.com"
+				"script-src"
+					+ " 'report-sample'"
+					+ " 'unsafe-inline'"
+					+ " 'self'"
+					+ " https://www.gstatic.com"
 			)
 			// hope that all other directives are the same as on the index page
 			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
@@ -179,22 +179,22 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		// test only the directives that differ from the index page
 		assertThat(directives)
 			.contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com "
-					+ "https://www.gstatic.com "
-					+ "'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
+					+ " https://www.gstatic.com"
+					+ " 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
 			)
 			.contains(
-				"script-src "
-					+ "'report-sample' "
-					+ "'unsafe-inline' "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com "
-					+ "https://yandex.st "
-					+ "https://www.gstatic.com"
+				"script-src"
+					+ " 'report-sample'"
+					+ " 'unsafe-inline'"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
+					+ " https://yandex.st"
+					+ " https://www.gstatic.com"
 			)
 			// hope that all other directives are the same as on the index page
 			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
@@ -215,11 +215,11 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			// test only the directives that are differ from the index page
 			assertThat(directives)
 				.contains(
-					"style-src "
-						+ "'report-sample' "
-						+ "https://cdn.jsdelivr.net "
-						+ "'self' "
-						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+					"style-src"
+						+ " 'report-sample'"
+						+ " https://cdn.jsdelivr.net"
+						+ " 'self'"
+						+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 				)
 				.contains("connect-src 'self'")
 				// hope that all other directives are the same as on the index page
@@ -242,21 +242,21 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			// test only the directives that are differ from the index page
 			assertThat(directives)
 				.contains(
-					"style-src "
-						+ "'report-sample' "
-						+ "https://cdn.jsdelivr.net "
-						+ "https://stamps.filezz.ru "
-						+ "https://maxcdn.bootstrapcdn.com "
-						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+					"style-src"
+						+ " 'report-sample'"
+						+ " https://cdn.jsdelivr.net"
+						+ " https://stamps.filezz.ru"
+						+ " https://maxcdn.bootstrapcdn.com"
+						+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 				)
 				.contains(
-					"script-src "
-						+ "'report-sample' "
-						+ "'unsafe-inline' "
-						+ "https://stamps.filezz.ru "
-						+ "https://maxcdn.bootstrapcdn.com "
-						+ "https://yandex.st "
-						+ "https://unpkg.com"
+					"script-src"
+						+ " 'report-sample'"
+						+ " 'unsafe-inline'"
+						+ " https://stamps.filezz.ru"
+						+ " https://maxcdn.bootstrapcdn.com"
+						+ " https://yandex.st"
+						+ " https://unpkg.com"
 				)
 				.contains("connect-src 'self'")
 				// hope that all other directives are the same as on the index page
@@ -277,19 +277,19 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		// test only the directives that differ from the index page
 		assertThat(directives)
 			.contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net "
-					+ "'self' "
-					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
-					+ "https://cdnjs.cloudflare.com"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
+					+ " 'self'"
+					+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+					+ " https://cdnjs.cloudflare.com"
 			)
 			.contains(
-				"script-src "
-					+ "'report-sample' "
-					+ "'unsafe-inline' "
-					+ "'self' "
-					+ "https://cdnjs.cloudflare.com"
+				"script-src"
+					+ " 'report-sample'"
+					+ " 'unsafe-inline'"
+					+ " 'self'"
+					+ " https://cdnjs.cloudflare.com"
 			)
 			.contains("connect-src 'self'")
 			// hope that all other directives are the same as on the index page
@@ -309,22 +309,22 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		// test only the directives that differ from the index page
 		assertThat(directives)
 			.contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com "
-					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
-					+ "https://cdnjs.cloudflare.com"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
+					+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+					+ " https://cdnjs.cloudflare.com"
 			)
 			.contains(
-				"script-src "
-					+ "'report-sample' "
-					+ "'unsafe-inline' "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com "
-					+ "https://yandex.st "
-					+ "https://cdnjs.cloudflare.com"
+				"script-src"
+					+ " 'report-sample'"
+					+ " 'unsafe-inline'"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
+					+ " https://yandex.st"
+					+ " https://cdnjs.cloudflare.com"
 			)
 			.contains("connect-src 'self'")
 			// hope that all other directives are the same as on the index page
@@ -344,9 +344,9 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		// test only the directives that are differ from the index page
 		assertThat(directives).
 			contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
 					+ " 'self'"
 					+ " 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
 					+ " 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='"
@@ -376,11 +376,11 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(directives)
 			// "style-src" directive should be the same as for the index page
 			.contains(
-				"style-src "
-					+ "'report-sample' "
-					+ "https://cdn.jsdelivr.net "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com"
+				"style-src"
+					+ " 'report-sample'"
+					+ " https://cdn.jsdelivr.net"
+					+ " https://stamps.filezz.ru"
+					+ " https://maxcdn.bootstrapcdn.com"
 			)
 			.doesNotContain("child-src 'self'")
 			// hope that all other directives are the same as on the index page
