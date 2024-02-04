@@ -159,6 +159,12 @@
 			</exclusions>
 		</dependency>
 		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-validation/build.gradle -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.togglz</groupId>
 			<artifactId>togglz-console</artifactId>
