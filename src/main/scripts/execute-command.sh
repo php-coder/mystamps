@@ -52,25 +52,6 @@ case ${1:-} in
 			--batch-mode \
 			enforcer:enforce
 		;;
-	'html5validator')
-		# FIXME: remove ignoring of error about alt attribute after resolving #314
-		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
-		# @todo #695 /series/import/request/{id}: use divs instead of table for elements aligning
-		exec html5validator \
-			--root "$ROOTDIR/src/main/webapp/WEB-INF/views" \
-			--no-langdetect \
-			--ignore-re \
-				'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
-				'Attribute “th:[-a-z]+” not allowed on element "body" at this point' \
-				'Attribute “(th|sec|togglz):[-a-z]+” is not serializable' \
-				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
-			--ignore \
-				'An "img" element must have an "alt" attribute' \
-				'Element "option" without attribute "label" must not be empty' \
-				'The "width" attribute on the "td" element is obsolete' \
-				'Attribute "loading" not allowed on element "img" at this point' \
-			--show-warnings
-		;;
 	'integration-tests')
 		exec "$MVN" \
 			--batch-mode \
@@ -127,7 +108,6 @@ case ${1:-} in
 		echo >&2 '- checkstyle'
 		echo >&2 '- codenarc'
 		echo >&2 '- enforcer'
-		echo >&2 '- html5validator'
 		echo >&2 '- integration-tests'
 		echo >&2 '- jest'
 		echo >&2 '- pmd'
