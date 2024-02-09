@@ -83,29 +83,11 @@
     <file>infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml</file>
   </puzzle>
   <puzzle>
-    <ticket>971</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>971-7e983586</id>
-    <lines>892-892</lines>
-    <body>Document ErrorProne tool</body>
-    <file>pom.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1170</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1170-64f18d35</id>
-    <lines>896-896</lines>
-    <body>ErrorProne: activate experimental checks</body>
-    <file>pom.xml</file>
-  </puzzle>
-  <puzzle>
     <ticket>1060</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-e52eab60</id>
-    <lines>1365-1365</lines>
+    <lines>1299-1299</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
   </puzzle>
