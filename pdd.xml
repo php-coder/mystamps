@@ -1748,24 +1748,6 @@
     <file>src/main/scripts/ci/connect-todos-to-issues.sh</file>
   </puzzle>
   <puzzle>
-    <ticket>109</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>109-a721e051</id>
-    <lines>64-64</lines>
-    <body>Check src/main/config/nginx/503.*html by html5validator</body>
-    <file>src/main/scripts/execute-command.sh</file>
-  </puzzle>
-  <puzzle>
-    <ticket>695</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>695-eb735e9f</id>
-    <lines>65-65</lines>
-    <body>/series/import/request/{id}: use divs instead of table for elements aligning</body>
-    <file>src/main/scripts/execute-command.sh</file>
-  </puzzle>
-  <puzzle>
     <ticket>1244</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
