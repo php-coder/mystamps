@@ -92,13 +92,6 @@ case ${1:-} in
 			--batch-mode \
 			pmd:check
 		;;
-	'rflint')
-		exec rflint \
-			--error=all \
-			--ignore TooFewKeywordSteps \
-			--configure LineTooLong:130 \
-			"$ROOTDIR/src/test/robotframework"
-		;;
 	'shellcheck')
 		# Shellcheck doesn't support recursive scanning: https://github.com/koalaman/shellcheck/issues/143
 		# Also I don't want to invoke it many times (slower, more code for handling failures), so I prefer this way.
@@ -138,7 +131,6 @@ case ${1:-} in
 		echo >&2 '- integration-tests'
 		echo >&2 '- jest'
 		echo >&2 '- pmd'
-		echo >&2 '- rflint'
 		echo >&2 '- shellcheck'
 		echo >&2 '- spotbugs'
 		echo >&2 '- unit-tests'
