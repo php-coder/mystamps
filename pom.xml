@@ -16,6 +16,20 @@
 			<version>${thymeleaf.togglz.version}</version>
 		</dependency>
 		
+		<!--
+			Without this dependency, compilation fails with:
+			Warning:  unknown enum constant javax.annotation.meta.When.MAYBE
+			Spring uses this constant and thus this dependency is needed.
+			Details:
+			- https://github.com/spring-projects/spring-framework/issues/27183#issuecomment-1174742553
+			- https://github.com/spring-projects/spring-framework/issues/28797
+		-->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		
 		<!-- Required for InternetAddress class -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
