@@ -22,13 +22,6 @@ case ${1:-} in
 			"$ROOTDIR/infra/vagrant/provisioning/bootstrap.yml" \
 			"$ROOTDIR/src/main/scripts/ci/ansible/deploy.yml"
 		;;
-	'bootlint')
-		find "$ROOTDIR/src/main" \
-			-type f \
-			-name '*.html' \
-			-print0 \
-		| xargs -0 bootlint --disable W013
-		;;
 	'check-license')
 		exec "$MVN" \
 			--batch-mode \
@@ -136,7 +129,6 @@ case ${1:-} in
 		echo >&2
 		echo >&2 "Where <command> is one of:"
 		echo >&2 '- ansible-lint'
-		echo >&2 '- bootlint'
 		echo >&2 '- check-license'
 		echo >&2 '- check-pom'
 		echo >&2 '- checkstyle'
