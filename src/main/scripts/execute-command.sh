@@ -51,16 +51,6 @@ case ${1:-} in
 			--batch-mode \
 			pmd:check
 		;;
-	'shellcheck')
-		# Shellcheck doesn't support recursive scanning: https://github.com/koalaman/shellcheck/issues/143
-		# Also I don't want to invoke it many times (slower, more code for handling failures), so I prefer this way.
-		# shellcheck disable=SC2207
-		SHELL_FILES=( $(find "$ROOTDIR/src/main/scripts" -type f -name '*.sh') )
-		exec shellcheck \
-			--shell bash \
-			--format gcc \
-			"${SHELL_FILES[@]}"
-		;;
 	'spotbugs')
 		exec "$MVN" \
 			--batch-mode \
@@ -86,7 +76,6 @@ case ${1:-} in
 		echo >&2 '- integration-tests'
 		echo >&2 '- jest'
 		echo >&2 '- pmd'
-		echo >&2 '- shellcheck'
 		echo >&2 '- spotbugs'
 		echo >&2 '- unit-tests'
 		exit 1

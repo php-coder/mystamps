@@ -15,7 +15,6 @@ if [ -z "${1:-}" ]; then
 fi
 
 # Yes, usage of `cat` is useless here, but it makes code more readable
-# shellcheck disable=SC2002
 cat "$1" \
 	| sed \
 		-e '/<?xml/d' \

@@ -23,7 +23,6 @@ SPRING_POM="$(curl -sS --fail-with-body https://raw.githubusercontent.com/spring
 printf "Comparing with Spring Boot %s (project vs spring versions)\\n\\n" "$SPRING_VERSION"
 
 # I know about useless cat below, but it's here for better readability.
-# shellcheck disable=SC2002
 join \
 	<(cat "$PROJECT_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version$/{print $2, $3}' | sort) \
 	<(echo "$SPRING_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version$/{print $2, $3}' | sort) \

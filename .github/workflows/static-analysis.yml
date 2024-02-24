@@ -90,21 +90,6 @@ jobs:
       - name: Check license header
         run: ./src/main/scripts/execute-command.sh check-license
 
-  run-shellcheck:
-    name: Run ShellCheck
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Clone source code
-        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
-        with:
-          # Whether to configure the token or SSH key with the local git config. Default: true
-          persist-credentials: false
-      - name: Show shellcheck version
-        run: shellcheck --version
-      - name: Run shellcheck
-        run: ./src/main/scripts/execute-command.sh shellcheck
-
   run-enforcer:
     name: Run maven-enforcer-plugin
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on

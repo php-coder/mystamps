@@ -59,7 +59,6 @@ ENABLE_DEBUG=
 ISSUE_LABEL=techdebt
 
 # We intentionally use single quotes as the real values will be substituted during `eval` call later
-# shellcheck disable=SC2016
 ISSUE_BODY_TEMPLATE='echo "The puzzle \`${PUZZLE_ID}\` from #$ORIG_ISSUE has to be resolved:
 
 https://github.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/${PUZZLE_FILE}#L${PUZZLE_LINE_START}-L${PUZZLE_LINE_END}
@@ -86,7 +85,6 @@ PUZZLES_COUNT=0
 NEW_ISSUES_COUNT=0
 
 # UNUSED_REST is really unused but without it, read appends the rest of a line to the last variable
-# shellcheck disable=SC2034
 while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
     PUZZLES_COUNT=$((PUZZLES_COUNT + 1))
 
@@ -151,7 +149,6 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
         error "    1) modify a body of one of the tickets to not contain puzzle id (or to have a different title)"
         error "    2) manually create a mapping between this puzzle and one of the issues:"
         # UNUSED_REST is really unused but without it, read appends the rest of a line to the last variable
-        # shellcheck disable=SC2034
         echo "$CANDIDATES" | while read -r ISSUE_ID ISSUE_STATE UNUSED_REST; do
             error "       echo '$PUZZLE_ID\t$ISSUE_ID\t$ISSUE_STATE\tmanually' >>$ISSUES_MAPPING_FILE"
         done
@@ -162,12 +159,10 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
         info "$PUZZLE_ID: no related issues found. Need to create a new issue: $TITLE"
 
         # These variables are needed for eval-ing ISSUE_BODY_TEMPLATE
-        # shellcheck disable=SC2034
         IFS=$'\t' read -r UNUSED_PUZZLE_ID ORIG_ISSUE UNUSED_TITLE PUZZLE_FILE PUZZLE_LINES < <(grep --max-count=1 "^$PUZZLE_ID" "$CODE_MAPPING_FILE")
 
         # "50-51" => {50, 51}
         # These variables are needed for eval-ing ISSUE_BODY_TEMPLATE
-        # shellcheck disable=SC2034
         IFS='-' read -r PUZZLE_LINE_START PUZZLE_LINE_END < <(echo "$PUZZLE_LINES")
 
         ISSUE_BODY="$(eval "$ISSUE_BODY_TEMPLATE")"
