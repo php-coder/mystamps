@@ -27,12 +27,6 @@ case ${1:-} in
 			--batch-mode \
 			license:check
 		;;
-	'check-pom')
-		exec "$MVN" \
-			--batch-mode \
-			sortpom:verify \
-			-Dsort.verifyFail=stop
-		;;
 	'checkstyle')
 		exec "$MVN" \
 			--batch-mode \
@@ -104,7 +98,6 @@ case ${1:-} in
 		echo >&2 "Where <command> is one of:"
 		echo >&2 '- ansible-lint'
 		echo >&2 '- check-license'
-		echo >&2 '- check-pom'
 		echo >&2 '- checkstyle'
 		echo >&2 '- codenarc'
 		echo >&2 '- enforcer'
