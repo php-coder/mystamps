@@ -87,7 +87,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-e52eab60</id>
-    <lines>1313-1313</lines>
+    <lines>1270-1270</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
   </puzzle>
