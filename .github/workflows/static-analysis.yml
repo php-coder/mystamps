@@ -105,22 +105,6 @@ jobs:
       - name: Run shellcheck
         run: ./src/main/scripts/execute-command.sh shellcheck
 
-  run-ansible-lint:
-    name: Run ansible-lint
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Clone source code
-        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
-        with:
-          # Whether to configure the token or SSH key with the local git config. Default: true
-          persist-credentials: false
-      - name: Install ansible-lint
-        # Pin rich version to workaround https://github.com/ansible/ansible-lint/issues/1795
-        run: pip3 install --user 'rich<11.0.0' ansible-lint==4.3.7
-      - name: Run ansible-lint
-        run: ./src/main/scripts/execute-command.sh ansible-lint
-
   run-enforcer:
     name: Run maven-enforcer-plugin
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on

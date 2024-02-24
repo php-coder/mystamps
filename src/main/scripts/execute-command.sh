@@ -14,14 +14,6 @@ ROOTDIR="$(dirname "$0")/../../.."
 MVN=mvn
 
 case ${1:-} in
-	'ansible-lint')
-		exec ansible-lint \
-			-x 106 \
-			"$ROOTDIR/infra/vagrant/provisioning/prod.yml" \
-			"$ROOTDIR/infra/vagrant/provisioning/vagrant.yml" \
-			"$ROOTDIR/infra/vagrant/provisioning/bootstrap.yml" \
-			"$ROOTDIR/src/main/scripts/ci/ansible/deploy.yml"
-		;;
 	'check-license')
 		exec "$MVN" \
 			--batch-mode \
@@ -88,7 +80,6 @@ case ${1:-} in
 		echo >&2 "Usage: $0 <command>"
 		echo >&2
 		echo >&2 "Where <command> is one of:"
-		echo >&2 '- ansible-lint'
 		echo >&2 '- check-license'
 		echo >&2 '- checkstyle'
 		echo >&2 '- enforcer'
