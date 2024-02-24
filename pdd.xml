@@ -1743,7 +1743,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-c9ead0b8</id>
-    <lines>131-131</lines>
+    <lines>129-129</lines>
     <body>Add a workaround for GitHub search by filtering out issues with titles that don't match exactly</body>
     <file>src/main/scripts/ci/connect-todos-to-issues.sh</file>
   </puzzle>
