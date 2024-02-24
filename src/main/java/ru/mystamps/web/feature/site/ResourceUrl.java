@@ -34,7 +34,6 @@ public final class ResourceUrl {
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION = "v0.4.7.0";
 
-	// CheckStyle: ignore LineLength for next 17 lines
 	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/utils/CatalogUtils.min.js";
 	private static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
 	private static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/utils/DateUtils.min.js";
@@ -63,7 +62,6 @@ public final class ResourceUrl {
 	private static final String REACT_DOM_JS       = "16.8.6/umd/react-dom.production.min.js";
 	private static final String SELECTIZE_JS       = "/0.13.3/js/standalone/selectize.min.js";
 	
-	// CheckStyle: ignore LineLength for next 2 lines
 	private static final String SELECTIZE_CSS      = "/public/selectize/0.13.3/css/selectize.bootstrap3.css";
 	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap3.min.css";
 	
@@ -103,7 +101,6 @@ public final class ResourceUrl {
 			put(resources, "https://yandex.st", "JQUERY_JS", JQUERY_JS);
 			put(resources, "https://unpkg.com/react@", "REACT_JS", REACT_JS);
 			put(resources, "https://unpkg.com/react-dom@", "REACT_DOM_JS", REACT_DOM_JS);
-			// CheckStyle: ignore LineLength for next 1 line
 			put(resources, "https://cdnjs.cloudflare.com/ajax/libs/selectize.js", "SELECTIZE_JS", SELECTIZE_JS);
 			put(resources, null, "SELECTIZE_CSS", SELECTIZE_CSS_CDN);
 			return;

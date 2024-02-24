@@ -22,7 +22,6 @@ import org.springframework.core.convert.converter.Converter;
 
 import java.math.BigDecimal;
 
-// CheckStyle: ignore LineLength for next 2 lines
 /**
  * Converter for BigDecimal that correctly parse values with a comma separator (in addition to a point).
  */

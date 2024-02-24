@@ -39,7 +39,6 @@ import ru.mystamps.web.feature.series.importing.SeriesImportService;
 public class ImportRequestCreatedEventListener
 	implements ApplicationListener<ImportRequestCreated> {
 	
-	// CheckStyle: ignore LineLength for next 1 line
 	private static final Logger LOG = LoggerFactory.getLogger(ImportRequestCreatedEventListener.class);
 	
 	private final DownloaderService downloaderService;
@@ -55,7 +54,6 @@ public class ImportRequestCreatedEventListener
 		
 		DownloadResult result = downloaderService.download(url);
 		if (result.hasFailed()) {
-			// CheckStyle: ignore LineLength for next 1 line
 			LOG.info("Request #{}: downloading of '{}' failed: {}", requestId, url, result.getCode());
 
 			seriesImportService.changeStatus(

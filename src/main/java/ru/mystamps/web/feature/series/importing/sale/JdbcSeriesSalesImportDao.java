@@ -32,7 +32,6 @@ public class JdbcSeriesSalesImportDao implements SeriesSalesImportDao {
 	private final String addParsedDataSql;
 	private final String findParsedDataSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcSeriesSalesImportDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate      = jdbcTemplate;
 		this.addParsedDataSql  = env.getRequiredProperty("series_sales_import.add_series_sales_parsed_data");

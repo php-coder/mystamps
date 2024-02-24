@@ -65,7 +65,6 @@ public class SeriesImportConfig {
 			);
 		}
 		
-		// CheckStyle: ignore LineLength for next 2 lines
 		@Bean
 		public FilterRegistrationBean<ImportSeriesFormTrimmerFilter> importSeriesFormTrimmerFilter() {
 			FilterRegistrationBean<ImportSeriesFormTrimmerFilter> bean =
@@ -76,7 +75,6 @@ public class SeriesImportConfig {
 			
 			// register with an order greater than UserMdcLoggingFilter to get a lowest precedence
 			// and being executed after it
-			// CheckStyle: ignore MagicNumber for next 1 line
 			bean.setOrder(Ordered.LOWEST_PRECEDENCE - 50);
 			
 			return bean;

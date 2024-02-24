@@ -29,8 +29,7 @@ import ru.mystamps.web.config.DispatcherServletContext;
 import ru.mystamps.web.support.liquibase.LiquibaseSupport;
 
 // PMD: "All methods are static" here because it's a program entry point.
-// CheckStyle: I cannot declare the constructor as private because app won't start.
-@SuppressWarnings({ "PMD.UseUtilityClass", "checkstyle:hideutilityclassconstructor" })
+@SuppressWarnings("PMD.UseUtilityClass")
 public class ApplicationBootstrap {
 	
 	public static void main(String... args) throws LiquibaseException {

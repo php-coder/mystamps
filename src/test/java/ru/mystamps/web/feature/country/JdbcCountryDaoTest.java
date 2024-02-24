@@ -68,7 +68,6 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-6-france-qty6.sql"
 		},
 		statements =  {
-			// CheckStyle: ignore LineLength for next 1 line
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
 				+ "  (1, 4, 5, CURRENT_TIMESTAMP())"
 				+ ", (1, 5, 4, CURRENT_TIMESTAMP())"
@@ -93,7 +92,6 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-3-sport-qty7.sql"
 		},
 		statements =  {
-			// CheckStyle: ignore LineLength for next 1 line
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
 				+ "  (1, 2, 3, CURRENT_TIMESTAMP())"
 				+ ", (1, 3, 7, CURRENT_TIMESTAMP())"
@@ -137,7 +135,6 @@ public class JdbcCountryDaoTest implements WithAssertions {
 			"/db/series-6-france-qty6.sql"
 		},
 		statements =  {
-			// CheckStyle: ignore LineLength for next 1 line
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
 				+ "  (1, 4, 5, CURRENT_TIMESTAMP())"
 				+ ", (1, 5, 4, CURRENT_TIMESTAMP())"

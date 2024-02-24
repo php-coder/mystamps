@@ -44,7 +44,6 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	@NotNull
 	private Currency currency;
 	
-	// CheckStyle: ignore LineLength for next 1 line
 	// @todo #1230 /series/import/request/{id}: validate that both alt price/currency are present or absent
 	private BigDecimal altPrice;
 	private Currency altCurrency;

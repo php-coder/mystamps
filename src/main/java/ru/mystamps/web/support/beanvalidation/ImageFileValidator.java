@@ -57,7 +57,6 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	}
 	
 	private static byte[] readEightBytes(InputStream is) throws IOException {
-		// CheckStyle: ignore MagicNumber for next 1 line
 		byte[] bytes = new byte[8];
 		int read = is.read(bytes, 0, bytes.length);
 		if (read != bytes.length) {
@@ -68,7 +67,6 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	}
 	
 	private static String formatBytes(byte[] bytes) {
-		// CheckStyle: ignore MagicNumber for next 4 lines
 		return String.format(
 			"%02x %02x %02x %02x %02x %02x %02x %02x",
 			bytes[0], bytes[1], bytes[2], bytes[3],

@@ -569,7 +569,6 @@
 		<bootstrap.version>3.4.1</bootstrap.version>
 		
 		<cglib.version>2.2.2</cglib.version>
-		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<clean.plugin.version>3.0.0</clean.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
@@ -828,20 +827,6 @@
 					<repository>phpcoder/mystamps</repository>
 					<!-- FIXME: set it to docker/ after https://github.com/spotify/dockerfile-maven/pull/89 will be merged -->
 					<contextDirectory>target</contextDirectory>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.plugin.version}</version>
-				<configuration>
-					<enableRSS>false</enableRSS>
-					<consoleOutput>true</consoleOutput>
-					<includeTestSourceDirectory>true</includeTestSourceDirectory>
-					<linkXRef>false</linkXRef>
-					<configLocation>${basedir}/src/main/config/checkstyle.xml</configLocation>
-					<suppressionsLocation>${basedir}/src/main/config/checkstyle-suppressions.xml</suppressionsLocation>
 				</configuration>
 			</plugin>
 			

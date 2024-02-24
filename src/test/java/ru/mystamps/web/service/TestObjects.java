@@ -81,7 +81,6 @@ public final class TestObjects {
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
 	private static final String TEST_ENTITY_SLUG    = "test-slug";
 	
-	// CheckStyle: ignore LineLength for next 1 line
 	private static final String TEST_HASH           = "$2a$10$Oo8A/oaKQYwt4Zi1RWGir.HHziCG267CJaqaNaNUtE/8ceysZn0za";
 
 	private TestObjects() {
@@ -140,7 +139,6 @@ public final class TestObjects {
 		return new SitemapInfoDto(String.valueOf(Random.id()), Random.date());
 	}
 	
-	@SuppressWarnings("checkstyle:magicnumber")
 	public static SeriesInfoDto createSeriesInfoDto() {
 		String category = Random.categoryName();
 		String country = Random.countryName();

@@ -113,7 +113,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		VersionResourceResolver resourceResolver = new VersionResourceResolver()
 			.addFixedVersionStrategy(ResourceUrl.RESOURCES_VERSION, "/**");
 		
-		// CheckStyle: ignore MagicNumber for next 1 line
 		CacheControl cacheControl = CacheControl.maxAge(Duration.ofDays(7));
 		
 		registry.addResourceHandler("/static/**")
@@ -168,7 +167,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 	
 	@Override
-	// CheckStyle: ignore LineLength for next 2 lines
 	// LATER: remove deprecation and usage of setUseSuffixPatternMatch() during upgrade to Spring Framework 5.3
 	// See: https://docs.spring.io/spring-framework/docs/5.2.22.RELEASE/javadoc-api/org/springframework/web/servlet/config/annotation/PathMatchConfigurer.html#setUseSuffixPatternMatch-java.lang.Boolean-
 	@SuppressWarnings("deprecation")

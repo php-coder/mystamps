@@ -92,7 +92,6 @@ public class CountryServiceImpl implements CountryService {
 		return countryDao.findIdsByNames(lowerCasesNames);
 	}
 	
-	// CheckStyle: ignore LineLength for next 1 line
 	// @todo #819 CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)

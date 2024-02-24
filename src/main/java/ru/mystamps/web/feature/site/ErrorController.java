@@ -42,7 +42,6 @@ public class ErrorController {
 	public String notFound(
 			HttpServletRequest request,
 			@AuthenticationPrincipal CustomUserDetails currentUser,
-			// CheckStyle: ignore LineLength for next 1 line
 			@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page,
 			@RequestHeader(name = HttpHeaders.REFERER, required = false) String referer,
 			@RequestHeader(name = HttpHeaders.USER_AGENT, required = false) String agent) {
@@ -59,7 +58,6 @@ public class ErrorController {
 	
 	@RequestMapping(SiteUrl.INTERNAL_ERROR_PAGE)
 	public String internalError(
-		// CheckStyle: ignore LineLength for next 3 lines
 		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION_TYPE, required = false) Class<?> exceptionType,
 		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION, required = false) Exception exception,
 		@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page) {

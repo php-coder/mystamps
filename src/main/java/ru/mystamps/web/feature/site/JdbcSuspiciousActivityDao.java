@@ -35,7 +35,6 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	private final String countByTypeSinceSql;
 	private final String findAllSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcSuspiciousActivityDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate             = jdbcTemplate;
 		this.addSuspiciousActivitySql = env.getRequiredProperty("suspicious_activity.create");

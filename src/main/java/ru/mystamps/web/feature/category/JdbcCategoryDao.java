@@ -64,7 +64,6 @@ public class JdbcCategoryDao implements CategoryDao {
 	@SuppressWarnings("PMD.LongVariable")
 	private final String findFromLastCreatedSeriesByUserSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcCategoryDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                       = jdbcTemplate;
 		this.addCategorySql                     = env.getRequiredProperty("category.create");

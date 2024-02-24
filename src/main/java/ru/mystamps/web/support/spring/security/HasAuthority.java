@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-@SuppressWarnings({ "checkstyle:linelength", "PMD.AvoidDuplicateLiterals" })
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class HasAuthority {
 	// Constants sorted in an ascending order.
 	public static final String ADD_COMMENTS_TO_SERIES = "hasAuthority('" + StringAuthority.ADD_COMMENTS_TO_SERIES + "')";

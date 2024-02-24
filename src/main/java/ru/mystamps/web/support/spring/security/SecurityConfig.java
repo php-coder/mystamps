@@ -33,12 +33,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
-// CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-// CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -84,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	@SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "checkstyle:linelength" })
+	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	protected void configure(HttpSecurity http) throws Exception {
 		Profiles prod = Profiles.of("prod");
 		boolean useSingleHost = !environment.acceptsProfiles(prod);
@@ -232,7 +230,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			new FilterRegistrationBean<>(new UserMdcLoggingFilter());
 		// the filters that need to include userId in their logs, should have the order grater than
 		// Ordered.LOWEST_PRECEDENCE - 100 to get applied after us
-		// CheckStyle: ignore MagicNumber for next 1 line
 		bean.setOrder(Ordered.LOWEST_PRECEDENCE - 100);
 		return bean;
 	}

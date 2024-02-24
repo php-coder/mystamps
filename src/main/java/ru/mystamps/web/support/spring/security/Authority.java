@@ -20,7 +20,6 @@ package ru.mystamps.web.support.spring.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-@SuppressWarnings("checkstyle:linelength")
 public final class Authority {
 	// Constants sorted in an ascending order.
 	public static final GrantedAuthority ADD_COMMENTS_TO_SERIES = new SimpleGrantedAuthority(StringAuthority.ADD_COMMENTS_TO_SERIES);

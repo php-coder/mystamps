@@ -31,7 +31,6 @@ import static ru.mystamps.web.feature.series.SeriesValidation.MAX_SERIES_COMMENT
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId);
 
-	// CheckStyle: ignore LineLength for next 6 lines
 	// @todo #1411 Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties
 	void addComment(
 		Integer seriesId,

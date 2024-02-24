@@ -81,7 +81,6 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 			info.getCondition()
 		);
 		
-		// CheckStyle: ignore LineLength for next 1 line
 		// @todo #995 SeriesInfoExtractorService: introduce a method for parsing only sales-related info
 		SeriesExtractedInfo seriesInfo = extractorService.extract(url, data);
 		

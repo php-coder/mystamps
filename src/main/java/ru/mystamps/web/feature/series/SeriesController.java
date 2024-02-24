@@ -297,7 +297,6 @@ public class SeriesController {
 		return "category/info";
 	}
 	
-	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = { "replaceImage", "imageUrl" })
 	public String replaceImageWithImageUrl(
 		@Validated({
@@ -328,7 +327,6 @@ public class SeriesController {
 		);
 	}
 	
-	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = "imageUrl")
 	public String processImageWithImageUrl(
 		@Validated({
@@ -358,7 +356,6 @@ public class SeriesController {
 		);
 	}
 	
-	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(
 		path = SeriesUrl.ADD_IMAGE_SERIES_PAGE,
 		params = "!imageUrl",
@@ -431,8 +428,6 @@ public class SeriesController {
 		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, series.getId());
 	}
 	
-	// many method parameters are OK here
-	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(path = SeriesUrl.INFO_SERIES_PAGE, params = "action=ADD")
 	public String addToCollection(
 		@Valid AddToCollectionForm form,
@@ -483,7 +478,6 @@ public class SeriesController {
 				return null;
 			}
 			
-			// CheckStyle: ignore LineLength for next 1 line
 			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
 			model.addAllAttributes(commonAttrs);
 			
@@ -538,7 +532,6 @@ public class SeriesController {
 		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 
-	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(SeriesUrl.ADD_SERIES_ASK_PAGE)
 	public String processAskForm(
 		@Validated({ Default.class, AddSeriesSalesForm.UrlChecks.class }) AddSeriesSalesForm form,

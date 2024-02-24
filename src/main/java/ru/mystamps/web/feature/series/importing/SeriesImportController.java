@@ -70,7 +70,6 @@ public class SeriesImportController {
 	
 	@InitBinder("importSeriesForm")
 	protected void initImportSeriesForm(WebDataBinder binder) {
-		// CheckStyle: ignore LineLength for next 1 line
 		binder.registerCustomEditor(String.class, "michelNumbers", new ExpandCatalogNumbersEditor());
 		binder.registerCustomEditor(String.class, "seller.name", new StringTrimmerEditor(true));
 		binder.registerCustomEditor(String.class, "seller.url", new StringTrimmerEditor(true));
@@ -201,7 +200,6 @@ public class SeriesImportController {
 		return "series/import/info";
 	}
 	
-	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(SeriesImportUrl.REQUEST_IMPORT_PAGE)
 	public String processImportSeriesForm(
 		@PathVariable("id") Integer requestId,

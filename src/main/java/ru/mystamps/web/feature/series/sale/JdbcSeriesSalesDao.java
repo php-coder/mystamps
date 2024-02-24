@@ -32,7 +32,6 @@ public class JdbcSeriesSalesDao implements SeriesSalesDao {
 	private final String addSeriesSaleSql;
 	private final String findSeriesSalesBySeriesIdSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcSeriesSalesDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                 = jdbcTemplate;
 		this.addSeriesSaleSql             = env.getRequiredProperty("series_sales.add");

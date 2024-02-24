@@ -81,13 +81,11 @@ public final class LiquibaseSupport {
 	public static class LiquibaseOnlyStartup {
 	}
 	
-	// CheckStyle: ignore LineLength for next 2 lines
 	// Partially copy&pasted from:
 	// https://github.com/liquibase/liquibase/blob/v4.7.1/liquibase-core/src/main/java/liquibase/integration/spring/SpringLiquibase.java#L263-L276
 	// Reason: the original code executes "update" while we need to perform validation
 	private static void performLiquibaseValidate(SpringLiquibase springLiquibase)
 		throws LiquibaseException {
-		// CheckStyle: ignore LineLength for next 1 line
 		try (Liquibase liquibase = createLiquibase(springLiquibase.getDataSource().getConnection(), springLiquibase)) {
 			validate(liquibase, springLiquibase);
 		} catch (SQLException ex) {
@@ -95,7 +93,6 @@ public final class LiquibaseSupport {
 		}
 	}
 	
-	// CheckStyle: ignore LineLength for next 2 lines
 	// Partially copy&pasted from:
 	// https://github.com/liquibase/liquibase/blob/v4.7.1/liquibase-core/src/main/java/liquibase/Liquibase.java#L2279-L2283
 	// Reason: the original method doesn't respect spring.liquibase.contexts
@@ -115,7 +112,6 @@ public final class LiquibaseSupport {
 		}
 	}
 	
-	// CheckStyle: ignore LineLength for next 2 lines
 	// Partially copy&pasted from:
 	// https://github.com/liquibase/liquibase/blob/v4.7.1/liquibase-core/src/main/java/liquibase/integration/spring/SpringLiquibase.java#L320-L334
 	// Reason: the original method is protected
@@ -130,7 +126,6 @@ public final class LiquibaseSupport {
 		);
 	}
 	
-	// CheckStyle: ignore LineLength for next 2 lines
 	// Partially copy&pasted from:
 	// https://github.com/liquibase/liquibase/blob/v4.7.1/liquibase-core/src/main/java/liquibase/integration/spring/SpringLiquibase.java#L344-L380
 	// Reason: the original method is protected

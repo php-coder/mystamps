@@ -51,7 +51,6 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			log.warn("Directory '{}' doesn't exist! Image uploading won't work", storageDir);
 		
 		} else if (!storageDir.canWrite()) {
-			// CheckStyle: ignore ParenPad for next 1 line
 			log.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
 				// FIXME(java9): log also user: ProcessHandle.current().info().user()
 				"Directory '{}' exists but isn't writable for the current user! "
@@ -70,7 +69,6 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		
 		} else if (!previewDir.canWrite()) {
 			// FIXME(java9): log also user: ProcessHandle.current().info().user()
-			// CheckStyle: ignore ParenPad for next 1 line
 			log.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image preview generation won't work",

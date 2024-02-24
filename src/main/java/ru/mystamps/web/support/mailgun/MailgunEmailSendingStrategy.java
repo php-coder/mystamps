@@ -20,8 +20,6 @@ package ru.mystamps.web.support.mailgun;
 /**
  * Sending e-mails with Mailgun service.
  */
-// Links in javadoc are long
-@SuppressWarnings("checkstyle:linelength")
 public interface MailgunEmailSendingStrategy {
 
 	/**

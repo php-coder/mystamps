@@ -42,7 +42,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	private final UserService userService;
 	
-	// CheckStyle: ignore LineLength for next 3 lines
 	@Override
 	@Transactional(readOnly = true)
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String login) {

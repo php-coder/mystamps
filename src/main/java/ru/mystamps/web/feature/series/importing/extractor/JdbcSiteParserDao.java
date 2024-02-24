@@ -38,7 +38,6 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	@SuppressWarnings("PMD.LongVariable")
 	private final String findParametersWithParserNameSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcSiteParserDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                    = jdbcTemplate;
 		this.findParserIdByMatchedUrlSql     = env.getRequiredProperty("site_parser.find_like_matched_url");

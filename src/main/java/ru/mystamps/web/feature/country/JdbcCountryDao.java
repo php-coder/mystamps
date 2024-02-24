@@ -65,7 +65,6 @@ public class JdbcCountryDao implements CountryDao {
 	@SuppressWarnings("PMD.LongVariable")
 	private final String findLastCountryCreatedByUserSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcCountryDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                       = jdbcTemplate;
 		this.addCountrySql                      = env.getRequiredProperty("country.create");

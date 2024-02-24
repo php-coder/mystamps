@@ -19,12 +19,6 @@ case ${1:-} in
 			--batch-mode \
 			license:check
 		;;
-	'checkstyle')
-		exec "$MVN" \
-			--batch-mode \
-			checkstyle:check \
-			-Dcheckstyle.violationSeverity=warning
-		;;
 	'enforcer')
 		exec "$MVN" \
 			--batch-mode \
@@ -71,7 +65,6 @@ case ${1:-} in
 		echo >&2
 		echo >&2 "Where <command> is one of:"
 		echo >&2 '- check-license'
-		echo >&2 '- checkstyle'
 		echo >&2 '- enforcer'
 		echo >&2 '- integration-tests'
 		echo >&2 '- jest'

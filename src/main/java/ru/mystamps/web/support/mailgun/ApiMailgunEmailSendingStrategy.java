@@ -35,7 +35,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 
-// CheckStyle: ignore LineLength for next 10 lines
 /**
  * Sending e-mails with Mailgun service (via HTTP API).
  *

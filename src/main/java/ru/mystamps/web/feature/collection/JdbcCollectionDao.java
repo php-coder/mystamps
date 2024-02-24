@@ -62,7 +62,6 @@ public class JdbcCollectionDao implements CollectionDao {
 	private final String removeSeriesInstanceSql;
 	private final String findCollectionInfoBySlugSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcCollectionDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                  = jdbcTemplate;
 		this.findLastCreatedCollectionsSql = env.getRequiredProperty("collection.find_last_created");
@@ -259,7 +258,6 @@ public class JdbcCollectionDao implements CollectionDao {
 			JdbcUtils.ID_KEY_COLUMN
 		);
 		
-		// CheckStyle: ignore LineLength for next 3 lines
 		Validate.validState(
 			affected == 1,
 			"Unexpected number of affected rows after adding series #%d to collection of user #%d: %d",
@@ -280,7 +278,6 @@ public class JdbcCollectionDao implements CollectionDao {
 		
 		int affected = jdbcTemplate.update(removeSeriesInstanceSql, params);
 		if (affected != 1) {
-			// CheckStyle: ignore LineLength for next 2 lines
 			LOG.warn(
 				"Unexpected number of affected rows after removing series instance #{} from collection of user #{}: {}",
 				seriesInstanceId,

@@ -67,7 +67,6 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/series-3-sport-qty7.sql"
 		},
 		statements = {
-			// CheckStyle: ignore LineLength for next 1 line
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps, added_at) VALUES"
 				+ "  (1, 1, 5, CURRENT_TIMESTAMP())"
 				+ ", (1, 2, 3, CURRENT_TIMESTAMP())"

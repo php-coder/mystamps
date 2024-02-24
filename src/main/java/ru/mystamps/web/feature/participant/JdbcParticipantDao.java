@@ -45,7 +45,6 @@ public class JdbcParticipantDao implements ParticipantDao {
 	private final String findAllGroupsSql;
 	private final String findGroupIdByNameSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcParticipantDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                  = jdbcTemplate;
 		this.addParticipantSql             = env.getRequiredProperty("transaction_participant.create");

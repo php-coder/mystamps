@@ -117,7 +117,6 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	private static HttpURLConnection openConnection(URL url) throws IOException {
 		URLConnection connection = url.openConnection();
 		if (!(connection instanceof HttpURLConnection)) {
-			// CheckStyle: ignore ParenPad for next 1 line
 			LOG.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
 				"Couldn't open connection: "
 				+ "unknown type of connection class ({}). "

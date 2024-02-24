@@ -46,7 +46,6 @@ import javax.annotation.PostConstruct;
 public class DownloadingSucceededEventListener
 	implements ApplicationListener<DownloadingSucceeded> {
 	
-	// CheckStyle: ignore LineLength for next 1 line
 	private static final Logger LOG = LoggerFactory.getLogger(DownloadingSucceededEventListener.class);
 	
 	private final SeriesImportService seriesImportService;

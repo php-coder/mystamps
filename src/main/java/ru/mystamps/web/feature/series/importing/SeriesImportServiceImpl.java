@@ -174,7 +174,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		return seriesImportDao.findRawContentByRequestId(requestId);
 	}
 	
-	// CheckStyle: ignore LineLength for next 3 lines
 	@Override
 	@Transactional
 	public void saveParsedData(Integer requestId, SeriesExtractedInfo seriesInfo, List<String> imageUrls) {

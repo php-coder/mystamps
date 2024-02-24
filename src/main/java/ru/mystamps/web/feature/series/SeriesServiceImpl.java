@@ -168,7 +168,6 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	// CheckStyle: ignore LineLength for next 1 line
 	public void addCatalogPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(price != null, "Price must be non null");
@@ -182,7 +181,6 @@ public class SeriesServiceImpl implements SeriesService {
 		Date now = new Date();
 		dto.setUpdatedAt(now);
 
-		// CheckStyle: ignore MethodParamPad for next 5 lines
 		switch (catalog) {
 			case MICHEL:   seriesDao.addMichelPrice  (dto); break;
 			case SCOTT:    seriesDao.addScottPrice   (dto); break;
@@ -206,7 +204,6 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	// CheckStyle: ignore LineLength for next 1 line
 	public void addCatalogNumbers(StampsCatalog catalog, Integer seriesId, String numbers, Integer userId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(numbers != null, "Numbers must be non null");
@@ -214,7 +211,6 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		seriesDao.markAsModified(seriesId, new Date(), userId);
 		
-		// CheckStyle: ignore LineLength for next 7 lines
 		switch (catalog) {
 			case MICHEL:   createCatalogNumbersAndAddToSeries(seriesId, michelCatalogService,   numbers); break;
 			case SCOTT:    createCatalogNumbersAndAddToSeries(seriesId, scottCatalogService,    numbers); break;

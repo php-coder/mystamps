@@ -67,7 +67,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	private final String addSolovyovPriceSql;
 	private final String addZagorskiPriceSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcSeriesDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate               = jdbcTemplate;
 		this.createSeriesSql            = env.getRequiredProperty("series.create");
@@ -221,7 +220,6 @@ public class JdbcSeriesDao implements SeriesDao {
 		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesLinkDto);
 	}
 	
-	// CheckStyle: ignore LineLength for next 2 lines
 	@Override
 	public SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, Integer userId, String lang) {
 		Map<String, Object> params = new HashMap<>();

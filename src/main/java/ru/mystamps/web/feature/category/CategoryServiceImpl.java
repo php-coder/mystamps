@@ -92,7 +92,6 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDao.findIdsByNames(lowerCasesNames);
 	}
 	
-	// CheckStyle: ignore LineLength for next 1 line
 	// @todo #819 CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)

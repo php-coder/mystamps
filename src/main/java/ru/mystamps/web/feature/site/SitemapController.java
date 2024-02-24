@@ -75,22 +75,18 @@ public class SitemapController {
 			writer.print(INDEX_URL_ENTRY);
 			
 			for (SitemapInfoDto item : collectionService.findAllForSitemap()) {
-				// CheckStyle: ignore LineLength for next 1 line
 				writer.print(createUrlEntry(dateFormatter, item, CollectionUrl.INFO_COLLECTION_PAGE, "{slug}"));
 			}
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
-				// CheckStyle: ignore LineLength for next 1 line
 				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_SERIES_PAGE, "{id}"));
 			}
 
 			for (SitemapInfoDto item : categoryService.findAllForSitemap()) {
-				// CheckStyle: ignore LineLength for next 1 line
 				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_CATEGORY_PAGE, "{slug}"));
 			}
 
 			for (SitemapInfoDto item : countryService.findAllForSitemap()) {
-				// CheckStyle: ignore LineLength for next 1 line
 				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_COUNTRY_PAGE, "{slug}"));
 			}
 			

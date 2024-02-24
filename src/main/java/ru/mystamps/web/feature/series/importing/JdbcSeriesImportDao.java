@@ -52,7 +52,6 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	private final String findRequestInfoSql;
 	private final String findAllSql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcSeriesImportDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                  = jdbcTemplate;
 		this.createSeriesImportRequestSql  = env.getRequiredProperty("series_import_requests.create");
@@ -96,7 +95,6 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		return Integer.valueOf(holder.getKey().intValue());
 	}
 
-	// CheckStyle: ignore LineLength for next 2 lines
 	@Override
 	public void setSeriesIdAndChangeStatus(Integer seriesId, UpdateImportRequestStatusDbDto requestStatus) {
 		Map<String, Object> params = new HashMap<>();
@@ -214,7 +212,6 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	}
 	
 	@Override
-	@SuppressWarnings("checkstyle:linelength")
 	public void addParsedImageUrls(Integer requestId, List<String> imageUrls) {
 		if (imageUrls == null || imageUrls.isEmpty()) {
 			return;

@@ -38,7 +38,6 @@ public class JdbcUsersActivationDao implements UsersActivationDao {
 	private final String removeByActivationKeySql;
 	private final String addActivationKeySql;
 	
-	@SuppressWarnings("checkstyle:linelength")
 	public JdbcUsersActivationDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate             = jdbcTemplate;
 		this.findByActivationKeySql   = env.getRequiredProperty("users_activation.find_by_activation_key");

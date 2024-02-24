@@ -56,12 +56,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// Regular expression matches release date of the stamps.
 	// Year should be in range within 1840 and 2099 inclusive.
-	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern RELEASE_DATE_REGEXP =
 		Pattern.compile("((?<day>[0-9]{2})\\.(?<month>[0-9]{2})\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?|\\.)?");
 	
 	// Regular expression matches number of the stamps in a series.
-	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
 		"(?<quantity>[1-9][0-9]*)(-?(ти|ой|ух))?( ((без)?зубцов(ая|ы[ех])))?[ ]?(м(ар(ок|к[аи])|\\b)|(люкс[- ])?блок(а|ов)?|БЛ)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
@@ -78,7 +76,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern BYN_CURRENCY_REGEXP = Pattern.compile("[0-9] бел\\. руб\\.");
 	
 	// Regular expression that matches Rubles (Russian currency).
-	// CheckStyle: ignore LineLength for next 1 line
 	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("([0-9][ ]?р(уб|\\.)|RUB [0-9])");
 
 	// Regular expression that matches Euro.
@@ -90,7 +87,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Regular expression that matches US dollar.
 	private static final Pattern USD_CURRENCY_REGEXP = Pattern.compile("([0-9]\\$|US\\$[0-9])");
 	
-	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.NAME_EN_REGEXP);
 	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(CategoryValidation.NAME_RU_REGEXP);
 	private static final Pattern VALID_COUNTRY_NAME_EN  = Pattern.compile(CountryValidation.NAME_EN_REGEXP);
@@ -355,7 +351,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	/* default */ Integer extractSeller(String pageUrl, String name, String url) {
 		if (StringUtils.isNotBlank(name) && StringUtils.isNotBlank(url)) {
-			// CheckStyle: ignore LineLength for next 1 line
 			// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)
 			return extractSellerByNameAndUrl(name, url);
 		}
@@ -428,8 +423,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		"PMD.AvoidInstantiatingObjectsInLoops",
 		"PMD.AvoidReassigningParameters",
 		"PMD.NPathComplexity",
-		"PMD.ModifiedCyclomaticComplexity",
-		"checkstyle:parameterassignment"
+		"PMD.ModifiedCyclomaticComplexity"
 	})
 	/* default */ BigDecimal extractPrice(String fragment) {
 		if (StringUtils.isBlank(fragment)) {

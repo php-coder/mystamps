@@ -126,7 +126,7 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	// protected for using in unit tests
-	@SuppressWarnings({ "PMD.UseObjectForClearerAPI", "checkstyle:parameternumber" })
+	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	protected void logEvent(
 			String type,
 			String page,
@@ -192,7 +192,6 @@ public class SiteServiceImpl implements SiteService {
 		);
 	}
 	
-	// CheckStyle: ignore LineLength for next 1 lines
 	private String abbreviateIfLengthGreaterThan(String text, int maxLength, String fieldName) {
 		if (text == null || text.length() <= maxLength) {
 			return text;

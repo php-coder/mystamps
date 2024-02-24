@@ -145,14 +145,12 @@ public class Pager {
 				nextItemsCnt--;
 			}
 		
-		// CheckStyle: ignore LineLength for next 3 lines
 		// we've added too much to the beginning
 		} else if (prevItemsCnt > ITEMS_BEFORE_CURRENT && nextItemsCnt <= ITEMS_AFTER_CURRENT) {
 			while (prevItemsCnt > ITEMS_BEFORE_CURRENT && (prevItemsCnt + nextItemsCnt + 1) > MAX_ITEMS) {
 				prevItemsCnt--;
 			}
 		
-		// CheckStyle: ignore LineLength for next 3 lines
 		// we've added too much to the end
 		} else if (nextItemsCnt > ITEMS_AFTER_CURRENT && prevItemsCnt <= ITEMS_BEFORE_CURRENT) {
 			while (nextItemsCnt > ITEMS_AFTER_CURRENT && (prevItemsCnt + nextItemsCnt + 1) > MAX_ITEMS) {
