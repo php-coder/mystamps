@@ -27,7 +27,6 @@ import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {
 
 	private final ImageDao imageDao = Mock()
@@ -92,11 +91,6 @@ class ImageServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
-	])
 	def "save() should pass content type '#contentType' to image dao"(String contentType, String expectedType) {
 		when:
 			service.save(multipartFile)
@@ -116,11 +110,6 @@ class ImageServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
-	])
 	def 'save() should pass filename "#filename" to image dao'(String filename, String expectedFilename) {
 		when:
 			service.save(multipartFile)
@@ -144,7 +133,6 @@ class ImageServiceImplTest extends Specification {
 			'http://example/pic.jpeg' || 'http://example/pic.jpeg'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'save() should pass abbreviated filename when it is too long'() {
 		given:
 			String longFilename = '/long/url/' + ('x' * Images.FILENAME_LENGTH)
@@ -175,7 +163,6 @@ class ImageServiceImplTest extends Specification {
 			ex.message == "Can't save image"
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should call strategy"() {
 		given:
 			ImageInfoDto image = TestObjects.createImageInfoDto()
@@ -232,7 +219,6 @@ class ImageServiceImplTest extends Specification {
 			0       | _
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to image dao"() {
 		when:
 			service.get(7)
@@ -254,7 +240,6 @@ class ImageServiceImplTest extends Specification {
 			image == null
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to strategy and return result from it"() {
 		given:
 			ImageInfoDto expectedImage = TestObjects.createImageInfoDto()
@@ -310,7 +295,6 @@ class ImageServiceImplTest extends Specification {
 			0       | _
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "getOrCreatePreview() should pass argument to strategy and return result from it"() {
 		given:
 			Integer expectedImageId = 7
@@ -349,7 +333,6 @@ class ImageServiceImplTest extends Specification {
 			ex.message == 'Image id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addToSeries() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14
@@ -378,7 +361,6 @@ class ImageServiceImplTest extends Specification {
 			ex.message == 'Series id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14
@@ -411,7 +393,6 @@ class ImageServiceImplTest extends Specification {
 			ex.message == 'Image info must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "removeIfPossible() should pass argument to strategy"() {
 		given:
 			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()

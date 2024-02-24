@@ -26,14 +26,6 @@ import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class ParticipantServiceImplTest extends Specification {
 	
 	private final ParticipantDao participantDao = Mock()
@@ -93,7 +85,6 @@ class ParticipantServiceImplTest extends Specification {
 			ex.message == 'Seller flag must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should create participant'() {
 		given:
 			String expectedName     = Random.participantName()

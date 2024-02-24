@@ -27,7 +27,6 @@ import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesSalesServiceImplTest extends Specification {
 	
 	private final SeriesSalesDao seriesSalesDao = Mock()
@@ -104,7 +103,6 @@ class SeriesSalesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryObjectReferences', 'UnnecessaryReturnKeyword'])
 	def 'add() should create series sales'(
 		Date date,
 		String url,

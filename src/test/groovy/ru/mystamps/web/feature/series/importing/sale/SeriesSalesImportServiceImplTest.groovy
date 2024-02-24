@@ -24,7 +24,6 @@ import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesSalesImportServiceImplTest extends Specification {
 	
 	private final SeriesSalesImportDao seriesSalesImportDao = Mock()

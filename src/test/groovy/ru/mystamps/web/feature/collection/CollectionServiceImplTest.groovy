@@ -29,14 +29,6 @@ import spock.lang.Unroll
 import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.positiveLong
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class CollectionServiceImplTest extends Specification {
 	
 	private final CollectionDao collectionDao = Mock()
@@ -51,7 +43,6 @@ class CollectionServiceImplTest extends Specification {
 	// Tests for createCollection()
 	//
 	
-	@SuppressWarnings('FactoryMethodName')
 	def 'createCollection() should throw exception when owner id is null'() {
 		when:
 			service.createCollection(null, 'test-owner-login')
@@ -60,7 +51,6 @@ class CollectionServiceImplTest extends Specification {
 			ex.message == 'Owner id must be non null'
 	}
 	
-	@SuppressWarnings('FactoryMethodName')
 	def 'createCollection() should throw exception when owner login is null'() {
 		when:
 			service.createCollection(Random.userId(), null)
@@ -69,7 +59,6 @@ class CollectionServiceImplTest extends Specification {
 			ex.message == 'Owner login must be non null'
 	}
 	
-	@SuppressWarnings('FactoryMethodName')
 	def 'createCollection() should throw exception when owner login can\'t be converted to slug'() {
 		when:
 			service.createCollection(Random.userId(), '')
@@ -78,7 +67,6 @@ class CollectionServiceImplTest extends Specification {
 			ex.message == 'Slug for string \'\' must be non empty'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def 'createCollection() should pass owner id to dao'() {
 		given:
 			Integer expectedOwnerId = Random.userId()
@@ -91,7 +79,6 @@ class CollectionServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def 'createCollection() should pass slugified owner login to dao'() {
 		given:
 			String ownerLogin = 'Test User'
@@ -106,7 +93,6 @@ class CollectionServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def 'createCollection() should assign updated at to current date'() {
 		when:
 			service.createCollection(Random.userId(), 'any-login')
@@ -171,7 +157,6 @@ class CollectionServiceImplTest extends Specification {
 			ex.message == 'Currency must be non null when price is specified'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'addToCollection() should add series to collection and mark it as modified'() {
 		given:
 			Integer expectedUserId = Random.userId()
@@ -234,7 +219,6 @@ class CollectionServiceImplTest extends Specification {
 			ex.message == 'Series instance id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'removeFromCollection() should remove series instance from collection and mark it as modified'() {
 		given:
 			Integer expectedUserId = Random.userId()

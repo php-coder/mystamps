@@ -24,14 +24,6 @@ import spock.lang.Specification
 
 import static io.qala.datagen.RandomShortApi.nullOr
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class TimedSeriesInfoExtractorServiceTest extends Specification {
 	
 	private final SeriesInfoExtractorService origService = Mock()

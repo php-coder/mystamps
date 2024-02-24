@@ -21,7 +21,6 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class TimedImagePreviewStrategyTest extends Specification {
 	
 	private final ImagePreviewStrategy origStrategy = Mock()
@@ -37,7 +36,6 @@ class TimedImagePreviewStrategyTest extends Specification {
 	//
 	
 	@Unroll
-	@SuppressWarnings([ 'FactoryMethodName', 'LineLength', /* false positive: */ 'UnnecessaryBooleanExpression' ])
 	def 'createPreview() should pass #expectedData and return #expectedResult'(byte[] expectedData, byte[] expectedResult) {
 		when:
 			byte[] result = strategy.createPreview(expectedData)

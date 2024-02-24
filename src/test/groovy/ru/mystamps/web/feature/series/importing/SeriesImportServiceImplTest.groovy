@@ -41,14 +41,6 @@ import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class SeriesImportServiceImplTest extends Specification {
 	
 	private final SeriesImportDao seriesImportDao = Mock()
@@ -117,7 +109,6 @@ class SeriesImportServiceImplTest extends Specification {
 			ex?.cause?.class == URISyntaxException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'addRequest() should pass dto to dao and return its result'() {
 		given:
 			String expectedUrl = Random.url()
@@ -140,7 +131,6 @@ class SeriesImportServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'LineLength', 'UnnecessaryReturnKeyword'])
 	def 'addRequest() should save url in the encoded form'() {
 		given:
 			String url = 'http://example.org/текст_на_русском'
@@ -156,7 +146,6 @@ class SeriesImportServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'LineLength', 'UnnecessaryReturnKeyword'])
 	def 'addRequest() should not encode url if it is already encoded'() {
 		given:
 			String expectedUrl = 'http://example.org/%D1%82%D0%B5%D0%BA%D1%81%D1%82_%D0%BD%D0%B0_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%BC'
@@ -214,7 +203,6 @@ class SeriesImportServiceImplTest extends Specification {
 			1 * seriesSalesService.add(expectedSaleDto, expectedSeriesId, expectedUserId)
 	}
 
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'addSeries() should create a new seller if needed and use it during series sale creation'() {
 		given:
 			Integer expectedSellerId = Random.id()
@@ -242,7 +230,6 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'addSeries() should update request and set status'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -312,7 +299,6 @@ class SeriesImportServiceImplTest extends Specification {
 			ex.message == 'Statuses must be different'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'changeStatus() should pass arguments to dao'() {
 		given:
 			Integer expectedRequestId = Random.userId()
@@ -385,7 +371,6 @@ class SeriesImportServiceImplTest extends Specification {
 			'  '    | _
 	}
 	
-	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def 'saveDownloadedContent() should pass arguments to dao'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -407,7 +392,6 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveDownloadedContent() should change status for new request'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -423,7 +407,6 @@ class SeriesImportServiceImplTest extends Specification {
 			})
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveDownloadedContent() should change status for failed request'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -498,7 +481,6 @@ class SeriesImportServiceImplTest extends Specification {
 			ex.message == 'Image URLs must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveParsedData() should publish ParsingFailed event when all series fields are empty'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -515,7 +497,6 @@ class SeriesImportServiceImplTest extends Specification {
 			})
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveParsedData() should save series parsed data'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -535,7 +516,6 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
 	def 'saveParsedData() should save series sale parsed data if provided'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -557,7 +537,6 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword', 'UnnecessaryGetter' ])
 	def 'saveParsedData() should save series info'() {
 		given:
 			SeriesExtractedInfo expectedSeriesInfo = TestObjects.createSeriesExtractedInfo()
@@ -605,7 +584,6 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveParsedData() should change request status'() {
 		when:
 			service.saveParsedData(
@@ -660,7 +638,6 @@ class SeriesImportServiceImplTest extends Specification {
 			ex.message == 'Series id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findRequestInfo() should invoke dao and return its result'() {
 		given:
 			Integer expectedSeriesId = Random.id()

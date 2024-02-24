@@ -24,7 +24,6 @@ import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UsersActivationServiceImplTest extends Specification {
 	
 	private final UsersActivationDao usersActivationDao = Mock()
@@ -61,7 +60,6 @@ class UsersActivationServiceImplTest extends Specification {
 			1 * usersActivationDao.add(_ as AddUsersActivationDbDto)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should generate activation key"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -73,7 +71,6 @@ class UsersActivationServiceImplTest extends Specification {
 			})
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should generate unique activation key"() {
 		given:
 			List<String> passedArguments = []
@@ -107,7 +104,6 @@ class UsersActivationServiceImplTest extends Specification {
 			ex.message == 'Email must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass email to dao"() {
 		given:
 			String expectedEmail = 'somename@example.org'
@@ -122,11 +118,6 @@ class UsersActivationServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
-	])
 	def "add() should pass language '#expectedLang' to dao"(Locale lang, String expectedLang) {
 		when:
 			service.add(registrationForm, lang)
@@ -141,7 +132,6 @@ class UsersActivationServiceImplTest extends Specification {
 			Locale.FRENCH || 'fr'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -152,7 +142,6 @@ class UsersActivationServiceImplTest extends Specification {
 			})
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass user's activation request to mail service"() {
 		when:
 			service.add(registrationForm, Locale.FRANCE)
@@ -206,7 +195,6 @@ class UsersActivationServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countCreatedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -258,7 +246,6 @@ class UsersActivationServiceImplTest extends Specification {
 			ex.message == 'Days must be greater than zero'
 	}
 
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findOlderThan() should invoke dao, pass changed date and return the result"() {
 		given:
 			int days = 4

@@ -24,7 +24,6 @@ import spock.lang.Specification
 
 import java.nio.file.Path
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
 	private static final PREVIEW_DIR = File.separator + 'tmp'
@@ -33,7 +32,6 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	private final Path mockFile = Mock(Path)
 	
-	@SuppressWarnings('SpaceAfterComma') // false positive
 	private final ImagePersistenceStrategy strategy = Spy(
 		FilesystemImagePersistenceStrategy,
 		constructorArgs:[NOPLogger.NOP_LOGGER, STORAGE_DIR, PREVIEW_DIR]
@@ -50,7 +48,6 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> { }
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'save() should save a file into a configured directory'() {
 		given:
 			String expectedDirectoryName = STORAGE_DIR
@@ -63,7 +60,6 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			}) >> { }
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'save() should give a proper name to a file'() {
 		given:
 			String expectedExtension = imageInfoDto.type.toLowerCase(Locale.ENGLISH)

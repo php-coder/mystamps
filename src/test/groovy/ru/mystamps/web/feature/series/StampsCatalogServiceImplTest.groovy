@@ -22,7 +22,6 @@ import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class StampsCatalogServiceImplTest extends Specification {
 	
 	private final StampsCatalogDao stampsCatalogDao = Mock()
@@ -53,7 +52,6 @@ class StampsCatalogServiceImplTest extends Specification {
 			ex.message == 'TestCatalog numbers must be non empty'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add catalog numbers"() {
 		given:
 			Set<String> expectedNumbers = [ '8', '9' ] as Set
@@ -94,7 +92,6 @@ class StampsCatalogServiceImplTest extends Specification {
 			ex.message == 'TestCatalog numbers must be non empty'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addToSeries() should add catalog numbers to series"() {
 		given:
 			Integer expectedSeriesId = 100
@@ -123,7 +120,6 @@ class StampsCatalogServiceImplTest extends Specification {
 			ex.message == 'Series id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 50

@@ -25,7 +25,6 @@ import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {
 	
 	private final UserDao userDao = Mock()
@@ -78,7 +77,6 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add(_ as AddUserDbDto) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should delete registration request"() {
 		given:
 			String expectedActivationKey = activationForm.activationKey
@@ -114,7 +112,6 @@ class UserServiceImplTest extends Specification {
 			0 * usersActivationService.remove(_ as String)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass name to dao"() {
 		given:
 			String expectedUserName = activationForm.name
@@ -127,7 +124,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login instead of name when name is null"() {
 		given:
 			String expectedUserLogin = activationForm.login
@@ -141,7 +137,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login instead of name when name is empty"() {
 		given:
 			String expectedUserLogin = activationForm.login
@@ -156,7 +151,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should fill role field"() {
 		when:
 			service.registerUser(activationForm)
@@ -167,7 +161,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should use email from registration request"() {
 		given:
 			UsersActivationDto activation = new UsersActivationDto('test@example.org', new Date())
@@ -182,7 +175,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should use registration date from registration request"() {
 		given:
 			UsersActivationDto activation = new UsersActivationDto(TestObjects.TEST_EMAIL, new Date(86, 8, 12))
@@ -207,7 +199,6 @@ class UserServiceImplTest extends Specification {
 			ex.message == 'Password must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should gets hash from encoder"() {
 		given:
 			String expectedHash = TestObjects.createAddUserDbDto().hash
@@ -245,7 +236,6 @@ class UserServiceImplTest extends Specification {
 			ex.message == 'Login must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login to dao"() {
 		given:
 			String expectedUserLogin = activationForm.login
@@ -258,7 +248,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should assign activated at to current date"() {
 		when:
 			service.registerUser(activationForm)
@@ -269,7 +258,6 @@ class UserServiceImplTest extends Specification {
 			}) >> Random.userId()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should create collection for user"() {
 		given:
 			Integer expectedId = 909
@@ -357,7 +345,6 @@ class UserServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countRegisteredSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()

@@ -35,14 +35,6 @@ import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomShortApi.positiveLong
 import static io.qala.datagen.RandomShortApi.sample
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class SeriesServiceImplTest extends Specification {
 	private final ImageService imageService = Mock()
 	private final SeriesDao seriesDao = Mock()
@@ -58,7 +50,6 @@ class SeriesServiceImplTest extends Specification {
 	private AddSeriesForm form
 	private AddImageForm imageForm
 	
-	@SuppressWarnings('UnnecessaryGetter')
 	def setup() {
 		form = new AddSeriesForm()
 		form.setQuantity(Random.quantity())
@@ -144,7 +135,6 @@ class SeriesServiceImplTest extends Specification {
 			ex.message == 'User id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should load and pass country to series dao if country present"() {
 		given:
 			LinkEntityDto country = TestObjects.createLinkEntityDto()
@@ -162,7 +152,6 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass date of release (#expectedDay/#expectedMonth/#expectedYear) when it's #day/#month/#year"(
 		Integer day, Integer month, Integer year,
 		Integer expectedDay, Integer expectedMonth, Integer expectedYear) {
@@ -192,7 +181,6 @@ class SeriesServiceImplTest extends Specification {
 			null | 6     | null || null        | null          | null
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass category to series dao"() {
 		given:
 			LinkEntityDto category = TestObjects.createLinkEntityDto()
@@ -209,7 +197,6 @@ class SeriesServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass quantity to series dao"() {
 		given:
 			Integer expectedQuantity = Random.quantity()
@@ -223,7 +210,6 @@ class SeriesServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass perforated to series dao"() {
 		given:
 			Boolean expectedPerforated = Random.perforated()
@@ -237,7 +223,6 @@ class SeriesServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryObjectReferences', 'UnnecessaryReturnKeyword' ])
 	def 'add() should pass catalog prices to series dao'() {
 		given:
 			BigDecimal expectedPrice = nullOr(Random.price())
@@ -262,7 +247,6 @@ class SeriesServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created/updated at/by to current date/user"() {
 		given:
 			Integer expectedUserId = Random.userId()
@@ -470,7 +454,6 @@ class SeriesServiceImplTest extends Specification {
 			ex.message == 'User id must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'addComment() should add a comment'() {
 		given:
 			Integer expectedSeriesId = Random.id()
@@ -517,7 +500,6 @@ class SeriesServiceImplTest extends Specification {
 			ex.message == 'User id must be non null'
 	}
 	
-	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def "addImageToSeries() should mark series as modified"() {
 		given:
 			Integer expectedSeriesId = Random.id()
@@ -666,7 +648,6 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings([ 'LineLength', /* false positive: */ 'UnnecessaryBooleanExpression' ])
 	def "isSeriesExist() should return #expectedResult when dao returns #daoReturnValue"(Integer daoReturnValue, boolean expectedResult) {
 		given:
 			Integer expectedSeriesId = Random.id()
@@ -734,7 +715,6 @@ class SeriesServiceImplTest extends Specification {
 			result == null
 	}
 	
-	@SuppressWarnings('UnnecessaryObjectReferences')
 	def "findFullInfoById() should return info about series"() {
 		given:
 			Integer userId = nullOr(Random.userId())

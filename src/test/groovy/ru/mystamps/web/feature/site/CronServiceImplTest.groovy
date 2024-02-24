@@ -29,7 +29,6 @@ import ru.mystamps.web.feature.series.SeriesService
 import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CronServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
@@ -82,7 +81,6 @@ class CronServiceImplTest extends Specification {
 	// Tests for sendDailyStatistics()
 	//
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "sendDailyStatistics() should invoke services and pass start date to them"() {
 		when:
 			service.sendDailyStatistics()
@@ -141,7 +139,6 @@ class CronServiceImplTest extends Specification {
 			})
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "sendDailyStatistics() should prepare report and pass it to mail service"() {
 		given:
 			categoryService.countAddedSince(_ as Date) >> 1
@@ -195,7 +192,6 @@ class CronServiceImplTest extends Specification {
 			1 * usersActivationService.findOlderThan(_ as Integer) >> []
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "purgeUsersActivations() should pass days to service"() {
 		given:
 			int expectedDays = CronService.PURGE_AFTER_DAYS

@@ -571,8 +571,6 @@
 		<cglib.version>2.2.2</cglib.version>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<clean.plugin.version>3.0.0</clean.plugin.version>
-		<codenarc.plugin.version>0.22-1</codenarc.plugin.version>
-		<codenarc.version>0.27.0</codenarc.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<commons-lang3.version>3.14.0</commons-lang3.version>
@@ -1024,28 +1022,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<!--
-				Usage:
-				./mvnw codenarc:codenarc (checks the sources and generates report in target/site/codenarc.html)
-			-->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>codenarc-maven-plugin</artifactId>
-				<version>${codenarc.plugin.version}</version>
-				<configuration>
-					<codeNarcVersion>${codenarc.version}</codeNarcVersion>
-					<groovyVersion>${groovy-old.version}</groovyVersion>
-					<sourceDirectory>src/test/groovy</sourceDirectory>
-					<!--
-						rulesets/enhanced.xml was excluded because of a lot of errors about failed
-						compilation: https://github.com/CodeNarc/CodeNarc/issues/123
-					-->
-					<rulesetfiles>
-						rulesets/basic.xml,rulesets/braces.xml,rulesets/concurrency.xml,rulesets/convention.xml,rulesets/design.xml,rulesets/dry.xml,rulesets/exceptions.xml,rulesets/formatting.xml,rulesets/generic.xml,rulesets/groovyism.xml,rulesets/imports.xml,rulesets/jdbc.xml,rulesets/logging.xml,rulesets/naming.xml,rulesets/security.xml,rulesets/serialization.xml,rulesets/unnecessary.xml,rulesets/unused.xml
-					</rulesetfiles>
-				</configuration>
 			</plugin>
 			
 			<plugin>

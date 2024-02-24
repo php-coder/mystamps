@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile
 import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	private final ImageDataDao imageDataDao = Mock()
@@ -57,7 +56,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			ex.cause?.message == 'oops'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass dto to image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
@@ -79,7 +77,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	// Tests for savePreview()
 	//
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "savePreview() should pass dto to image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id

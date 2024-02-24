@@ -21,7 +21,6 @@ import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SuspiciousActivityServiceImplTest extends Specification {
 	
 	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
@@ -69,7 +68,6 @@ class SuspiciousActivityServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByTypeSince() should invoke dao, pass arguments and return result from dao"() {
 		given:
 			String expectedType = 'ExpectedType'
@@ -119,7 +117,6 @@ class SuspiciousActivityServiceImplTest extends Specification {
 			0              | _
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findSuspiciousActivities() should invoke dao and return result from dao"() {
 		given:
 			int expectedPage = 5

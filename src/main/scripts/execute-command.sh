@@ -33,14 +33,6 @@ case ${1:-} in
 			checkstyle:check \
 			-Dcheckstyle.violationSeverity=warning
 		;;
-	'codenarc')
-		exec "$MVN" \
-			--batch-mode \
-			codenarc:codenarc \
-			-Dcodenarc.maxPriority1Violations=0 \
-			-Dcodenarc.maxPriority2Violations=0 \
-			-Dcodenarc.maxPriority3Violations=0
-		;;
 	'enforcer')
 		exec "$MVN" \
 			--batch-mode \
@@ -99,7 +91,6 @@ case ${1:-} in
 		echo >&2 '- ansible-lint'
 		echo >&2 '- check-license'
 		echo >&2 '- checkstyle'
-		echo >&2 '- codenarc'
 		echo >&2 '- enforcer'
 		echo >&2 '- integration-tests'
 		echo >&2 '- jest'

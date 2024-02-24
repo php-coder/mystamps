@@ -32,14 +32,6 @@ import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomValue.between
 import static io.qala.datagen.StringModifier.Impls.oneOf
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class CountryServiceImplTest extends Specification {
 	
 	private final CountryDao countryDao = Mock()
@@ -108,7 +100,6 @@ class CountryServiceImplTest extends Specification {
 			ex.message == "Slug for string '-' must be non empty"
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should pass slug to dao'() {
 		given:
 			String name = '-foo123 test_'
@@ -125,7 +116,6 @@ class CountryServiceImplTest extends Specification {
 			}) >> 40
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should pass values to dao'() {
 		given:
 			Integer expectedUserId = 10

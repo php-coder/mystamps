@@ -33,14 +33,6 @@ import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
 import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
 
-@SuppressWarnings([
-	'ClassJavadoc',
-	'MethodName',
-	'MisorderedStaticImports',
-	'NoDef',
-	'NoTabCharacter',
-	'TrailingWhitespace',
-])
 class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
@@ -297,7 +289,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'01.02.2010'                     | _
 	}
 	
-	@SuppressWarnings('UnnecessaryGetter')
 	def 'extractIssueDate() should return the first year if there are many'() {
 		given:
 			Integer expectedYear = Random.issueYear()
@@ -311,7 +302,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			date.get('year') == expectedYear
 	}
 	
-	@SuppressWarnings('UnnecessaryGetter')
 	def 'extractIssueDate() should skip invalid date'() {
 		given:
 			Integer unsupportedYearInPast = between(0, SeriesValidation.MIN_RELEASE_YEAR - 1).integer()
@@ -400,7 +390,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBooleanExpression')
 	def 'extractQuantity() should extract quantity from "#fragment"'(String fragment, Integer expectedQuantity) {
 		expect:
 			service.extractQuantity(fragment) == expectedQuantity
@@ -476,7 +465,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def 'extractMichelNumbers() should extract "#expected" from "#fragment"'(String fragment, Set<String> expected) {
 		expect:
 			service.extractMichelNumbers(fragment) == expected
@@ -595,7 +583,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def 'extractSellerName() should return "#expected" for id=#id/name=#name'(Integer id, String name, String expected) {
 		expect:
 			service.extractSellerName(id, name) == expected
@@ -610,7 +597,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def 'extractSellerUrl() should return "#expected" for id=#id/url=#url'(Integer id, String url, String expected) {
 		expect:
 			service.extractSellerUrl(id, url) == expected
@@ -650,7 +636,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBigDecimalInstantiation')
 	def 'extractPrice() should extract "#expected" from "#fragment"'(String fragment, BigDecimal expected) {
 		expect:
 			service.extractPrice(fragment) == expected
@@ -669,7 +654,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBooleanExpression')
 	def 'extractPrice() should ignore a space in "#fragment"'(String fragment, BigDecimal result) {
 		expect:
 			service.extractPrice(fragment) == result

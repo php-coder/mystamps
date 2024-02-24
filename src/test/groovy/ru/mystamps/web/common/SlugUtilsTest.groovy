@@ -20,7 +20,6 @@ package ru.mystamps.web.common
 import spock.lang.Specification
 import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SlugUtilsTest extends Specification {
 	
 	//
@@ -36,7 +35,6 @@ class SlugUtilsTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def "slugify() should transform text '#input' to '#output'"(String input, String output) {
 		when:
 			String result = SlugUtils.slugify(input)
