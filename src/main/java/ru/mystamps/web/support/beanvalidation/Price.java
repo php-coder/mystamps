@@ -30,7 +30,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Min(value = 1) // NOPMD: UnnecessaryAnnotationValueElement; this one is useful
+@Min(value = 1)
 @ReportAsSingleViolation
 @Target({ METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)

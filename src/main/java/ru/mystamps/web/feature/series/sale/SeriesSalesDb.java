@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class SeriesSalesDb {
 	
 	static final class SeriesSales {

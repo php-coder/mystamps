@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.participant;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class ParticipantDb {
 	
 	static final class TransactionParticipant {

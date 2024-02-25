@@ -40,7 +40,6 @@ import java.util.concurrent.Callable;
  * @see CategoryServiceImpl
  */
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.TooManyMethods")
 public class TogglzWithFallbackCategoryService implements CategoryService {
 
 	private static final Logger LOG =
@@ -185,7 +184,7 @@ public class TogglzWithFallbackCategoryService implements CategoryService {
 				} catch (UnsupportedOperationException ignored) {
 					// the method isn't yet implemented, fallback to the default implementation
 					
-				} catch (RuntimeException e) { // NOPMD: AvoidCatchingGenericException; catch-all
+				} catch (RuntimeException e) {
 					LOG.warn(
 						"Failed to call a category service. Fallback to default implementation",
 						e
@@ -194,8 +193,8 @@ public class TogglzWithFallbackCategoryService implements CategoryService {
 			}
 			return defaultImpl.call();
 			
-		} catch (Exception ex) { // NOPMD: AvoidCatchingGenericException; try to catch-all
-			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
 		}
 	}
 	

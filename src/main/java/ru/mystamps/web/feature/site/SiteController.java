@@ -38,10 +38,8 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class SiteController {
 	
-	@SuppressWarnings("PMD.LongVariable")
 	private static final int AMOUNT_OF_RECENTLY_ADDED_SERIES = 10;
 	
-	@SuppressWarnings("PMD.LongVariable")
 	private static final int AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS = 10;
 	
 	private static final int RECORDS_PER_PAGE = 50;

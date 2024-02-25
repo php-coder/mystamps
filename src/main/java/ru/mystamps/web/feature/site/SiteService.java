@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public interface SiteService {
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutAbsentPage(
 		String page,
 		String method,
@@ -30,7 +29,6 @@ public interface SiteService {
 		String referer,
 		String agent
 	);
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutFailedAuthentication(
 		String page,
 		String method,

@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionDao {
 	List<LinkEntityDto> findLastCreated(int quantity);
 	List<SeriesInCollectionDto> findSeriesByCollectionId(Integer collectionId, String lang);

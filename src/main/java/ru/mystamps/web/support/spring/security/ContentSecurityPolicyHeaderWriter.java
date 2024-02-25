@@ -165,7 +165,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		response.setHeader(header, constructDirectives(uri));
 	}
 
-	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		boolean onAddSeriesPage = uri.equals(SeriesUrl.ADD_SERIES_PAGE);

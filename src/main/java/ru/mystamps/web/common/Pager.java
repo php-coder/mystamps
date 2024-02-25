@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// yes, I know that it's too complex :-(
-@SuppressWarnings("PMD.ModifiedCyclomaticComplexity")
 @ToString
 public class Pager {
 	// be very careful when you're changing this value
@@ -41,15 +39,12 @@ public class Pager {
 	private static final int FIRST_PAGE = 1;
 	
 	// this field is shown in toString() and useful when debugging unit tests
-	@SuppressWarnings("PMD.SingularField")
 	private final int totalRecords;
 	
 	// this field is shown in toString() and useful when debugging unit tests
-	@SuppressWarnings("PMD.SingularField")
 	private final int totalPages;
 	
 	// this field is shown in toString() and useful when debugging unit tests
-	@SuppressWarnings({ "PMD.SingularField", "PMD.UnusedPrivateField" })
 	private final int recordsPerPage;
 	
 	// this field is using in the view (hence its getter)
@@ -106,8 +101,6 @@ public class Pager {
 		return Integer.valueOf(currentPage + 1);
 	}
 	
-	// I hope that we'll fix these one day
-	@SuppressWarnings("PMD.NPathComplexity")
 	private static List<Integer> createItems(
 		int totalRecords,
 		int recordsPerPage,

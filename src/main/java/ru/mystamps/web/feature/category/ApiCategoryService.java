@@ -34,7 +34,6 @@ import java.util.Map;
 /**
  * Implementation that delegates calls to a category service.
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public class ApiCategoryService implements CategoryService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ApiCategoryService.class);

@@ -36,7 +36,6 @@ public final class GroupByParent {
 	private GroupByParent() {
 	}
 	
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	public static List<SelectItem> transformEntities(List<EntityWithParentDto> entities) {
 		if (entities.isEmpty()) {
 			return Collections.emptyList();

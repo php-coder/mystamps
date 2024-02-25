@@ -47,7 +47,7 @@ public class ThumbnailatorImagePreviewStrategy implements ImagePreviewStrategy {
 		} catch (IOException
 			| IllegalArgumentException
 			| IllegalStateException
-			| NullPointerException ex) { // NOPMD: AvoidCatchingNPE (Thumbnails.of() could throw it)
+			| NullPointerException ex) { // Thumbnails.of() could throw it
 			throw new CreateImagePreviewException("Can't create preview for an image", ex);
 		}
 	}

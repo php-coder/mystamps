@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class AccountUrl {
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";

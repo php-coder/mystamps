@@ -56,7 +56,6 @@ public class ThymeleafViewResolverInitializingBean
 	private Environment environment;
 	
 	@Override
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void afterPropertiesSet() throws Exception {
 		ThymeleafViewResolver viewResolver =
 			applicationContext.getBean(ThymeleafViewResolver.class);

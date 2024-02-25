@@ -33,7 +33,6 @@ import java.util.Map;
 /**
  * Implementation that delegates calls to a country service.
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public class ApiCountryService implements CountryService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ApiCountryService.class);

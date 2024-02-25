@@ -25,7 +25,6 @@ import java.math.BigDecimal;
 
 @Getter
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.TooManyFields")
 public class SeriesFullInfoDto {
 	private final Integer id;
 	private final LinkEntityDto category;

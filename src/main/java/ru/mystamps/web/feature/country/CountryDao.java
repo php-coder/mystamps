@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public interface CountryDao {
 	Integer add(AddCountryDbDto country);
 	long countAll();

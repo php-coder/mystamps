@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class SeriesUrl {
 	
 	public static final String ADD_SERIES_PAGE          = "/series/add";

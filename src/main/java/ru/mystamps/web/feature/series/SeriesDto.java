@@ -49,7 +49,6 @@ public class SeriesDto {
 	@Getter
 	private final List<Integer> hiddenImageIds;
 	
-	@SuppressWarnings("PMD.ExcessiveParameterList")
 	public SeriesDto(
 		SeriesFullInfoDto info,
 		List<String> michelNumbers,

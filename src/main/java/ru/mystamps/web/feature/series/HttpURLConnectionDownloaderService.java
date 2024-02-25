@@ -46,7 +46,6 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	
 	// We don't support redirects because they allow to bypass some of our validations.
 	// FIXME: How exactly redirects can harm?
-	@SuppressWarnings("PMD.RedundantFieldInitializer")
 	private boolean followRedirects = false;
 	
 	// Only types listed here will be downloaded. For other types, INVALID_FILE_TYPE error
@@ -117,7 +116,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	private static HttpURLConnection openConnection(URL url) throws IOException {
 		URLConnection connection = url.openConnection();
 		if (!(connection instanceof HttpURLConnection)) {
-			LOG.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
+			LOG.warn(
 				"Couldn't open connection: "
 				+ "unknown type of connection class ({}). "
 				+ "Downloading files from external servers won't work!",

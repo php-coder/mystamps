@@ -34,8 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// it complains that "request_id" is present many times
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcSeriesImportDao implements SeriesImportDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;

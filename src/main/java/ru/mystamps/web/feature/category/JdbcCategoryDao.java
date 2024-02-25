@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCategoryDao implements CategoryDao {
 	
 	private static final ResultSetExtractor<Map<String, Integer>> NAME_COUNTER_EXTRACTOR =
@@ -59,9 +58,7 @@ public class JdbcCategoryDao implements CategoryDao {
 	private final String findCategoriesNamesWithSlugSql;
 	private final String findAllForSitemapSql;
 	private final String findLinkEntityBySlugSql;
-	@SuppressWarnings("PMD.LongVariable")
 	private final String findCategoriesWithParentNamesSql;
-	@SuppressWarnings("PMD.LongVariable")
 	private final String findFromLastCreatedSeriesByUserSql;
 	
 	public JdbcCategoryDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {

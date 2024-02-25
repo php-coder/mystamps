@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class CategoryUrl {
 	
 	public static final String SUGGEST_SERIES_CATEGORY = "/suggest/series_category";

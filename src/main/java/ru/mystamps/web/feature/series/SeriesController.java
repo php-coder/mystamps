@@ -86,7 +86,6 @@ import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesController.class);
@@ -656,7 +655,7 @@ public class SeriesController {
 			seriesService.markAsSimilar(form);
 			return ResponseEntity.noContent().build();
 
-		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException; try to catch-all
+		} catch (RuntimeException ex) {
 			LOG.error(
 				"Couldn't mark series #{} similar to {}: {}",
 				form.getSeriesId(),
@@ -831,8 +830,6 @@ public class SeriesController {
 		return series.getImageIds().size() <= series.getQuantity();
 	}
 	
-	// I like these parentheses
-	@SuppressWarnings("PMD.UselessParentheses")
 	private static boolean isUserCanAddImagesToSeries(
 		Authentication authentication,
 		Integer userId,
@@ -846,7 +843,6 @@ public class SeriesController {
 		return SecurityContextUtils.hasAuthority(authentication, Authority.ADD_IMAGES_TO_SERIES);
 	}
 	
-	@SuppressWarnings("PMD.UnusedNullCheckInEquals")
 	private static boolean isOwner(Integer userId, SeriesDto series) {
 		return userId != null
 			&& Objects.equals(series.getCreatedBy(), userId);

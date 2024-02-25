@@ -49,7 +49,6 @@ import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERI
 
 @Getter
 @Setter
-@SuppressWarnings({ "PMD.TooManyFields", "PMD.AvoidDuplicateLiterals" })
 @RequireImageOrImageUrl(
 	imageFieldName = DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME,
 	imageUrlFieldName = DownloadImageInterceptor.IMAGE_URL_FIELD_NAME,

@@ -36,7 +36,6 @@ public class RobotsTxtController {
 	private static final Logger LOG = LoggerFactory.getLogger(RobotsTxtController.class);
 	
 	@GetMapping(SiteUrl.ROBOTS_TXT)
-	@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 	public void generateRobotsTxt(HttpServletResponse response) {
 		response.setContentType(MediaType.TEXT_PLAIN_VALUE);
 		response.setCharacterEncoding("UTF-8");

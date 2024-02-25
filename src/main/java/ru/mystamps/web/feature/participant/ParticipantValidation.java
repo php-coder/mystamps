@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.participant;
 
 import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class ParticipantValidation {
 	
 	public static final int NAME_MIN_LENGTH = 3;

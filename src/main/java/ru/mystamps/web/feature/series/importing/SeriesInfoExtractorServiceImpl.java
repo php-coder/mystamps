@@ -48,7 +48,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
-@SuppressWarnings({ "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
 	// Related to RELEASE_DATE_REGEXP and used in unit tests.
@@ -223,7 +222,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	/* default */ Map<String, Integer> extractIssueDate(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyMap();
@@ -419,12 +417,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return url;
 	}
 	
-	@SuppressWarnings({
-		"PMD.AvoidInstantiatingObjectsInLoops",
-		"PMD.AvoidReassigningParameters",
-		"PMD.NPathComplexity",
-		"PMD.ModifiedCyclomaticComplexity"
-	})
 	/* default */ BigDecimal extractPrice(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
@@ -529,7 +521,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	// @todo #1326 SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests
-	@SuppressWarnings("PMD.AvoidBranchingStatementAsLastInLoop")
 	/* default */ SeriesCondition extractCondition(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;

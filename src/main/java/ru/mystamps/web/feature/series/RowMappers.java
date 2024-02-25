@@ -26,8 +26,6 @@ import java.sql.SQLException;
 
 import static ru.mystamps.web.common.RowMappers.createLinkEntityDto;
 
-// complains on "release_year", "quantity" and "perforated"
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RowMappers {
 	
 	private RowMappers() {

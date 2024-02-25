@@ -34,8 +34,6 @@ import java.util.Locale;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
 
-// Complains on duplicated String literal "Image id must be non null"
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
 	

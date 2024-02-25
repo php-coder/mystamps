@@ -27,7 +27,6 @@ import java.util.List;
 import static ru.mystamps.web.feature.series.SeriesValidation.MAX_SERIES_COMMENT_LENGTH;
 
 // FIXME: move stamps related methods to separate interface (#88)
-@SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId);
 

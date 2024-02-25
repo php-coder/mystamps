@@ -27,7 +27,6 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString(exclude = { "createdAt", "createdBy", "updatedAt", "updatedBy" })
-@SuppressWarnings("PMD.TooManyFields")
 public class AddSeriesDbDto {
 	private Integer categoryId;
 	private Integer countryId;

@@ -46,8 +46,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-// it complains on "Request id must be non null"
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class SeriesImportServiceImpl implements SeriesImportService {
 	
@@ -62,7 +60,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
-	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer addRequest(RequestImportDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getUrl() != null, "URL must be non null");
@@ -75,7 +72,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			String encodedUrl = new URI(dto.getUrl()).toASCIIString();
 			importRequest.setUrl(encodedUrl);
 		} catch (URISyntaxException ex) {
-			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
+			throw new RuntimeException(ex);
 		}
 		
 		Date now = new Date();

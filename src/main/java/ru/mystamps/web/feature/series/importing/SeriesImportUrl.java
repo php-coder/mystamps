@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class SeriesImportUrl {
 	
 	public static final String REQUEST_IMPORT_SERIES_PAGE = "/series/import/request";

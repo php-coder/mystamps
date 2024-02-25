@@ -37,9 +37,6 @@ import java.util.Optional;
 import java.util.Set;
 
 // FIXME: move stamps related methods to separate interface (#88)
-// The String literal "Series id must be non null" appears N times in this file
-// and we think that it's OK.
-@SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 @Validated
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
@@ -105,7 +102,7 @@ public class SeriesServiceImpl implements SeriesService {
 		try {
 			imageService.addToSeries(id, imageId);
 			
-		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException
+		} catch (RuntimeException ex) {
 			imageService.removeIfPossible(imageInfo);
 			throw ex;
 		}
@@ -239,7 +236,7 @@ public class SeriesServiceImpl implements SeriesService {
 		try {
 			imageService.addToSeries(seriesId, imageId);
 			
-		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException
+		} catch (RuntimeException ex) {
 			imageService.removeIfPossible(imageInfo);
 			throw ex;
 		}

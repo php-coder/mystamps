@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.country;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class CountryDb {
 	
 	static final class Country {

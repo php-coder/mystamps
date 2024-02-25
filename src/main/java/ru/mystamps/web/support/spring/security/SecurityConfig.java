@@ -76,13 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private H2ConsoleProperties h2ConsoleProperties;
 	
 	@Override
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/static/**", "/public/**");
 	}
 	
 	@Override
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	protected void configure(HttpSecurity http) throws Exception {
 		Profiles prod = Profiles.of("prod");
 		boolean useSingleHost = !environment.acceptsProfiles(prod);

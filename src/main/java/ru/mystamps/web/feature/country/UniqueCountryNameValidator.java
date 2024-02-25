@@ -36,7 +36,6 @@ public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCou
 	}
 	
 	@Override
-	@SuppressWarnings("PMD.SimplifyBooleanReturns")
 	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {

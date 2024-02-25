@@ -46,7 +46,7 @@ public class SeriesSaleImportController {
 			SeriesSaleExtractedInfo result = seriesSalesImportService.downloadAndParse(url);
 			return ResponseEntity.ok(result);
 			
-		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException; try to catch-all
+		} catch (RuntimeException ex) {
 			LOG.error("Failed to process '{}': {}", url, ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

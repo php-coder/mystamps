@@ -33,11 +33,6 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-@SuppressWarnings({
-	"PMD.TooManyMethods",
-	// complains on "Series id must be non null"
-	"PMD.AvoidDuplicateLiterals"
-})
 public class CollectionServiceImpl implements CollectionService {
 	
 	private final Logger log;

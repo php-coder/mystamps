@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
 	void addToCollection(Integer userId, AddToCollectionDto dto);

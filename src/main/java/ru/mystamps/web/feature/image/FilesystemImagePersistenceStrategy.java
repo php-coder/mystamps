@@ -30,7 +30,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.Locale;
 import java.util.Objects;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
 	
 	private final Logger log;
@@ -47,11 +46,11 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	public void init() {
 		log.info("Images will be saved into {} directory", storageDir);
 		
-		if (!storageDir.exists()) { // NOPMD: ConfusingTernary (it's ok for me)
+		if (!storageDir.exists()) {
 			log.warn("Directory '{}' doesn't exist! Image uploading won't work", storageDir);
 		
 		} else if (!storageDir.canWrite()) {
-			log.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
+			log.warn(
 				// FIXME(java9): log also user: ProcessHandle.current().info().user()
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image uploading won't work.",
@@ -61,7 +60,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		
 		log.info("Image previews will be saved into {} directory", previewDir);
 		
-		if (!previewDir.exists()) { // NOPMD: ConfusingTernary (it's ok for me)
+		if (!previewDir.exists()) {
 			log.warn(
 				"Directory '{}' doesn't exist! Image preview generation won't work",
 				previewDir
@@ -69,7 +68,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		
 		} else if (!previewDir.canWrite()) {
 			// FIXME(java9): log also user: ProcessHandle.current().info().user()
-			log.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
+			log.warn(
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image preview generation won't work",
 				previewDir
@@ -162,7 +161,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			Files.deleteIfExists(dest);
 			log.debug("Image #{}: data ({}) has been removed", image.getId(), dest);
 			
-		} catch (Exception ex) { // NOPMD: AvoidCatchingGenericException
+		} catch (Exception ex) {
 			log.warn(
 				"Couldn't delete file {}: {}. You have to remove it manually",
 				dest,

@@ -40,11 +40,6 @@ case ${1:-} in
 			frontend:npm \
 			-Dfrontend.npm.arguments='install-ci-test'
 		;;
-	'pmd')
-		exec "$MVN" \
-			--batch-mode \
-			pmd:check
-		;;
 	'spotbugs')
 		exec "$MVN" \
 			--batch-mode \
@@ -68,7 +63,6 @@ case ${1:-} in
 		echo >&2 '- enforcer'
 		echo >&2 '- integration-tests'
 		echo >&2 '- jest'
-		echo >&2 '- pmd'
 		echo >&2 '- spotbugs'
 		echo >&2 '- unit-tests'
 		exit 1

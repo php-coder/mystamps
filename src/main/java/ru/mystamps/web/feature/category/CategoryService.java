@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryService {
 	String add(AddCategoryDto dto, Integer userId);
 	List<Integer> findIdsByNames(List<String> names);

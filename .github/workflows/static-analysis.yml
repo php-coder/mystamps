@@ -16,31 +16,6 @@ defaults:
 
 jobs:
 
-  run-pmd:
-    name: Run PMD
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Clone source code
-        uses: actions/checkout@v4.1.1 # https://github.com/actions/checkout
-        with:
-          # Whether to configure the token or SSH key with the local git config. Default: true
-          persist-credentials: false
-      - name: Install JDK
-        uses: actions/setup-java@v4.0.0 # https://github.com/actions/setup-java
-        with:
-          distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
-          java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
-      - name: Restore existing cache
-        uses: actions/cache@v4.0.0 # https://github.com/actions/cache
-        with:
-          # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#input-parameters-for-the-cache-action
-          key: maven-repository-${{ hashFiles('pom.xml') }}
-          path: ~/.m2/repository
-          restore-keys: maven-repository-
-      - name: Run PMD
-        run: ./src/main/scripts/execute-command.sh pmd
-
   check-license:
     name: Check license in file headers
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on

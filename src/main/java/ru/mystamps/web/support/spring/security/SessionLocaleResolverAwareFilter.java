@@ -77,7 +77,7 @@ class SessionLocaleResolverAwareFilter implements Filter {
 			
 			LocaleContextHolder.setLocale(locale);
 			
-		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException
+		} catch (RuntimeException ex) {
 			LOG.warn("Couldn't handle request: {}", ex);
 		
 		} finally {

@@ -37,7 +37,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.TooManyMethods")
 public class CountryServiceImpl implements CountryService {
 	
 	private final Logger log;

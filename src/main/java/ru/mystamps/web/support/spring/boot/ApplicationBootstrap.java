@@ -28,8 +28,6 @@ import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
 import ru.mystamps.web.support.liquibase.LiquibaseSupport;
 
-// PMD: "All methods are static" here because it's a program entry point.
-@SuppressWarnings("PMD.UseUtilityClass")
 public class ApplicationBootstrap {
 	
 	public static void main(String... args) throws LiquibaseException {

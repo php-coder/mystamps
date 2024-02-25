@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public interface CountryService {
 	String add(AddCountryDto dto, Integer userId);
 	List<Integer> findIdsByNames(List<String> names);

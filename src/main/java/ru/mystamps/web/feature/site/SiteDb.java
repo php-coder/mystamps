@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.site;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class SiteDb {
 	
 	static final class SuspiciousActivity {

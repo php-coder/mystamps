@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class SeriesImportDb {
 	
 	static final class SeriesImportRequest {

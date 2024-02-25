@@ -644,7 +644,6 @@
 		
 		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<nodejs.version>v10.16.0</nodejs.version>
-		<pmd.plugin.version>3.12.0</pmd.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<postgresql.version>9.4.1212.jre7</postgresql.version>
@@ -909,20 +908,6 @@
 					<nodeprecatedlist>true</nodeprecatedlist>
 					<failOnWarnings>true</failOnWarnings>
 					<bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} ${project.developers[0].name}. All rights reserved.</bottom>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${pmd.plugin.version}</version>
-				<configuration>
-					<linkXRef>false</linkXRef>
-					<verbose>true</verbose>
-					<targetJdk>${java.version}</targetJdk>
-					<rulesets>
-						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
-					</rulesets>
 				</configuration>
 			</plugin>
 			

@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.account;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class AccountDb {
 	
 	static final class UsersActivation {

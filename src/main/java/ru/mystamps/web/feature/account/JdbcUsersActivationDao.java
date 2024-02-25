@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcUsersActivationDao implements UsersActivationDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;

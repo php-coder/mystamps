@@ -40,8 +40,6 @@ public class SeriesSalesParsedDataDbDto {
 	private Date createdAt;
 	private Date updatedAt;
 	
-	// they aren't useless
-	@SuppressWarnings("PMD.UselessParentheses")
 	public boolean hasAtLeastOneFieldFilled() {
 		return sellerId != null
 			|| (sellerName != null && sellerUrl != null)

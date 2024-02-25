@@ -20,13 +20,11 @@ package ru.mystamps.web.feature.account;
 import ru.mystamps.web.feature.account.AccountDb.User;
 import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class AccountValidation {
 	
 	public static final int LOGIN_MIN_LENGTH = 2;
 	public static final int LOGIN_MAX_LENGTH = User.LOGIN_LENGTH;
 	static final String LOGIN_REGEXP = "[-_\\.a-zA-Z0-9]+";
-	@SuppressWarnings("PMD.LongVariable")
 	static final String LOGIN_NO_REPEATING_CHARS_REGEXP = "(?!.+[-_.]{2,}).+";
 	
 	static final int NAME_MAX_LENGTH = User.NAME_LENGTH;

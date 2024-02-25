@@ -74,8 +74,6 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		);
 	}
 	
-	// The following warnings will gone after splitting this validator (see #593)
-	@SuppressWarnings({ "PMD.ModifiedCyclomaticComplexity", "PMD.NPathComplexity" })
 	@Override
 	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		

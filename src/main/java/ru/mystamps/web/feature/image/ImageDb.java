@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.image;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class ImageDb {
 	
 	static final class Images {

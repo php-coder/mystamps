@@ -33,7 +33,6 @@ public class JettyWebServerFactoryCustomizer
 	
 	private static final JettyServerCustomizer JETTY_CUSTOMIZER = new JettyServerCustomizer() {
 		@Override
-		@SuppressWarnings("PMD.AvoidDeeplyNestedIfStmts")
 		public void customize(Server server) {
 			for (Connector connector : server.getConnectors()) {
 				if (connector instanceof ServerConnector) {

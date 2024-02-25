@@ -32,8 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// The String literal "name" appears 4 times in this file
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcParticipantDao implements ParticipantDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;

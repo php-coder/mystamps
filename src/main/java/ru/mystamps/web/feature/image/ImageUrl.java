@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class ImageUrl {
 	
 	static final String GET_IMAGE_PAGE         = "/image/{id}";

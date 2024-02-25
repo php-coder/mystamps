@@ -39,7 +39,6 @@ import java.util.concurrent.Callable;
  * @see CountryServiceImpl
  */
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.TooManyMethods")
 public class TogglzWithFallbackCountryService implements CountryService {
 
 	private static final Logger LOG =
@@ -176,7 +175,7 @@ public class TogglzWithFallbackCountryService implements CountryService {
 				} catch (UnsupportedOperationException ignored) {
 					// the method isn't yet implemented, fallback to the default implementation
 					
-				} catch (RuntimeException e) { // NOPMD: AvoidCatchingGenericException; catch-all
+				} catch (RuntimeException e) {
 					LOG.warn(
 						"Failed to call a country service. Fallback to default implementation",
 						e
@@ -185,8 +184,8 @@ public class TogglzWithFallbackCountryService implements CountryService {
 			}
 			return defaultImpl.call();
 			
-		} catch (Exception ex) { // NOPMD: AvoidCatchingGenericException; try to catch-all
-			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
 		}
 	}
 	

@@ -40,8 +40,6 @@ public class AddSeriesParsedDataDbDto {
 	private Date createdAt;
 	private Date updatedAt;
 	
-	// they aren't useless
-	@SuppressWarnings("PMD.UselessParentheses")
 	public boolean hasAtLeastOneFieldFilled() {
 		return categoryId != null
 			|| countryId != null

@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.country;
 
 import ru.mystamps.web.feature.country.CountryDb.Country;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class CountryValidation {
 	
 	public static final int NAME_MIN_LENGTH = 3;
@@ -27,7 +26,6 @@ public final class CountryValidation {
 	public static final String NAME_EN_REGEXP = "[- a-zA-Z]+";
 	public static final String NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
 	static final String NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
-	@SuppressWarnings("PMD.LongVariable")
 	static final String NAME_NO_REPEATING_HYPHENS_REGEXP = "(?!.+[-]{2,}).+";
 	
 	private CountryValidation() {

@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryDao {
 	Integer add(AddCategoryDbDto category);
 	long countAll();

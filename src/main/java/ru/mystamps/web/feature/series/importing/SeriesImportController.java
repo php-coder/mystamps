@@ -120,7 +120,6 @@ public class SeriesImportController {
 		return redirectTo(SeriesImportUrl.REQUEST_IMPORT_PAGE, requestId);
 	}
 	
-	@SuppressWarnings({ "PMD.ModifiedCyclomaticComplexity", "PMD.NPathComplexity" })
 	@GetMapping(SeriesImportUrl.REQUEST_IMPORT_PAGE)
 	public String showRequestAndImportSeriesForm(
 		@PathVariable("id") Integer requestId,

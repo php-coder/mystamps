@@ -71,7 +71,6 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 	private final DownloaderService downloaderService;
 	
 	@Override
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public boolean preHandle(
 		HttpServletRequest request,
 		HttpServletResponse response,
@@ -89,7 +88,7 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 		
 		if (!(request instanceof StandardMultipartHttpServletRequest)) {
 			// It could mean that <form> tag doesn't have enctype="multipart/form-data" attribute.
-			LOG.warn( // NOPMD: GuardLogStatement (https://github.com/pmd/pmd/issues/957)
+			LOG.warn(
 				"Unknown type of request ({}). "
 				+ "Downloading images from external servers won't work!",
 				request

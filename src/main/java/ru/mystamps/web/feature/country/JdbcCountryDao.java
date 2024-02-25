@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCountryDao implements CountryDao {
 	
 	private static final ResultSetExtractor<Map<String, Integer>> NAME_COUNTER_EXTRACTOR =
@@ -58,11 +57,8 @@ public class JdbcCountryDao implements CountryDao {
 	private final String findCountriesNamesWithSlugSql;
 	private final String findAllForSitemapSql;
 	private final String findCountryLinkEntityBySlugSql;
-	@SuppressWarnings("PMD.LongVariable")
 	private final String findFromLastCreatedSeriesByUserSql;
-	@SuppressWarnings("PMD.LongVariable")
 	private final String findPopularCountryInCollectionSql;
-	@SuppressWarnings("PMD.LongVariable")
 	private final String findLastCountryCreatedByUserSql;
 	
 	public JdbcCountryDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {

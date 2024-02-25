@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCollectionDao implements CollectionDao {
 	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDao.class);
 	
@@ -269,7 +268,6 @@ public class JdbcCollectionDao implements CollectionDao {
 		return holder.getKey().intValue();
 	}
 	
-	@SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
 	@Override
 	public void removeSeriesFromUserCollection(Integer userId, Integer seriesInstanceId) {
 		Map<String, Object> params = new HashMap<>();

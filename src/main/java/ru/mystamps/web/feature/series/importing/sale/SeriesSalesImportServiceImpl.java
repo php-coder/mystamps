@@ -43,7 +43,6 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
-	@SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
 	public SeriesSaleExtractedInfo downloadAndParse(String url) {
 		SiteParser parser = siteParserService.findForUrl(url);
 		if (parser == null) {

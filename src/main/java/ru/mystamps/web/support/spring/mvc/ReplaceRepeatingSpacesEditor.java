@@ -43,7 +43,7 @@ public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
 		}
 
 		if (emptyAsNull && EMPTY.equals(text)) {
-			text = null; // NOPMD: NullAssignment (we need it)
+			text = null;
 		}
 
 		setValue(text);

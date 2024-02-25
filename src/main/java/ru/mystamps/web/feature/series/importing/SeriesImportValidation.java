@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.importing;
 
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class SeriesImportValidation {
 	
 	static final int IMPORT_REQUEST_URL_MAX_LENGTH  = SeriesImportRequest.URL_LENGTH;

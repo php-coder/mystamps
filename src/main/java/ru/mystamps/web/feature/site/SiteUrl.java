@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class SiteUrl {
 	
 	public static final String PUBLIC_URL          = "https://my-stamps.ru";

@@ -37,7 +37,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("PMD.TooManyMethods")
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 	

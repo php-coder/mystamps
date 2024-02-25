@@ -63,7 +63,7 @@ class ByteArrayMultipartFile implements MultipartFile {
 
 	@Override
 	public byte[] getBytes() throws IOException {
-		return content; // NOPMD: MethodReturnsInternalArray
+		return content;
 	}
 
 	@Override

@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.category;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class CategoryDb {
 	
 	static final class Category {

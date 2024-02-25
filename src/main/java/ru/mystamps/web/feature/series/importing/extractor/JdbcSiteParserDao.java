@@ -35,7 +35,6 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final String findParserIdByMatchedUrlSql;
 	private final String findParserNamesSql;
-	@SuppressWarnings("PMD.LongVariable")
 	private final String findParametersWithParserNameSql;
 	
 	public JdbcSiteParserDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {

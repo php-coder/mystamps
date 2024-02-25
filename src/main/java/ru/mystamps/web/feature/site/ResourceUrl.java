@@ -26,7 +26,6 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ResourceUrl {
 	
 	public static final String STATIC_RESOURCES_URL = "https://stamps.filezz.ru";
