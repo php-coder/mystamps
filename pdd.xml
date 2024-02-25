@@ -87,72 +87,9 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-e52eab60</id>
-    <lines>1240-1240</lines>
+    <lines>1225-1225</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>869</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>869-7bf9fe59</id>
-    <lines>8-8</lines>
-    <body>Find a better way to deal with SpotBugs warnings in DAO classes</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>493</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>493-f666e113</id>
-    <lines>236-236</lines>
-    <body>AddCategoryDbDto: port to a new datetime API</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>493</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>493-bc96ed45</id>
-    <lines>249-249</lines>
-    <body>AddCountryDbDto: port to a new datetime API</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>493</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>493-42e1fc4c</id>
-    <lines>262-262</lines>
-    <body>AddCollectionDbDto: port to a new datetime API</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>493</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>493-6ad65c8d</id>
-    <lines>273-273</lines>
-    <body>AddSuspiciousActivityDbDto: port to a new datetime API</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>493</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>493-2b6007d4</id>
-    <lines>280-280</lines>
-    <body>SuspiciousActivityDto: port to a new datetime API</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1621</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1621-71a788b3</id>
-    <lines>287-287</lines>
-    <body>AddToCollectionDbDto: port to a new datetime API</body>
-    <file>src/main/config/spotbugs-filter.xml</file>
   </puzzle>
   <puzzle>
     <ticket>1484</ticket>

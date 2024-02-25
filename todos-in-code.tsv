@@ -1,11 +1,6 @@
 Id	Ticket	"Title"	File	Lines
 226-af195ad8	226	"Introduce app.use-public-hostname property"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	89-89
 477-6f081e18	477	"Add to collection: integration test for invisible quantity for a series with 1 stamp"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	31-31
-493-2b6007d4	493	"SuspiciousActivityDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	280-280
-493-42e1fc4c	493	"AddCollectionDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	262-262
-493-6ad65c8d	493	"AddSuspiciousActivityDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	273-273
-493-bc96ed45	493	"AddCountryDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	249-249
-493-f666e113	493	"AddCategoryDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	236-236
 511-f20a64c0	511	"/collection/{slug}: wrap a long caption"	src/main/webapp/WEB-INF/views/collection/info.html	162-162
 517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	228-228
 517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	227-227
@@ -87,7 +82,6 @@ Id	Ticket	"Title"	File	Lines
 857-83098214	857	"TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service"	src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java	98-98
 857-a6f9cdd0	857	"SeriesImportServiceImpl.saveParsedData(): add unit test for seller group"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	210-210
 857-aa59724c	857	"/series/import/request/{id}(seller.group): add validation for existing group"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	37-37
-869-7bf9fe59	869	"Find a better way to deal with SpotBugs warnings in DAO classes"	src/main/config/spotbugs-filter.xml	8-8
 869-90e5e0f1	869	"show-spring-boot-version-diff.sh: properly handle recursive properties"	src/main/scripts/show-spring-boot-version-diff.sh	20-20
 884-03637f5c	884	"/collection/{slug}/estimation: optimize summing of prices"	src/main/webapp/WEB-INF/views/collection/estimation.html	118-118
 892-9e92b338	892	"Add integration tests for showing a link to collection estimation page"	src/main/webapp/WEB-INF/views/collection/info.html	101-101
@@ -123,7 +117,7 @@ Id	Ticket	"Title"	File	Lines
 1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	858-858
 1057-ea0a43ea	1057	"SeriesSaleImportForm: wait until setState() finishes"	src/main/frontend/src/components/SeriesSaleImportForm.js	32-32
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	129-129
-1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1240-1240
+1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1225-1225
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	630-630
 1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	134-134
 1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
@@ -210,5 +204,4 @@ Id	Ticket	"Title"	File	Lines
 1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	211-211
 1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	73-73
 1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	74-74
-1621-71a788b3	1621	"AddToCollectionDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	287-287
 1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	63-63
