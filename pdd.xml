@@ -87,7 +87,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1060-e52eab60</id>
-    <lines>1255-1255</lines>
+    <lines>1240-1240</lines>
     <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
   </puzzle>
@@ -312,7 +312,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>819-38c578c8</id>
-    <lines>95-95</lines>
+    <lines>94-94</lines>
     <body>CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -321,7 +321,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1605-7e6638bf</id>
-    <lines>119-119</lines>
+    <lines>118-118</lines>
     <body>CategoryService.findAllForSitemap(): add unit test</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -330,7 +330,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>517-d58933f7</id>
-    <lines>210-210</lines>
+    <lines>209-209</lines>
     <body>Add integration tests for category suggestion</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -339,7 +339,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>517-49fc5900</id>
-    <lines>228-228</lines>
+    <lines>227-227</lines>
     <body>CategoryService.suggestCategoryForUser(): suggest a last created category</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -348,7 +348,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>517-385bf5f0</id>
-    <lines>229-229</lines>
+    <lines>228-228</lines>
     <body>CategoryService.suggestCategoryForUser(): suggest the most popular category</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -393,7 +393,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1621-b132f9e0</id>
-    <lines>68-68</lines>
+    <lines>63-63</lines>
     <body>Add 3 integration tests to check that the last added series is shown first</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
   </puzzle>
@@ -402,7 +402,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1123-296bb340</id>
-    <lines>139-139</lines>
+    <lines>134-134</lines>
     <body>CollectionService.findSeriesInstances(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
   </puzzle>
@@ -411,7 +411,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1605-c1ea4a5f</id>
-    <lines>216-216</lines>
+    <lines>211-211</lines>
     <body>CollectionService.findAllForSitemap(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
   </puzzle>
@@ -429,7 +429,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>819-04650c42</id>
-    <lines>95-95</lines>
+    <lines>94-94</lines>
     <body>CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
     <file>src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java</file>
   </puzzle>
@@ -438,7 +438,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1605-8a636eb1</id>
-    <lines>119-119</lines>
+    <lines>118-118</lines>
     <body>CountryService.findAllForSitemap(): add unit test</body>
     <file>src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java</file>
   </puzzle>
@@ -474,7 +474,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-c2bfae4d</id>
-    <lines>106-106</lines>
+    <lines>105-105</lines>
     <body>FilesystemImagePersistenceStrategy.replace(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
   </puzzle>
@@ -483,7 +483,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-59dd45e7</id>
-    <lines>131-131</lines>
+    <lines>130-130</lines>
     <body>FilesystemImagePersistenceStrategy.replacePreview(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java</file>
   </puzzle>
@@ -501,7 +501,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-5b557695</id>
-    <lines>83-83</lines>
+    <lines>81-81</lines>
     <body>ImageServiceImpl.replace(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
   </puzzle>
@@ -510,7 +510,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-7320596f</id>
-    <lines>84-84</lines>
+    <lines>82-82</lines>
     <body>ImageServiceImpl: reduce duplication between add() and replace()</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
   </puzzle>
@@ -519,7 +519,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-fbc787d3</id>
-    <lines>85-85</lines>
+    <lines>83-83</lines>
     <body>ImageServiceImpl.replace(): ensure that method cleanups file after exception</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
   </puzzle>
@@ -582,7 +582,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1277-5efa16a9</id>
-    <lines>99-99</lines>
+    <lines>98-98</lines>
     <body>/series/add: add integration test to check that Michel numbers may contain letter</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
   </puzzle>
@@ -591,7 +591,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>671-aade0c20</id>
-    <lines>106-106</lines>
+    <lines>105-105</lines>
     <body>/series/add: add integration test to check that Scott numbers may contain letters</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
   </puzzle>
@@ -600,7 +600,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>671-e8c4f51d</id>
-    <lines>107-107</lines>
+    <lines>106-106</lines>
     <body>/series/add: add integration test for Scott numbers error message</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
   </puzzle>
@@ -609,7 +609,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1421-f0722df3</id>
-    <lines>114-114</lines>
+    <lines>113-113</lines>
     <body>/series/add: add integration test to check that Yvert numbers may contain letters</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
   </puzzle>
@@ -618,7 +618,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>770-3251a080</id>
-    <lines>127-128</lines>
+    <lines>126-127</lines>
     <body>/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
   </puzzle>
@@ -627,7 +627,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>769-d2cdc518</id>
-    <lines>135-136</lines>
+    <lines>134-135</lines>
     <body>/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java</file>
   </puzzle>
@@ -699,7 +699,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>785-c33d2a08</id>
-    <lines>148-148</lines>
+    <lines>143-143</lines>
     <body>Update series: handle refuse to update an existing comment gracefully</body>
     <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
   </puzzle>
@@ -708,7 +708,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1343-c710f5d6</id>
-    <lines>166-166</lines>
+    <lines>161-161</lines>
     <body>Update series: handle refuse to update an existing release year gracefully</body>
     <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
   </puzzle>
@@ -717,7 +717,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1340-1b97f079</id>
-    <lines>375-375</lines>
+    <lines>370-370</lines>
     <body>Update series: handle refuse to update an existing price gracefully</body>
     <file>src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java</file>
   </puzzle>
@@ -771,7 +771,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1098-de488059</id>
-    <lines>631-631</lines>
+    <lines>630-630</lines>
     <body>Optimize a search within user's collection</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesController.java</file>
   </puzzle>
@@ -780,7 +780,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1280-7ac54ef9</id>
-    <lines>649-649</lines>
+    <lines>648-648</lines>
     <body>Mark similar series: gracefully handle error when value mismatches to type</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesController.java</file>
   </puzzle>
@@ -789,7 +789,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1411-1e303594</id>
-    <lines>34-34</lines>
+    <lines>33-33</lines>
     <body>Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesService.java</file>
   </puzzle>
@@ -798,7 +798,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1343-fe3ada44</id>
-    <lines>145-145</lines>
+    <lines>142-142</lines>
     <body>SeriesServiceImpl.addReleaseYear(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -807,7 +807,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1340-c6d2a382</id>
-    <lines>167-167</lines>
+    <lines>164-164</lines>
     <body>SeriesServiceImpl.addPrice(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -816,7 +816,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1339-3c1b068a</id>
-    <lines>203-203</lines>
+    <lines>200-200</lines>
     <body>SeriesServiceImpl.addCatalogNumbers(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -825,7 +825,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-7c7e06c0</id>
-    <lines>248-248</lines>
+    <lines>245-245</lines>
     <body>SeriesServiceImpl.replaceImage(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -834,7 +834,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1505-6101f84e</id>
-    <lines>316-316</lines>
+    <lines>313-313</lines>
     <body>Don't load a series comment for anonymous users</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -843,7 +843,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1280-e234a7b0</id>
-    <lines>427-427</lines>
+    <lines>424-424</lines>
     <body>SeriesServiceImpl.markAsSimilar(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -852,7 +852,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1448-eb3f0fe6</id>
-    <lines>440-440</lines>
+    <lines>437-437</lines>
     <body>SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
@@ -1221,7 +1221,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>660-32942e08</id>
-    <lines>148-148</lines>
+    <lines>146-146</lines>
     <body>JdbcSeriesImportDao.addRawContent(): introduce dao</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java</file>
   </puzzle>
@@ -1248,7 +1248,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>687-c6d33b89</id>
-    <lines>30-30</lines>
+    <lines>29-29</lines>
     <body>replace set of strings by enum</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java</file>
   </puzzle>
@@ -1266,7 +1266,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>694-2b8246eb</id>
-    <lines>200-200</lines>
+    <lines>197-197</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1275,7 +1275,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>857-a6f9cdd0</id>
-    <lines>213-213</lines>
+    <lines>210-210</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit test for seller group</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1284,7 +1284,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1230-9685721f</id>
-    <lines>228-229</lines>
+    <lines>225-226</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1293,7 +1293,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1326-2bc92a3c</id>
-    <lines>236-236</lines>
+    <lines>233-233</lines>
     <body>SeriesImportServiceImpl.saveParsedData(): add unit test for condition</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1302,7 +1302,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>684-0b0d5497</id>
-    <lines>243-244</lines>
+    <lines>240-241</lines>
     <body>Series import: add integration test for the case when parsed value doesn't match database</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1311,7 +1311,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-6636bb5e</id>
-    <lines>252-252</lines>
+    <lines>249-249</lines>
     <body>Remove hasAtLeastOneFieldFilled() methods from DTOs</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1320,7 +1320,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>803-64628226</id>
-    <lines>103-103</lines>
+    <lines>102-102</lines>
     <body>SeriesInfoExtractorServiceImpl.extract(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1329,7 +1329,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1287-00d4c9e9</id>
-    <lines>252-253</lines>
+    <lines>250-251</lines>
     <body>SeriesInfoExtractorServiceImpl.extractIssueDate(): filter out invalid day/month</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1338,7 +1338,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>782-a11927bd</id>
-    <lines>290-290</lines>
+    <lines>288-288</lines>
     <body>Series import: add integration test for extracting perforation flag</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1347,7 +1347,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>694-5ff627a7</id>
-    <lines>325-325</lines>
+    <lines>323-323</lines>
     <body>SeriesInfoExtractorServiceImpl: support for a single Michel number</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1356,7 +1356,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>694-d39599f4</id>
-    <lines>326-326</lines>
+    <lines>324-324</lines>
     <body>SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1365,7 +1365,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-acc3d320</id>
-    <lines>354-354</lines>
+    <lines>352-352</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1374,7 +1374,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>978-63d2b8ea</id>
-    <lines>362-362</lines>
+    <lines>360-360</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSeller(): validate name</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1383,7 +1383,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-ee1c9a1a</id>
-    <lines>403-403</lines>
+    <lines>401-401</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1392,7 +1392,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-b081f579</id>
-    <lines>404-404</lines>
+    <lines>402-402</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1401,7 +1401,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-1c6fc247</id>
-    <lines>415-415</lines>
+    <lines>413-413</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1410,7 +1410,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-c38ae205</id>
-    <lines>416-416</lines>
+    <lines>414-414</lines>
     <body>SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1419,7 +1419,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-30836e69</id>
-    <lines>469-469</lines>
+    <lines>461-461</lines>
     <body>SeriesInfoExtractorServiceImpl.extractPrice(): filter out values &lt;= 0</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1428,7 +1428,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1326-d460ac09</id>
-    <lines>531-531</lines>
+    <lines>523-523</lines>
     <body>SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java</file>
   </puzzle>
@@ -1437,7 +1437,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>975-c9aec551</id>
-    <lines>64-64</lines>
+    <lines>63-63</lines>
     <body>SiteParserServiceImpl: add unit tests for constructor</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
   </puzzle>
@@ -1446,7 +1446,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>694-d17b3e39</id>
-    <lines>199-199</lines>
+    <lines>198-198</lines>
     <body>Support for a separate locator for a field with michel numbers</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
   </puzzle>
@@ -1455,7 +1455,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1326-2cfe45cd</id>
-    <lines>286-286</lines>
+    <lines>285-285</lines>
     <body>JsoupSiteParser.extractCondition(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java</file>
   </puzzle>
@@ -1518,7 +1518,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>995-dfb3dc6f</id>
-    <lines>61-61</lines>
+    <lines>60-60</lines>
     <body>SiteParser: introduce a method for parsing only sales-related info</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
   </puzzle>
@@ -1527,7 +1527,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>995-a90e239c</id>
-    <lines>84-84</lines>
+    <lines>83-83</lines>
     <body>SeriesInfoExtractorService: introduce a method for parsing only sales-related info</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
   </puzzle>
@@ -1536,7 +1536,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>834-3f317328</id>
-    <lines>97-97</lines>
+    <lines>96-96</lines>
     <body>SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
   </puzzle>
@@ -1644,7 +1644,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>226-af195ad8</id>
-    <lines>91-91</lines>
+    <lines>89-89</lines>
     <body>Introduce app.use-public-hostname property</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
   </puzzle>
@@ -1653,7 +1653,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1149-f52d6199</id>
-    <lines>106-106</lines>
+    <lines>104-104</lines>
     <body>Move feature-specific rules to the dedicated packages</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
   </puzzle>
@@ -1662,7 +1662,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1161-69decc53</id>
-    <lines>170-170</lines>
+    <lines>168-168</lines>
     <body>Add Feature-Policy header</body>
     <file>src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java</file>
   </puzzle>
