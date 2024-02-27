@@ -22,7 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
 
-// @todo #801 TimedSiteParser: add unit tests
 @RequiredArgsConstructor
 public class TimedSiteParser implements SiteParser {
 	

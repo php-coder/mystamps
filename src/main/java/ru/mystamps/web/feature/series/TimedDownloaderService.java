@@ -27,7 +27,6 @@ public class TimedDownloaderService implements DownloaderService {
 	private final Logger log;
 	private final DownloaderService service;
 	
-	// @todo #665 TimedDownloaderService: add unit tests
 	@Override
 	public DownloadResult download(String url) {
 		// Why we don't use Spring's StopWatch?
