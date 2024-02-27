@@ -9,7 +9,6 @@ Id	Ticket	"Title"	File	Lines
 660-32942e08	660	"JdbcSeriesImportDao.addRawContent(): introduce dao"	src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java	146-146
 663-2b32ef86	663	"Add to collection: add integration test for specifying a price"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	32-32
 663-8bbd6c00	663	"/series/{id}(price): must be greater than zero"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	47-47
-665-32370c4c	665	"TimedDownloaderService: add unit tests"	src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java	30-30
 671-aade0c20	671	"/series/add: add integration test to check that Scott numbers may contain letters"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	105-105
 671-e8c4f51d	671	"/series/add: add integration test for Scott numbers error message"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	106-106
 684-0b0d5497	684	"Series import: add integration test for the case when parsed value doesn't match database"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	240-241
@@ -72,7 +71,6 @@ Id	Ticket	"Title"	File	Lines
 785-a8e6066a	785	"Update series: properly fail on invalid path"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	111-111
 785-c0b6c3f6	785	"Update series: add integration test for non-empty ""value"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	47-47
 785-c33d2a08	785	"Update series: handle refuse to update an existing comment gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	143-143
-801-b1837c29	801	"TimedSiteParser: add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java	25-25
 803-64628226	803	"SeriesInfoExtractorServiceImpl.extract(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	102-102
 819-04650c42	819	"CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	94-94
 819-38c578c8	819	"CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	94-94

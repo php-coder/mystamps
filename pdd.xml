@@ -794,15 +794,6 @@
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
   <puzzle>
-    <ticket>665</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>665-32370c4c</id>
-    <lines>30-30</lines>
-    <body>TimedDownloaderService: add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java</file>
-  </puzzle>
-  <puzzle>
     <ticket>694</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -1431,15 +1422,6 @@
     <lines>54-54</lines>
     <body>SiteParserServiceImpl.findParserNames(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>801</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>801-b1837c29</id>
-    <lines>25-25</lines>
-    <body>TimedSiteParser: add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java</file>
   </puzzle>
   <puzzle>
     <ticket>995</ticket>
