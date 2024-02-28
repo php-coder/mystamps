@@ -2,9 +2,9 @@ Id	Ticket	"Title"	File	Lines
 226-af195ad8	226	"Introduce app.use-public-hostname property"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	89-89
 477-6f081e18	477	"Add to collection: integration test for invisible quantity for a series with 1 stamp"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	31-31
 511-f20a64c0	511	"/collection/{slug}: wrap a long caption"	src/main/webapp/WEB-INF/views/collection/info.html	162-162
-517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	228-228
-517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	227-227
-517-d58933f7	517	"Add integration tests for category suggestion"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	209-209
+517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	226-226
+517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	225-225
+517-d58933f7	517	"Add integration tests for category suggestion"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	207-207
 592-8fadbb56	592	"GroupByParent: add unit tests"	src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java	35-35
 660-32942e08	660	"JdbcSeriesImportDao.addRawContent(): introduce dao"	src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java	146-146
 663-2b32ef86	663	"Add to collection: add integration test for specifying a price"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	32-32
@@ -72,8 +72,6 @@ Id	Ticket	"Title"	File	Lines
 785-c0b6c3f6	785	"Update series: add integration test for non-empty ""value"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	47-47
 785-c33d2a08	785	"Update series: handle refuse to update an existing comment gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	143-143
 803-64628226	803	"SeriesInfoExtractorServiceImpl.extract(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	102-102
-819-04650c42	819	"CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	94-94
-819-38c578c8	819	"CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	94-94
 834-3f317328	834	"SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	96-96
 857-34fbb536	857	"/series/import/request/{id}(seller.group): add validation against negative values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	36-36
 857-719bea28	857	"Check that a just created seller belongs to the ""example.com"" group"	src/test/robotframework/series/import/request-logic.robot	130-130
@@ -117,7 +115,6 @@ Id	Ticket	"Title"	File	Lines
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	129-129
 1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1225-1225
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	630-630
-1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	134-134
 1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	104-104
 1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	70-70
@@ -197,9 +194,6 @@ Id	Ticket	"Title"	File	Lines
 1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	313-313
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	28-28
 1605-1a43eb84	1605	"sitemap.xml: consider adding ""priority"" and ""changefreq"" attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60
-1605-7e6638bf	1605	"CategoryService.findAllForSitemap(): add unit test"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	118-118
-1605-8a636eb1	1605	"CountryService.findAllForSitemap(): add unit test"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	118-118
-1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	211-211
 1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	73-73
 1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	74-74
 1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	63-63

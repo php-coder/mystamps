@@ -245,29 +245,11 @@
     <file>src/main/java/ru/mystamps/web/feature/account/package-info.java</file>
   </puzzle>
   <puzzle>
-    <ticket>819</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>819-38c578c8</id>
-    <lines>94-94</lines>
-    <body>CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1605</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1605-7e6638bf</id>
-    <lines>118-118</lines>
-    <body>CategoryService.findAllForSitemap(): add unit test</body>
-    <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
     <ticket>517</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>517-d58933f7</id>
-    <lines>209-209</lines>
+    <lines>207-207</lines>
     <body>Add integration tests for category suggestion</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -276,7 +258,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>517-49fc5900</id>
-    <lines>227-227</lines>
+    <lines>225-225</lines>
     <body>CategoryService.suggestCategoryForUser(): suggest a last created category</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -285,7 +267,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>517-385bf5f0</id>
-    <lines>228-228</lines>
+    <lines>226-226</lines>
     <body>CategoryService.suggestCategoryForUser(): suggest the most popular category</body>
     <file>src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java</file>
   </puzzle>
@@ -335,24 +317,6 @@
     <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
   </puzzle>
   <puzzle>
-    <ticket>1123</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1123-296bb340</id>
-    <lines>134-134</lines>
-    <body>CollectionService.findSeriesInstances(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1605</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1605-c1ea4a5f</id>
-    <lines>211-211</lines>
-    <body>CollectionService.findAllForSitemap(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
     <ticket>927</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
@@ -360,24 +324,6 @@
     <lines>1-1</lines>
     <body>Move collection package one level up</body>
     <file>src/main/java/ru/mystamps/web/feature/collection/package-info.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>819</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>819-04650c42</id>
-    <lines>94-94</lines>
-    <body>CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case</body>
-    <file>src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1605</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1605-8a636eb1</id>
-    <lines>118-118</lines>
-    <body>CountryService.findAllForSitemap(): add unit test</body>
-    <file>src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java</file>
   </puzzle>
   <puzzle>
     <ticket>927</ticket>
