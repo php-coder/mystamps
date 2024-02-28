@@ -131,7 +131,6 @@ public class CollectionServiceImpl implements CollectionService {
 		return collectionDao.isSeriesInUserCollection(userId, seriesId);
 	}
 	
-	// @todo #1123 CollectionService.findSeriesInstances(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
@@ -208,7 +207,6 @@ public class CollectionServiceImpl implements CollectionService {
 		return collectionDao.findCollectionInfoBySlug(slug);
 	}
 
-	// @todo #1605 CollectionService.findAllForSitemap(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	public List<SitemapInfoDto> findAllForSitemap() {
