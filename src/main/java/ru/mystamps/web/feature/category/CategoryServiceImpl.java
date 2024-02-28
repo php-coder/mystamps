@@ -91,7 +91,6 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDao.findIdsByNames(lowerCasesNames);
 	}
 	
-	// @todo #819 CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsWhenNameStartsWith(String name) {
@@ -115,7 +114,6 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDao.findAllAsLinkEntities(lang);
 	}
 
-	// @todo #1605 CategoryService.findAllForSitemap(): add unit test
 	@Override
 	@Transactional(readOnly = true)
 	public List<SitemapInfoDto> findAllForSitemap() {
