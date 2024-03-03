@@ -190,10 +190,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_PRICE_AND_COLLECTION_OWNER_OR_VIEW_ANY_ESTIMATION)
-	public List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(
-		String slug,
-		String lang) {
-		
+	public List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang) {
 		Validate.isTrue(slug != null, "Collection slug must be non null");
 		
 		return collectionDao.findSeriesWithPricesBySlug(slug, lang);
