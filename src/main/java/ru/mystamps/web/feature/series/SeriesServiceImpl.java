@@ -436,10 +436,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private List<SeriesInfoDto> findByCatalogNumber(
-		StampsCatalogService catalogService,
-		String number, String lang) {
-		
+	private List<SeriesInfoDto> findByCatalogNumber(StampsCatalogService catalogService, String number, String lang) {
 		List<Integer> seriesIds = catalogService.findSeriesIdsByNumber(number);
 		if (seriesIds.isEmpty()) {
 			return Collections.emptyList();
