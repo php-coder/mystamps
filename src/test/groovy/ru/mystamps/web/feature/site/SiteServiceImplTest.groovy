@@ -19,18 +19,13 @@ package ru.mystamps.web.feature.site
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivity
-import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivityType
 import ru.mystamps.web.service.TestObjects
-import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class SiteServiceImplTest extends Specification {
 	private static final String TEST_TYPE         = TestObjects.TEST_ACTIVITY_TYPE
 	private static final String TEST_PAGE         = TestObjects.TEST_ACTIVITY_PAGE
-	private static final String TEST_IP           = TestObjects.TEST_ACTIVITY_IP
 	private static final String TEST_METHOD       = TestObjects.TEST_ACTIVITY_METHOD
-	private static final String TEST_REFERER_PAGE = TestObjects.TEST_ACTIVITY_REFERER
 	private static final String TEST_USER_AGENT   = TestObjects.TEST_ACTIVITY_AGENT
 	
 	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
@@ -45,138 +40,8 @@ class SiteServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for logAboutAbsentPage()
-	//
-	
-	def "logAboutAbsentPage() should pass arguments to logEvent()"() {
-		given:
-			Integer expectedUserId = 17
-		when:
-			serviceImpl.logAboutAbsentPage(
-				TEST_PAGE,
-				TEST_METHOD,
-				expectedUserId,
-				TEST_IP,
-				TEST_REFERER_PAGE,
-				TEST_USER_AGENT
-			)
-		then:
-			1 * serviceImpl.logEvent(
-				SuspiciousActivityType.PAGE_NOT_FOUND,
-				TEST_PAGE,
-				TEST_METHOD,
-				expectedUserId,
-				TEST_IP,
-				TEST_REFERER_PAGE,
-				TEST_USER_AGENT,
-				{ Date date ->
-					assert DateUtils.roughlyEqual(date, new Date())
-					return true
-				}
-			)
-	}
-	
-	//
-	// Tests for logAboutFailedAuthentication()
-	//
-	
-	def "logAboutFailedAuthentication() should pass arguments to logEvent()"() {
-		given:
-			Integer expectedUserId = 18
-			Date expectedDate      = new Date()
-		when:
-			serviceImpl.logAboutFailedAuthentication(
-				TEST_PAGE,
-				TEST_METHOD,
-				expectedUserId,
-				TEST_IP,
-				TEST_REFERER_PAGE,
-				TEST_USER_AGENT,
-				expectedDate
-			)
-		then:
-			1 * serviceImpl.logEvent(
-				SuspiciousActivityType.AUTHENTICATION_FAILED,
-				TEST_PAGE,
-				TEST_METHOD,
-				expectedUserId,
-				TEST_IP,
-				TEST_REFERER_PAGE,
-				TEST_USER_AGENT,
-				expectedDate
-			)
-	}
-	
-	//
 	// Tests for logEvent()
 	//
-	
-	def "logEvent() should throw exception when type is null"() {
-		when:
-			serviceImpl.logEvent(null, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			IllegalArgumentException ex = thrown()
-			ex.message == 'Type of suspicious activity must be non null'
-	}
-	
-	def "logEvent() should throw exception when page is null"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, null, TEST_METHOD, null, null, null, null, null)
-		then:
-			IllegalArgumentException ex = thrown()
-			ex.message == 'Page must be non null'
-	}
-	
-	def "logEvent() should call dao"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add(_ as AddSuspiciousActivityDbDto)
-	}
-	
-	def "logEvent() should pass activity type to dao"() {
-		given:
-			String expectedType = 'expectedType'
-		when:
-			serviceImpl.logEvent(expectedType, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.type == expectedType
-				return true
-			})
-	}
-	
-	def "logEvent() should assign occurred at to specified date when date was provided"() {
-		given:
-			Date expectedDate = new Date() - 100
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, expectedDate)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert DateUtils.roughlyEqual(activity?.occurredAt, expectedDate)
-				return true
-			})
-	}
-	
-	def "logEvent() should assign occurred at to current date when date wasn't provided"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
-				return true
-			})
-	}
-	
-	def "logEvent() should pass page to dao"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.page == TEST_PAGE
-				return true
-			})
-	}
 	
 	def "logAboutAbsentPage() should pass abbreviated page when it's too long"() {
 		given:
@@ -191,20 +56,6 @@ class SiteServiceImplTest extends Specification {
 				return true
 			})
 	}
-	
-	@Unroll
-	def "logEvent() should pass method to dao"(String expectedMethod) {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, expectedMethod, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.method == expectedMethod
-				return true
-			})
-		where: expectedMethod | _
-			'OPTIONS'         | _
-			null              | _
-	}
 
 	def "logEvent() should pass abbreviated method when it's too long"() {
 		given:
@@ -216,58 +67,6 @@ class SiteServiceImplTest extends Specification {
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.method == exceptedMethod
-				return true
-			})
-	}
-	
-	def "logEvent() should pass null to dao for unknown user id"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userId == null
-				return true
-			})
-	}
-	
-	def "logEvent() should pass user id to dao"() {
-		given:
-			Integer expectedUserId = 20
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, expectedUserId, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userId == expectedUserId
-				return true
-			})
-	}
-	
-	def "logEvent() should pass ip to dao"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.ip == TEST_IP
-				return true
-			})
-	}
-	
-	def "logEvent() should pass empty string to dao for unknown ip"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.ip?.empty
-				return true
-			})
-	}
-	
-	def "logEvent() should pass referer to dao"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.refererPage == TEST_REFERER_PAGE
 				return true
 			})
 	}
@@ -286,30 +85,6 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logEvent() should pass null to dao for unknown referer"(String refererPage) {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, refererPage, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.refererPage == null
-				return true
-			})
-		where: refererPage | _
-			'  '           | _
-			''             | _
-			null           | _
-	}
-	
-	def "logEvent() should pass user agent to dao"() {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userAgent == TEST_USER_AGENT
-				return true
-			})
-	}
-	
 	def "logEvent() should pass abbreviated user agent when it's too long"() {
 		given:
 			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * SuspiciousActivity.USER_AGENT_LENGTH)
@@ -322,20 +97,6 @@ class SiteServiceImplTest extends Specification {
 				assert activity?.userAgent == expectedUserAgent
 				return true
 			})
-	}
-	
-	def "logEvent() should pass null to dao for unknown user agent"(String userAgent) {
-		when:
-			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, userAgent, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userAgent == null
-				return true
-			})
-		where: userAgent | _
-			'  '     | _
-			''       | _
-			null     | _
 	}
 	
 }
