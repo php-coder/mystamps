@@ -194,7 +194,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesParsedData.setQuantity(seriesInfo.getQuantity());
 		seriesParsedData.setPerforated(seriesInfo.getPerforated());
 		
-		// @todo #694 SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers
 		Set<String> michelNumbers = seriesInfo.getMichelNumbers();
 		if (!michelNumbers.isEmpty()) {
 			String shortenedNumbers = CatalogUtils.toShortForm(michelNumbers);
@@ -207,7 +206,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			seriesParsedData.setMichelNumbers(shortenedNumbers);
 		}
 		
-		// @todo #857 SeriesImportServiceImpl.saveParsedData(): add unit test for seller group
 		SeriesSalesParsedDataDbDto seriesSalesParsedData = new SeriesSalesParsedDataDbDto();
 		seriesSalesParsedData.setCreatedAt(now);
 		seriesSalesParsedData.setUpdatedAt(now);
@@ -222,15 +220,12 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			seriesSalesParsedData.setCurrency(seriesInfo.getCurrency());
 		}
 		
-		// @todo #1230 SeriesImportServiceImpl.saveParsedData():
-		//  add unit test for alternative price and currency
 		BigDecimal altPrice = seriesInfo.getAltPrice();
 		if (altPrice != null) {
 			seriesSalesParsedData.setAltPrice(altPrice);
 			seriesSalesParsedData.setAltCurrency(seriesInfo.getAltCurrency());
 		}
 		
-		// @todo #1326 SeriesImportServiceImpl.saveParsedData(): add unit test for condition
 		SeriesCondition condition = seriesInfo.getCondition();
 		if (condition != null) {
 			seriesSalesParsedData.setCondition(condition.toString());

@@ -31,25 +31,15 @@ import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
-import ru.mystamps.web.feature.participant.AddParticipantDto;
-import ru.mystamps.web.feature.participant.AddParticipantForm;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
-import ru.mystamps.web.feature.series.AddSeriesDto;
-import ru.mystamps.web.feature.series.AddSeriesForm;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInGalleryDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
-import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
-import ru.mystamps.web.feature.series.importing.ImportSeriesSalesForm;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
-import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
-import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
-import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.feature.series.sale.SeriesSaleDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 import ru.mystamps.web.tests.Random;
@@ -242,39 +232,6 @@ public final class TestObjects {
 		return new EntityWithIdDto(Random.id(), TEST_ENTITY_NAME);
 	}
 	
-	public static ImportRequestDto createImportRequestDto() {
-		return new ImportRequestDto(Random.url(), Random.importRequestStatus(), Random.id());
-	}
-	
-	public static SeriesParsedDataDto createSeriesParsedDataDto() {
-		String categoryName = Random.categoryName();
-		String categorySlug = SlugUtils.slugify(categoryName);
-		
-		String countryName = Random.countryName();
-		String countrySlug = SlugUtils.slugify(countryName);
-
-		Integer day = null;
-		Integer month = null;
-		boolean hasFullDate = bool();
-		if (hasFullDate) {
-			day = Random.dayOfMonth();
-			month = Random.monthOfYear();
-		}
-		
-		SeriesParsedDataDto dto = new SeriesParsedDataDto(
-			new LinkEntityDto(Random.id(), categorySlug, categoryName),
-			new LinkEntityDto(Random.id(), countrySlug, countryName),
-			day,
-			month,
-			Random.issueYear(),
-			Random.quantity(),
-			Random.perforated(),
-			String.join(",", Random.michelNumbers())
-		);
-		dto.setImageUrls(Collections.singletonList(Random.url()));
-		return dto;
-	}
-	
 	public static RawParsedDataDto createRawParsedDataDto() {
 		return new RawParsedDataDto(
 			Random.categoryName(),
@@ -301,100 +258,12 @@ public final class TestObjects {
 		return new EntityWithParentDto(Random.id().toString(), name, parentName);
 	}
 	
-	public static AddSeriesDto createAddSeriesDto() {
-		// @todo #734 TestObjects.createAddSeriesDto(): return randomized values
-		return new AddSeriesForm();
-	}
-	
-	public static AddSeriesSalesDto createAddSeriesSalesDto() {
-		return createAddSeriesSalesDtoWithSellerId(Random.id());
-	}
-	
-	public static AddSeriesSalesDto createAddSeriesSalesDtoWithSellerId(Integer sellerId) {
-		ImportSeriesSalesForm form = new ImportSeriesSalesForm();
-		form.setSellerId(sellerId);
-		form.setPrice(Random.price());
-		form.setCurrency(Random.currency());
-		return form;
-	}
-	
-	public static ImportRequestInfo createImportRequestInfo() {
-		return new ImportRequestInfo(Random.id(), Random.url());
-	}
-	
 	public static ImportRequestFullInfo createImportRequestFullInfo() {
 		return new ImportRequestFullInfo(
 			Random.id(),
 			Random.url(),
 			Random.importRequestStatus(),
 			Random.date()
-		);
-	}
-	
-	public static SeriesExtractedInfo createSeriesExtractedInfo() {
-		Integer sellerId = null;
-		Integer sellerGroupId = null;
-		String sellerName = null;
-		String sellerUrl = null;
-		
-		boolean existingSeller = bool();
-		if (existingSeller) {
-			sellerId = Random.id();
-		} else {
-			sellerGroupId = Random.id();
-			sellerName = Random.sellerName();
-			sellerUrl = Random.url();
-		}
-		
-		Integer day = null;
-		Integer month = null;
-		boolean hasFullDate = bool();
-		if (hasFullDate) {
-			day = Random.dayOfMonth();
-			month = Random.monthOfYear();
-		}
-		
-		return new SeriesExtractedInfo(
-			Random.listOfIntegers(),
-			Random.listOfIntegers(),
-			day,
-			month,
-			Random.issueYear(),
-			Random.quantity(),
-			Random.perforated(),
-			Random.michelNumbers(),
-			sellerId,
-			sellerGroupId,
-			sellerName,
-			sellerUrl,
-			Random.price(),
-			Random.currency().toString(),
-			Random.price(),
-			// FIXME: alternative currency shouldn't match with currency
-			Random.currency().toString(),
-			Random.seriesCondition()
-		);
-	}
-	
-	public static SeriesExtractedInfo createEmptySeriesExtractedInfo() {
-		return new SeriesExtractedInfo(
-			Collections.emptyList(),
-			Collections.emptyList(),
-			null,
-			null,
-			null,
-			null,
-			null,
-			Collections.emptySet(),
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null
 		);
 	}
 	
@@ -443,16 +312,6 @@ public final class TestObjects {
 			Random.currency(),
 			nullOr(Random.seriesCondition())
 		);
-	}
-	
-	public static AddParticipantDto createAddParticipantDto() {
-		AddParticipantForm dto = new AddParticipantForm();
-		dto.setName(Random.participantName());
-		dto.setUrl(Random.url());
-		dto.setGroupId(Random.id());
-		dto.setBuyer(bool());
-		dto.setSeller(bool());
-		return dto;
 	}
 	
 	public static AddToCollectionDto createAddToCollectionDto() {
