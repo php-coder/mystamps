@@ -1082,47 +1082,11 @@
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java</file>
   </puzzle>
   <puzzle>
-    <ticket>694</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>694-2b8246eb</id>
-    <lines>197-197</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>857</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>857-a6f9cdd0</id>
-    <lines>210-210</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for seller group</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1230</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1230-9685721f</id>
-    <lines>225-226</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1326</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1326-2bc92a3c</id>
-    <lines>233-233</lines>
-    <body>SeriesImportServiceImpl.saveParsedData(): add unit test for condition</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
     <ticket>684</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>684-0b0d5497</id>
-    <lines>240-241</lines>
+    <lines>235-236</lines>
     <body>Series import: add integration test for the case when parsed value doesn't match database</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1131,7 +1095,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>695-6636bb5e</id>
-    <lines>249-249</lines>
+    <lines>244-244</lines>
     <body>Remove hasAtLeastOneFieldFilled() methods from DTOs</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
   </puzzle>
@@ -1674,15 +1638,6 @@
     <lines>1289-1289</lines>
     <body>Mark similar series: add integration tests</body>
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
-  </puzzle>
-  <puzzle>
-    <ticket>734</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>734-10236b8a</id>
-    <lines>305-305</lines>
-    <body>TestObjects.createAddSeriesDto(): return randomized values</body>
-    <file>src/test/java/ru/mystamps/web/service/TestObjects.java</file>
   </puzzle>
   <puzzle>
     <ticket>687</ticket>
