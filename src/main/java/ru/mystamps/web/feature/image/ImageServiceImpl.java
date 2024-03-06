@@ -78,7 +78,6 @@ public class ImageServiceImpl implements ImageService {
 		return imageInfo;
 	}
 
-	// @todo #1303 ImageServiceImpl.replace(): add unit tests
 	// @todo #1303 ImageServiceImpl: reduce duplication between add() and replace()
 	// @todo #1303 ImageServiceImpl.replace(): ensure that method cleanups file after exception
 	@Override
