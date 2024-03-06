@@ -383,17 +383,8 @@
     <ticket>1303</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1303-5b557695</id>
-    <lines>81-81</lines>
-    <body>ImageServiceImpl.replace(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1303</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
     <id>1303-7320596f</id>
-    <lines>82-82</lines>
+    <lines>81-81</lines>
     <body>ImageServiceImpl: reduce duplication between add() and replace()</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
   </puzzle>
@@ -402,7 +393,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1303-fbc787d3</id>
-    <lines>83-83</lines>
+    <lines>82-82</lines>
     <body>ImageServiceImpl.replace(): ensure that method cleanups file after exception</body>
     <file>src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java</file>
   </puzzle>
@@ -677,57 +668,12 @@
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesService.java</file>
   </puzzle>
   <puzzle>
-    <ticket>1343</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1343-fe3ada44</id>
-    <lines>142-142</lines>
-    <body>SeriesServiceImpl.addReleaseYear(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1340</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1340-c6d2a382</id>
-    <lines>164-164</lines>
-    <body>SeriesServiceImpl.addPrice(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1339</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1339-3c1b068a</id>
-    <lines>200-200</lines>
-    <body>SeriesServiceImpl.addCatalogNumbers(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1303</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1303-7c7e06c0</id>
-    <lines>245-245</lines>
-    <body>SeriesServiceImpl.replaceImage(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
     <ticket>1505</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1505-6101f84e</id>
-    <lines>313-313</lines>
+    <lines>309-309</lines>
     <body>Don't load a series comment for anonymous users</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>1280</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>1280-e234a7b0</id>
-    <lines>424-424</lines>
-    <body>SeriesServiceImpl.markAsSimilar(): add unit tests</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>
   <puzzle>
@@ -735,7 +681,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>1448-eb3f0fe6</id>
-    <lines>437-437</lines>
+    <lines>432-432</lines>
     <body>SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO</body>
     <file>src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java</file>
   </puzzle>

@@ -135,7 +135,6 @@ Id	Ticket	"Title"	File	Lines
 1280-77fd103b	1280	"AddSimilarSeriesForm: add integration test for mandatory similarSeriesId"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	37-37
 1280-7ac54ef9	1280	"Mark similar series: gracefully handle error when value mismatches to type"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	648-648
 1280-9a82bce8	1280	"SimilarSeriesForm: add tests"	src/main/frontend/src/components/SimilarSeriesForm.js	6-6
-1280-e234a7b0	1280	"SeriesServiceImpl.markAsSimilar(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	424-424
 1280-e7733cce	1280	"AddSimilarSeriesForm: similarSeriesId must exist"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	38-38
 1281-8f164ecd	1281	"Add integration test for import with seller-url-locator"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java	62-62
 1282-0969f19a	1282	"Consider adding a field with an image used for preview"	src/main/resources/sql/series_dao_queries.properties	178-178
@@ -149,14 +148,12 @@ Id	Ticket	"Title"	File	Lines
 1303-015294f3	1303	"Replace image: add integration test for mandatory imageId"	src/main/java/ru/mystamps/web/feature/series/AddImageForm.java	67-67
 1303-25f7ab3b	1303	"Replace image form: arrange submit buttons in a one line"	src/main/webapp/WEB-INF/views/series/info.html	167-167
 1303-59dd45e7	1303	"FilesystemImagePersistenceStrategy.replacePreview(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java	130-130
-1303-5b557695	1303	"ImageServiceImpl.replace(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	81-81
-1303-7320596f	1303	"ImageServiceImpl: reduce duplication between add() and replace()"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	82-82
-1303-7c7e06c0	1303	"SeriesServiceImpl.replaceImage(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	245-245
+1303-7320596f	1303	"ImageServiceImpl: reduce duplication between add() and replace()"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	81-81
 1303-7ef1304a	1303	"DatabaseImagePersistenceStrategy.replace(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java	67-67
 1303-c0d00ebb	1303	"Replace image: validate that image id is valid"	src/main/java/ru/mystamps/web/feature/series/AddImageForm.java	68-68
 1303-c2bfae4d	1303	"FilesystemImagePersistenceStrategy.replace(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java	105-105
 1303-dcf84f86	1303	"DatabaseImagePersistenceStrategy.replacePreview(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java	79-79
-1303-fbc787d3	1303	"ImageServiceImpl.replace(): ensure that method cleanups file after exception"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	83-83
+1303-fbc787d3	1303	"ImageServiceImpl.replace(): ensure that method cleanups file after exception"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	82-82
 1326-2bc92a3c	1326	"SeriesImportServiceImpl.saveParsedData(): add unit test for condition"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	233-233
 1326-2cfe45cd	1326	"JsoupSiteParser.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	285-285
 1326-4794f854	1326	"Series sale import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java	72-72
@@ -164,16 +161,13 @@ Id	Ticket	"Title"	File	Lines
 1326-e5faca08	1326	"Series import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	51-51
 1329-5cbf2e5d	1329	"SeriesSalesList: add tests"	src/main/frontend/src/components/SeriesSalesList.js	6-6
 1338-4f752b8a	1338	"AddCommentForm: add tests"	src/main/frontend/src/components/AddCommentForm.js	7-7
-1339-3c1b068a	1339	"SeriesServiceImpl.addCatalogNumbers(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	200-200
 1339-9a7986f1	1339	"Update series: add validation for catalog numbers"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	49-49
 1340-1b97f079	1340	"Update series: handle refuse to update an existing price gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	370-370
 1340-34ef47fe	1340	"Update series: add validation for a price"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	50-50
-1340-c6d2a382	1340	"SeriesServiceImpl.addPrice(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	164-164
 1341-d3b9ba1b	1341	"AddCatalogNumbersForm: add tests"	src/main/frontend/src/components/AddCatalogNumbersForm.js	6-6
 1342-c6d2f2ba	1342	"AddCatalogPriceForm: add tests"	src/main/frontend/src/components/AddCatalogPriceForm.js	5-5
 1343-a893935d	1343	"Update series: add validation for a release year"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	51-51
 1343-c710f5d6	1343	"Update series: handle refuse to update an existing release year gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	161-161
-1343-fe3ada44	1343	"SeriesServiceImpl.addReleaseYear(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	142-142
 1344-fb12fdf0	1344	"AddReleaseYearForm: add tests"	src/main/frontend/src/components/AddReleaseYearForm.js	6-6
 1356-b1ab6b12	1356	"Hidden images: add integration tests"	src/main/webapp/WEB-INF/views/series/info.html	177-177
 1356-cbf177f8	1356	"Hidden images: protect hidden images from direct access"	src/main/webapp/WEB-INF/views/series/info.html	179-179
@@ -185,13 +179,13 @@ Id	Ticket	"Title"	File	Lines
 1447-3c055652	1447	"Add test to ensure that catalog numbers are trimmed"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	52-52
 1448-65ca5ec2	1448	"AddSimilarSeriesForm.similarSeriesId: remove deprecated member"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	39-39
 1448-d5a68b83	1448	"AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	60-60
-1448-eb3f0fe6	1448	"SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	437-437
+1448-eb3f0fe6	1448	"SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	432-432
 1455-dfea25aa	1455	"Remove export of components to window"	src/main/frontend/webpack.config.js	4-4
 1484-0743f8f3	1484	"Remove usage of jest-standard-reporter once facebook/jest#5064 is resolved"	src/main/frontend/jest.config.js	11-11
 1484-7c5cb814	1484	"Find a better way to use ESM with Jest and replace jest-esm-transformer"	src/main/frontend/jest.config.js	6-6
 1484-a3f3427b	1484	"Document Jest usage"	src/main/frontend/jest.config.js	1-1
 1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	57-57
-1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	313-313
+1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	309-309
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	28-28
 1605-1a43eb84	1605	"sitemap.xml: consider adding ""priority"" and ""changefreq"" attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60
 1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	73-73
