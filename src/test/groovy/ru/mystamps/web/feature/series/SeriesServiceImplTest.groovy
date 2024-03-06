@@ -36,15 +36,12 @@ class SeriesServiceImplTest extends Specification {
 	
 	private SeriesService service
 	private AddSeriesForm form
-	private AddImageForm imageForm
 	
 	def setup() {
 		form = new AddSeriesForm()
 		form.setQuantity(Random.quantity())
 		form.setPerforated(Random.perforated())
 		form.setCategory(TestObjects.createLinkEntityDto())
-		
-		imageForm = new AddImageForm()
 		
 		service = new SeriesServiceImpl(
 			NOPLogger.NOP_LOGGER,
@@ -87,6 +84,8 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "addImageToSeries() should remove image when exception occurs"() {
 		given:
+			AddImageForm imageForm = new AddImageForm()
+		and:
 			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException('oops') }
