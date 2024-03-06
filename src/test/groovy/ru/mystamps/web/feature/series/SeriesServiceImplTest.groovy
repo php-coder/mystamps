@@ -35,14 +35,8 @@ class SeriesServiceImplTest extends Specification {
 	private final StampsCatalogService zagorskiCatalogService = Mock()
 	
 	private SeriesService service
-	private AddSeriesForm form
 	
 	def setup() {
-		form = new AddSeriesForm()
-		form.setQuantity(Random.quantity())
-		form.setPerforated(Random.perforated())
-		form.setCategory(TestObjects.createLinkEntityDto())
-		
 		service = new SeriesServiceImpl(
 			NOPLogger.NOP_LOGGER,
 			seriesDao,
@@ -62,6 +56,11 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should remove image when exception occurs"() {
 		given:
+			AddSeriesForm form = new AddSeriesForm()
+			form.setQuantity(Random.quantity())
+			form.setPerforated(Random.perforated())
+			form.setCategory(TestObjects.createLinkEntityDto())
+		and:
 			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> Random.id()
