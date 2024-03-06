@@ -43,7 +43,7 @@ class SiteServiceImplTest extends Specification {
 	// Tests for logEvent()
 	//
 	
-	def "logAboutAbsentPage() should pass abbreviated page when it's too long"() {
+	def "logEvent() should pass abbreviated page when it's too long"() {
 		given:
 			String longPageUrl = '/long/url/' + ('x' * SuspiciousActivity.PAGE_URL_LENGTH)
 		and:
