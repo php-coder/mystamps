@@ -139,7 +139,6 @@ public class SeriesServiceImpl implements SeriesService {
 		log.info("Series #{}: a comment has been added", seriesId);
 	}
 	
-	// @todo #1343 SeriesServiceImpl.addReleaseYear(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
@@ -161,7 +160,6 @@ public class SeriesServiceImpl implements SeriesService {
 		log.info("Series #{}: release year set to {}", seriesId, year);
 	}
 	
-	// @todo #1340 SeriesServiceImpl.addPrice(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
@@ -197,7 +195,6 @@ public class SeriesServiceImpl implements SeriesService {
 		);
 	}
 	
-	// @todo #1339 SeriesServiceImpl.addCatalogNumbers(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
@@ -242,7 +239,6 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	// @todo #1303 SeriesServiceImpl.replaceImage(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.REPLACE_IMAGE)
@@ -421,7 +417,6 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.findAllForSitemap();
 	}
 	
-	// @todo #1280 SeriesServiceImpl.markAsSimilar(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.MARK_SIMILAR_SERIES)
