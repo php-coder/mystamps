@@ -12,7 +12,6 @@ Id	Ticket	"Title"	File	Lines
 671-aade0c20	671	"/series/add: add integration test to check that Scott numbers may contain letters"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	105-105
 671-e8c4f51d	671	"/series/add: add integration test for Scott numbers error message"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	106-106
 684-0b0d5497	684	"Series import: add integration test for the case when parsed value doesn't match database"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	235-236
-687-994e661c	687	"Random.STATUSES: reduce duplication by using EnumSet.allOf()"	src/test/java/ru/mystamps/web/tests/Random.java	62-62
 687-c6d33b89	687	"replace set of strings by enum"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java	29-29
 690-384e961f	690	"HasSiteParserValidator: introduce SiteParserService.hasParserForUrl()"	src/main/java/ru/mystamps/web/feature/series/importing/HasSiteParserValidator.java	38-38
 694-18bba425	694	"Import series: add support for Zagorski catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	104-104
@@ -56,9 +55,9 @@ Id	Ticket	"Title"	File	Lines
 709-fd5f9ae4	709	"/series/import/request/{id}(quantity): add integration test for min value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	61-61
 709-fe188622	709	"/series/import/request/{id}(year): add validation for year in future"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	87-87
 709-ffbd8602	709	"/series/import/request/{id}(imageUrl): add validation for file size"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	96-96
-738-13880c1a	738	"Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)"	src/test/java/ru/mystamps/web/tests/Random.java	190-191
+738-13880c1a	738	"Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)"	src/test/java/ru/mystamps/web/tests/Random.java	170-171
 749-2a40850f	749	"/series/{id}: add integration test that import info is only visible to admin"	src/test/robotframework/series/import/request-logic.robot	39-39
-769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	96-96
+769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	84-84
 769-d2cdc518	769	"/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	134-135
 770-3251a080	770	"/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	126-127
 782-a11927bd	782	"Series import: add integration test for extracting perforation flag"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	288-288

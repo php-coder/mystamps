@@ -1640,20 +1640,11 @@
     <file>src/main/webapp/WEB-INF/views/series/info.html</file>
   </puzzle>
   <puzzle>
-    <ticket>687</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>687-994e661c</id>
-    <lines>62-62</lines>
-    <body>Random.STATUSES: reduce duplication by using EnumSet.allOf()</body>
-    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-  </puzzle>
-  <puzzle>
     <ticket>769</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
     <id>769-4310f3c0</id>
-    <lines>96-96</lines>
+    <lines>84-84</lines>
     <body>Random.price(): return randomized values</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
   </puzzle>
@@ -1662,7 +1653,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>738-13880c1a</id>
-    <lines>190-191</lines>
+    <lines>170-171</lines>
     <body>Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
   </puzzle>
