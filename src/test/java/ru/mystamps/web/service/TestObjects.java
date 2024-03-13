@@ -24,8 +24,6 @@ import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
 import ru.mystamps.web.feature.account.UsersActivationFullDto;
-import ru.mystamps.web.feature.collection.AddToCollectionDto;
-import ru.mystamps.web.feature.collection.AddToCollectionForm;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.image.ImageDto;
@@ -286,19 +284,6 @@ public final class TestObjects {
 			Random.currency(),
 			nullOr(Random.seriesCondition())
 		);
-	}
-	
-	public static AddToCollectionDto createAddToCollectionDto() {
-		return createAddToCollectionForm();
-	}
-	
-	public static AddToCollectionForm createAddToCollectionForm() {
-		AddToCollectionForm dto = new AddToCollectionForm();
-		dto.setNumberOfStamps(Random.quantity());
-		dto.setPrice(Random.price());
-		dto.setCurrency(Random.currency());
-		dto.setSeriesId(Random.id());
-		return dto;
 	}
 	
 	public static SeriesLinkDto createSeriesLinkDto() {
