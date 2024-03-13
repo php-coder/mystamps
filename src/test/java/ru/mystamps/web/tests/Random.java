@@ -219,10 +219,6 @@ public final class Random {
 		return sample(STATUSES);
 	}
 	
-	public static List<String> importRequestStatuses(int numToReturn) {
-		return sampleMultiple(numToReturn, STATUSES);
-	}
-	
 	public static Set<String> solovyovNumbers() {
 		return catalogNumbers();
 	}
