@@ -33,14 +33,12 @@ import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInGalleryDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
-import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 import ru.mystamps.web.tests.Random;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.Date;
 
 import static io.qala.datagen.RandomShortApi.bool;
@@ -201,26 +199,6 @@ public final class TestObjects {
 	
 	public static EntityWithIdDto createEntityWithIdDto() {
 		return new EntityWithIdDto(Random.id(), TEST_ENTITY_NAME);
-	}
-	
-	public static RawParsedDataDto createRawParsedDataDto() {
-		return new RawParsedDataDto(
-			Random.categoryName(),
-			Random.countryName(),
-			Collections.singletonList(Random.url()),
-			Random.issueYear().toString(),
-			Random.quantity().toString(),
-			String.valueOf(Random.perforated()),
-			Random.michelNumbers().toString(),
-			Random.sellerName(),
-			Random.url(),
-			String.valueOf(Random.price()),
-			Random.currency().toString(),
-			String.valueOf(Random.price()),
-			// FIXME: alternative currency shouldn't match with currency
-			Random.currency().toString(),
-			Random.seriesCondition().toString()
-		);
 	}
 	
 	public static EntityWithParentDto createEntityWithParentDto() {
