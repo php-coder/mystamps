@@ -28,7 +28,6 @@ import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesValidation;
 import ru.mystamps.web.feature.series.sale.SeriesCondition;
 import ru.mystamps.web.feature.site.SiteUrl;
@@ -251,18 +250,6 @@ public final class Random {
 			TestObjects.createEntityWithParentDto(),
 			TestObjects.createEntityWithParentDto(),
 			TestObjects.createEntityWithParentDto()
-		);
-	}
-	
-	public static List<SeriesInfoDto> listOfSeriesInfoDto() {
-		final int minSize = 1;
-		final int maxSize = 3;
-		int size = integer(minSize, maxSize);
-		return sampleMultiple(
-			size,
-			TestObjects.createSeriesInfoDto(),
-			TestObjects.createSeriesInfoDto(),
-			TestObjects.createSeriesInfoDto()
 		);
 	}
 	

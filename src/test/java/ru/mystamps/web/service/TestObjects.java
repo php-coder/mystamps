@@ -19,7 +19,6 @@ package ru.mystamps.web.service;
 
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
-import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
@@ -27,7 +26,6 @@ import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
@@ -110,20 +108,6 @@ public final class TestObjects {
 	
 	public static ImageDto createImageDto() {
 		return new ImageDto("PNG", "test".getBytes(StandardCharsets.UTF_8));
-	}
-	
-	public static SeriesInfoDto createSeriesInfoDto() {
-		String category = Random.categoryName();
-		String country = Random.countryName();
-		
-		return new SeriesInfoDto(
-			Random.id(),
-			new LinkEntityDto(Random.id(), SlugUtils.slugify(category), category),
-			new LinkEntityDto(Random.id(), SlugUtils.slugify(country), country),
-			Random.issueYear(),
-			16,
-			Random.perforated()
-		);
 	}
 	
 	public static SuspiciousActivityDto createSuspiciousActivityDto() {
