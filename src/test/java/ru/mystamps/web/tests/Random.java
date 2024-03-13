@@ -25,12 +25,10 @@ import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.feature.account.AccountValidation;
 import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryValidation;
-import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesValidation;
 import ru.mystamps.web.feature.series.sale.SeriesCondition;
 import ru.mystamps.web.feature.site.SiteUrl;
-import ru.mystamps.web.service.TestObjects;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -40,9 +38,6 @@ import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static io.qala.datagen.RandomShortApi.bool;
 import static io.qala.datagen.RandomShortApi.integer;
@@ -195,14 +190,6 @@ public final class Random {
 		return bool();
 	}
 	
-	public static Set<String> solovyovNumbers() {
-		return catalogNumbers();
-	}
-	
-	public static Set<String> zagorskiNumbers() {
-		return catalogNumbers();
-	}
-	
 	public static String catalogNumber() {
 		final long maxCatalogNumber = 9999;
 		return String.valueOf(between(1, maxCatalogNumber).integer());
@@ -221,18 +208,6 @@ public final class Random {
 	
 	public static String host() {
 		return sample(SiteUrl.SITE, SiteUrl.PUBLIC_URL);
-	}
-	
-	private static Set<String> catalogNumbers() {
-		final int minSize = 1;
-		final int maxSize = 7;
-		final int maxCatalogNumber = 9999;
-		int size = integer(minSize, maxSize);
-		int from = integer(1, maxCatalogNumber - maxSize + 1);
-		
-		return IntStream.rangeClosed(from, from + size)
-			.mapToObj(String::valueOf)
-			.collect(Collectors.toSet());
 	}
 	
 }
