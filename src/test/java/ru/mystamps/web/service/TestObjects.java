@@ -32,7 +32,6 @@ import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInGalleryDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
@@ -283,16 +282,6 @@ public final class TestObjects {
 			// FIXME: alternative currency shouldn't match with currency
 			Random.currency(),
 			nullOr(Random.seriesCondition())
-		);
-	}
-	
-	public static SeriesLinkDto createSeriesLinkDto() {
-		return new SeriesLinkDto(
-			Random.id(),
-			Random.issueYear(),
-			Random.quantity(),
-			Random.perforated(),
-			Random.countryName()
 		);
 	}
 	
