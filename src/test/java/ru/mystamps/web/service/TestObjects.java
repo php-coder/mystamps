@@ -29,7 +29,6 @@ import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
-import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
@@ -127,28 +126,6 @@ public final class TestObjects {
 			Random.issueYear(),
 			16,
 			Random.perforated()
-		);
-	}
-	
-	public static SeriesFullInfoDto createSeriesFullInfoDto() {
-		SeriesInfoDto info = createSeriesInfoDto();
-		return new SeriesFullInfoDto(
-			info.getId(),
-			info.getCategory(),
-			info.getCountry(),
-			Random.dayOfMonth(),
-			Random.monthOfYear(),
-			info.getReleaseYear(),
-			info.getQuantity(),
-			info.getPerforated(),
-			"this is a full info",
-			Random.userId(),
-			nullOr(Random.price()),
-			nullOr(Random.price()),
-			nullOr(Random.price()),
-			nullOr(Random.price()),
-			nullOr(Random.price()),
-			nullOr(Random.price())
 		);
 	}
 	
