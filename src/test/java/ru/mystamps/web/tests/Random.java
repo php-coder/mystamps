@@ -215,18 +215,6 @@ public final class Random {
 		return sampleMultiple(size, integer(), integer(), integer());
 	}
 	
-	public static List<EntityWithIdDto> listOfEntityWithIdDto() {
-		final int minSize = 1;
-		final int maxSize = 3;
-		int size = integer(minSize, maxSize);
-		return sampleMultiple(
-			size,
-			TestObjects.createEntityWithIdDto(),
-			TestObjects.createEntityWithIdDto(),
-			TestObjects.createEntityWithIdDto()
-		);
-	}
-	
 	public static String jsoupLocator() {
 		return sample("#id", "a[href]", "img[src$=.png]", "div#logo");
 	}

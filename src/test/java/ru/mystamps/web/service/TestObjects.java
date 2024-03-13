@@ -24,7 +24,6 @@ import ru.mystamps.web.feature.account.UsersActivationDto;
 import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
-import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
@@ -120,10 +119,6 @@ public final class TestObjects {
 			TEST_ACTIVITY_REFERER,
 			TEST_ACTIVITY_AGENT
 		);
-	}
-	
-	public static EntityWithIdDto createEntityWithIdDto() {
-		return new EntityWithIdDto(Random.id(), TEST_ENTITY_NAME);
 	}
 	
 	public static SeriesSalesParsedDataDbDto createSeriesSalesParsedDataDbDto() {
