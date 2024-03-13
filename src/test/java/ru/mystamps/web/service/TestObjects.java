@@ -30,7 +30,6 @@ import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
-import ru.mystamps.web.feature.series.SeriesInGalleryDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
@@ -128,20 +127,6 @@ public final class TestObjects {
 			Random.issueYear(),
 			16,
 			Random.perforated()
-		);
-	}
-	
-	public static SeriesInGalleryDto createSeriesInGalleryDto() {
-		Integer numberOfImages = 1;
-		
-		return new SeriesInGalleryDto(
-			Random.id(),
-			nullOr(Random.issueYear()),
-			Random.quantity(),
-			Random.perforated(),
-			Random.id(),
-			numberOfImages,
-			Random.categoryName()
 		);
 	}
 	
