@@ -24,7 +24,6 @@ import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
 import ru.mystamps.web.feature.account.UsersActivationFullDto;
-import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
@@ -125,19 +124,6 @@ public final class TestObjects {
 			Random.issueYear(),
 			16,
 			Random.perforated()
-		);
-	}
-	
-	public static SeriesInCollectionWithPriceDto createSeriesInCollectionWithPriceDto() {
-		return new SeriesInCollectionWithPriceDto(
-			Random.id(),
-			Random.issueYear(),
-			Random.quantity(),
-			Random.quantity(),
-			Random.perforated(),
-			Random.countryName(),
-			Random.price(),
-			Random.currency()
 		);
 	}
 	
