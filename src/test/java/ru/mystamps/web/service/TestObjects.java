@@ -40,7 +40,6 @@ import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
-import ru.mystamps.web.feature.series.sale.SeriesSaleDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 import ru.mystamps.web.tests.Random;
 
@@ -66,7 +65,6 @@ public final class TestObjects {
 	protected static final String TEST_PASSWORD     = "secret";
 	
 	private static final String TEST_NAME           = "Test Name";
-	private static final String TEST_URL            = "test.example.org";
 	
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
 	private static final String TEST_ENTITY_SLUG    = "test-slug";
@@ -206,25 +204,6 @@ public final class TestObjects {
 			TEST_ACTIVITY_IP,
 			TEST_ACTIVITY_REFERER,
 			TEST_ACTIVITY_AGENT
-		);
-	}
-	
-	/**
-	 * @author Sergey Chechenev
-	 */
-	public static SeriesSaleDto createSeriesSaleDto() {
-		return new SeriesSaleDto(
-			Random.date(),
-			TEST_NAME,
-			TEST_URL,
-			TEST_NAME,
-			TEST_URL,
-			TEST_URL,
-			Random.price(),
-			Random.currency(),
-			Random.price(),
-			Random.currency(),
-			nullOr(Random.seriesCondition())
 		);
 	}
 	
