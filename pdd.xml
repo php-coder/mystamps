@@ -1644,17 +1644,8 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>769-4310f3c0</id>
-    <lines>84-84</lines>
+    <lines>77-77</lines>
     <body>Random.price(): return randomized values</body>
-    <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>738</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
-    <id>738-13880c1a</id>
-    <lines>170-171</lines>
-    <body>Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
   </puzzle>
   <puzzle>

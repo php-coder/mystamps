@@ -55,9 +55,8 @@ Id	Ticket	"Title"	File	Lines
 709-fd5f9ae4	709	"/series/import/request/{id}(quantity): add integration test for min value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	61-61
 709-fe188622	709	"/series/import/request/{id}(year): add validation for year in future"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	87-87
 709-ffbd8602	709	"/series/import/request/{id}(imageUrl): add validation for file size"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	96-96
-738-13880c1a	738	"Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)"	src/test/java/ru/mystamps/web/tests/Random.java	170-171
 749-2a40850f	749	"/series/{id}: add integration test that import info is only visible to admin"	src/test/robotframework/series/import/request-logic.robot	39-39
-769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	84-84
+769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	77-77
 769-d2cdc518	769	"/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	134-135
 770-3251a080	770	"/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	126-127
 782-a11927bd	782	"Series import: add integration test for extracting perforation flag"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	288-288
