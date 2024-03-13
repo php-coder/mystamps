@@ -19,7 +19,6 @@ package ru.mystamps.web.service;
 
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
-import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
@@ -121,10 +120,6 @@ public final class TestObjects {
 	
 	public static ImageDto createImageDto() {
 		return new ImageDto("PNG", "test".getBytes(StandardCharsets.UTF_8));
-	}
-	
-	public static SitemapInfoDto createSitemapInfoDto() {
-		return new SitemapInfoDto(String.valueOf(Random.id()), Random.date());
 	}
 	
 	public static SeriesInfoDto createSeriesInfoDto() {
