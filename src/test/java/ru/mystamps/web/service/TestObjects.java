@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
@@ -125,12 +124,6 @@ public final class TestObjects {
 	
 	public static EntityWithIdDto createEntityWithIdDto() {
 		return new EntityWithIdDto(Random.id(), TEST_ENTITY_NAME);
-	}
-	
-	public static EntityWithParentDto createEntityWithParentDto() {
-		String name = Random.categoryName();
-		String parentName = Random.participantGroupName();
-		return new EntityWithParentDto(Random.id().toString(), name, parentName);
 	}
 	
 	public static SeriesSalesParsedDataDbDto createSeriesSalesParsedDataDbDto() {

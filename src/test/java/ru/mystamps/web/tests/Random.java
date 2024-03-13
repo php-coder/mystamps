@@ -21,7 +21,6 @@ import io.qala.datagen.RandomElements;
 import io.qala.datagen.RandomShortApi;
 import org.apache.commons.lang3.StringUtils;
 import ru.mystamps.web.common.Currency;
-import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.feature.account.AccountValidation;
 import ru.mystamps.web.feature.category.CategoryValidation;
@@ -166,12 +165,6 @@ public final class Random {
 		).english();
 	}
 	
-	// @todo #738 Random.participantGroupName(): make the generated names conform to
-	//  the validation rules (when they will appear)
-	public static String participantGroupName() {
-		return name();
-	}
-	
 	public static String sellerName() {
 		return participantName();
 	}
@@ -238,18 +231,6 @@ public final class Random {
 			TestObjects.createEntityWithIdDto(),
 			TestObjects.createEntityWithIdDto(),
 			TestObjects.createEntityWithIdDto()
-		);
-	}
-	
-	public static List<EntityWithParentDto> listOfEntityWithParentDto() {
-		final int minSize = 1;
-		final int maxSize = 3;
-		int size = integer(minSize, maxSize);
-		return sampleMultiple(
-			size,
-			TestObjects.createEntityWithParentDto(),
-			TestObjects.createEntityWithParentDto(),
-			TestObjects.createEntityWithParentDto()
 		);
 	}
 	
