@@ -30,8 +30,6 @@ import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesValidation;
-import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
-import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.sale.SeriesCondition;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.service.TestObjects;
@@ -58,16 +56,6 @@ import static io.qala.datagen.StringModifier.Impls.oneOf;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
 public final class Random {
-	
-	// @todo #687 Random.STATUSES: reduce duplication by using EnumSet.allOf()
-	private static final String[] STATUSES = new String[] {
-		SeriesImportRequestStatus.UNPROCESSED,
-		SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
-		SeriesImportRequestStatus.DOWNLOADING_FAILED,
-		SeriesImportRequestStatus.PARSING_SUCCEEDED,
-		SeriesImportRequestStatus.PARSING_FAILED,
-		SeriesImportRequestStatus.IMPORT_SUCCEEDED,
-	};
 	
 	private Random() {
 	}
@@ -215,10 +203,6 @@ public final class Random {
 		return bool();
 	}
 	
-	public static String importRequestStatus() {
-		return sample(STATUSES);
-	}
-	
 	public static Set<String> solovyovNumbers() {
 		return catalogNumbers();
 	}
@@ -279,18 +263,6 @@ public final class Random {
 			TestObjects.createSeriesInfoDto(),
 			TestObjects.createSeriesInfoDto(),
 			TestObjects.createSeriesInfoDto()
-		);
-	}
-	
-	public static List<ImportRequestFullInfo> listOfImportRequestFullInfo() {
-		final int minSize = 1;
-		final int maxSize = 3;
-		int size = integer(minSize, maxSize);
-		return sampleMultiple(
-			size,
-			TestObjects.createImportRequestFullInfo(),
-			TestObjects.createImportRequestFullInfo(),
-			TestObjects.createImportRequestFullInfo()
 		);
 	}
 	

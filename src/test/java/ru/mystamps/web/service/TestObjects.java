@@ -28,7 +28,6 @@ import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
@@ -148,15 +147,6 @@ public final class TestObjects {
 		String name = Random.categoryName();
 		String parentName = Random.participantGroupName();
 		return new EntityWithParentDto(Random.id().toString(), name, parentName);
-	}
-	
-	public static ImportRequestFullInfo createImportRequestFullInfo() {
-		return new ImportRequestFullInfo(
-			Random.id(),
-			Random.url(),
-			Random.importRequestStatus(),
-			Random.date()
-		);
 	}
 	
 	public static SeriesSalesParsedDataDbDto createSeriesSalesParsedDataDbDto() {
