@@ -1283,17 +1283,8 @@
     <ticket>995</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>995-950efed9</id>
-    <lines>42-42</lines>
-    <body>SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests</body>
-    <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
-  </puzzle>
-  <puzzle>
-    <ticket>995</ticket>
-    <estimate>0</estimate>
-    <role>DEV</role>
     <id>995-dfb3dc6f</id>
-    <lines>60-60</lines>
+    <lines>59-59</lines>
     <body>SiteParser: introduce a method for parsing only sales-related info</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
   </puzzle>
@@ -1302,7 +1293,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>995-a90e239c</id>
-    <lines>83-83</lines>
+    <lines>82-82</lines>
     <body>SeriesInfoExtractorService: introduce a method for parsing only sales-related info</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
   </puzzle>
@@ -1311,7 +1302,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>834-3f317328</id>
-    <lines>96-96</lines>
+    <lines>95-95</lines>
     <body>SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java</file>
   </puzzle>
@@ -1644,7 +1635,7 @@
     <estimate>0</estimate>
     <role>DEV</role>
     <id>769-4310f3c0</id>
-    <lines>77-77</lines>
+    <lines>75-75</lines>
     <body>Random.price(): return randomized values</body>
     <file>src/test/java/ru/mystamps/web/tests/Random.java</file>
   </puzzle>

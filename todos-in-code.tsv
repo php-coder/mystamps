@@ -56,7 +56,7 @@ Id	Ticket	"Title"	File	Lines
 709-fe188622	709	"/series/import/request/{id}(year): add validation for year in future"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	87-87
 709-ffbd8602	709	"/series/import/request/{id}(imageUrl): add validation for file size"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	96-96
 749-2a40850f	749	"/series/{id}: add integration test that import info is only visible to admin"	src/test/robotframework/series/import/request-logic.robot	39-39
-769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	77-77
+769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	75-75
 769-d2cdc518	769	"/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	134-135
 770-3251a080	770	"/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	126-127
 782-a11927bd	782	"Series import: add integration test for extracting perforation flag"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	288-288
@@ -68,7 +68,7 @@ Id	Ticket	"Title"	File	Lines
 785-c0b6c3f6	785	"Update series: add integration test for non-empty ""value"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	47-47
 785-c33d2a08	785	"Update series: handle refuse to update an existing comment gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	143-143
 803-64628226	803	"SeriesInfoExtractorServiceImpl.extract(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	102-102
-834-3f317328	834	"SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	96-96
+834-3f317328	834	"SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	95-95
 857-34fbb536	857	"/series/import/request/{id}(seller.group): add validation against negative values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	36-36
 857-719bea28	857	"Check that a just created seller belongs to the ""example.com"" group"	src/test/robotframework/series/import/request-logic.robot	130-130
 857-83098214	857	"TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service"	src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java	98-98
@@ -92,9 +92,8 @@ Id	Ticket	"Title"	File	Lines
 978-63d2b8ea	978	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	360-360
 979-ca86046a	979	"Add integration test for import of series with currency-locator"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java	65-65
 995-71e1e7c8	995	"Series sale import: add support for new sellers"	src/main/webapp/WEB-INF/views/series/info.html	857-857
-995-950efed9	995	"SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	42-42
-995-a90e239c	995	"SeriesInfoExtractorService: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	83-83
-995-dfb3dc6f	995	"SiteParser: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	60-60
+995-a90e239c	995	"SeriesInfoExtractorService: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	82-82
+995-dfb3dc6f	995	"SiteParser: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	59-59
 1000-66d57f44	1000	"Terraform: add Mailgun"	infra/terraform/my-stamps.tf	2-2
 1000-7b4c3a87	1000	"CI: validate and check Terraform configuration"	infra/terraform/my-stamps.tf	1-1
 1034-0016977f	1034	"Document how to run with PostgreSQL and docker-compose"	infra/docker/postgres.yml	7-8
