@@ -190,11 +190,6 @@ public final class Random {
 		return bool();
 	}
 	
-	public static String catalogNumber() {
-		final long maxCatalogNumber = 9999;
-		return String.valueOf(between(1, maxCatalogNumber).integer());
-	}
-	
 	public static List<Integer> listOfIntegers() {
 		final int minSize = 1;
 		final int maxSize = 3;
