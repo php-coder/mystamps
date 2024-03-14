@@ -27,7 +27,6 @@ import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesValidation;
-import ru.mystamps.web.feature.series.sale.SeriesCondition;
 import ru.mystamps.web.feature.site.SiteUrl;
 
 import java.math.BigDecimal;
@@ -99,10 +98,6 @@ public final class Random {
 	
 	public static Currency currency() {
 		return sample(Currency.values());
-	}
-	
-	public static SeriesCondition seriesCondition() {
-		return sample(SeriesCondition.values());
 	}
 	
 	public static String url() {

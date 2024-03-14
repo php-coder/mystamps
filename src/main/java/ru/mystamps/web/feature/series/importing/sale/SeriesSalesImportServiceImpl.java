@@ -39,7 +39,6 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 	private final SiteParserService siteParserService;
 	private final SeriesInfoExtractorService extractorService;
 	
-	// @todo #995 SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)

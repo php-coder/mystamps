@@ -24,16 +24,11 @@ import ru.mystamps.web.feature.account.UsersActivationDto;
 import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 import ru.mystamps.web.tests.Random;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-
-import static io.qala.datagen.RandomShortApi.bool;
-import static io.qala.datagen.RandomShortApi.nullOr;
 
 public final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
@@ -118,53 +113,6 @@ public final class TestObjects {
 			TEST_ACTIVITY_IP,
 			TEST_ACTIVITY_REFERER,
 			TEST_ACTIVITY_AGENT
-		);
-	}
-	
-	public static SeriesSalesParsedDataDbDto createSeriesSalesParsedDataDbDto() {
-		SeriesSalesParsedDataDbDto dto = new SeriesSalesParsedDataDbDto();
-		
-		boolean existingSeller = bool();
-		if (existingSeller) {
-			dto.setSellerId(Random.id());
-		} else {
-			dto.setSellerName(Random.sellerName());
-			dto.setSellerUrl(Random.url());
-		}
-		
-		dto.setPrice(Random.price());
-		dto.setCurrency(Random.currency().toString());
-		dto.setCreatedAt(Random.date());
-		dto.setUpdatedAt(Random.date());
-		return dto;
-	}
-	
-	public static SeriesSaleParsedDataDto createSeriesSaleParsedDataDto() {
-		Integer sellerId = null;
-		Integer sellerGroupId = null;
-		String sellerName = null;
-		String sellerUrl = null;
-		
-		boolean existingSeller = bool();
-		if (existingSeller) {
-			sellerId = Random.id();
-		} else {
-			sellerGroupId = Random.id();
-			sellerName = Random.sellerName();
-			sellerUrl = Random.url();
-		}
-		
-		return new SeriesSaleParsedDataDto(
-			sellerId,
-			sellerGroupId,
-			sellerName,
-			sellerUrl,
-			Random.price(),
-			Random.currency(),
-			Random.price(),
-			// FIXME: alternative currency shouldn't match with currency
-			Random.currency(),
-			nullOr(Random.seriesCondition())
 		);
 	}
 	
