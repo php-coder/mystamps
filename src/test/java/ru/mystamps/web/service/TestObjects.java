@@ -18,8 +18,6 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.common.LinkEntityDto;
-import ru.mystamps.web.feature.account.AddUserDbDto;
-import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
 import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.image.ImageDto;
@@ -42,14 +40,10 @@ public final class TestObjects {
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
 	
-	protected static final String TEST_PASSWORD     = "secret";
-	
 	private static final String TEST_NAME           = "Test Name";
 	
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
 	private static final String TEST_ENTITY_SLUG    = "test-slug";
-	
-	private static final String TEST_HASH           = "$2a$10$Oo8A/oaKQYwt4Zi1RWGir.HHziCG267CJaqaNaNUtE/8ceysZn0za";
 
 	private TestObjects() {
 	}
@@ -69,30 +63,6 @@ public final class TestObjects {
 	
 	public static LinkEntityDto createLinkEntityDto() {
 		return new LinkEntityDto(Random.id(), TEST_ENTITY_SLUG, TEST_ENTITY_NAME);
-	}
-	
-	public static AddUserDbDto createAddUserDbDto() {
-		AddUserDbDto user = new AddUserDbDto();
-		user.setLogin(Random.login());
-		user.setRole(UserDetails.Role.USER);
-		user.setName(TEST_NAME);
-		user.setEmail(TEST_EMAIL);
-		user.setRegisteredAt(Random.date());
-		user.setActivatedAt(Random.date());
-		user.setHash(TEST_HASH);
-
-		return user;
-	}
-	
-	public static UserDetails createUserDetails() {
-		return new UserDetails(
-			Random.userId(),
-			Random.login(),
-			TEST_NAME,
-			TEST_HASH,
-			UserDetails.Role.USER,
-			Random.collectionSlug()
-		);
 	}
 	
 	public static ImageInfoDto createImageInfoDto() {

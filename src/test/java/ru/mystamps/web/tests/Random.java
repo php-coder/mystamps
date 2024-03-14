@@ -21,7 +21,6 @@ import io.qala.datagen.RandomElements;
 import io.qala.datagen.RandomShortApi;
 import org.apache.commons.lang3.StringUtils;
 import ru.mystamps.web.common.Currency;
-import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.feature.account.AccountValidation;
 import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryValidation;
@@ -90,10 +89,6 @@ public final class Random {
 		}
 		
 		return login;
-	}
-	
-	public static String collectionSlug() {
-		return SlugUtils.slugify(login());
 	}
 	
 	public static Currency currency() {
