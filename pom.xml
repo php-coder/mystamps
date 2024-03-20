@@ -635,7 +635,7 @@
 		<liquibase.version>4.26.0</liquibase.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<lombok.version>1.18.30</lombok.version>
+		<lombok.version>1.18.32</lombok.version>
 		
 		<minify.plugin.version>1.7.6</minify.plugin.version>
 		
