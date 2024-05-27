@@ -165,6 +165,7 @@ jobs:
           NEW_COMMIT_MSG: "chore: processed ${{ env.COMMIT_MSG }}"
         working-directory: generated-todos
         run: |
+          git add pdd.json
           git commit pdd.json todos-in-code.tsv -m "$NEW_COMMIT_MSG"
           git push
 
