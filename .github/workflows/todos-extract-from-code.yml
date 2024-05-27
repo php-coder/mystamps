@@ -58,17 +58,14 @@ jobs:
             --exclude 'src/test/wiremock/**/*' \
             --exclude 'generated-todos/**' \
             --verbose \
-            --file pdd.xml
+            --format json \
+            --file pdd.json
 
-      - name: Remove the current date from pdd.xml
-        run: sed -i -E '/<time>[-0-9T:Z]+<\/time>/d;/<puzzles/s| date="[-0-9T:Z]+"||' pdd.xml
-
-      # Workaround for #1659
-      - name: Remove author and email
-        run: sed -i '/<author>/d;/<email>/d' pdd.xml
+      - name: Remove the current date from pdd.json
+        run: sed -i '/"date":/d' pdd.json
 
       - name: Generate todos-in-code.tsv
-        run: ./src/main/scripts/ci/pdd-xml-to-json.sh pdd.xml | ./src/main/scripts/ci/pdd-json-to-tsv.sh > todos-in-code.tsv
+        run: ./src/main/scripts/ci/pdd-json-to-tsv.sh < pdd.json > todos-in-code.tsv
 
       # @todo #1610 Close an issue or post a comment when a puzzle got removed from code
       # @todo #1610 Post a comment when issue got closed without removing a puzzle
@@ -76,13 +73,13 @@ jobs:
         run: |
           PUZZLES_FILES_MODIFIED=no
 
-          if [ ! -f generated-todos/pdd.xml ]; then
-            echo 'pdd.xml has just been created'
-            mv pdd.xml generated-todos/pdd.xml
+          if [ ! -f generated-todos/pdd.json ]; then
+            echo 'pdd.json has just been created'
+            mv pdd.json generated-todos/pdd.json
             PUZZLES_FILES_MODIFIED=yes
-          elif ! diff --brief generated-todos/pdd.xml pdd.xml >/dev/null; then
-            echo 'pdd.xml has been modified'
-            mv pdd.xml generated-todos/pdd.xml
+          elif ! diff --brief generated-todos/pdd.json pdd.json >/dev/null; then
+            echo 'pdd.json has been modified'
+            mv pdd.json generated-todos/pdd.json
             PUZZLES_FILES_MODIFIED=yes
           fi
 
@@ -97,10 +94,11 @@ jobs:
           fi
 
           if [ "$PUZZLES_FILES_MODIFIED" = 'yes' ]; then
-            printf 'pdd.xml: %d puzzles\n' "$(grep -c '<puzzle>' generated-todos/pdd.xml)"
+            printf 'pdd.json: %d puzzles\n' "$(grep -c '<puzzle>' generated-todos/pdd.json)"
+            printf 'pdd.json: %d puzzles\n' "$(jq '.puzzles | length' generated-todos/pdd.json)"
             printf 'todos-in-code.tsv: %d todos\n' "$(sed 1d generated-todos/todos-in-code.tsv | wc -l)"
           else
-            echo 'neither pdd.xml nor todos-in-code.tsv have been modified'
+            echo 'neither pdd.json nor todos-in-code.tsv have been modified'
           fi
 
           # Make variable available for the next steps
@@ -168,7 +166,7 @@ jobs:
           NEW_COMMIT_MSG: "chore: processed ${{ env.COMMIT_MSG }}"
         working-directory: generated-todos
         run: |
-          git commit pdd.xml todos-in-code.tsv -m "$NEW_COMMIT_MSG"
+          git commit pdd.json todos-in-code.tsv -m "$NEW_COMMIT_MSG"
           git push
 
       - name: Commit updated mapping
@@ -184,6 +182,6 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
-          [ ! -f pdd.xml ] || rm -fv pdd.xml
+          [ ! -f pdd.json ] || rm -fv pdd.json
           [ ! -f todos-in-code.tsv ] || rm -fv todos-in-code.tsv
           [ ! -d generated-todos ] || git worktree remove generated-todos
