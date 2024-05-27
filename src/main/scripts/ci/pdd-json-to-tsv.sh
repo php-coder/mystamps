@@ -10,4 +10,4 @@
 #     https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files#rendering-csv-and-tsv-data
 # 5) transform lists to TSV rows
 
-exec jq --raw-output '. | sort_by([ .ticket | tonumber ], .id) | [ { "id":"Id", "ticket":"Ticket", "body":"Title", "file":"File", "lines":"Lines" } ] + . | .[] | [ .id, .ticket, ([ .body ] | @csv), .file, .lines ] | @tsv'
+exec jq --raw-output '.puzzles | sort_by([ .ticket | tonumber ], .id) | [ { "id":"Id", "ticket":"Ticket", "body":"Title", "file":"File", "lines":"Lines" } ] + . | .[] | [ .id, .ticket, ([ .body ] | @csv), .file, .lines ] | @tsv'
