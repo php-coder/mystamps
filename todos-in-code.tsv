@@ -60,17 +60,17 @@ Id	Ticket	"Title"	File	Lines
 769-d2cdc518	769	"/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	134-135
 770-3251a080	770	"/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	126-127
 782-a11927bd	782	"Series import: add integration test for extracting perforation flag"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	288-288
-785-140bc7bd	785	"Update series: add integration test for non-empty ""path"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	43-43
+785-140bc7bd	785	"Update series: add integration test for non-empty “path“ field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	43-43
 785-37a48219	785	"Update series: properly fail on non-supported operations"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	71-71
-785-4e1225ab	785	"Update series: add integration test for required ""op"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	39-39
+785-4e1225ab	785	"Update series: add integration test for required “op“ field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	39-39
 785-70fca94a	785	"Improve error handling for requests with a list of objects"	src/main/java/ru/mystamps/web/support/spring/mvc/ValidationErrors.java	54-54
 785-a8e6066a	785	"Update series: properly fail on invalid path"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	111-111
-785-c0b6c3f6	785	"Update series: add integration test for non-empty ""value"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	47-47
+785-c0b6c3f6	785	"Update series: add integration test for non-empty “value“ field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	47-47
 785-c33d2a08	785	"Update series: handle refuse to update an existing comment gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	143-143
 803-64628226	803	"SeriesInfoExtractorServiceImpl.extract(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	102-102
 834-3f317328	834	"SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	95-95
 857-34fbb536	857	"/series/import/request/{id}(seller.group): add validation against negative values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	36-36
-857-719bea28	857	"Check that a just created seller belongs to the ""example.com"" group"	src/test/robotframework/series/import/request-logic.robot	130-130
+857-719bea28	857	"Check that a just created seller belongs to the “example.com“ group"	src/test/robotframework/series/import/request-logic.robot	130-130
 857-83098214	857	"TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service"	src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java	98-98
 857-aa59724c	857	"/series/import/request/{id}(seller.group): add validation for existing group"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	37-37
 869-90e5e0f1	869	"show-spring-boot-version-diff.sh: properly handle recursive properties"	src/main/scripts/show-spring-boot-version-diff.sh	20-20
@@ -97,7 +97,7 @@ Id	Ticket	"Title"	File	Lines
 1000-66d57f44	1000	"Terraform: add Mailgun"	infra/terraform/my-stamps.tf	2-2
 1000-7b4c3a87	1000	"CI: validate and check Terraform configuration"	infra/terraform/my-stamps.tf	1-1
 1034-0016977f	1034	"Document how to run with PostgreSQL and docker-compose"	infra/docker/postgres.yml	7-7
-1054-0d061f99	1054	"Introduce ""mailgun-mock"" profile"	src/main/resources/application-postgres.properties	25-25
+1054-0d061f99	1054	"Introduce “mailgun-mock“ profile"	src/main/resources/application-postgres.properties	25-25
 1054-1c349c8e	1054	"Extract list of exclusions to a common profile"	src/main/resources/application-postgres.properties	48-48
 1054-33066ab3	1054	"Introduce profiles for image persistence strategies"	src/main/java/ru/mystamps/web/feature/image/ImageConfig.java	80-80
 1054-41eae704	1054	"Extract part of spring.messages configuration to a common profile"	src/main/resources/application-postgres.properties	10-10
@@ -109,11 +109,11 @@ Id	Ticket	"Title"	File	Lines
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	129-129
 1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1225-1225
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	630-630
-1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
+1123-42494b3d	1123	"/collection/{slug}: show “New“ badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	104-104
 1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	70-70
 1154-ac29fbc0	1154	"Deploy should depend on successful execution of the other pipelines"	.github/workflows/deploy.yml	20-20
-1154-b99af137	1154	"Rename profile ""travis"" to ""mysql"""	src/main/resources/application-travis.properties	2-2
+1154-b99af137	1154	"Rename profile “travis“ to “mysql“"	src/main/resources/application-travis.properties	2-2
 1160-545c948a	1160	"ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz"	src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java	160-160
 1161-69decc53	1161	"Add Feature-Policy header"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	168-168
 1161-a2706b18	1161	"Consider using spring.task.execution properties instead of manual configuration"	src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java	31-31
@@ -179,7 +179,7 @@ Id	Ticket	"Title"	File	Lines
 1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	57-57
 1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	309-309
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	28-28
-1605-1a43eb84	1605	"sitemap.xml: consider adding ""priority"" and ""changefreq"" attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60
-1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	73-73
-1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	74-74
+1605-1a43eb84	1605	"sitemap.xml: consider adding “priority“ and “changefreq“ attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60
+1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	70-70
+1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	71-71
 1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	63-63

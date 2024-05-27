@@ -1,0 +1,1661 @@
+{
+    "version": "0.24.0",
+    "puzzles": [
+    {
+      "id": "1154-ac29fbc0", 
+      "ticket": "1154", 
+      "file": ".github/workflows/deploy.yml", 
+      "lines": "20-20", 
+      "body": "Deploy should depend on successful execution of the other pipelines", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1154-3fe7f1f2", 
+      "ticket": "1154", 
+      "file": ".github/workflows/integration-tests-mysql.yml", 
+      "lines": "70-70", 
+      "body": "Set charset of MySQL container by providing a custom my.cnf", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1610-3bdaa3a0", 
+      "ticket": "1610", 
+      "file": ".github/workflows/todos-extract-from-code.yml", 
+      "lines": "70-70", 
+      "body": "Close an issue or post a comment when a puzzle got removed from code", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1610-40bd5b91", 
+      "ticket": "1610", 
+      "file": ".github/workflows/todos-extract-from-code.yml", 
+      "lines": "71-71", 
+      "body": "Post a comment when issue got closed without removing a puzzle", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1034-0016977f", 
+      "ticket": "1034", 
+      "file": "infra/docker/postgres.yml", 
+      "lines": "7-7", 
+      "body": "Document how to run with PostgreSQL and docker-compose", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1000-7b4c3a87", 
+      "ticket": "1000", 
+      "file": "infra/terraform/my-stamps.tf", 
+      "lines": "1-1", 
+      "body": "CI: validate and check Terraform configuration", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1000-66d57f44", 
+      "ticket": "1000", 
+      "file": "infra/terraform/my-stamps.tf", 
+      "lines": "2-2", 
+      "body": "Terraform: add Mailgun", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1268-64454c39", 
+      "ticket": "1268", 
+      "file": "infra/terraform/versions.tf", 
+      "lines": "2-2", 
+      "body": "Update Terraform to 0.15.x", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "705-eb60edc9", 
+      "ticket": "705", 
+      "file": "infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml", 
+      "lines": "64-64", 
+      "body": "remote-backup.sh: find a way to protect duplicity against ps", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1060-e52eab60", 
+      "ticket": "1060", 
+      "file": "pom.xml", 
+      "lines": "1225-1225", 
+      "body": "Document usage of frontend-maven-plugin", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1484-a3f3427b", 
+      "ticket": "1484", 
+      "file": "src/main/frontend/jest.config.js", 
+      "lines": "1-1", 
+      "body": "Document Jest usage", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1484-7c5cb814", 
+      "ticket": "1484", 
+      "file": "src/main/frontend/jest.config.js", 
+      "lines": "6-6", 
+      "body": "Find a better way to use ESM with Jest and replace jest-esm-transformer", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1484-0743f8f3", 
+      "ticket": "1484", 
+      "file": "src/main/frontend/jest.config.js", 
+      "lines": "11-11", 
+      "body": "Remove usage of jest-standard-reporter once facebook/jest#5064 is resolved", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1341-d3b9ba1b", 
+      "ticket": "1341", 
+      "file": "src/main/frontend/src/components/AddCatalogNumbersForm.js", 
+      "lines": "6-6", 
+      "body": "AddCatalogNumbersForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1342-c6d2f2ba", 
+      "ticket": "1342", 
+      "file": "src/main/frontend/src/components/AddCatalogPriceForm.js", 
+      "lines": "5-5", 
+      "body": "AddCatalogPriceForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1388-110ff48f", 
+      "ticket": "1388", 
+      "file": "src/main/frontend/src/components/AddCatalogPriceForm.js", 
+      "lines": "6-6", 
+      "body": "AddCatalogPriceForm: consider using a tooltip for currency", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1338-4f752b8a", 
+      "ticket": "1338", 
+      "file": "src/main/frontend/src/components/AddCommentForm.js", 
+      "lines": "7-7", 
+      "body": "AddCommentForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1489-42680117", 
+      "ticket": "1489", 
+      "file": "src/main/frontend/src/components/AddCommentForm.test.js", 
+      "lines": "57-57", 
+      "body": "Use toHaveErrorMessage() or toHaveDescription() for checking error messages", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1344-fb12fdf0", 
+      "ticket": "1344", 
+      "file": "src/main/frontend/src/components/AddReleaseYearForm.js", 
+      "lines": "6-6", 
+      "body": "AddReleaseYearForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1383-68064f45", 
+      "ticket": "1383", 
+      "file": "src/main/frontend/src/components/HideImageForm.js", 
+      "lines": "7-7", 
+      "body": "HideImageForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1057-ae51bd20", 
+      "ticket": "1057", 
+      "file": "src/main/frontend/src/components/SeriesSaleImportForm.js", 
+      "lines": "6-6", 
+      "body": "SeriesSaleImportForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1057-ea0a43ea", 
+      "ticket": "1057", 
+      "file": "src/main/frontend/src/components/SeriesSaleImportForm.js", 
+      "lines": "32-32", 
+      "body": "SeriesSaleImportForm: wait until setState() finishes", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1329-5cbf2e5d", 
+      "ticket": "1329", 
+      "file": "src/main/frontend/src/components/SeriesSalesList.js", 
+      "lines": "6-6", 
+      "body": "SeriesSalesList: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-9a82bce8", 
+      "ticket": "1280", 
+      "file": "src/main/frontend/src/components/SimilarSeriesForm.js", 
+      "lines": "6-6", 
+      "body": "SimilarSeriesForm: add tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1455-dfea25aa", 
+      "ticket": "1455", 
+      "file": "src/main/frontend/webpack.config.js", 
+      "lines": "4-4", 
+      "body": "Remove export of components to window", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1161-a2706b18", 
+      "ticket": "1161", 
+      "file": "src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java", 
+      "lines": "31-31", 
+      "body": "Consider using spring.task.execution properties instead of manual configuration", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-e31062c0", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/account/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move account package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "517-d58933f7", 
+      "ticket": "517", 
+      "file": "src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java", 
+      "lines": "207-207", 
+      "body": "Add integration tests for category suggestion", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "517-49fc5900", 
+      "ticket": "517", 
+      "file": "src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java", 
+      "lines": "225-225", 
+      "body": "CategoryService.suggestCategoryForUser(): suggest a last created category", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "517-385bf5f0", 
+      "ticket": "517", 
+      "file": "src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java", 
+      "lines": "226-226", 
+      "body": "CategoryService.suggestCategoryForUser(): suggest the most popular category", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-285714a8", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/category/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move category package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "477-6f081e18", 
+      "ticket": "477", 
+      "file": "src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java", 
+      "lines": "31-31", 
+      "body": "Add to collection: integration test for invisible quantity for a series with 1 stamp", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "663-2b32ef86", 
+      "ticket": "663", 
+      "file": "src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java", 
+      "lines": "32-32", 
+      "body": "Add to collection: add integration test for specifying a price", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "663-8bbd6c00", 
+      "ticket": "663", 
+      "file": "src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java", 
+      "lines": "47-47", 
+      "body": "/series/{id}(price): must be greater than zero", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1621-b132f9e0", 
+      "ticket": "1621", 
+      "file": "src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java", 
+      "lines": "63-63", 
+      "body": "Add 3 integration tests to check that the last added series is shown first", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-0de549b6", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/collection/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move collection package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-d8dc99c9", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/country/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move country package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-7ef1304a", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java", 
+      "lines": "67-67", 
+      "body": "DatabaseImagePersistenceStrategy.replace(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-dcf84f86", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java", 
+      "lines": "79-79", 
+      "body": "DatabaseImagePersistenceStrategy.replacePreview(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-c2bfae4d", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java", 
+      "lines": "105-105", 
+      "body": "FilesystemImagePersistenceStrategy.replace(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-59dd45e7", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java", 
+      "lines": "130-130", 
+      "body": "FilesystemImagePersistenceStrategy.replacePreview(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1054-33066ab3", 
+      "ticket": "1054", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/ImageConfig.java", 
+      "lines": "80-80", 
+      "body": "Introduce profiles for image persistence strategies", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-7320596f", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java", 
+      "lines": "81-81", 
+      "body": "ImageServiceImpl: reduce duplication between add() and replace()", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-fbc787d3", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java", 
+      "lines": "82-82", 
+      "body": "ImageServiceImpl.replace(): ensure that method cleanups file after exception", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-61bc647b", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/image/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move image package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "857-83098214", 
+      "ticket": "857", 
+      "file": "src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java", 
+      "lines": "98-98", 
+      "body": "TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-664a2788", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/participant/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move participant package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-e9697c74", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/report/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move report package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-015294f3", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddImageForm.java", 
+      "lines": "67-67", 
+      "body": "Replace image: add integration test for mandatory imageId", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-c0d00ebb", 
+      "ticket": "1303", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddImageForm.java", 
+      "lines": "68-68", 
+      "body": "Replace image: validate that image id is valid", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1277-5efa16a9", 
+      "ticket": "1277", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java", 
+      "lines": "98-98", 
+      "body": "/series/add: add integration test to check that Michel numbers may contain letter", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "671-aade0c20", 
+      "ticket": "671", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java", 
+      "lines": "105-105", 
+      "body": "/series/add: add integration test to check that Scott numbers may contain letters", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "671-e8c4f51d", 
+      "ticket": "671", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java", 
+      "lines": "106-106", 
+      "body": "/series/add: add integration test for Scott numbers error message", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1421-f0722df3", 
+      "ticket": "1421", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java", 
+      "lines": "113-113", 
+      "body": "/series/add: add integration test to check that Yvert numbers may contain letters", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "770-3251a080", 
+      "ticket": "770", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java", 
+      "lines": "126-127", 
+      "body": "/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "769-d2cdc518", 
+      "ticket": "769", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java", 
+      "lines": "134-135", 
+      "body": "/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-6ea086d8", 
+      "ticket": "1280", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java", 
+      "lines": "28-28", 
+      "body": "AddSimilarSeriesForm: series and similar series must be different", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-50f25bf4", 
+      "ticket": "1280", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java", 
+      "lines": "33-33", 
+      "body": "AddSimilarSeriesForm: seriesId must exist", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-77fd103b", 
+      "ticket": "1280", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java", 
+      "lines": "37-37", 
+      "body": "AddSimilarSeriesForm: add integration test for mandatory similarSeriesId", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-e7733cce", 
+      "ticket": "1280", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java", 
+      "lines": "38-38", 
+      "body": "AddSimilarSeriesForm: similarSeriesId must exist", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1448-65ca5ec2", 
+      "ticket": "1448", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java", 
+      "lines": "39-39", 
+      "body": "AddSimilarSeriesForm.similarSeriesId: remove deprecated member", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1448-d5a68b83", 
+      "ticket": "1448", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java", 
+      "lines": "60-60", 
+      "body": "AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-5e76eadc", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/CatalogUtils.java", 
+      "lines": "61-61", 
+      "body": "CatalogUtils.toShortForm(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-c33d2a08", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java", 
+      "lines": "143-143", 
+      "body": "Update series: handle refuse to update an existing comment gracefully", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1343-c710f5d6", 
+      "ticket": "1343", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java", 
+      "lines": "161-161", 
+      "body": "Update series: handle refuse to update an existing release year gracefully", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1340-1b97f079", 
+      "ticket": "1340", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java", 
+      "lines": "370-370", 
+      "body": "Update series: handle refuse to update an existing price gracefully", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1339-9a7986f1", 
+      "ticket": "1339", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
+      "lines": "49-49", 
+      "body": "Update series: add validation for catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1340-34ef47fe", 
+      "ticket": "1340", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
+      "lines": "50-50", 
+      "body": "Update series: add validation for a price", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1343-a893935d", 
+      "ticket": "1343", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
+      "lines": "51-51", 
+      "body": "Update series: add validation for a release year", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-37a48219", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
+      "lines": "71-71", 
+      "body": "Update series: properly fail on non-supported operations", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-a8e6066a", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
+      "lines": "111-111", 
+      "body": "Update series: properly fail on invalid path", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1098-de488059", 
+      "ticket": "1098", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/SeriesController.java", 
+      "lines": "630-630", 
+      "body": "Optimize a search within user's collection", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-7ac54ef9", 
+      "ticket": "1280", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/SeriesController.java", 
+      "lines": "648-648", 
+      "body": "Mark similar series: gracefully handle error when value mismatches to type", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1411-1e303594", 
+      "ticket": "1411", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/SeriesService.java", 
+      "lines": "33-33", 
+      "body": "Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1505-6101f84e", 
+      "ticket": "1505", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java", 
+      "lines": "309-309", 
+      "body": "Don't load a series comment for anonymous users", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1448-eb3f0fe6", 
+      "ticket": "1448", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java", 
+      "lines": "432-432", 
+      "body": "SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-6574cec0", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java", 
+      "lines": "35-35", 
+      "body": "ExpandCatalogNumbersEditor: add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-d3adec03", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java", 
+      "lines": "50-50", 
+      "body": "ExpandCatalogNumbersEditor: find a better way of editors composition", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-993ff349", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java", 
+      "lines": "56-57", 
+      "body": "/series/import/request/{id}: add integration test for trimming of michel numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-35aab30a", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java", 
+      "lines": "58-58", 
+      "body": "CatalogUtils: consider introducing toLongForm(String) method", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "690-384e961f", 
+      "ticket": "690", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/HasSiteParserValidator.java", 
+      "lines": "38-38", 
+      "body": "HasSiteParserValidator: introduce SiteParserService.hasParserForUrl()", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-7d753493", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java", 
+      "lines": "28-28", 
+      "body": "/series/import/request/{id}(seller.name): add validation against short values", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-3605c681", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java", 
+      "lines": "29-29", 
+      "body": "/series/import/request/{id}(seller.name): add validation against long values", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-f2940c60", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java", 
+      "lines": "32-32", 
+      "body": "/series/import/request/{id}(seller.url): add validation for valid url", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-3e442dbc", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java", 
+      "lines": "33-33", 
+      "body": "/series/import/request/{id}(seller.url): add validation against long values", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "857-34fbb536", 
+      "ticket": "857", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java", 
+      "lines": "36-36", 
+      "body": "/series/import/request/{id}(seller.group): add validation against negative values", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "857-aa59724c", 
+      "ticket": "857", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java", 
+      "lines": "37-37", 
+      "body": "/series/import/request/{id}(seller.group): add validation for existing group", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-08af32c7", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "44-44", 
+      "body": "/series/import/request/{id}: add integration tests for release day and month", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-760de89e", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "45-45", 
+      "body": "/series/import/request/{id}: month is required when day is specified", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-6ef6a9d5", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "46-46", 
+      "body": "/series/import/request/{id}: year is required when month is specified", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-917ee600", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "47-47", 
+      "body": "/series/import/request/{id}: release date should be in past", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-64870988", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "52-52", 
+      "body": "/series/import/request/{id}(category): add integration test for required field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-8e67a194", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "60-60", 
+      "body": "/series/import/request/{id}(quantity): add integration test for required field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-fd5f9ae4", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "61-61", 
+      "body": "/series/import/request/{id}(quantity): add integration test for min value", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-2eff2f2e", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "62-62", 
+      "body": "/series/import/request/{id}(quantity): add integration test for max value", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-51c3200e", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "68-68", 
+      "body": "/series/import/request/{id}(perforated): add integration test for required field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-3f7597a9", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "73-73", 
+      "body": "/series/import/request/{id}(imageUrl): add validation for valid url", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-35da0048", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "78-78", 
+      "body": "/series/import/request/{id}(day): add integration test for invalid day", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-318d9e28", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "82-82", 
+      "body": "/series/import/request/{id}(month): add integration test for invalid month", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-8f32202e", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "86-86", 
+      "body": "/series/import/request/{id}(year): add validation for min value", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-fe188622", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "87-87", 
+      "body": "/series/import/request/{id}(year): add validation for year in future", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-74ca36a7", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "94-94", 
+      "body": "/series/import/request/{id}(imageUrl): add integration test for required field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-6a277942", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "95-95", 
+      "body": "/series/import/request/{id}(imageUrl): add validation for non-empty file", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-ffbd8602", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "96-96", 
+      "body": "/series/import/request/{id}(imageUrl): add validation for file size", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "709-7b960d82", 
+      "ticket": "709", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "97-97", 
+      "body": "/series/import/request/{id}(imageUrl): add validation for file type", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-8e1ac4c4", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "101-101", 
+      "body": "Import series: add support for Scott catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-424e441b", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "102-102", 
+      "body": "Import series: add support for Yvert catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-d360b036", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "103-103", 
+      "body": "Import series: add support for Gibbons catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-18bba425", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "104-104", 
+      "body": "Import series: add support for Zagorski catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-f7d3a238", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "105-105", 
+      "body": "Import series: add support for Solovyov catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-b7a345ad", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java", 
+      "lines": "106-106", 
+      "body": "/series/import/request/{id}(michelNumbers): add integration test for validation", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-18c5a29c", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java", 
+      "lines": "31-31", 
+      "body": "/series/import/request/{id}: seller's name and url are required when sellerId is empty", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-0c97d8b1", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java", 
+      "lines": "32-33", 
+      "body": "/series/import/request/{id}(seriesSale): add integration test for validation of required fields", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1230-8769330d", 
+      "ticket": "1230", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java", 
+      "lines": "47-47", 
+      "body": "/series/import/request/{id}: validate that both alt price/currency are present or absent", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1326-e5faca08", 
+      "ticket": "1326", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java", 
+      "lines": "51-51", 
+      "body": "Series import: add integration test for series condition", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "660-32942e08", 
+      "ticket": "660", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java", 
+      "lines": "146-146", 
+      "body": "JdbcSeriesImportDao.addRawContent(): introduce dao", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-9e515adc", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java", 
+      "lines": "96-96", 
+      "body": "Extract logic to a separate method or add to SeriesImportService.addRequest()", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1254-f96635a2", 
+      "ticket": "1254", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java", 
+      "lines": "104-104", 
+      "body": "Update workflow to mention RetryDownloading event", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "687-c6d33b89", 
+      "ticket": "687", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java", 
+      "lines": "29-29", 
+      "body": "replace set of strings by enum", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-c3acafce", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java", 
+      "lines": "28-28", 
+      "body": "SeriesImportService.addSeries(): introduce DTO object", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "684-0b0d5497", 
+      "ticket": "684", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java", 
+      "lines": "235-236", 
+      "body": "Series import: add integration test for the case when parsed value doesn't match database", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-6636bb5e", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java", 
+      "lines": "244-244", 
+      "body": "Remove hasAtLeastOneFieldFilled() methods from DTOs", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "803-64628226", 
+      "ticket": "803", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "102-102", 
+      "body": "SeriesInfoExtractorServiceImpl.extract(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1287-00d4c9e9", 
+      "ticket": "1287", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "250-251", 
+      "body": "SeriesInfoExtractorServiceImpl.extractIssueDate(): filter out invalid day/month", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "782-a11927bd", 
+      "ticket": "782", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "288-288", 
+      "body": "Series import: add integration test for extracting perforation flag", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-5ff627a7", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "323-323", 
+      "body": "SeriesInfoExtractorServiceImpl: support for a single Michel number", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-d39599f4", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "324-324", 
+      "body": "SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-acc3d320", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "352-352", 
+      "body": "SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "978-63d2b8ea", 
+      "ticket": "978", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "360-360", 
+      "body": "SeriesInfoExtractorServiceImpl.extractSeller(): validate name", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-ee1c9a1a", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "401-401", 
+      "body": "SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-b081f579", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "402-402", 
+      "body": "SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-1c6fc247", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "413-413", 
+      "body": "SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-c38ae205", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "414-414", 
+      "body": "SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "695-30836e69", 
+      "ticket": "695", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "461-461", 
+      "body": "SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1326-d460ac09", 
+      "ticket": "1326", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
+      "lines": "523-523", 
+      "body": "SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "975-c9aec551", 
+      "ticket": "975", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java", 
+      "lines": "63-63", 
+      "body": "SiteParserServiceImpl: add unit tests for constructor", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "694-d17b3e39", 
+      "ticket": "694", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java", 
+      "lines": "198-198", 
+      "body": "Support for a separate locator for a field with michel numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1326-2cfe45cd", 
+      "ticket": "1326", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java", 
+      "lines": "285-285", 
+      "body": "JsoupSiteParser.extractCondition(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1281-8f164ecd", 
+      "ticket": "1281", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java", 
+      "lines": "62-62", 
+      "body": "Add integration test for import with seller-url-locator", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "979-ca86046a", 
+      "ticket": "979", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java", 
+      "lines": "65-65", 
+      "body": "Add integration test for import of series with currency-locator", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "975-e76660de", 
+      "ticket": "975", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java", 
+      "lines": "33-33", 
+      "body": "SiteParserServiceImpl.findForUrl(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "975-d6c13208", 
+      "ticket": "975", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java", 
+      "lines": "54-54", 
+      "body": "SiteParserServiceImpl.findParserNames(): add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "995-dfb3dc6f", 
+      "ticket": "995", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java", 
+      "lines": "59-59", 
+      "body": "SiteParser: introduce a method for parsing only sales-related info", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "995-a90e239c", 
+      "ticket": "995", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java", 
+      "lines": "82-82", 
+      "body": "SeriesInfoExtractorService: introduce a method for parsing only sales-related info", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "834-3f317328", 
+      "ticket": "834", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java", 
+      "lines": "95-95", 
+      "body": "SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-0bf380a9", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move series package one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1326-4794f854", 
+      "ticket": "1326", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java", 
+      "lines": "72-72", 
+      "body": "Series sale import: add integration test for series condition", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1605-1a43eb84", 
+      "ticket": "1605", 
+      "file": "src/main/java/ru/mystamps/web/feature/site/SitemapController.java", 
+      "lines": "60-60", 
+      "body": "sitemap.xml: consider adding “priority“ and “changefreq“ attributes", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "927-5e01dc83", 
+      "ticket": "927", 
+      "file": "src/main/java/ru/mystamps/web/feature/site/package-info.java", 
+      "lines": "1-1", 
+      "body": "Move site package to one level up", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1513-5b274200", 
+      "ticket": "1513", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java", 
+      "lines": "28-28", 
+      "body": "Add integration test to check that prices accept a decimal comma", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-4e1225ab", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
+      "lines": "39-39", 
+      "body": "Update series: add integration test for required “op“ field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-140bc7bd", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
+      "lines": "43-43", 
+      "body": "Update series: add integration test for non-empty “path“ field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-c0b6c3f6", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
+      "lines": "47-47", 
+      "body": "Update series: add integration test for non-empty “value“ field", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1447-3c055652", 
+      "ticket": "1447", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
+      "lines": "52-52", 
+      "body": "Add test to ensure that catalog numbers are trimmed", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "785-70fca94a", 
+      "ticket": "785", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/mvc/ValidationErrors.java", 
+      "lines": "54-54", 
+      "body": "Improve error handling for requests with a list of objects", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1160-545c948a", 
+      "ticket": "1160", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java", 
+      "lines": "160-160", 
+      "body": "ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "226-af195ad8", 
+      "ticket": "226", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java", 
+      "lines": "89-89", 
+      "body": "Introduce app.use-public-hostname property", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1149-f52d6199", 
+      "ticket": "1149", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java", 
+      "lines": "104-104", 
+      "body": "Move feature-specific rules to the dedicated packages", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1161-69decc53", 
+      "ticket": "1161", 
+      "file": "src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java", 
+      "lines": "168-168", 
+      "body": "Add Feature-Policy header", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "592-8fadbb56", 
+      "ticket": "592", 
+      "file": "src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java", 
+      "lines": "35-35", 
+      "body": "GroupByParent: add unit tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1054-41eae704", 
+      "ticket": "1054", 
+      "file": "src/main/resources/application-postgres.properties", 
+      "lines": "10-10", 
+      "body": "Extract part of spring.messages configuration to a common profile", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1054-7817233c", 
+      "ticket": "1054", 
+      "file": "src/main/resources/application-postgres.properties", 
+      "lines": "19-19", 
+      "body": "Extract part of Thymeleaf configuration to a common profile", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1054-0d061f99", 
+      "ticket": "1054", 
+      "file": "src/main/resources/application-postgres.properties", 
+      "lines": "25-25", 
+      "body": "Introduce “mailgun-mock“ profile", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1054-d4786412", 
+      "ticket": "1054", 
+      "file": "src/main/resources/application-postgres.properties", 
+      "lines": "29-29", 
+      "body": "Introduce profiles for liquibase contexts", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1054-1c349c8e", 
+      "ticket": "1054", 
+      "file": "src/main/resources/application-postgres.properties", 
+      "lines": "48-48", 
+      "body": "Extract list of exclusions to a common profile", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1154-b99af137", 
+      "ticket": "1154", 
+      "file": "src/main/resources/application-travis.properties", 
+      "lines": "2-2", 
+      "body": "Rename profile “travis“ to “mysql“", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1282-0969f19a", 
+      "ticket": "1282", 
+      "file": "src/main/resources/sql/series_dao_queries.properties", 
+      "lines": "178-178", 
+      "body": "Consider adding a field with an image used for preview", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1060-c9ead0b8", 
+      "ticket": "1060", 
+      "file": "src/main/scripts/ci/connect-todos-to-issues.sh", 
+      "lines": "129-129", 
+      "body": "Add a workaround for GitHub search by filtering out issues with titles that don't match exactly", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1244-070a6baf", 
+      "ticket": "1244", 
+      "file": "src/main/scripts/show-spring-boot-version-diff.sh", 
+      "lines": "3-3", 
+      "body": "Retrofit show-spring-boot-version-diff.sh script to work with a new format of the file", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "869-90e5e0f1", 
+      "ticket": "869", 
+      "file": "src/main/scripts/show-spring-boot-version-diff.sh", 
+      "lines": "20-20", 
+      "body": "show-spring-boot-version-diff.sh: properly handle recursive properties", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "884-03637f5c", 
+      "ticket": "884", 
+      "file": "src/main/webapp/WEB-INF/views/collection/estimation.html", 
+      "lines": "118-118", 
+      "body": "/collection/{slug}/estimation: optimize summing of prices", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "892-9e92b338", 
+      "ticket": "892", 
+      "file": "src/main/webapp/WEB-INF/views/collection/info.html", 
+      "lines": "101-101", 
+      "body": "Add integration tests for showing a link to collection estimation page", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1123-42494b3d", 
+      "ticket": "1123", 
+      "file": "src/main/webapp/WEB-INF/views/collection/info.html", 
+      "lines": "161-161", 
+      "body": "/collection/{slug}: show “New“ badge only once", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "511-f20a64c0", 
+      "ticket": "511", 
+      "file": "src/main/webapp/WEB-INF/views/collection/info.html", 
+      "lines": "162-162", 
+      "body": "/collection/{slug}: wrap a long caption", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1303-25f7ab3b", 
+      "ticket": "1303", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "167-167", 
+      "body": "Replace image form: arrange submit buttons in a one line", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1356-b1ab6b12", 
+      "ticket": "1356", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "177-177", 
+      "body": "Hidden images: add integration tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1356-ff7ebcc8", 
+      "ticket": "1356", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "178-178", 
+      "body": "Hidden images: allow to replace a hidden image", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1356-cbf177f8", 
+      "ticket": "1356", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "179-179", 
+      "body": "Hidden images: protect hidden images from direct access", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "995-71e1e7c8", 
+      "ticket": "995", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "857-857", 
+      "body": "Series sale import: add support for new sellers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1057-afe1bb59", 
+      "ticket": "1057", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "858-858", 
+      "body": "Series sale import form: show a message when JavaScript is disabled", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1280-233d287d", 
+      "ticket": "1280", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "1289-1289", 
+      "body": "Mark similar series: add integration tests", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "769-4310f3c0", 
+      "ticket": "769", 
+      "file": "src/test/java/ru/mystamps/web/tests/Random.java", 
+      "lines": "75-75", 
+      "body": "Random.price(): return randomized values", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "749-2a40850f", 
+      "ticket": "749", 
+      "file": "src/test/robotframework/series/import/request-logic.robot", 
+      "lines": "39-39", 
+      "body": "/series/{id}: add integration test that import info is only visible to admin", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "857-719bea28", 
+      "ticket": "857", 
+      "file": "src/test/robotframework/series/import/request-logic.robot", 
+      "lines": "130-130", 
+      "body": "Check that a just created seller belongs to the “example.com“ group", 
+      "estimate": "0", 
+      "role": "DEV"
+    }
+  ]
+}
