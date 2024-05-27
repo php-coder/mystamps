@@ -38,7 +38,7 @@ jobs:
           persist-credentials: true
 
       - name: Install pdd
-        run: sudo gem install pdd:0.23.1 --no-document
+        run: sudo gem install pdd:0.24.0 --no-document
 
       - name: Checkout existing todos to another directory
         run: |
