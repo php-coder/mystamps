@@ -94,7 +94,6 @@ jobs:
           fi
 
           if [ "$PUZZLES_FILES_MODIFIED" = 'yes' ]; then
-            printf 'pdd.json: %d puzzles\n' "$(grep -c '<puzzle>' generated-todos/pdd.json)"
             printf 'pdd.json: %d puzzles\n' "$(jq '.puzzles | length' generated-todos/pdd.json)"
             printf 'todos-in-code.tsv: %d todos\n' "$(sed 1d generated-todos/todos-in-code.tsv | wc -l)"
           else
