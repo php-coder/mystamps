@@ -603,7 +603,6 @@
 		-->
 		<java.version>1.8</java.version>
 		
-		<javadoc.plugin.version>3.4.0</javadoc.plugin.version>
 		<javassist.version>3.21.0-GA</javassist.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
@@ -870,19 +869,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${javadoc.plugin.version}</version>
-				<configuration>
-					<quiet>true</quiet>
-					<nohelp>true</nohelp>
-					<nodeprecatedlist>true</nodeprecatedlist>
-					<failOnWarnings>true</failOnWarnings>
-					<bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} ${project.developers[0].name}. All rights reserved.</bottom>
-				</configuration>
 			</plugin>
 			
 			<plugin>
