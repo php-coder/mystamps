@@ -600,8 +600,6 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<htmlunit.version>2.46.0</htmlunit.version>
 		
-		<jacoco.plugin.version>0.8.8</jacoco.plugin.version>
-		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<jakarta-mail.version>1.6.7</jakarta-mail.version>
 		
@@ -977,12 +975,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.plugin.version}</version>
 			</plugin>
 			
 			<!--
