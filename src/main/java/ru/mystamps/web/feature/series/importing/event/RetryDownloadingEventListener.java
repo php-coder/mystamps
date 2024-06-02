@@ -57,7 +57,7 @@ public class RetryDownloadingEventListener implements ApplicationListener<RetryD
 		ImportRequestDto request = seriesImportService.findById(requestId);
 		if (request == null) {
 			// FIXME: how to handle error? maybe publish UnexpectedErrorEvent?
-			LOG.error("Request #{}: couldn't retry is it doesn't exist", requestId);
+			LOG.error("Request #{}: couldn't retry as it doesn't exist", requestId);
 			return;
 		}
 
