@@ -101,7 +101,6 @@ public class SeriesImportController {
 		return redirectTo(SeriesImportUrl.REQUEST_IMPORT_PAGE, requestId);
 	}
 
-	// @todo #1254 Update workflow to mention RetryDownloading event
 	@PostMapping(path = SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE, params = "requestId")
 	public String rerunImport(
 		@RequestParam("requestId") Integer requestId,

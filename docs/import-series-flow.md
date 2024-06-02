@@ -81,6 +81,58 @@ sequenceDiagram
 	end
 ```
 
+```mermaid
+sequenceDiagram
+	title Series import flow: stage 2a (re-run a failed page downloading)
+
+	participant Browser
+	participant SeriesImportController
+	participant SeriesImportService
+	participant EventPublisher
+
+	opt POST /series/import/request?requestId=$id
+
+	Browser->>SeriesImportController: requestId
+	activate SeriesImportController
+
+	SeriesImportController->>SeriesImportService: requestId
+	activate SeriesImportService
+	SeriesImportService->>SeriesImportController: ImportRequestDto
+	deactivate SeriesImportService
+	SeriesImportController->>EventPublisher: RetryDownloading
+	SeriesImportController->>Browser: redirect to /series/import/request/{id}
+	deactivate SeriesImportController
+
+	end
+```
+
+```mermaid
+sequenceDiagram
+	title Series import flow: stage 2b (re-downloading a page)
+
+	participant RetryDownloadingEventListener
+	participant SeriesImportService
+	participant DownloaderService
+	participant EventPublisher
+
+	RetryDownloadingEventListener->>SeriesImportService: requestId
+	activate SeriesImportService
+	SeriesImportService->>RetryDownloadingEventListener: ImportRequestDto
+	deactivate SeriesImportService
+	RetryDownloadingEventListener->>DownloaderService: url
+	activate DownloaderService
+	DownloaderService->>RetryDownloadingEventListener: DownloadResult
+	deactivate DownloaderService
+
+	RetryDownloadingEventListener->>SeriesImportService: content of downloaded page
+	activate SeriesImportService
+	SeriesImportService->>SeriesImportService: 
+	SeriesImportService->>RetryDownloadingEventListener: 
+	note right of SeriesImportService: DownloadingFailed -> DownloadingSucceeded
+	deactivate SeriesImportService
+	RetryDownloadingEventListener->>EventPublisher: DownloadingSucceeded
+```
+
 ## Parse page
 
 ```mermaid
