@@ -1055,15 +1055,6 @@
       "role": "DEV"
     },
   {
-      "id": "1254-f96635a2", 
-      "ticket": "1254", 
-      "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java", 
-      "lines": "104-104", 
-      "body": "Update workflow to mention RetryDownloading event", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "687-c6d33b89", 
       "ticket": "687", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java", 
