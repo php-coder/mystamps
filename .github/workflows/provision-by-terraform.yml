@@ -23,7 +23,7 @@ jobs:
     steps:
 
       - name: Clone source code
-        uses: actions/checkout@v4.1.7 # https://github.com/actions/checkout
+        uses: actions/checkout@v4.2.0 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
@@ -36,7 +36,7 @@ jobs:
 
       # https://github.com/tfutils/tfenv#manual
       - name: Install tfenv
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
         with:
           # https://github.com/actions/checkout#checkout-multiple-repos-nested
           repository: tfutils/tfenv
