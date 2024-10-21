@@ -42,7 +42,7 @@ public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorServi
 		SeriesExtractedInfo result = extractorService.extract(pageUrl, data);
 		timer.stop();
 		
-		log.debug("Series info was extracted from raw data in {} msecs", timer.getTime());
+		log.debug("Series info was extracted from raw data in {} msecs", timer.getDuration().toMillis());
 		
 		return result;
 	}

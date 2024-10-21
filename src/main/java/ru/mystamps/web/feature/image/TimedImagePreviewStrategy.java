@@ -45,7 +45,7 @@ public class TimedImagePreviewStrategy implements ImagePreviewStrategy {
 		
 		log.debug(
 			"Image preview has been generated in {} msecs: {} -> {} bytes",
-			timer.getTime(),
+			timer.getDuration().toMillis(),
 			// let's hope that it won't throw IllegalStateException :)
 			ArrayUtils.getLength(image),
 			ArrayUtils.getLength(result)

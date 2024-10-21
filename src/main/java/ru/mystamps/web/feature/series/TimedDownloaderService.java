@@ -46,7 +46,7 @@ public class TimedDownloaderService implements DownloaderService {
 			log.debug(
 				"{} bytes have been downloaded in {} msecs",
 				result.getData().length,
-				timer.getTime()
+				timer.getDuration().toMillis()
 			);
 		}
 		
