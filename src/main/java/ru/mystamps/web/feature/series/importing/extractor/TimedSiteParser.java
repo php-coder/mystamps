@@ -47,7 +47,7 @@ public class TimedSiteParser implements SiteParser {
 			log.debug(
 				"HTML page with {} characters has been parsed in {} msecs",
 				StringUtils.length(htmlPage),
-				timer.getTime()
+				timer.getDuration().toMillis()
 			);
 		}
 		

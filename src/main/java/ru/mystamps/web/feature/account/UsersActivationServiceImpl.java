@@ -112,7 +112,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	 **/
 	private static String generateActivationKey() {
 		int actKeyLength = AccountValidation.ACT_KEY_LENGTH;
-		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase(Locale.ENGLISH);
+		return RandomStringUtils.secure().nextAlphanumeric(actKeyLength).toLowerCase(Locale.ENGLISH);
 	}
 	
 }
