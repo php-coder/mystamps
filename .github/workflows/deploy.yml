@@ -58,6 +58,7 @@ jobs:
       - name: Install ansible
         # The command pip3 install --user ansible==2.10.17 doesn't work as we have an old version
         # See https://docs.ansible.com/ansible/2.10/installation_guide/intro_installation.html#installing-devel-from-github-with-pip
+        # NOTE: during version bump don't forget to update in other places: provisioning-by-ansible.yml and provisioning-by-terraform.yml
         run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
 
       # https://docs.ansible.com/ansible/2.10/collections/community/general/uptimerobot_module.html
