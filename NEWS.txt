@@ -1,5 +1,6 @@
 0.x (upcoming release)
 - (infrastructure) migrate to Spring Boot 2.3
+- (infrastructure) discontinue usage of Vagrant
 
 0.4.7
 - (infrastructure) port JavaScript unit tests from Jasmine to Jest

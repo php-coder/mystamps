@@ -18,14 +18,12 @@ src/main/javascript/*/*.min.js
 src/main/frontend/node/
 src/main/frontend/node_modules/
 
-# Vagrant related files
-.vagrant/
-infra/vagrant/provisioning/vagrant.retry
-infra/vagrant/provisioning/vars/prod.yml
-infra/vagrant/provisioning/roles/php-coder.oraclejdk/
-infra/vagrant/provisioning/roles/php-coder.nginx/
-infra/vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
-infra/vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
+# Ansible related files
+infra/ansible/vars/prod.yml
+infra/ansible/roles/php-coder.oraclejdk/
+infra/ansible/roles/php-coder.nginx/
+infra/ansible/roles/mystamps-nginx/files/prod/my-stamps.ru.key
+infra/ansible/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
 
 # Terraform related files
 infra/terraform/.terraform/
