@@ -5,6 +5,7 @@ variable "do_token" {
   # How to obtain a token: https://docs.digitalocean.com/reference/api/create-personal-access-token/
   description = "Digital Ocean Personal Access Token"
   type        = string
+  sensitive   = true
 }
 
 variable "uptimerobot_token" {
@@ -14,6 +15,7 @@ variable "uptimerobot_token" {
   # - scroll down to API Settings and select "Main API Key"
   description = "UptimeRobot API key"
   type        = string
+  sensitive   = true
 }
 
 # Digital Ocean provider docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs
