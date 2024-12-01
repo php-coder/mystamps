@@ -99,14 +99,14 @@ jobs:
             -detailed-exitcode \
             -var-file terraform-data/terraform.tfvars \
             -state terraform-data/terraform.tfstate \
-            -out terraform.tfplan
+            -out terraform-data/terraform.tfplan
 
 
       - name: Cleanup
         if: always()
         working-directory: infra/terraform
         run: |
-          for FILE in vault-pass.txt terraform.tfplan terraform-data/terraform.tfstate terraform-data/terraform.tfvars; do
+          for FILE in vault-pass.txt terraform-data/terraform.tfplan terraform-data/terraform.tfstate terraform-data/terraform.tfvars; do
             [ ! -f "$FILE" ] || rm -fv "$FILE"
           done
           [ ! -d terraform-data ] || git worktree remove terraform-data
