@@ -16,11 +16,6 @@
       package: nano
       state: absent
 
-  - name: Installing mycli
-    apt:
-      package: mycli
-      state: present
-
   - name: Creating /data directory
     file:
       path: /data
