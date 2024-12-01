@@ -145,5 +145,5 @@ resource "uptimerobot_monitor" "mystamps" {
 # https://registry.terraform.io/providers/vexxhost/uptimerobot/0.8.2/docs/resources/status_page
 resource "uptimerobot_status_page" "status_page" {
   friendly_name = "MyStamps Site Status"
-  monitors = [ uptimerobot_monitor.mystamps.id ]
+  monitors      = [uptimerobot_monitor.mystamps.id]
 }
