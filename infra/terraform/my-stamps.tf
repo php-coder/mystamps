@@ -25,11 +25,14 @@ provider "digitalocean" {
 
 # Droplet docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/droplet.html
 resource "digitalocean_droplet" "web" {
-  # "ubuntu-16-04-x64" resolves into Ubuntu 16.04.6 while our server is based on Ubuntu 16.04.1
-  image  = "18572320"
+  image  = "ubuntu-24-04-x64"
   name   = "my-stamps.ru"
   region = "fra1"
   size   = "s-1vcpu-1gb"
+  # https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle
+  lifecycle {
+    ignore_changes = [image]
+  }
 }
 
 # Domain docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/domain.html
