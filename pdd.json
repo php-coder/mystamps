@@ -38,6 +38,15 @@
       "role": "DEV"
     },
   {
+      "id": "705-eb60edc9", 
+      "ticket": "705", 
+      "file": "infra/ansible/roles/mystamps-backup/tasks/main.yml", 
+      "lines": "64-64", 
+      "body": "remote-backup.sh: find a way to protect duplicity against ps", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "1034-0016977f", 
       "ticket": "1034", 
       "file": "infra/docker/postgres.yml", 
@@ -70,15 +79,6 @@
       "file": "infra/terraform/versions.tf", 
       "lines": "2-2", 
       "body": "Update Terraform to 0.15.x", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
-      "id": "705-eb60edc9", 
-      "ticket": "705", 
-      "file": "infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml", 
-      "lines": "64-64", 
-      "body": "remote-backup.sh: find a way to protect duplicity against ps", 
       "estimate": "0", 
       "role": "DEV"
     },

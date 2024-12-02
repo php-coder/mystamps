@@ -42,7 +42,7 @@ Id	Ticket	"Title"	File	Lines
 695-c3acafce	695	"SeriesImportService.addSeries(): introduce DTO object"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java	28-28
 695-ee1c9a1a	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	401-401
 695-f2940c60	695	"/series/import/request/{id}(seller.url): add validation for valid url"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	32-32
-705-eb60edc9	705	"remote-backup.sh: find a way to protect duplicity against ps"	infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml	64-64
+705-eb60edc9	705	"remote-backup.sh: find a way to protect duplicity against ps"	infra/ansible/roles/mystamps-backup/tasks/main.yml	64-64
 709-2eff2f2e	709	"/series/import/request/{id}(quantity): add integration test for max value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	62-62
 709-3f7597a9	709	"/series/import/request/{id}(imageUrl): add validation for valid url"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	73-73
 709-51c3200e	709	"/series/import/request/{id}(perforated): add integration test for required field"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	68-68
