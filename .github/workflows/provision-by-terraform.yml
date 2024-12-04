@@ -90,10 +90,16 @@ jobs:
 
       - name: Run terraform init
         working-directory: infra/terraform
+        env:
+          # https://developer.hashicorp.com/terraform/cli/config/environment-variables#tf_in_automation
+          TF_IN_AUTOMATION: true
         run: terraform init
 
       - name: Run terraform plan
         working-directory: infra/terraform
+        env:
+          # https://developer.hashicorp.com/terraform/cli/config/environment-variables#tf_in_automation
+          TF_IN_AUTOMATION: true
         run: >-
           terraform plan \
             -detailed-exitcode \
