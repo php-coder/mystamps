@@ -1,6 +1,5 @@
 terraform {
-  # @todo #1268 Update Terraform to 0.15.x
-  required_version = ">= 0.14"
+  required_version = ">= 0.15"
 
   required_providers {
     digitalocean = {
