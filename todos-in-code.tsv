@@ -119,7 +119,6 @@ Id	Ticket	"Title"	File	Lines
 1161-a2706b18	1161	"Consider using spring.task.execution properties instead of manual configuration"	src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java	31-31
 1230-8769330d	1230	"/series/import/request/{id}: validate that both alt price/currency are present or absent"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	47-47
 1244-070a6baf	1244	"Retrofit show-spring-boot-version-diff.sh script to work with a new format of the file"	src/main/scripts/show-spring-boot-version-diff.sh	3-3
-1268-64454c39	1268	"Update Terraform to 0.15.x"	infra/terraform/versions.tf	2-2
 1277-5efa16a9	1277	"/series/add: add integration test to check that Michel numbers may contain letter"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	98-98
 1280-233d287d	1280	"Mark similar series: add integration tests"	src/main/webapp/WEB-INF/views/series/info.html	1289-1289
 1280-50f25bf4	1280	"AddSimilarSeriesForm: seriesId must exist"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	33-33

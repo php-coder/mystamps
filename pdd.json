@@ -74,15 +74,6 @@
       "role": "DEV"
     },
   {
-      "id": "1268-64454c39", 
-      "ticket": "1268", 
-      "file": "infra/terraform/versions.tf", 
-      "lines": "2-2", 
-      "body": "Update Terraform to 0.15.x", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "1060-e52eab60", 
       "ticket": "1060", 
       "file": "pom.xml", 
