@@ -27,6 +27,10 @@ infra/ansible/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
 
 # Terraform related files
 infra/terraform/.terraform/
+infra/terraform/terraform.tfplan
+infra/terraform/terraform.tfvars
+infra/terraform/terraform.tfstate
+infra/terraform/terraform.tfstate.backup
 
 # used by infra/docker/prod.yml
 infra/docker/application-prod.properties

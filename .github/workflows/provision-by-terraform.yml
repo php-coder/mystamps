@@ -84,7 +84,7 @@ jobs:
             echo "Decrypting ${FILENAME}.enc to $FILENAME"
             ansible-vault decrypt \
               --vault-password-file vault-pass.txt \
-              --output "terraform-data/$FILENAME" \
+              --output "$FILENAME" \
               "terraform-data/${FILENAME}.enc"
           done
 
@@ -103,16 +103,16 @@ jobs:
         run: >-
           terraform plan \
             -detailed-exitcode \
-            -var-file terraform-data/terraform.tfvars \
-            -state terraform-data/terraform.tfstate \
-            -out terraform-data/terraform.tfplan
+            -var-file terraform.tfvars \
+            -state terraform.tfstate \
+            -out terraform.tfplan
 
 
       - name: Cleanup
         if: always()
         working-directory: infra/terraform
         run: |
-          for FILE in vault-pass.txt terraform-data/terraform.tfplan terraform-data/terraform.tfstate terraform-data/terraform.tfstate.backup terraform-data/terraform.tfvars; do
+          for FILE in vault-pass.txt terraform.tfplan terraform.tfstate terraform.tfstate.backup terraform.tfvars; do
             [ ! -f "$FILE" ] || rm -fv "$FILE"
           done
           [ ! -d terraform-data ] || git worktree remove terraform-data
