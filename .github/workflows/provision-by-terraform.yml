@@ -103,10 +103,7 @@ jobs:
         run: >-
           terraform plan \
             -detailed-exitcode \
-            -var-file terraform.tfvars \
-            -state terraform.tfstate \
             -out terraform.tfplan
-
 
       - name: Cleanup
         if: always()
