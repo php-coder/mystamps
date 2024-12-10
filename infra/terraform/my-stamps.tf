@@ -1,18 +1,18 @@
 # @todo #1000 CI: validate and check Terraform configuration
 # @todo #1000 Terraform: add Mailgun
 
+# How to obtain a token: https://docs.digitalocean.com/reference/api/create-personal-access-token/
 variable "do_token" {
-  # How to obtain a token: https://docs.digitalocean.com/reference/api/create-personal-access-token/
   description = "Digital Ocean Personal Access Token"
   type        = string
   sensitive   = true
 }
 
+# How to create API Key:
+# - open https://uptimerobot.com/dashboard
+# - go to MySettings
+# - scroll down to API Settings and select "Main API Key"
 variable "uptimerobot_token" {
-  # How to create API Key:
-  # - open https://uptimerobot.com/dashboard
-  # - go to MySettings
-  # - scroll down to API Settings and select "Main API Key"
   description = "UptimeRobot API key"
   type        = string
   sensitive   = true
