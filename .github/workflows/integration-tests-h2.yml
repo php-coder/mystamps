@@ -2,6 +2,12 @@ name: Integration Tests (H2)
 
 on:
   push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushpull_requestpull_request_targetpathspaths-ignore
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/integration-tests-h2.yml'
+      - 'docs/**'
+      - 'infra/**'
 
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions:

@@ -2,6 +2,12 @@ name: Integration Tests (MySQL)
 
 on:
   push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushpull_requestpull_request_targetpathspaths-ignore
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/integration-tests-mysql.yml'
+      - 'docs/**'
+      - 'infra/**'
 
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions:
