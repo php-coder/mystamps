@@ -65,15 +65,6 @@
       "role": "DEV"
     },
   {
-      "id": "1000-66d57f44", 
-      "ticket": "1000", 
-      "file": "infra/terraform/my-stamps.tf", 
-      "lines": "2-2", 
-      "body": "Terraform: add Mailgun", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "1060-e52eab60", 
       "ticket": "1060", 
       "file": "pom.xml", 

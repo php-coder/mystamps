@@ -94,7 +94,6 @@ Id	Ticket	"Title"	File	Lines
 995-71e1e7c8	995	"Series sale import: add support for new sellers"	src/main/webapp/WEB-INF/views/series/info.html	857-857
 995-a90e239c	995	"SeriesInfoExtractorService: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	82-82
 995-dfb3dc6f	995	"SiteParser: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	59-59
-1000-66d57f44	1000	"Terraform: add Mailgun"	infra/terraform/my-stamps.tf	2-2
 1000-7b4c3a87	1000	"CI: validate and check Terraform configuration"	infra/terraform/my-stamps.tf	1-1
 1034-0016977f	1034	"Document how to run with PostgreSQL and docker-compose"	infra/docker/postgres.yml	7-7
 1054-0d061f99	1054	"Introduce “mailgun-mock“ profile"	src/main/resources/application-postgres.properties	25-25
