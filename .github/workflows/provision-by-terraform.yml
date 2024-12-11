@@ -105,6 +105,15 @@ jobs:
           TF_IN_AUTOMATION: true
         run: terraform init
 
+      - name: Check whether there are no modified files
+        run: >-
+          MODIFIED_FILES="$(git status --short)";
+          if [ -n "$MODIFIED_FILES" ]; then
+            echo >&2 "ERROR: the following files have been modified:";
+            echo >&2 "$MODIFIED_FILES";
+            exit 1;
+          fi
+
       - name: Run terraform plan
         working-directory: infra/terraform
         env:
