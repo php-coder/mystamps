@@ -10,5 +10,9 @@ terraform {
       source  = "vexxhost/uptimerobot"
       version = "0.8.2"
     }
+    mailgun = {
+      source  = "wgebis/mailgun"
+      version = "0.7.7"
+    }
   }
 }

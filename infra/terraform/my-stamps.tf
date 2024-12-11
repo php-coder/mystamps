@@ -1,5 +1,4 @@
 # @todo #1000 CI: validate and check Terraform configuration
-# @todo #1000 Terraform: add Mailgun
 
 # How to obtain a token: https://docs.digitalocean.com/reference/api/create-personal-access-token/
 variable "do_token" {
@@ -17,6 +16,27 @@ variable "uptimerobot_token" {
   type        = string
   sensitive   = true
 }
+
+# How to create API Key:
+# - https://app.mailgun.com/settings/api_security
+# - https://help.mailgun.com/hc/en-us/articles/203380100-Where-can-I-find-my-API-keys-and-SMTP-credentials
+variable "mailgun_token" {
+  description = "MailGun API key"
+  type        = string
+  sensitive   = true
+}
+
+# Mailgun provider docs: https://registry.terraform.io/providers/wgebis/mailgun/0.7.7/docs
+provider "mailgun" {
+  api_key = var.mailgun_token
+}
+
+# https://registry.terraform.io/providers/wgebis/mailgun/0.7.7/docs/resources/domain
+resource "mailgun_domain" "mystamps" {
+  name   = "my-stamps.ru"
+  region = "us"
+}
+
 
 # Digital Ocean provider docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs
 provider "digitalocean" {

@@ -1,2 +1,3 @@
 do_token = "<insert-token-here>"
 uptimerobot_token = "<insert-token-here>"
+mailgun_token = "<insert-token-here>"

@@ -60,6 +60,10 @@
   $ curl -sS -H 'Content-Type: application/x-www-form-urlencoded' -H 'Cache-Control: no-cache' -d "api_key=$UPTIMEROBOT_TOKEN" 'https://api.uptimerobot.com/v2/getPSPs' | jq '.psps[].id'
   1234
   ```
+* Import existing MailGun configuration (optionally; only the first time)
+  ```console
+  $ terraform import mailgun_domain.mystamps us:my-stamps.ru
+  ```
 * Plan and apply:
   ```console
   $ terraform plan -out terraform.tfplan
