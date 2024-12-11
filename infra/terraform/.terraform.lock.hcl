@@ -44,6 +44,7 @@ provider "registry.terraform.io/wgebis/mailgun" {
   constraints = "0.7.7"
   hashes = [
     "h1:NRlNwk7z3JyMkZiTWp6XqBS3voj6xp8QY81tTOT+Ock=",
+    "h1:u4NSFhUhTncpRV1L2joy3COQsS7UE/e5Uwup15IdlMw=",
     "zh:090f6e8d5829bba95cd4aca39581363dbe85adad91fc1db81397bad5ed86de49",
     "zh:44a3a3781c15930facdccc97a40d8eb34d1a0acceb9006544ee58647d835dfd4",
     "zh:552b52d7013dbcb8714111900a1a4fc2d5b6b8dad4e844e6b1a636d459b11c7c",
