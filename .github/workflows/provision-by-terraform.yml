@@ -1,6 +1,16 @@
 name: Setup a server by Terraform
 
 on:
+  push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
+    branches:
+      - master
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushpull_requestpull_request_targetpathspaths-ignore
+    paths:
+      - .github/workflows/provision-by-terraform.yml
+      - 'infra/terraform/**'
+      - '!infra/terraform/*.example'
+      - '!infra/terraform/*.md'
   # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onworkflow_dispatch
   workflow_dispatch:
 
