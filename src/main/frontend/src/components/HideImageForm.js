@@ -135,7 +135,7 @@ class HideImageFormView extends React.PureComponent {
 						</div>
 					</div>
 
-					<div className="form-group from-group-sm">
+					<div className="form-group form-group-sm">
 						<div className="col-sm-offset-3 col-sm-8">
 							<button
 								type="submit"
