@@ -167,6 +167,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
+		boolean onSeriesInfoPage = SERIES_INFO_PAGE_PATTERN.matcher(uri).matches();
 		boolean onAddSeriesPage = uri.equals(SeriesUrl.ADD_SERIES_PAGE);
 		boolean onH2ConsolePage = h2ConsolePath != null && uri.startsWith(h2ConsolePath);
 		
@@ -223,7 +224,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		} else if (onH2ConsolePage) {
 			sb.append(SEPARATOR)
 			  .append(CHILD_SRC);
-		} else if (SERIES_INFO_PAGE_PATTERN.matcher(uri).matches()) {
+		
+		} else if (onSeriesInfoPage) {
 			// anonymous and users without a required authority actually don't need these directives
 			sb.append(SCRIPTS_SERIES_INFO_PAGE)
 			  .append(SEPARATOR)
