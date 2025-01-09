@@ -72,7 +72,6 @@ import java.io.IOException;
 import java.time.Year;
 import java.time.ZoneOffset;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -231,10 +230,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		Map<String, ?> commonAttrs =
-			prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
-		model.addAllAttributes(commonAttrs);
-		
+		prepareCommonAttrsForSeriesInfo(model, series, currentUserId, authentication, lang);
 		addSeriesSalesFormToModel(authentication, model);
 		addImageFormToModel(model);
 		addStampsToCollectionForm(model, series);
@@ -404,10 +400,7 @@ public class SeriesController {
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
-			Map<String, ?> commonAttrs =
-				prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
-			model.addAllAttributes(commonAttrs);
-			
+			prepareCommonAttrsForSeriesInfo(model, series, currentUserId, authentication, lang);
 			addSeriesSalesFormToModel(authentication, model);
 			addStampsToCollectionForm(model, series);
 			
@@ -477,9 +470,7 @@ public class SeriesController {
 				return null;
 			}
 			
-			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
-			model.addAllAttributes(commonAttrs);
-			
+			prepareCommonAttrsForSeriesInfo(model, series, currentUserId, authentication, lang);
 			addSeriesSalesFormToModel(authentication, model);
 			addImageFormToModel(model);
 			addStampsToCollectionForm(model, series);
@@ -570,10 +561,7 @@ public class SeriesController {
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
-			Map<String, ?> commonAttrs =
-				prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
-			model.addAllAttributes(commonAttrs);
-			
+			prepareCommonAttrsForSeriesInfo(model, series, currentUserId, authentication, lang);
 			addSeriesSalesFormToModel(authentication, model);
 			addImageFormToModel(model);
 			addStampsToCollectionForm(model, series);
@@ -736,19 +724,19 @@ public class SeriesController {
 		request.removeAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
 	}
 	
-	private Map<String, ?> prepareCommonAttrsForSeriesInfo(
+	private void prepareCommonAttrsForSeriesInfo(
+		Model model,
 		SeriesDto series,
 		Integer currentUserId,
 		Authentication authentication,
 		String lang) {
 		
-		Map<String, Object> model = new HashMap<>();
 		Integer seriesId = series.getId();
 		
-		model.put("series", series);
+		model.addAttribute("series", series);
 		
 		List<SeriesLinkDto> similarSeries = seriesService.findSimilarSeries(seriesId, lang);
-		model.put("similarSeries", similarSeries);
+		model.addAttribute("similarSeries", similarSeries);
 		
 		String michelNumbers   = CatalogUtils.toShortForm(series.getMichel().getNumbers());
 		String scottNumbers    = CatalogUtils.toShortForm(series.getScott().getNumbers());
@@ -756,16 +744,16 @@ public class SeriesController {
 		String gibbonsNumbers  = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
 		String solovyovNumbers = CatalogUtils.toShortForm(series.getSolovyov().getNumbers());
 		String zagorskiNumbers = CatalogUtils.toShortForm(series.getZagorski().getNumbers());
-		model.put("michelNumbers", michelNumbers);
-		model.put("scottNumbers", scottNumbers);
-		model.put("yvertNumbers", yvertNumbers);
-		model.put("gibbonsNumbers", gibbonsNumbers);
-		model.put("solovyovNumbers", solovyovNumbers);
-		model.put("zagorskiNumbers", zagorskiNumbers);
+		model.addAttribute("michelNumbers", michelNumbers);
+		model.addAttribute("scottNumbers", scottNumbers);
+		model.addAttribute("yvertNumbers", yvertNumbers);
+		model.addAttribute("gibbonsNumbers", gibbonsNumbers);
+		model.addAttribute("solovyovNumbers", solovyovNumbers);
+		model.addAttribute("zagorskiNumbers", zagorskiNumbers);
 		
 		boolean userCanAddImagesToSeries =
 			isUserCanAddImagesToSeries(authentication, currentUserId, series);
-		model.put("allowAddingImages", userCanAddImagesToSeries);
+		model.addAttribute("allowAddingImages", userCanAddImagesToSeries);
 		
 		// we require DOWNLOAD_IMAGE and ADD_IMAGES_TO_SERIES in order to reduce
 		// a number of the possible cases to maintain
@@ -773,25 +761,23 @@ public class SeriesController {
 			SecurityContextUtils.hasAuthority(authentication, Authority.REPLACE_IMAGE)
 			&& SecurityContextUtils.hasAuthority(authentication, Authority.DOWNLOAD_IMAGE)
 			&& SecurityContextUtils.hasAuthority(authentication, Authority.ADD_IMAGES_TO_SERIES);
-		model.put("allowReplacingImages", userCanReplaceImages);
+		model.addAttribute("allowReplacingImages", userCanReplaceImages);
 		
 		if (SecurityContextUtils.hasAuthority(authentication, Authority.UPDATE_COLLECTION)) {
 			Map<Integer, Integer> seriesInstances =
 				collectionService.findSeriesInstances(currentUserId, seriesId);
-			model.put("seriesInstances", seriesInstances);
+			model.addAttribute("seriesInstances", seriesInstances);
 		}
 		
 		if (SecurityContextUtils.hasAuthority(authentication, Authority.VIEW_SERIES_SALES)) {
 			List<SeriesSaleDto> seriesSales = seriesSalesService.findSales(seriesId);
-			model.put("seriesSales", seriesSales);
+			model.addAttribute("seriesSales", seriesSales);
 		}
 		
 		if (SecurityContextUtils.hasAuthority(authentication, Authority.IMPORT_SERIES)) {
 			ImportRequestInfo importInfo = seriesImportService.findRequestInfo(seriesId);
-			model.put("importInfo", importInfo);
+			model.addAttribute("importInfo", importInfo);
 		}
-		
-		return model;
 	}
 	
 	private void addSeriesSalesFormToModel(Authentication authentication, Model model) {
