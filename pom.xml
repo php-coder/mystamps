@@ -79,12 +79,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 			<version>${liquibase.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.yaml</groupId>
-					<artifactId>snakeyaml</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<dependency>
@@ -97,12 +91,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.yaml</groupId>
-					<artifactId>snakeyaml</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jdbc/build.gradle -->
@@ -389,10 +377,6 @@
 			<version>${robotframework-selenium.version}</version>
 			<scope>test</scope>
 			<exclusions>
-				<exclusion>
-					<groupId>org.yaml</groupId>
-					<artifactId>snakeyaml</artifactId>
-				</exclusion>
 				<exclusion>
 					<groupId>io.appium</groupId>
 					<artifactId>java-client</artifactId>
@@ -853,7 +837,6 @@
 								<exclude>org.apache.tomcat.embed:tomcat-embed-el</exclude>
 								<exclude>junit:*:*:*:compile</exclude>
 								<exclude>org.hamcrest:*:*:*:compile</exclude>
-								<exclude>org.yaml:snakeyaml</exclude>
 							</excludes>
 						</bannedDependencies>
 						<requireJavaVersion>
