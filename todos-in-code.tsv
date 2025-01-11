@@ -106,8 +106,8 @@ Id	Ticket	"Title"	File	Lines
 1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	858-858
 1057-ea0a43ea	1057	"SeriesSaleImportForm: wait until setState() finishes"	src/main/frontend/src/components/SeriesSaleImportForm.js	32-32
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	129-129
-1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1200-1200
-1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	630-630
+1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1183-1183
+1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	618-618
 1123-42494b3d	1123	"/collection/{slug}: show “New“ badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	104-104
 1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	76-76
@@ -123,7 +123,7 @@ Id	Ticket	"Title"	File	Lines
 1280-50f25bf4	1280	"AddSimilarSeriesForm: seriesId must exist"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	33-33
 1280-6ea086d8	1280	"AddSimilarSeriesForm: series and similar series must be different"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	28-28
 1280-77fd103b	1280	"AddSimilarSeriesForm: add integration test for mandatory similarSeriesId"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	37-37
-1280-7ac54ef9	1280	"Mark similar series: gracefully handle error when value mismatches to type"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	648-648
+1280-7ac54ef9	1280	"Mark similar series: gracefully handle error when value mismatches to type"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	636-636
 1280-9a82bce8	1280	"SimilarSeriesForm: add tests"	src/main/frontend/src/components/SimilarSeriesForm.js	6-6
 1280-e7733cce	1280	"AddSimilarSeriesForm: similarSeriesId must exist"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	38-38
 1281-8f164ecd	1281	"Add integration test for import with seller-url-locator"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java	62-62

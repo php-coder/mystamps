@@ -68,7 +68,7 @@
       "id": "1060-e52eab60", 
       "ticket": "1060", 
       "file": "pom.xml", 
-      "lines": "1200-1200", 
+      "lines": "1183-1183", 
       "body": "Document usage of frontend-maven-plugin", 
       "estimate": "0", 
       "role": "DEV"
@@ -626,7 +626,7 @@
       "id": "1098-de488059", 
       "ticket": "1098", 
       "file": "src/main/java/ru/mystamps/web/feature/series/SeriesController.java", 
-      "lines": "630-630", 
+      "lines": "618-618", 
       "body": "Optimize a search within user's collection", 
       "estimate": "0", 
       "role": "DEV"
@@ -635,7 +635,7 @@
       "id": "1280-7ac54ef9", 
       "ticket": "1280", 
       "file": "src/main/java/ru/mystamps/web/feature/series/SeriesController.java", 
-      "lines": "648-648", 
+      "lines": "636-636", 
       "body": "Mark similar series: gracefully handle error when value mismatches to type", 
       "estimate": "0", 
       "role": "DEV"
