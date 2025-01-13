@@ -60,3 +60,23 @@ updates:
     rebase-strategy: "disabled"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#open-pull-requests-limit
     open-pull-requests-limit: 1
+
+  # https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference#package-ecosystem-
+  # NOTE: only terraform >= 0.13 and <= 1.8.x is supported
+  - package-ecosystem: "terraform"
+    directory: "infra/terraform"
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "Asia/Novosibirsk"
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#commit-message
+    commit-message:
+      prefix: "chore"
+    assignees: [ "php-coder" ]
+    reviewers: [ "php-coder" ]
+    labels: [ "kind/dependency-update" ]
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#rebase-strategy
+    rebase-strategy: "disabled"
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#open-pull-requests-limit
+    open-pull-requests-limit: 1
