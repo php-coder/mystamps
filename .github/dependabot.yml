@@ -30,7 +30,6 @@ updates:
     commit-message:
       prefix: "chore"
     assignees: [ "php-coder" ]
-    reviewers: [ "php-coder" ]
     labels: [ "kind/dependency-update" ]
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#rebase-strategy
     rebase-strategy: "disabled"
@@ -54,7 +53,6 @@ updates:
     commit-message:
       prefix: "ci"
     assignees: [ "php-coder" ]
-    reviewers: [ "php-coder" ]
     labels: [ "kind/dependency-update", "area/ci" ]
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#rebase-strategy
     rebase-strategy: "disabled"
@@ -74,7 +72,6 @@ updates:
     commit-message:
       prefix: "chore"
     assignees: [ "php-coder" ]
-    reviewers: [ "php-coder" ]
     labels: [ "kind/dependency-update" ]
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#rebase-strategy
     rebase-strategy: "disabled"
