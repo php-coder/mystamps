@@ -38,12 +38,6 @@ updates:
 
   - package-ecosystem: "github-actions"
     directory: "/"
-    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#allow
-    allow:
-      - dependency-name: "actions/cache"
-      - dependency-name: "actions/checkout"
-      - dependency-name: "actions/setup-java"
-      - dependency-name: "actions/upload-artifact"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#scheduleinterval
     schedule:
       interval: "daily"
