@@ -120,7 +120,7 @@ class AddCommentFormView extends React.PureComponent {
 							</textarea>
 						</div>
 					</div>
-					<div className="col-sm-offset-3 col-sm-4">
+					<div className="col-sm-offset-3 col-sm-9">
 						{ hasValidationErrors &&
 							<span id="new-comment.errors" className="help-block">
 								{ validationErrors.join(', ') }
