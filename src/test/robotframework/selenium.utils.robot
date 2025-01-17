@@ -58,3 +58,8 @@ Disable Client Validation
 	[Documentation]     Disable client validation for a form with a specified ID
 	[Arguments]         ${id}
 	Execute Javascript  return window.document.getElementById('${id}').setAttribute('novalidate', 'true');
+
+Modify Input Type
+	[Documentation]     Modifies <input> "type" attribute to bypass possible browser's validations
+	[Arguments]         ${id}  ${type}
+	Execute Javascript  return window.document.getElementById('${id}').type = '${type}';

@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation   Verify account registration validation scenarios
 Library         SeleniumLibrary
+Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Force Tags      account  registration  validation
@@ -23,7 +24,8 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 
 Invalid Email Should Be Rejected
-	[Arguments]             ${email}
-	Input Text              id:email  ${email}
-	Submit Form             id:register-account-form
-	Element Text Should Be  id:email.errors  Invalid e-mail address
+	[Arguments]                ${email}
+	Disable Client Validation  register-account-form
+	Input Text                 id:email  ${email}
+	Submit Form                id:register-account-form
+	Element Text Should Be     id:email.errors  Invalid e-mail address

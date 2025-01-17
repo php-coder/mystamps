@@ -17,6 +17,7 @@ Create series with empty required fields
 	Page Should Not Contain Element  id:image-url.errors
 
 Create series with non-numeric quantity
+	Modify Input Type       quantity  text
 	Input Text              id:quantity  NaN
 	Submit Form             id:add-series-form
 	Element Text Should Be  id:quantity.errors  Invalid value
