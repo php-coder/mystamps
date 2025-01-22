@@ -23,7 +23,7 @@
       "id": "1610-3bdaa3a0", 
       "ticket": "1610", 
       "file": ".github/workflows/todos-extract-from-code.yml", 
-      "lines": "70-70", 
+      "lines": "69-69", 
       "body": "Close an issue or post a comment when a puzzle got removed from code", 
       "estimate": "0", 
       "role": "DEV"
@@ -32,7 +32,7 @@
       "id": "1610-40bd5b91", 
       "ticket": "1610", 
       "file": ".github/workflows/todos-extract-from-code.yml", 
-      "lines": "71-71", 
+      "lines": "70-70", 
       "body": "Post a comment when issue got closed without removing a puzzle", 
       "estimate": "0", 
       "role": "DEV"
