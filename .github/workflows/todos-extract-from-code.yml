@@ -52,7 +52,6 @@ jobs:
             --exclude '**/*.jpg' \
             --exclude '**/*.png' \
             --exclude '**/*.ico' \
-            --exclude '**/*.md' \
             --exclude '**/*.enc' \
             --exclude 'src/test/wiremock/**/*' \
             --exclude 'generated-todos/**' \
