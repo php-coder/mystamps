@@ -23,7 +23,7 @@
       "id": "1610-3bdaa3a0", 
       "ticket": "1610", 
       "file": ".github/workflows/todos-extract-from-code.yml", 
-      "lines": "69-69", 
+      "lines": "68-68", 
       "body": "Close an issue or post a comment when a puzzle got removed from code", 
       "estimate": "0", 
       "role": "DEV"
@@ -32,7 +32,7 @@
       "id": "1610-40bd5b91", 
       "ticket": "1610", 
       "file": ".github/workflows/todos-extract-from-code.yml", 
-      "lines": "70-70", 
+      "lines": "69-69", 
       "body": "Post a comment when issue got closed without removing a puzzle", 
       "estimate": "0", 
       "role": "DEV"
@@ -52,6 +52,15 @@
       "file": "infra/docker/postgres.yml", 
       "lines": "7-7", 
       "body": "Document how to run with PostgreSQL and docker-compose", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
+      "id": "1720-f6404f1b", 
+      "ticket": "1720", 
+      "file": "infra/terraform/README.md", 
+      "lines": "3-3", 
+      "body": "Terraform: automate import of the existing resources -->", 
       "estimate": "0", 
       "role": "DEV"
     },

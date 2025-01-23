@@ -177,6 +177,7 @@ Id	Ticket	"Title"	File	Lines
 1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	309-309
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	28-28
 1605-1a43eb84	1605	"sitemap.xml: consider adding “priority“ and “changefreq“ attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60
-1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	69-69
-1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	70-70
+1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	68-68
+1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	69-69
 1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	63-63
+1720-f6404f1b	1720	"Terraform: automate import of the existing resources -->"	infra/terraform/README.md	3-3
