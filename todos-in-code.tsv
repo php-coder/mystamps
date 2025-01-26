@@ -173,7 +173,7 @@ Id	Ticket	"Title"	File	Lines
 1484-0743f8f3	1484	"Remove usage of jest-standard-reporter once facebook/jest#5064 is resolved"	src/main/frontend/jest.config.js	11-11
 1484-7c5cb814	1484	"Find a better way to use ESM with Jest and replace jest-esm-transformer"	src/main/frontend/jest.config.js	6-6
 1484-a3f3427b	1484	"Document Jest usage"	src/main/frontend/jest.config.js	1-1
-1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	57-57
+1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	53-53
 1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	309-309
 1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	28-28
 1605-1a43eb84	1605	"sitemap.xml: consider adding “priority“ and “changefreq“ attributes"	src/main/java/ru/mystamps/web/feature/site/SitemapController.java	60-60

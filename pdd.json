@@ -149,7 +149,7 @@
       "id": "1489-42680117", 
       "ticket": "1489", 
       "file": "src/main/frontend/src/components/AddCommentForm.test.js", 
-      "lines": "57-57", 
+      "lines": "53-53", 
       "body": "Use toHaveErrorMessage() or toHaveDescription() for checking error messages", 
       "estimate": "0", 
       "role": "DEV"
