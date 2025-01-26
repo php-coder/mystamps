@@ -1,6 +1,8 @@
 # Provisioning a server with Terraform
 
-<!-- @todo #1720 Terraform: automate import of the existing resources -->
+<!--
+@todo #1720 Terraform: automate import of the existing resources
+-->
 
 * Install [tfenv](https://github.com/tfutils/tfenv) and terraform
   ```console
