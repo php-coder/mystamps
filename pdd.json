@@ -60,7 +60,7 @@
       "ticket": "1720", 
       "file": "infra/terraform/README.md", 
       "lines": "3-3", 
-      "body": "Terraform: automate import of the existing resources -->", 
+      "body": "Terraform: automate import of the existing resources", 
       "estimate": "0", 
       "role": "DEV"
     },
