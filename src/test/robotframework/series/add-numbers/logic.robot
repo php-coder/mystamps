@@ -26,7 +26,7 @@ Before Test Suite
 Add numbers
 	[Arguments]                       ${catalog}  ${numbers}  ${expectedNumbers}
 	Wait Until Page Contains Element  id:add-catalog-numbers-form
-	Select From List By Value         id:numbers-catalog-name  ${catalog}
+	Select From List By Value         id:catalog-name  ${catalog}
 	Input Text                        id:catalog-numbers  ${numbers}
 	Submit Form                       id:add-catalog-numbers-form
 	Wait Until Page Contains Element  id:${catalog}_catalog_info

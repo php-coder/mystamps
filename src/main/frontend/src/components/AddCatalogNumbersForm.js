@@ -115,12 +115,12 @@ class AddCatalogNumbersFormView extends React.PureComponent {
 						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
-						<label htmlFor="numbers-catalog-name" className="control-label col-sm-3">
+						<label htmlFor="catalog-name" className="control-label col-sm-3">
 							{ l10n['t_catalog'] || 'Catalog' }
 						</label>
 						<div className="col-sm-6">
 							<select
-								id="numbers-catalog-name"
+								id="catalog-name"
 								name="catalogName"
 								className="form-control"
 								onChange={ handleChangeCatalog }>
