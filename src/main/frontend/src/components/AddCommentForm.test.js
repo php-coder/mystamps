@@ -50,10 +50,6 @@ describe('AddCommentFormView', () => {
 				<AddCommentFormView validationErrors={ [ 'err1', 'err2' ] } />
 			);
 			// then
-			const form = screen.getByRole('form', {name: 'Add a comment'});
-			expect(form).not.toBeNull();
-			expect(form).toHaveClass('has-error');
-
 			// @todo #1489 Use toHaveErrorMessage() or toHaveDescription() for checking error messages
 			const fieldErrors = container.querySelector('#new-comment\\.errors');
 			expect(fieldErrors).not.toBeNull();

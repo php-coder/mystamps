@@ -96,7 +96,7 @@ class AddCommentFormView extends React.PureComponent {
 			<div className="col-sm-12 form-group">
 				<form id="add-comment-form"
 					aria-label={ l10n['t_add_comment'] || 'Add a comment' }
-					className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+					className="form-horizontal"
 					onSubmit={ handleSubmit }>
 					{ hasServerError &&
 						<div id="add-comment-failed-msg"
@@ -105,7 +105,7 @@ class AddCommentFormView extends React.PureComponent {
 							{ l10n['t_server_error'] || 'Server error' }
 						</div>
 					}
-					<div className="form-group form-group-sm">
+					<div className={ `form-group form-group-sm ${hasValidationErrors ? 'has-error' : ''}` }>
 						<label htmlFor="new-comment" className="control-label col-sm-3 required-field">
 							{ l10n['t_comment'] || 'Comment' }
 						</label>
@@ -118,14 +118,14 @@ class AddCommentFormView extends React.PureComponent {
 								required="required"
 								onChange={ handleChange }>
 							</textarea>
+							{ hasValidationErrors &&
+								<span id="new-comment.errors" className="help-block">
+									{ validationErrors.join(', ') }
+								</span>
+							}
 						</div>
 					</div>
 					<div className="col-sm-offset-3 col-sm-9">
-						{ hasValidationErrors &&
-							<span id="new-comment.errors" className="help-block">
-								{ validationErrors.join(', ') }
-							</span>
-						}
 						<button
 							type="submit"
 							className="btn btn-primary btn-sm"
