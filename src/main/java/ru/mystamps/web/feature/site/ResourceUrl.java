@@ -42,7 +42,6 @@ public final class ResourceUrl {
 	private static final String SERIES_INFO_JS         = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";
 	private static final String SALE_IMPORT_FORM_JS     = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSaleImportForm.min.js";
 	private static final String SIMILAR_SERIES_FORM_JS  = "/public/js/" + RESOURCES_VERSION + "/components/SimilarSeriesForm.min.js";
-	private static final String CATALOG_PRICE_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.min.js";
 	private static final String RELEASE_YEAR_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.min.js";
 	private static final String HIDE_IMAGE_FORM_JS      = "/public/js/" + RESOURCES_VERSION + "/components/HideImageForm.min.js";
 	private static final String SERIES_SALES_LIST_JS    = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSalesList.min.js";
@@ -81,7 +80,6 @@ public final class ResourceUrl {
 		put(resources, host, "SERIES_INFO_JS", SERIES_INFO_JS);
 		put(resources, host, "SALE_IMPORT_FORM_JS", SALE_IMPORT_FORM_JS);
 		put(resources, host, "SIMILAR_SERIES_FORM_JS", SIMILAR_SERIES_FORM_JS);
-		put(resources, host, "CATALOG_PRICE_FORM_JS", CATALOG_PRICE_FORM_JS);
 		put(resources, host, "RELEASE_YEAR_FORM_JS", RELEASE_YEAR_FORM_JS);
 		put(resources, host, "HIDE_IMAGE_FORM_JS", HIDE_IMAGE_FORM_JS);
 		put(resources, host, "SERIES_SALES_LIST_JS", SERIES_SALES_LIST_JS);

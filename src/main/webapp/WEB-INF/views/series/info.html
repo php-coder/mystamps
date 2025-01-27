@@ -1318,29 +1318,8 @@
 		<th:block sec:authorize="hasAuthority('CREATE_SERIES')">
 		/*/-->
 		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.min.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.min.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
 
 		<script th:inline="javascript">
-			/*[+
-			var addCatalogPriceProps = {
-				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
-				'csrfHeaderName': [[ ${_csrf.headerName} ]],
-				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {
-					't_server_error': [[ #{t_server_error} ]],
-					't_catalog':      [[ #{t_catalog} ]],
-					't_michel':       [[ #{t_michel} ]],
-					't_scott':        [[ #{t_scott} ]],
-					't_yvert':        [[ #{t_yvert} ]],
-					't_sg':           [[ #{t_sg} ]],
-					't_solovyov':     [[ #{t_solovyov} ]],
-					't_zagorski':     [[ #{t_zagorski} ]],
-					't_price':        [[ #{t_price} ]],
-					't_add':          [[ #{t_add} ]]
-				}
-			};
-			+]*/
-			
 			/*[- */
 			var addReleaseYearProps = {
 				'url': '/series/100',
@@ -1348,13 +1327,7 @@
 				'sinceYear': 1840,
 				'tillYear': new Date().getFullYear()
 			};
-			var addCatalogPriceProps = {
-				'url': '/series/100',
-				'l10n': {}
-			};
 			/* -]*/
-			
-			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
 			
 			/*[# th:if="${series.releaseYear == null}"]*/
 			/*[+
