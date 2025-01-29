@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.series;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +35,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 @Validated
 @RestController
@@ -77,19 +75,6 @@ class RestSeriesController {
 				case "/release_year":
 					seriesService.addReleaseYear(seriesId, patch.integerValue(), currentUserId);
 					break;
-				case "/michel_price":
-				case "/scott_price":
-				case "/yvert_price":
-				case "/gibbons_price":
-				case "/solovyov_price":
-				case "/zagorski_price":
-					seriesService.addCatalogPrice(
-						extractCatalog(path),
-						seriesId,
-						patch.bigDecimalValue(),
-						currentUserId
-					);
-					break;
 				default:
 					// @todo #785 Update series: properly fail on invalid path
 					break;
@@ -116,12 +101,5 @@ class RestSeriesController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	private static StampsCatalog extractCatalog(String path) {
-		// "/catalog_something" => "catalog" => "CATALOG"
-		String catalogName = StringUtils.substringBetween(path, "/", "_")
-			.toUpperCase(Locale.ENGLISH);
-		return StampsCatalog.valueOf(catalogName);
-	}
-
 }
 

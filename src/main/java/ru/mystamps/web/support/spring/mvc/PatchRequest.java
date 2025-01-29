@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 // See for details: http://jsonpatch.com
 @Getter
@@ -56,10 +55,6 @@ public class PatchRequest {
 
 	public Integer integerValue() {
 		return Integer.valueOf(value);
-	}
-	
-	public BigDecimal bigDecimalValue() {
-		return BigDecimalConverter.valueOf(value);
 	}
 	
 }
