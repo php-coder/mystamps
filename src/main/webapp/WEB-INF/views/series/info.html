@@ -409,7 +409,59 @@
 							
 							<div id="add-release-year" sec:authorize="hasAuthority('CREATE_SERIES')" th:if="${series.releaseYear == null}"></div>
 							
-							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
+							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')">
+								<div class="col-sm-12 form-group">
+									<form id="add-catalog-price-form" class={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }>
+										<div id="add-catalog-price-failed-msg"
+											class={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
+										{ l10n['t_server_error'] || 'Server error' }
+										</div>
+										<div class="form-group form-group-sm">
+											<label for="price-catalog-name" class="control-label col-sm-3">
+												{ l10n['t_catalog'] || 'Catalog' }
+											</label>
+											<div class="col-sm-6">
+												<select id="price-catalog-name" name="catalogName" class="form-control">
+													<option value="michel">{ l10n['t_michel'] || 'Michel' }</option>
+													<option value="scott">{ l10n['t_scott'] || 'Scott' }</option>
+													<option value="yvert">{ l10n['t_yvert'] || 'Yvert et Tellier' }</option>
+													<option value="gibbons">{ l10n['t_sg'] || 'Stanley Gibbons' }</option>
+													<option value="solovyov">{ l10n['t_solovyov'] || 'Solovyov' }</option>
+													<option value="zagorski">{ l10n['t_zagorski'] || 'Zagorski' }</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group form-group-sm">
+											<label for="catalog-price" class="control-label col-sm-3 required-field">
+												{ l10n['t_price'] || 'Price' }
+											</label>
+											<div class="col-sm-3">
+												<div class="input-group">
+													<span class="input-group-addon">{ currencySymbol }</span>
+													<input id="catalog-price"
+														type="text"
+														class="form-control"
+														size="5"
+														title={ currencyName }
+														required="required" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-offset-3 col-sm-4">
+											<span id="catalog-price.errors"
+												class={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
+												{ validationErrors.join(', ') }
+											</span>
+											<button
+												type="submit"
+												class="btn btn-primary btn-sm"
+												disabled={ isDisabled }>
+												{ l10n['t_add'] || 'Add' }
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
 
 							<div id="add-catalog-numbers" class="row" sec:authorize="hasAuthority('CREATE_SERIES')">
 								<div class="col-sm-12 form-group" th:fragment="AddCatalogNumbersForm">
