@@ -68,10 +68,8 @@ jobs:
           tfenv use
 
       - name: Install ansible-vault
-        # The command pip3 install --user ansible==2.10.17 doesn't work as we have an old version
-        # See https://docs.ansible.com/ansible/2.10/installation_guide/intro_installation.html#installing-devel-from-github-with-pip
         # NOTE: during version bump don't forget to update in other places: deploy.yml and provisioning-by-ansible.yml
-        run: python3 -m pip install --user https://github.com/ansible/ansible/archive/refs/tags/v2.10.17.tar.gz
+        run: pip3 install ansible==3.4.0
 
       - name: Show tools versions
         env:

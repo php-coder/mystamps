@@ -24,11 +24,11 @@ cleanup() {
 trap 'cleanup' EXIT SIGHUP SIGINT SIGTERM
 
 # Disable host key checking to suppress interactive prompt.
-# See: https://docs.ansible.com/ansible/2.10/user_guide/connection_details.html#managing-host-key-checking
+# See: https://docs.ansible.com/ansible/3/user_guide/connection_details.html#managing-host-key-checking
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 # Make the output of a failed task human readable.
-# See: https://docs.ansible.com/ansible/2.10/reference_appendices/config.html#envvar-ANSIBLE_STDOUT_CALLBACK
+# See: https://docs.ansible.com/ansible/3/reference_appendices/config.html#envvar-ANSIBLE_STDOUT_CALLBACK
 export ANSIBLE_STDOUT_CALLBACK=debug
 
 if [ -z "${VAULT_PASSWORD:-}" ]; then
@@ -39,7 +39,7 @@ fi
 printf '%s' "$VAULT_PASSWORD" >"$PASS_FILE"
 
 # LATER: consider specifying private key via env variable
-# https://docs.ansible.com/ansible/2.10/reference_appendices/config.html#envvar-ANSIBLE_PRIVATE_KEY_FILE
+# https://docs.ansible.com/ansible/3/reference_appendices/config.html#envvar-ANSIBLE_PRIVATE_KEY_FILE
 for FILE in "$PRIVATE_KEY" "$VARS_FILE"; do
 	FILENAME="$(basename "$FILE")"
 	echo "Decrypting ${FILENAME}.enc to $FILENAME"
