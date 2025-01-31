@@ -31,7 +31,7 @@ public final class ResourceUrl {
 	public static final String STATIC_RESOURCES_URL = "https://stamps.filezz.ru";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION = "v0.4.7.0";
+	public static final String RESOURCES_VERSION = "v0.4.7.1";
 
 	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/utils/CatalogUtils.min.js";
 	private static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";

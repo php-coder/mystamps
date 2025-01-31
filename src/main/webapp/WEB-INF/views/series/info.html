@@ -411,52 +411,53 @@
 							
 							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')">
 								<div class="col-sm-12 form-group">
-									<form id="add-catalog-price-form" class={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }>
+									<form id="add-catalog-price-form" class="form-horizontal has-error">
 										<div id="add-catalog-price-failed-msg"
-											class={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
-										{ l10n['t_server_error'] || 'Server error' }
+											class="alert alert-danger text-center col-sm-8 col-sm-offset-2"
+											th:text="#{t_server_error}">
+											Server error
 										</div>
 										<div class="form-group form-group-sm">
-											<label for="price-catalog-name" class="control-label col-sm-3">
-												{ l10n['t_catalog'] || 'Catalog' }
+											<label for="price-catalog-name" class="control-label col-sm-3" th:text="#{t_catalog}">
+												Catalog
 											</label>
 											<div class="col-sm-6">
 												<select id="price-catalog-name" name="catalogName" class="form-control">
-													<option value="michel">{ l10n['t_michel'] || 'Michel' }</option>
-													<option value="scott">{ l10n['t_scott'] || 'Scott' }</option>
-													<option value="yvert">{ l10n['t_yvert'] || 'Yvert et Tellier' }</option>
-													<option value="gibbons">{ l10n['t_sg'] || 'Stanley Gibbons' }</option>
-													<option value="solovyov">{ l10n['t_solovyov'] || 'Solovyov' }</option>
-													<option value="zagorski">{ l10n['t_zagorski'] || 'Zagorski' }</option>
+													<option value="MICHEL" th:text="#{t_michel}">Michel</option>
+													<option value="SCOTT" th:text="#{t_scott}">Scott</option>
+													<option value="YVERT" th:text="#{t_yvert}">Yvert et Tellier</option>
+													<option value="GIBBONS" th:text="#{t_sg}">Stanley Gibbons</option>
+													<option value="SOLOVYOV" th:text="#{t_solovyov}">Solovyov</option>
+													<option value="ZAGORSKI" th:text="#{t_zagorski}">Zagorski</option>
 												</select>
 											</div>
 										</div>
 										<div class="form-group form-group-sm">
-											<label for="catalog-price" class="control-label col-sm-3 required-field">
-												{ l10n['t_price'] || 'Price' }
+											<label for="catalog-price" class="control-label col-sm-3 required-field" th:text="#{t_price}">
+												Price
 											</label>
 											<div class="col-sm-3">
 												<div class="input-group">
-													<span class="input-group-addon">{ currencySymbol }</span>
+													<span class="input-group-addon" id="js-catalog-price-symbol" >&euro;</span>
 													<input id="catalog-price"
 														type="text"
 														class="form-control"
 														size="5"
-														title={ currencyName }
+														title="EUR"
 														required="required" />
 												</div>
 											</div>
 										</div>
 										<div class="col-sm-offset-3 col-sm-4">
-											<span id="catalog-price.errors"
-												class={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
-												{ validationErrors.join(', ') }
+											<span id="catalog-price.errors" class="help-block">
+												Invalid value
 											</span>
 											<button
 												type="submit"
 												class="btn btn-primary btn-sm"
-												disabled={ isDisabled }>
-												{ l10n['t_add'] || 'Add' }
+												disabled
+												th:text="#{t_add}">
+												Add
 											</button>
 										</div>
 									</form>
@@ -1079,9 +1080,33 @@
 			src="../../../../../../target/classes/js/utils/DateUtils.min.js"
 			th:src="${DATE_UTILS_JS}"></script>
 
-		<script sec:authorize="hasAuthority('VIEW_SERIES_SALES')"
+		<script sec:authorize="hasAnyAuthority('VIEW_SERIES_SALES', 'CREATE_SERIES')"
 			src="../../../../javascript/series/info.js"
 			th:src="${SERIES_INFO_JS}"></script>
+		
+		<script sec:authorize="hasAuthority('CREATE_SERIES')">
+			window.addEventListener('DOMContentLoaded', function initPage() {
+				var catalogNameElem = document.getElementById('price-catalog-name');
+				if (catalogNameElem == null) {
+					console.error("Couldn't initialize catalog name selector: element not found");
+					return;
+				}
+				catalogNameElem.addEventListener('change', function changeCatalogCurrency(elem) {
+					var name = this.value;
+					var info = getCurrencyByCatalogName(this.value);
+					var symbolElem = document.getElementById('js-catalog-price-symbol');
+					if (symbolElem == null) {
+						console.error("Couldn't change currency symbol: element not found");
+					}
+					var titleElem = document.getElementById('catalog-price');
+					if (titleElem == null) {
+						console.error("Couldn't change currency title: element not found");
+					}
+					symbolElem.innerText = info[0];
+					titleElem.title = info[1];
+				});
+			});
+		</script>
 		
 		<!--/*/
 		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES', 'CREATE_SERIES', 'ADD_COMMENTS_TO_SERIES', 'HIDE_IMAGE')">
