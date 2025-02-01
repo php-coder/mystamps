@@ -77,7 +77,7 @@
       "id": "1060-e52eab60", 
       "ticket": "1060", 
       "file": "pom.xml", 
-      "lines": "1183-1183", 
+      "lines": "1195-1195", 
       "body": "Document usage of frontend-maven-plugin", 
       "estimate": "0", 
       "role": "DEV"
