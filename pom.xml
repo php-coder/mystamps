@@ -773,6 +773,18 @@
 						<phase>generate-resources</phase>
 					</execution>
 				</executions>
+				<dependencies>
+					<!--
+						A workaround to make the plugin work with Maven 3.9+:
+						explicitly add a dependency on required library (that was auto-injected previously).
+						See: https://github.com/samaxes/minify-maven-plugin/pull/176
+					-->
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-utils</artifactId>
+						<version>3.0.24</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			
 			<plugin>
