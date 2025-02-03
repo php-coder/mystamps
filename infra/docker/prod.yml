@@ -17,8 +17,6 @@ services:
       - SERVER_SERVLET_SESSION_COOKIE_SECURE=false
     volumes:
       - ./application-prod.properties:/data/mystamps/application-prod.properties:ro
-      # to use a WAR file from filesystem and avoid to build an image every time
-      #- ../../target/mystamps.war:/data/mystamps/mystamps.war:ro
     networks:
       - internal-network
     depends_on:
@@ -44,9 +42,6 @@ services:
       - MYSQL_DATABASE=mystamps
     ports:
       - '3306:3306'
-    # only for testing locally
-    #volumes:
-    #  - ./mysql_backup_mystamps.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:ro
     networks:
       - internal-network
 

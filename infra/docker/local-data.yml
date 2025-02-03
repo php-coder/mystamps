@@ -1,0 +1,15 @@
+# Customize configuration from docker-compose.yml and prod.yml to run the
+# application with local data.
+#
+# In order to get the effective configuration, run
+#   docker compose -f docker-compose.yml -f prod.yml -f local-data.yml config
+#
+
+services:
+  web:
+    volumes:
+      # to use a WAR file from filesystem and avoid to build image every time
+      - ../../target/mystamps.war:/data/mystamps/mystamps.war:ro
+  db:
+    volumes:
+      - ./mysql_backup_mystamps.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:ro
