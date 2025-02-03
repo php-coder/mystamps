@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   web:
     image: phpcoder/mystamps:0.4.7

@@ -6,7 +6,6 @@
 #
 # @todo #1034 Document how to run with PostgreSQL and docker-compose
 #
-version: '3'
 
 services:
   web:
