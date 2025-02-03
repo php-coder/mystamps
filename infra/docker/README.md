@@ -11,10 +11,10 @@ possible configurations, we support only those that are typically used:
     ```console
     $ ./mvnw package dockerfile:build
     ```
-  * Run a container with `docker-compose`:
+  * Run a container with `docker compose`:
     ```console
     $ cd infra/docker
-    $ docker-compose up -d
+    $ docker compose up -d
     ```
     or with a plain Docker:
     ```console

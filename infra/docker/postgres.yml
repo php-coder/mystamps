@@ -2,7 +2,7 @@
 # PostgreSQL database.
 #
 # In order to get the effective configuration, run
-#   docker-compose -f docker-compose.yml -f postgres.yml config
+#   docker compose -f docker-compose.yml -f postgres.yml config
 #
 # @todo #1034 Document how to run with PostgreSQL and docker-compose
 #
