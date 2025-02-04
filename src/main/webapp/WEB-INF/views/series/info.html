@@ -411,12 +411,7 @@
 							
 							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')">
 								<div class="col-sm-12 form-group">
-									<form id="add-catalog-price-form" class="form-horizontal has-error">
-										<div id="add-catalog-price-failed-msg"
-											class="alert alert-danger text-center col-sm-8 col-sm-offset-2"
-											th:text="#{t_server_error}">
-											Server error
-										</div>
+									<form id="add-catalog-price-form" class="form-horizontal">
 										<div class="form-group form-group-sm">
 											<label for="price-catalog-name" class="control-label col-sm-3" th:text="#{t_catalog}">
 												Catalog
@@ -449,9 +444,6 @@
 											</div>
 										</div>
 										<div class="col-sm-offset-3 col-sm-4">
-											<span id="catalog-price.errors" class="help-block">
-												Invalid value
-											</span>
 											<button
 												type="submit"
 												class="btn btn-primary btn-sm"
