@@ -8,6 +8,7 @@
 	<removeChangeSetProperty change="addColumn" remove="beforeColumn" dbms="mysql,postgresql" />
 	
 	<changeSet id="add-michel_numbers-column-to-series_import_parsed_data-table" author="php-coder" context="scheme">
+		<validCheckSum>8:4e2c6af7eeb86f5963ddc22c726bda35</validCheckSum>
 		
 		<!--
 			19 characters are enough for holding 2 ranges of catalog numbers

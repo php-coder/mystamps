@@ -8,6 +8,7 @@
 	<removeChangeSetProperty change="addColumn" remove="beforeColumn" dbms="mysql,postgresql" />
 	
 	<changeSet id="add-seller_group_id-column-to-series_sales_import_parsed_data-table" author="php-coder" context="scheme">
+		<validCheckSum>8:a99506d469794b03a4353a411aeb9b65</validCheckSum>
 		
 		<addColumn tableName="series_sales_import_parsed_data">
 			<column name="seller_group_id"

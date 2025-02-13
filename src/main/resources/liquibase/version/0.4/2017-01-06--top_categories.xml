@@ -36,6 +36,7 @@
 	</changeSet>
 	
 	<changeSet id="add-categories-top_category_id-field" author="php-coder" context="scheme">
+		<validCheckSum>8:a397b809158ce6de065df1d2944f6f6d</validCheckSum>
 		
 		<addColumn tableName="categories">
 			<column name="top_category_id" type="INTEGER" beforeColumn="created_at">
