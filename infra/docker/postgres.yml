@@ -11,12 +11,12 @@ services:
   web:
     environment:
       # NOTE: it's better to have credentials the same as in src/main/resources/application-postgres.properties
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mystamps
-      - SPRING_DATASOURCE_USERNAME=mystamps
-      - SPRING_DATASOURCE_PASSWORD=secret
-      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mystamps
+      SPRING_DATASOURCE_USERNAME: mystamps
+      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       # to test whether it works in prod-like environment
-      #- SPRING_LIQUIBASE_CONTEXTS=scheme,init-data,prod-data
+      #SPRING_LIQUIBASE_CONTEXTS: scheme,init-data,prod-data
     #volumes:
       # to use a WAR file from filesystem and avoid to build an image every time
       #- ../../target/mystamps.war:/data/mystamps/mystamps.war:ro
@@ -31,9 +31,9 @@ services:
     image: postgres:11.3
     environment:
       # NOTE: it's better to have credentials the same as in .github/workflows/integration-tests-postgres.yml
-      - POSTGRES_USER=mystamps
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DATABASE=mystamps
+      POSTGRES_USER: mystamps
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DATABASE: mystamps
     networks:
       - internal-network
 
