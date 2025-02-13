@@ -7,6 +7,9 @@
 
 services:
   web:
+    # Useful for debugging Liquibase
+    #environment:
+    #  LOGGING_LEVEL_LIQUIBASE: DEBUG
     volumes:
       # to use a WAR file from filesystem and avoid to build image every time
       - ../../target/mystamps.war:/data/mystamps/mystamps.war:ro
