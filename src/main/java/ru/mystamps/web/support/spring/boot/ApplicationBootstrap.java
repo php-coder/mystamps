@@ -31,6 +31,12 @@ import ru.mystamps.web.support.liquibase.LiquibaseSupport;
 public class ApplicationBootstrap {
 	
 	public static void main(String... args) throws LiquibaseException {
+		// LATER: use "spring.liquibase.analyticsEnabled: false" property instead (requires Spring Boot 3.5)
+		// See https://docs.liquibase.com/parameters/analytics-enabled.html
+		// See https://docs.liquibase.com/parameters/analytics-log-level.html
+		System.setProperty("liquibase.analytics.enabled", "false");
+		System.setProperty("liquibase.analytics.logLevel", "FINE");
+		
 		// When the application is started as
 		//
 		//     java -jar target/mystamps.war liquibase validate
