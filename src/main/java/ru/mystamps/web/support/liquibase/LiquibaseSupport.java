@@ -50,7 +50,7 @@ public final class LiquibaseSupport {
 		// Don't run Liquibase by default, we only need to initialize all required beans
 		// Note that we can't set "spring.liquibase.enabled: false" because it disables
 		// autoconfiguration of Liquibase beans completely.
-		// See https://docs.liquibase.com/commands/config-ref/should-run-parameter.html
+		// See https://docs.liquibase.com/parameters/should-run.html
 		System.setProperty("liquibase.shouldRun", "false");
 		
 		// Override value (WARN) from application*.properties
