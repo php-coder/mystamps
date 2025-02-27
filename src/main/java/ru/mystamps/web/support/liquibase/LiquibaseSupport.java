@@ -53,9 +53,6 @@ public final class LiquibaseSupport {
 		// See https://docs.liquibase.com/parameters/should-run.html
 		System.setProperty("liquibase.shouldRun", "false");
 		
-		// Override value (WARN) from application*.properties
-		System.setProperty("logging.level.liquibase", "INFO");
-		
 		// LATER: Ideally, we don't need to use a connection pool (HikariCP) in this case.
 		// Consider configuring spring.datasource.type property.
 		SpringApplication app = new SpringApplication(LiquibaseOnlyStartup.class);
