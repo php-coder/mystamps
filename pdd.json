@@ -1463,7 +1463,7 @@
       "id": "1054-1c349c8e", 
       "ticket": "1054", 
       "file": "src/main/resources/application-postgres.properties", 
-      "lines": "48-48", 
+      "lines": "47-47", 
       "body": "Extract list of exclusions to a common profile", 
       "estimate": "0", 
       "role": "DEV"
