@@ -91,6 +91,9 @@ jobs:
         env:
           # https://developer.hashicorp.com/terraform/cli/config/environment-variables#tf_in_automation
           TF_IN_AUTOMATION: true
+          # https://developer.hashicorp.com/terraform/cli/config/environment-variables#tf_input
+          # https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform#automated-terraform-cli-workflow
+          TF_INPUT: false
         run: terraform init
 
       - name: Check whether there are no modified files
@@ -107,6 +110,9 @@ jobs:
         env:
           # https://developer.hashicorp.com/terraform/cli/config/environment-variables#tf_in_automation
           TF_IN_AUTOMATION: true
+          # https://developer.hashicorp.com/terraform/cli/config/environment-variables#tf_input
+          # https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform#automated-terraform-cli-workflow
+          TF_INPUT: false
         run: >-
           terraform plan \
             -detailed-exitcode \
