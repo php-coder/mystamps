@@ -110,7 +110,7 @@ Id	Ticket	"Title"	File	Lines
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	618-618
 1123-42494b3d	1123	"/collection/{slug}: show “New“ badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	104-104
-1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	79-79
+1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	81-81
 1154-ac29fbc0	1154	"Deploy should depend on successful execution of the other pipelines"	.github/workflows/deploy.yml	20-20
 1154-b99af137	1154	"Rename profile “travis“ to “mysql“"	src/main/resources/application-travis.properties	2-2
 1160-545c948a	1160	"ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz"	src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java	160-160
