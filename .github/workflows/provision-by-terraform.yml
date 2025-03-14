@@ -48,17 +48,15 @@ jobs:
         uses: jdx/mise-action@v2.1.11 # https://github.com/jdx/mise-action
         with:
           version: 2025.3.2                  # [default: latest] mise version to install
-          install: false                     # [default: true] run `mise install`
+          install: true                      # [default: true] run `mise install`
           cache: true                        # [default: true] cache mise using GitHub's cache
           log_level: info                    # [default: info] log level
           working_directory: infra/terraform # [default: .] directory to run mise in
-
-      # Workaround: don't install parent's dependencies as we don't use them
-      # See: https://github.com/jdx/mise-action/issues/183
-      - name: Install ansible-vault
-        run: |
-          mise config set settings.disable_tools --type list java,maven
-          mise install
+        env:
+          # Workaround: don't install parent's dependencies as we don't use them
+          # See: https://github.com/jdx/mise-action/issues/183
+          # https://mise.jdx.dev/configuration/settings.html#disable_tools
+          MISE_DISABLE_TOOLS=java,maven
 
       - name: Install ansible-vault
         # NOTE: during version bump don't forget to update in other places: deploy.yml and provisioning-by-ansible.yml
