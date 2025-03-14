@@ -5,12 +5,12 @@ WireMock is a simulator for HTTP-based APIs. We use this tool in the integration
 external services. For example, for testing import of the stamps series from sites.
 
 ## Running on CI
-WireMock is automatically running/stopping during integration tests execution (`./mvnw verify`).
+WireMock is automatically running/stopping during integration tests execution (`mvn verify`).
 
 ## Running manually
 In order to run the server as a standalone process:
 ```console
-$ ./mvnw wiremock:run -Dwiremock.keepRunning=true
+$ mvn wiremock:run -Dwiremock.keepRunning=true
 ```
 
 After that the mock server will be available on 8888 port.

@@ -957,7 +957,7 @@
 			
 			<!--
 				Usage:
-				./mvnw robotframework:run (runs tests and generates report in target/robotframework-reports/report.html)
+				mvn robotframework:run (runs tests and generates report in target/robotframework-reports/report.html)
 			-->
 			<plugin>
 				<groupId>org.robotframework</groupId>
@@ -1048,7 +1048,7 @@
 			
 			<!--
 				Usage:
-				./mvnw wiremock:run (run WireMock server with mocks from src/test/wiremock/mappings)
+				mvn wiremock:run (run WireMock server with mocks from src/test/wiremock/mappings)
 			-->
 			<plugin>
 				<groupId>uk.co.automatictester</groupId>

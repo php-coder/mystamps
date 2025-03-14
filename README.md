@@ -25,9 +25,10 @@ You can look at it and try on https://my-stamps.ru
 If you are programmer/sysadmin or you just feeling that you are able to run a local version of the site then follow the following instructions:
 If you want to run it locally, follow the instructions:
 
-* install JDK (at least 8th version is required)
+* install JDK (8th version is required) and Maven
+  * the preferred way to set up tools is to use [`mise`](https://mise.jdx.dev/getting-started.html). After its activation, the required tools will be installed automatically
 * clone this project
-* from the console inside the directory with source code, execute the command `./mvnw spring-boot:run`
+* from the console inside the directory with source code, execute the command `mvn spring-boot:run`
 * open up `http://127.0.0.1:8080` in a browser
 * browse the site or log in as one of the pre-created users: `admin`, `paid`, or `coder` with password `test`
 * press `Ctrl-C` to stop the server

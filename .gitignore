@@ -53,9 +53,6 @@ coder_rsa
 mystamps_rsa
 prod_vars.yml
 
-# maven-wrapper
-.mvn/wrapper/maven-wrapper.jar
-
 # @asm0dey uses molecule for role testing which generates .pyc files
 # and also creates molecule directory
 *.pyc

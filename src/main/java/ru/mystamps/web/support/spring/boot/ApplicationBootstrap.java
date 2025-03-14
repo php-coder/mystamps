@@ -41,7 +41,7 @@ public class ApplicationBootstrap {
 		//
 		//     java -jar target/mystamps.war liquibase validate
 		// or
-		//    ./mvnw spring-boot:run -Dspring-boot.run.arguments='liquibase,validate'
+		//    mvn spring-boot:run -Dspring-boot.run.arguments='liquibase,validate'
 		//
 		// we don't run a full application but loads only Liquibase-related classes
 		boolean executeOnlyLiquibase = args.length == 2
