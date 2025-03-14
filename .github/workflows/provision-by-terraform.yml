@@ -56,7 +56,7 @@ jobs:
           # Workaround: don't install parent's dependencies as we don't use them
           # See: https://github.com/jdx/mise-action/issues/183
           # https://mise.jdx.dev/configuration/settings.html#disable_tools
-          MISE_DISABLE_TOOLS=java,maven
+          MISE_DISABLE_TOOLS: java,maven
 
       - name: Install ansible-vault
         # NOTE: during version bump don't forget to update in other places: deploy.yml and provisioning-by-ansible.yml
