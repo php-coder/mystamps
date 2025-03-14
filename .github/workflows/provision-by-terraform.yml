@@ -44,28 +44,14 @@ jobs:
           git fetch --depth=1 origin generated-terraform
           git worktree add terraform-data generated-terraform
 
-      # https://github.com/tfutils/tfenv#manual
-      - name: Install tfenv
-        uses: actions/checkout@v4.2.2
+      - name: Install mise to set up Terraform
+        uses: jdx/mise-action@v2.1.11 # https://github.com/jdx/mise-action
         with:
-          # https://github.com/actions/checkout#checkout-multiple-repos-nested
-          repository: tfutils/tfenv
-          path: tfenv
-          ref: v3.0.0
-          # Whether to configure the token or SSH key with the local git config. Default: true
-          persist-credentials: false
-
-      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-system-path
-      - name: Add tfenv directory to PATH
-        run: echo "$GITHUB_WORKSPACE/tfenv/bin" >> $GITHUB_PATH
-
-      # https://github.com/tfutils/tfenv#tfenv-install-version
-      # https://github.com/tfutils/tfenv#tfenv-use-version
-      - name: Install terraform
-        working-directory: infra/terraform
-        run: |
-          tfenv install
-          tfenv use
+          version: 2025.3.2                  # [default: latest] mise version to install
+          install: true                      # [default: true] run `mise install`
+          cache: true                        # [default: true] cache mise using GitHub's cache
+          log_level: info                    # [default: info] log level
+          working_directory: infra/terraform # [default: .] directory to run mise in
 
       - name: Install ansible-vault
         # NOTE: during version bump don't forget to update in other places: deploy.yml and provisioning-by-ansible.yml
@@ -76,9 +62,9 @@ jobs:
           # https://developer.hashicorp.com/terraform/cli/commands#upgrade-and-security-bulletin-checks
           CHECKPOINT_DISABLE: true
         run: |
-          tfenv --version
           terraform -version
           ansible-vault --version
+          mise --version
 
       - name: Decrypt terraform files
         working-directory: infra/terraform

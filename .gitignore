@@ -34,7 +34,6 @@ infra/terraform/terraform.tfstate.backup
 
 # created by .github/workflows/provision-by-terraform.yml
 infra/terraform/terraform-data/
-tfenv/
 
 # used by infra/docker/prod.yml
 infra/docker/application-prod.properties
