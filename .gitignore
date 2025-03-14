@@ -57,3 +57,5 @@ prod_vars.yml
 # and also creates molecule directory
 *.pyc
 molecule/
+
+mise.local.toml

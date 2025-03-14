@@ -4,12 +4,12 @@
 @todo #1720 Terraform: automate import of the existing resources
 -->
 
-* Install [tfenv](https://github.com/tfutils/tfenv) and terraform
+* Install Terraform
+  * the preferred way is to use [`mise`](https://mise.jdx.dev/getting-started.html). After its activation,
+    Terraform will be installed automatically once you `cd` into the `infra/terraform` directory
+* Navigate to the directory with Terraform configuration
   ```console
-  $ brew install tfenv
   $ cd infra/terraform
-  $ export HTTPS_PROXY=socks5://127.0.0.1:1122 # optionally
-  $ tfenv install
   ```
 * Setup credentials (only first time)
   ```console
@@ -18,7 +18,6 @@
   ```
 * Initialize and download modules (if needed)
   ```console
-  $ export HTTPS_PROXY=socks5://127.0.0.1:1122 # optionally
   $ terraform init
   ```
 * Import existing DigitalOcean configuration (optionally; only the first time)
