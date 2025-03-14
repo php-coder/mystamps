@@ -11,7 +11,7 @@
   ```console
   $ cd infra/terraform
   ```
-* Setup credentials (only first time)
+* Setup credentials (only the first time)
   ```console
   $ cp terraform.tfvars{.example,}
   $ vim terraform.tfvars

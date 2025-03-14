@@ -12,7 +12,11 @@ This is a website for anybody who collects post stamps and wants to have an onli
 ## How can it be useful to me?
 
 On the site you can:
-* see the statistics (including charts) about your collection: how many series and stamps do you have? From what countries and from what categories?
+* see the statistics (including charts) about your collection
+  * number of series and stamps
+  * from what countries
+  * in what categories
+  * amount of money that has been spent to buy the stamps
 * share a link to the collection with friends
 * use it as a list of the stamps that you are selling on an auction
 * add to the signature on the forums or e-mail
@@ -22,8 +26,7 @@ On the site you can:
 
 You can look at it and try on https://my-stamps.ru
 
-If you are programmer/sysadmin or you just feeling that you are able to run a local version of the site then follow the following instructions:
-If you want to run it locally, follow the instructions:
+If you are programmer/sysadmin, or you are just feeling that you are able to run a local version of the site, then follow the instructions:
 
 * install JDK (8th version is required) and Maven
   * the preferred way to set up tools is to use [`mise`](https://mise.jdx.dev/getting-started.html). After its activation, the required tools will be installed automatically
@@ -49,4 +52,4 @@ If you want to run it locally, follow the instructions:
 * *Unit tests*: Groovy with Spock Framework or JUnit (for Java code), Jest (for JavaScript code)
 * *Integration tests*: Selenium3, RobotFramework, WireMock
 * *Deployment*: bash, Ansible, Terraform
-* *Others*: Lombok, Togglz, WebJars, AssertJ
+* *Others*: Lombok, Togglz, WebJars, AssertJ, Mockito
