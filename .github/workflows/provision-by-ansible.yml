@@ -28,9 +28,19 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
 
-      - name: Install ansible
-        # NOTE: during version bump don't forget to update in other places: deploy.yml and provisioning-by-terraform.yml
-        run: pip3 install ansible==3.4.0
+      - name: Install mise to set up Ansible
+        uses: jdx/mise-action@v2.1.11 # https://github.com/jdx/mise-action
+        with:
+          version: 2025.3.2                # [default: latest] mise version to install
+          install: true                    # [default: true] run `mise install`
+          cache: true                      # [default: true] cache mise using GitHub's cache
+          log_level: info                  # [default: info] log level
+          working_directory: infra/ansible # [default: .] directory to run mise in
+        env:
+          # Workaround: don't install some dependencies that we don't use (java, maven) or don't want (python)
+          # See: https://github.com/jdx/mise-action/issues/183
+          # https://mise.jdx.dev/configuration/settings.html#disable_tools
+          MISE_DISABLE_TOOLS: java,maven,python
 
       - name: Show ansible version
         run: ansible --version

@@ -59,8 +59,12 @@ jobs:
           MISE_DISABLE_TOOLS: java,maven
 
       - name: Install ansible-vault
-        # NOTE: during version bump don't forget to update in other places: deploy.yml and provisioning-by-ansible.yml
-        run: pip3 install ansible==3.4.0
+        working-directory: infra/ansible
+        env:
+          # Don't install some dependencies that we don't use (java, maven) or don't want (python)
+          # https://mise.jdx.dev/configuration/settings.html#disable_tools
+          MISE_DISABLE_TOOLS: java,maven,python
+        run: mise install
 
       - name: Show tools versions
         env:
