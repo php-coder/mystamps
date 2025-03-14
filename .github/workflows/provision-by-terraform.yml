@@ -64,7 +64,6 @@ jobs:
         run: |
           terraform -version
           ansible-vault --version
-          mise --version
 
       - name: Decrypt terraform files
         working-directory: infra/terraform
