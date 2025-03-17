@@ -6,7 +6,7 @@ Resource         ../../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Disable Client Validation  add-series-sales-form
-Force Tags       series  sales  validation
+Force Tags       series  sales  validation  htmx
 
 *** Test Cases ***
 Create series with empty required fields

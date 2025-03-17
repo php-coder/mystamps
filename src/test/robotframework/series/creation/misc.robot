@@ -47,6 +47,7 @@ Catalog numbers should be stripped from any spaces
 	Textfield Value Should Be      id:zagorskiNumbers  11,12
 
 Catalog numbers should ignore duplicate values
+	[Tags]                     htmx
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id:category  Sport
 	Input Text                 id:quantity  2
@@ -67,6 +68,7 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id:zagorski_catalog_info  \#154, 155
 
 Catalog numbers should accept existing numbers
+	[Tags]                     htmx
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id:category  Sport
 	Input Text                 id:quantity  2

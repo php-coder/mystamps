@@ -4,7 +4,7 @@ Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Force Tags       series  add-image  validation
+Force Tags       series  add-image  validation  htmx
 
 *** Test Cases ***
 Add image with empty required fields

@@ -6,7 +6,7 @@ Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Before Test
-Force Tags       participant  logic
+Force Tags       participant  logic  htmx
 
 *** Test Cases ***
 Create participant with name only (fill only mandatory fields)

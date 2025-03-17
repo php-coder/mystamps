@@ -4,7 +4,7 @@ Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Force Tags       collection  series  logic
+Force Tags       collection  series  logic  htmx
 
 *** Test Cases ***
 Remove the first instance of a series from user's collection

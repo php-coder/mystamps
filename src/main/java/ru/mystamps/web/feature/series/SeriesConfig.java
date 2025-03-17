@@ -75,6 +75,11 @@ public class SeriesConfig {
 			return new RestSeriesController(seriesService, seriesImageService);
 		}
 		
+		@Bean
+		public HtmxSeriesController htmxSeriesController() {
+			return new HtmxSeriesController(seriesService);
+		}
+		
 	}
 	
 	@Import(Daos.class)

@@ -5,7 +5,7 @@ Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Before Test
-Force Tags       series  add-image  logic
+Force Tags       series  add-image  logic  htmx
 
 *** Test Cases ***
 Add additional image by uploading a file

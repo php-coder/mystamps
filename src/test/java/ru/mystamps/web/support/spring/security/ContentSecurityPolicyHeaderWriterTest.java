@@ -222,6 +222,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 						+ " https://cdn.jsdelivr.net"
 						+ " 'self'"
 						+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+						+ " 'sha256-bsV5JivYxvGywDAZ22EZJKBFip65Ng9xoJVLbBg7bdo='"
 						+ " 'unsafe-hashes'"
 				)
 				.contains("connect-src 'self'")
@@ -251,6 +252,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 						+ " https://stamps.filezz.ru"
 						+ " https://maxcdn.bootstrapcdn.com"
 						+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+						+ " 'sha256-bsV5JivYxvGywDAZ22EZJKBFip65Ng9xoJVLbBg7bdo='"
 						+ " 'unsafe-hashes'"
 				)
 				.contains(

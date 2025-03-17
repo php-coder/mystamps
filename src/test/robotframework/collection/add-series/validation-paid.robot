@@ -6,7 +6,7 @@ Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Disable Client Validation  add-series-form
-Force Tags       collection  validation
+Force Tags       collection  validation  htmx
 
 *** Test Cases ***
 Add a series with price but without currency

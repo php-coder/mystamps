@@ -130,6 +130,8 @@ public class MvcConfig implements WebMvcConfigurer {
 			.addResourceLocations("classpath:/META-INF/resources/webjars/axios/");
 		registry.addResourceHandler("/public/bootstrap/**")
 			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/");
+		registry.addResourceHandler("/public/htmx/**")
+			.addResourceLocations("classpath:/META-INF/resources/webjars/htmx.org/");
 		registry.addResourceHandler("/public/jquery/**")
 			.addResourceLocations("classpath:/META-INF/resources/webjars/jquery/");
 		registry.addResourceHandler("/public/react/**")

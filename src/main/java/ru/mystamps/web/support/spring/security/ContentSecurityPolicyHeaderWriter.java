@@ -115,6 +115,10 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		+ " 'sha256-RZ7vfNSfdJtvDeBSz2SI5g3wroaD1A1SzsDb04Yw9V0='"
 		+ " 'sha256-PGJ8tjuz2DXGgB1Sie9pW8BrxBGK6EQndbLEkXd44T8='";
 	
+	// - 'sha256-bsV...' is required for '.htmx-indicator{opacity:0} ...' inline CSS
+	private static final String STYLE_HTMX =
+		" 'sha256-bsV5JivYxvGywDAZ22EZJKBFip65Ng9xoJVLbBg7bdo='";
+	
 	// - 'unsafe-inline' is required by jquery.min.js (that is using code inside of
 	// event handlers. We can't use hashing algorithms because they aren't supported
 	// for handlers. In future, we should get rid of jQuery or use
@@ -194,6 +198,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 			
 			if (onAddSeriesPage) {
 				sb.append(STYLE_SERIES_ADD_PAGE);
+			} else if (onSeriesInfoPage) {
+				sb.append(STYLE_HTMX);
 			}
 		
 		} else if (onH2ConsolePage) {

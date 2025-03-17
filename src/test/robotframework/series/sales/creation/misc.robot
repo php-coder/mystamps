@@ -5,7 +5,7 @@ Resource         ../../../auth.steps.robot
 Resource         ../../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Force Tags       series  sales  misc
+Force Tags       series  sales  misc  htmx
 
 *** Test Cases ***
 Url should be stripped from leading and trailing spaces

@@ -10,7 +10,6 @@ module.exports = {
 
         'components/AddCatalogNumbersForm': './src/components/AddCatalogNumbersForm.js',
         'components/AddCatalogPriceForm':   './src/components/AddCatalogPriceForm.js',
-        'components/AddCommentForm':        './src/components/AddCommentForm.js',
         'components/AddReleaseYearForm':    './src/components/AddReleaseYearForm.js',
         'components/HideImageForm':         './src/components/HideImageForm.js',
         'components/SeriesSaleImportForm':  './src/components/SeriesSaleImportForm.js',

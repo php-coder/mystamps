@@ -1,0 +1,10 @@
+<!--/* NOTE: see also the same code in src/main/webapp/WEB-INF/views/series/info.html */-->
+<dl id="series-info" th:if="${comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}">
+	<dt th:text="#{t_comment}">
+		Comment
+	</dt>
+	<dd id="comment"
+		th:utext="${#strings.replace(#strings.escapeXml(comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
+		My favorite series.
+	</dd>
+</dl>

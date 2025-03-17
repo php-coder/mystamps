@@ -209,7 +209,7 @@
 						<div class="col-sm-4">
 							<div class="row">
 								<div class="col-sm-12">
-									<dl class="dl-horizontal">
+									<dl id="series-info" class="dl-horizontal">
 										<dt th:text="#{t_category}">
 											Category
 										</dt>
@@ -393,7 +393,8 @@
 												</a>
 											</dd>
 										<!--/*/ </th:block> /*/-->
-										
+
+										<!--/* NOTE: see also the same code in src/main/webapp/WEB-INF/views/series/partial/comment.html */-->
 										<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
 											<dt th:text="#{t_comment}">
 												Comment
@@ -412,7 +413,59 @@
 
 							<div id="add-catalog-numbers" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
 							
-							<div id="add-comment" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')" th:if="${series.comment == null}"></div>
+							<div id="add-comment"
+								class="row"
+								sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')"
+								th:with="isHtmx=${isHtmx ?: false},seriesId=${series.id}"
+								th:if="${series.comment == null}">
+								<div class="col-sm-12 form-group" th:fragment="AddCommentForm">
+									<form id="add-comment-form"
+										class="form-horizontal"
+										th:object="${addCommentForm}"
+										hx-target="#add-comment"
+										hx-select-oob="#series-info:beforeend"
+										hx-disabled-elt="#add-comment-btn"
+										th:hx-patch="@{${INFO_SERIES_PAGE}(id=${seriesId})}">
+										<div class="alert alert-danger text-center col-sm-8 col-sm-offset-3 hidden server-error-msg"
+											th:text="#{t_server_error}">
+											Server error
+										</div>
+										<div class="form-group form-group-sm" th:classappend="${isHtmx and #fields.hasErrors('comment') ? 'has-error' : ''}">
+											<label for="new-comment"
+												class="control-label col-sm-3 required-field"
+												th:text="#{t_comment}">
+												Comment
+											</label>
+											<div class="col-sm-6">
+												<textarea id="new-comment"
+													name="comment"
+													class="form-control"
+													cols="22"
+													rows="3"
+													required="required"
+													th:text="${addCommentForm != null ? addCommentForm.comment : ''}"></textarea>
+												<!--/*/
+												<th:block th:if="${isHtmx}">
+													<span id="new-comment.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('comment')}"
+														th:each="error : ${#fields.errors('comment')}" th:text="${error}">
+													</span>
+												</th:block>
+												/*/-->
+											</div>
+										</div>
+										<div class="col-sm-offset-3 col-sm-9">
+											<button id="add-comment-btn"
+												type="submit"
+												class="btn btn-primary btn-sm"
+												th:text="#{t_add}">
+												Add
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
 							
 							<div id="similar-series" class="row" th:if="${not #lists.isEmpty(similarSeries)}">
 								<div class="col-sm-10 col-sm-offset-2">
@@ -891,6 +944,45 @@
 		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
 		<script src="https://unpkg.com/axios@0.19.2/dist/axios.js" th:src="${AXIOS_JS}"></script>
+		<script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.js" th:src="${HTMX_JS}"></script>
+		<!--/*/
+		<script th:inline="javascript">
+			// See for details: https://htmx.org/docs/#configuration-options
+			htmx.config.selfRequestsOnly = true;
+			htmx.config.allowScriptTags = false;
+			htmx.config.historyCacheSize = 0;
+			htmx.config.allowEval = false;
+			
+			// https://htmx.org/events/#htmx:configRequest
+			document.body.addEventListener('htmx:configRequest', function configRequestHandler(event) {
+				if (event.detail.verb !== 'get') {
+					var csrfHeaderName = [[ ${_csrf.headerName} ]];
+					var csrfTokenValue = [[ ${_csrf.token} ]];
+					event.detail.headers[csrfHeaderName] = csrfTokenValue;
+					
+					event.detail.headers['Cache-Control'] = 'no-store';
+				}
+			});
+			
+			// https://htmx.org/events/#htmx:beforeSwap
+			document.body.addEventListener('htmx:beforeSwap', function beforeSwapHandler(event) {
+				if (event.detail.xhr.status === 422) {
+					// allow swap in order to render form errors
+					event.detail.shouldSwap = true;
+					// don't treat it as error and don't log in console
+					event.detail.isError = false;
+				
+				} else if (event.detail.xhr.status !== 200) {
+					var errorMessage = event.originalTarget.querySelector('.server-error-msg');
+					if (errorMessage != null) {
+						errorMessage.classList.remove('hidden');
+					} else {
+						console.error(event);
+					}
+				}
+			});
+		</script>
+		/*/-->
 		<script th:inline="javascript">
 			var renderComponent = function(component, props, elementId) {
 				var rootElement = React.createElement(component, props);
@@ -1249,38 +1341,6 @@
 			/* -]*/
 			
 			renderComponent(SeriesSalesList, seriesSalesListProps, 'series-sales-list');
-		</script>
-		<!--/*/
-		</th:block>
-		/*/-->
-		
-		<!--/*/
-		<th:block sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')" th:if="${series.comment == null}">
-		/*/-->
-		<script src="../../../../../../target/classes/js/components/AddCommentForm.min.js" th:src="${ADD_COMMENT_FORM_JS}"></script>
-		<script th:inline="javascript">
-			/*[+
-			var addCommentProps = {
-				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
-				'csrfHeaderName': [[ ${_csrf.headerName} ]],
-				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {
-					't_server_error': [[ #{t_server_error} ]],
-					't_add_comment':  [[ #{t_add_comment} ]],
-					't_comment':      [[ #{t_comment} ]],
-					't_add':          [[ #{t_add} ]]
-				}
-			};
-			+]*/
-			
-			/*[- */
-			var addCommentProps = {
-				'url': '/series/100',
-				'l10n': {}
-			};
-			/* -]*/
-			
-			renderComponent(AddCommentForm, addCommentProps, 'add-comment');
 		</script>
 		<!--/*/
 		</th:block>

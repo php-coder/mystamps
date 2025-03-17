@@ -75,9 +75,6 @@ class RestSeriesController {
 			Integer currentUserId = currentUser.getUserId();
 			String path = patch.getPath();
 			switch (path) {
-				case "/comment":
-					seriesService.addComment(seriesId, currentUserId, patch.getValue());
-					break;
 				case "/release_year":
 					seriesService.addReleaseYear(seriesId, patch.integerValue(), currentUserId);
 					break;

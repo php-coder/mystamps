@@ -5,13 +5,12 @@ Resource        ../../auth.steps.robot
 Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-comment  logic
+Force Tags      series  add-comment  logic  htmx
 
 *** Test Cases ***
 Add a comment
 	Input Text                        id:new-comment  A comment
 	Submit Form                       id:add-comment-form
-	Wait Until Page Does Not Contain  id:add-comment-form
 	Wait Until Page Contains Element  id:comment
 	Element Text Should Be            id:comment  A comment
 

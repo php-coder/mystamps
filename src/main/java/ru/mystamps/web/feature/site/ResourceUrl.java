@@ -42,7 +42,6 @@ public final class ResourceUrl {
 	private static final String SERIES_INFO_JS         = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";
 	private static final String SALE_IMPORT_FORM_JS     = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSaleImportForm.min.js";
 	private static final String SIMILAR_SERIES_FORM_JS  = "/public/js/" + RESOURCES_VERSION + "/components/SimilarSeriesForm.min.js";
-	private static final String ADD_COMMENT_FORM_JS     = "/public/js/" + RESOURCES_VERSION + "/components/AddCommentForm.min.js";
 	private static final String CATALOG_PRICE_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.min.js";
 	private static final String CATALOG_NUMBERS_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogNumbersForm.min.js";
 	private static final String RELEASE_YEAR_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.min.js";
@@ -56,6 +55,7 @@ public final class ResourceUrl {
 	private static final String AXIOS_JS           = "0.19.2/dist/axios.min.js";
 	private static final String BOOTSTRAP_CSS      = "/bootstrap/3.4.1/css/bootstrap.min.css";
 	private static final String BOOTSTRAP_JS       = "/bootstrap/3.4.1/js/bootstrap.min.js";
+	private static final String HTMX_JS            = "2.0.4/dist/htmx.min.js";
 	private static final String JQUERY_JS          = "/jquery/1.9.1/jquery.min.js";
 	private static final String REACT_JS           = "16.8.6/umd/react.production.min.js";
 	private static final String REACT_DOM_JS       = "16.8.6/umd/react-dom.production.min.js";
@@ -82,7 +82,6 @@ public final class ResourceUrl {
 		put(resources, host, "SERIES_INFO_JS", SERIES_INFO_JS);
 		put(resources, host, "SALE_IMPORT_FORM_JS", SALE_IMPORT_FORM_JS);
 		put(resources, host, "SIMILAR_SERIES_FORM_JS", SIMILAR_SERIES_FORM_JS);
-		put(resources, host, "ADD_COMMENT_FORM_JS", ADD_COMMENT_FORM_JS);
 		put(resources, host, "CATALOG_PRICE_FORM_JS", CATALOG_PRICE_FORM_JS);
 		put(resources, host, "CATALOG_NUMBERS_FORM_JS", CATALOG_NUMBERS_FORM_JS);
 		put(resources, host, "RELEASE_YEAR_FORM_JS", RELEASE_YEAR_FORM_JS);
@@ -95,6 +94,7 @@ public final class ResourceUrl {
 	public static void exposeWebjarResourcesToView(Map<String, String> resources, boolean useCdn) {
 		if (useCdn) {
 			put(resources, "https://unpkg.com/axios@", "AXIOS_JS", AXIOS_JS);
+			put(resources, "https://unpkg.com/htmx.org@", "HTMX_JS", HTMX_JS);
 			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_JS", BOOTSTRAP_JS);
 			put(resources, "https://yandex.st", "JQUERY_JS", JQUERY_JS);
@@ -106,6 +106,7 @@ public final class ResourceUrl {
 		}
 		
 		put(resources, "/public/axios/", "AXIOS_JS", AXIOS_JS);
+		put(resources, "/public/htmx/", "HTMX_JS", HTMX_JS);
 		put(resources, "/public", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 		put(resources, "/public", "BOOTSTRAP_JS", BOOTSTRAP_JS);
 		put(resources, "/public", "JQUERY_JS", JQUERY_JS);

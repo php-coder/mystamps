@@ -17,6 +17,7 @@ updates:
       - dependency-name: "org.liquibase:liquibase-core"
       - dependency-name: "org.projectlombok:lombok"
       - dependency-name: "org.hibernate.validator:hibernate-validator"
+      - dependency-name: "org.webjars.npm:htmx.org"
     # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#ignore
     ignore:
       - dependency-name: "org.hibernate.validator:hibernate-validator"

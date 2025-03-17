@@ -4,7 +4,7 @@ Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  import-series  validation
+Force Tags      series  import-series  validation  htmx
 
 *** Test Cases ***
 Price and currency should be optional when seller information isn't provided

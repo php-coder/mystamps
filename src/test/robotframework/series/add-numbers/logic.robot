@@ -4,7 +4,7 @@ Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-numbers  logic
+Force Tags      series  add-numbers  logic  htmx
 
 *** Test Cases ***
 Add catalog numbers

@@ -13,6 +13,7 @@ Message should be shown when a collection is empty
 	Element Text Should Be  id:empty-collection-msg  In this collection is no stamps
 
 Series with its price should be taken into account
+	[Tags]                       htmx
 	Go To                        ${SITE_URL}/series/1
 	Input Text                   id:paid-price  100
 	Select From List By Value    id:paid-currency  ${expectedCurrency}
@@ -22,6 +23,7 @@ Series with its price should be taken into account
 	Table Footer Should Contain  collection-estimation  100.00 ${expectedCurrency}
 
 Series without price should be shown but not taken into account
+	[Tags]                       htmx
 	Go To                        ${SITE_URL}/series/2
 	Submit Form                  id:add-series-form
 	Go To                        ${SITE_URL}/collection/paid/estimation

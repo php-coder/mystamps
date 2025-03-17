@@ -12,6 +12,7 @@ Force Tags       series  import-series  logic
 *** Test Cases ***
 Import series from an external site (in English, use category, country and date locators)
 	[Documentation]                  Verify import from a page in English and with different locators
+	[Tags]                           htmx
 	${importUrl}=                    Set Variable  http://127.0.0.1:8080/series/2?lang=en
 	Input Text                       id:url  ${importUrl}
 	Submit Form                      id:import-series-form
@@ -69,6 +70,7 @@ Import series from an external site (in Russian, use description locator)
 
 Import series from external site with catalog numbers (use description locator)
 	[Documentation]             Verify import of catalog numbers by extracting them from a description
+	[Tags]                      htmx
 	Input Text                  id:url  ${MOCK_SERVER}/series/import/request-logic/catalog-numbers-in-description.html
 	Submit Form                 id:import-series-form
 	Textfield Value Should Be   id:michel-numbers   2242-2246
@@ -89,6 +91,7 @@ Import series when a page in a non-utf-8 charset
 
 Import series and series sale with existing seller from an external site
 	[Documentation]             Verify import series and sale (with existing seller)
+	[Tags]                      htmx
 	Input Text                  id:url  ${MOCK_SERVER}/series/import/request-logic/existing-seller.html
 	Submit Form                 id:import-series-form
 	${requestLocation}=         Get Location
@@ -114,6 +117,7 @@ Import series and series sale with existing seller from an external site
 
 Import series and series sale with a new seller from an external site
 	[Documentation]             Verify import series and sale (with a new seller)
+	[Tags]                      htmx
 	Input Text                  id:url  ${MOCK_SERVER}/series/import/request-logic/new-seller.html
 	Submit Form                 id:import-series-form
 	${requestLocation}=         Get Location

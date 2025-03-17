@@ -5,18 +5,15 @@ Resource        ../../auth.steps.robot
 Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-comment  validation
+Force Tags      series  add-comment  validation  htmx
 
 *** Test Cases ***
-# In essence, here we test @NotEmpty annotation on PatchRequest.value because it validates an incoming value first
 Add comment with empty required field
 	[Setup]                           Disable Client Validation  add-comment-form
 	Submit Form                       id:add-comment-form
 	Wait Until Page Contains Element  id:new-comment.errors
 	Element Text Should Be            id:new-comment.errors  must not be empty
 
-# In essence, here we test @NotEmpty annotation on PatchRequest.value and setValue() that trims blank values to null,
-# because it validates an incoming value first
 Add a blank comment
 	Input Text                        id:new-comment  ${SPACE}${SPACE}
 	Submit Form                       id:add-comment-form

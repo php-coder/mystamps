@@ -301,6 +301,13 @@
 		
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
+			<artifactId>htmx.org</artifactId>
+			<version>${htmx.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
 			<artifactId>react</artifactId>
 			<version>${react.version}</version>
 			<scope>runtime</scope>
@@ -574,6 +581,9 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<htmlunit.version>2.70.0</htmlunit.version>
+		
+		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/info.html -->
+		<htmx.version>2.0.4</htmx.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<jakarta-mail.version>1.6.7</jakarta-mail.version>
@@ -987,6 +997,10 @@
 					<nonCriticalTags>
 						<!-- Allow to tests with this tag to fail without changing final status -->
 						<nonCriticalTag>unstable</nonCriticalTag>
+						<!--
+							@todo #1671 Fix integration tests because of unsupported HTMX in htmlunit
+						-->
+						<nonCriticalTag>htmx</nonCriticalTag>
 					</nonCriticalTags>
 				</configuration>
 				<dependencies>

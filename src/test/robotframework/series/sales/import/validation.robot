@@ -5,7 +5,7 @@ Resource        ../../../auth.steps.robot
 Resource        ../../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  sales  import-sales  validation
+Force Tags      series  sales  import-sales  validation  htmx
 
 *** Test Cases ***
 Import a series sale with empty required field
