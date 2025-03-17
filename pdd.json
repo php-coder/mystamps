@@ -119,15 +119,6 @@
       "role": "DEV"
     },
   {
-      "id": "1341-d3b9ba1b", 
-      "ticket": "1341", 
-      "file": "src/main/frontend/src/components/AddCatalogNumbersForm.js", 
-      "lines": "6-6", 
-      "body": "AddCatalogNumbersForm: add tests", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "1342-c6d2f2ba", 
       "ticket": "1342", 
       "file": "src/main/frontend/src/components/AddCatalogPriceForm.js", 
@@ -416,6 +407,15 @@
       "role": "DEV"
     },
   {
+      "id": "1339-9a7986f1", 
+      "ticket": "1339", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddCatalogNumbersForm.java", 
+      "lines": "33-33", 
+      "body": "Update series: add validation for catalog numbers", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "1303-015294f3", 
       "ticket": "1303", 
       "file": "src/main/java/ru/mystamps/web/feature/series/AddImageForm.java", 
@@ -551,6 +551,15 @@
       "role": "DEV"
     },
   {
+      "id": "1671-ff8788b3", 
+      "ticket": "1671", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/HtmxSeriesController.java", 
+      "lines": "130-130", 
+      "body": "AddCatalogNumbersForm: update a page without full reload", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "785-c33d2a08", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java", 
@@ -578,19 +587,10 @@
       "role": "DEV"
     },
   {
-      "id": "1339-9a7986f1", 
-      "ticket": "1339", 
-      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "49-49", 
-      "body": "Update series: add validation for catalog numbers", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "1340-34ef47fe", 
       "ticket": "1340", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "50-50", 
+      "lines": "49-49", 
       "body": "Update series: add validation for a price", 
       "estimate": "0", 
       "role": "DEV"
@@ -599,7 +599,7 @@
       "id": "1343-a893935d", 
       "ticket": "1343", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "51-51", 
+      "lines": "50-50", 
       "body": "Update series: add validation for a release year", 
       "estimate": "0", 
       "role": "DEV"
@@ -608,7 +608,7 @@
       "id": "785-37a48219", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "71-71", 
+      "lines": "70-70", 
       "body": "Update series: properly fail on non-supported operations", 
       "estimate": "0", 
       "role": "DEV"
@@ -617,7 +617,7 @@
       "id": "785-a8e6066a", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "108-108", 
+      "lines": "94-94", 
       "body": "Update series: properly fail on invalid path", 
       "estimate": "0", 
       "role": "DEV"
@@ -1571,7 +1571,7 @@
       "id": "995-71e1e7c8", 
       "ticket": "995", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "910-910", 
+      "lines": "990-990", 
       "body": "Series sale import: add support for new sellers", 
       "estimate": "0", 
       "role": "DEV"
@@ -1580,7 +1580,7 @@
       "id": "1057-afe1bb59", 
       "ticket": "1057", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "911-911", 
+      "lines": "991-991", 
       "body": "Series sale import form: show a message when JavaScript is disabled", 
       "estimate": "0", 
       "role": "DEV"
@@ -1589,7 +1589,7 @@
       "id": "1280-233d287d", 
       "ticket": "1280", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "1349-1349", 
+      "lines": "1405-1405", 
       "body": "Mark similar series: add integration tests", 
       "estimate": "0", 
       "role": "DEV"
