@@ -206,7 +206,7 @@
 							
 						</div>
 						
-						<div class="col-sm-4">
+						<div class="col-sm-4" th:with="isHtmx=${isHtmx ?: false},seriesId=${series.id}">
 							<div class="row">
 								<div class="col-sm-12">
 									<dl id="series-info" class="dl-horizontal">
@@ -411,12 +411,92 @@
 							
 							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
 
-							<div id="add-catalog-numbers" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
+							<div id="add-catalog-numbers" class="row" sec:authorize="hasAuthority('CREATE_SERIES')">
+								<div class="col-sm-12 form-group" th:fragment="AddCatalogNumbersForm">
+									<form id="add-catalog-numbers-form"
+										class="form-horizontal"
+										th:object="${addCatalogNumbersForm}"
+										hx-target="#add-catalog-numbers"
+										hx-disabled-elt="#add-catalog-numbers-btn"
+										th:hx-patch="@{${INFO_SERIES_PAGE}(id=${seriesId})}">
+										<div class="alert alert-danger text-center col-sm-8 col-sm-offset-3 hidden server-error-msg"
+											th:text="#{t_server_error}">
+											Server error
+										</div>
+										<div class="form-group form-group-sm"
+											th:classappend="${isHtmx and #fields.hasErrors('catalogName') ? 'has-error' : ''}">
+											<label for="catalog-name"
+												class="control-label col-sm-3"
+												th:text="#{t_catalog}">
+												Catalog
+											</label>
+											<div class="col-sm-6">
+												<select id="catalog-name"
+													name="catalogName"
+													class="form-control">
+													<option value="MICHEL" th:text="#{t_michel}">Michel</option>
+													<option value="SCOTT" th:text="#{t_scott}">Scott</option>
+													<option value="YVERT" th:text="#{t_yvert}">Yvert et Tellier</option>
+													<option value="GIBBONS" th:text="#{t_sg}">Stanley Gibbons</option>
+													<option value="SOLOVYOV" th:text="#{t_solovyov}">Solovyov</option>
+													<option value="ZAGORSKI" th:text="#{t_zagorski}">Zagorski</option>
+												</select>
+												<!--/*/
+												<th:block th:if="${isHtmx}">
+													<span id="catalog-name.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('catalogName')}"
+														th:each="error : ${#fields.errors('catalogName')}" th:text="${error}">
+													</span>
+												</th:block>
+												/*/-->
+											</div>
+										</div>
+										<div class="form-group form-group-sm"
+											th:classappend="${isHtmx and #fields.hasErrors('catalogNumbers') ? 'has-error' : ''}">
+											<label for="catalog-numbers"
+												class="control-label col-sm-3 required-field"
+												th:text="#{t_numbers}">
+												Numbers
+											</label>
+											<div class="row">
+												<div class="col-sm-6">
+													<input id="catalog-numbers"
+														name="catalogNumbers"
+														type="text"
+														class="form-control"
+														size="5"
+														required="required"
+														placeholder="Example: 90-92,117"
+														th:placeholder="|#{t_example}: 90-92,117|"
+														th:value="${addCatalogNumbersForm != null ? addCatalogNumbersForm.catalogNumbers : ''}" />
+													<!--/*/
+													<th:block th:if="${isHtmx}">
+														<span id="catalog-numbers.errors"
+															class="help-block"
+															th:if="${#fields.hasErrors('catalogNumbers')}"
+															th:each="error : ${#fields.errors('catalogNumbers')}" th:text="${error}">
+														</span>
+													</th:block>
+													/*/-->
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-offset-3 col-sm-4">
+											<button id="add-catalog-numbers-btn"
+												type="submit"
+												class="btn btn-primary btn-sm"
+												th:text="#{t_add}">
+												Add
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
 							
 							<div id="add-comment"
 								class="row"
 								sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')"
-								th:with="isHtmx=${isHtmx ?: false},seriesId=${series.id}"
 								th:if="${series.comment == null}">
 								<div class="col-sm-12 form-group" th:fragment="AddCommentForm">
 									<form id="add-comment-form"
@@ -1226,7 +1306,6 @@
 		/*/-->
 		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.min.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.min.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/AddCatalogNumbersForm.min.js" th:src="${CATALOG_NUMBERS_FORM_JS}"></script>
 
 		<script th:inline="javascript">
 			/*[+
@@ -1247,24 +1326,6 @@
 					't_add':          [[ #{t_add} ]]
 				}
 			};
-			var addCatalogNumbersProps = {
-				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
-				'csrfHeaderName': [[ ${_csrf.headerName} ]],
-				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {
-					't_server_error': [[ #{t_server_error} ]],
-					't_catalog':      [[ #{t_catalog} ]],
-					't_michel':       [[ #{t_michel} ]],
-					't_scott':        [[ #{t_scott} ]],
-					't_yvert':        [[ #{t_yvert} ]],
-					't_sg':           [[ #{t_sg} ]],
-					't_solovyov':     [[ #{t_solovyov} ]],
-					't_zagorski':     [[ #{t_zagorski} ]],
-					't_numbers':      [[ #{t_numbers} ]],
-					't_example':      [[ #{t_example} ]],
-					't_add':          [[ #{t_add} ]]
-				}
-			};
 			+]*/
 			
 			/*[- */
@@ -1278,14 +1339,9 @@
 				'url': '/series/100',
 				'l10n': {}
 			};
-			var addCatalogNumbersProps = {
-				'url': '/series/100',
-				'l10n': {}
-			};
 			/* -]*/
 			
 			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
-			renderComponent(AddCatalogNumbersForm, addCatalogNumbersProps, 'add-catalog-numbers');
 			
 			/*[# th:if="${series.releaseYear == null}"]*/
 			/*[+

@@ -42,8 +42,13 @@ public class HtmxSeriesController {
 	private final SeriesService seriesService;
 	
 	@InitBinder("addCommentForm")
-	protected void initBinder(WebDataBinder binder) {
+	protected void initBinderForComments(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
+	}
+	
+	@InitBinder("addCatalogNumbersForm")
+	protected void initBinderForCatalogNumbers(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, "catalogNumbers", new StringTrimmerEditor(true));
 	}
 	
 	@PatchMapping(
@@ -82,6 +87,50 @@ public class HtmxSeriesController {
 		
 		model.addAttribute("comment", comment);
 		return "series/partial/comment";
+	}
+
+	@PatchMapping(
+		path = SeriesUrl.INFO_SERIES_PAGE,
+		headers = "HX-Trigger=add-catalog-numbers-form"
+	)
+	public String addCatalogNumbers(
+		@PathVariable("id") Integer seriesId,
+		@Valid AddCatalogNumbersForm form,
+		BindingResult result,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
+		Model model,
+		HttpServletResponse response
+	) throws IOException {
+		
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		if (!seriesService.isSeriesExist(seriesId)) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		if (result.hasErrors()) {
+			response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			model.addAttribute("isHtmx", true);
+			model.addAttribute("seriesId", seriesId);
+			return "series/info :: AddCatalogNumbersForm";
+		}
+		
+		Integer currentUserId = currentUser.getUserId();
+		seriesService.addCatalogNumbers(
+			form.getCatalogName(),
+			seriesId,
+			form.getCatalogNumbers(),
+			currentUserId
+		);
+		
+		// @todo #1671 AddCatalogNumbersForm: update a page without full reload
+		response.addHeader("HX-Refresh", "true");
+		
+		return null;
 	}
 	
 }

@@ -8,7 +8,6 @@ module.exports = {
         'utils/CatalogUtils':               './src/utils/CatalogUtils.js',
         'utils/DateUtils':                  './src/utils/DateUtils.js',
 
-        'components/AddCatalogNumbersForm': './src/components/AddCatalogNumbersForm.js',
         'components/AddCatalogPriceForm':   './src/components/AddCatalogPriceForm.js',
         'components/AddReleaseYearForm':    './src/components/AddReleaseYearForm.js',
         'components/HideImageForm':         './src/components/HideImageForm.js',

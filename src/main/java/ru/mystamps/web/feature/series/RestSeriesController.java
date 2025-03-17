@@ -46,7 +46,6 @@ class RestSeriesController {
 	private final SeriesService seriesService;
 	private final SeriesImageService seriesImageService;
 	
-	// @todo #1339 Update series: add validation for catalog numbers
 	// @todo #1340 Update series: add validation for a price
 	// @todo #1343 Update series: add validation for a release year
 	@PatchMapping(SeriesUrl.INFO_SERIES_PAGE)
@@ -88,19 +87,6 @@ class RestSeriesController {
 						extractCatalog(path),
 						seriesId,
 						patch.bigDecimalValue(),
-						currentUserId
-					);
-					break;
-				case "/michel_numbers":
-				case "/scott_numbers":
-				case "/yvert_numbers":
-				case "/gibbons_numbers":
-				case "/solovyov_numbers":
-				case "/zagorski_numbers":
-					seriesService.addCatalogNumbers(
-						extractCatalog(path),
-						seriesId,
-						patch.getValue(),
 						currentUserId
 					);
 					break;
