@@ -74,10 +74,19 @@
       "role": "DEV"
     },
   {
+      "id": "1671-479aeb53", 
+      "ticket": "1671", 
+      "file": "pom.xml", 
+      "lines": "1001-1001", 
+      "body": "Fix integration tests because of unsupported HTMX in htmlunit", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "1060-e52eab60", 
       "ticket": "1060", 
       "file": "pom.xml", 
-      "lines": "1195-1195", 
+      "lines": "1209-1209", 
       "body": "Document usage of frontend-maven-plugin", 
       "estimate": "0", 
       "role": "DEV"
@@ -133,24 +142,6 @@
       "file": "src/main/frontend/src/components/AddCatalogPriceForm.js", 
       "lines": "6-6", 
       "body": "AddCatalogPriceForm: consider using a tooltip for currency", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
-      "id": "1338-4f752b8a", 
-      "ticket": "1338", 
-      "file": "src/main/frontend/src/components/AddCommentForm.js", 
-      "lines": "7-7", 
-      "body": "AddCommentForm: add tests", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
-      "id": "1489-42680117", 
-      "ticket": "1489", 
-      "file": "src/main/frontend/src/components/AddCommentForm.test.js", 
-      "lines": "53-53", 
-      "body": "Use toHaveErrorMessage() or toHaveDescription() for checking error messages", 
       "estimate": "0", 
       "role": "DEV"
     },
@@ -626,7 +617,7 @@
       "id": "785-a8e6066a", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "111-111", 
+      "lines": "108-108", 
       "body": "Update series: properly fail on invalid path", 
       "estimate": "0", 
       "role": "DEV"
@@ -646,15 +637,6 @@
       "file": "src/main/java/ru/mystamps/web/feature/series/SeriesController.java", 
       "lines": "636-636", 
       "body": "Mark similar series: gracefully handle error when value mismatches to type", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
-      "id": "1411-1e303594", 
-      "ticket": "1411", 
-      "file": "src/main/java/ru/mystamps/web/feature/series/SeriesService.java", 
-      "lines": "33-33", 
-      "body": "Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties", 
       "estimate": "0", 
       "role": "DEV"
     },
@@ -1382,7 +1364,7 @@
       "id": "1160-545c948a", 
       "ticket": "1160", 
       "file": "src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java", 
-      "lines": "160-160", 
+      "lines": "164-164", 
       "body": "ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz", 
       "estimate": "0", 
       "role": "DEV"
@@ -1589,7 +1571,7 @@
       "id": "995-71e1e7c8", 
       "ticket": "995", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "857-857", 
+      "lines": "910-910", 
       "body": "Series sale import: add support for new sellers", 
       "estimate": "0", 
       "role": "DEV"
@@ -1598,7 +1580,7 @@
       "id": "1057-afe1bb59", 
       "ticket": "1057", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "858-858", 
+      "lines": "911-911", 
       "body": "Series sale import form: show a message when JavaScript is disabled", 
       "estimate": "0", 
       "role": "DEV"
@@ -1607,7 +1589,7 @@
       "id": "1280-233d287d", 
       "ticket": "1280", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "1289-1289", 
+      "lines": "1349-1349", 
       "body": "Mark similar series: add integration tests", 
       "estimate": "0", 
       "role": "DEV"
@@ -1625,7 +1607,7 @@
       "id": "749-2a40850f", 
       "ticket": "749", 
       "file": "src/test/robotframework/series/import/request-logic.robot", 
-      "lines": "39-39", 
+      "lines": "40-40", 
       "body": "/series/{id}: add integration test that import info is only visible to admin", 
       "estimate": "0", 
       "role": "DEV"
@@ -1634,7 +1616,7 @@
       "id": "857-719bea28", 
       "ticket": "857", 
       "file": "src/test/robotframework/series/import/request-logic.robot", 
-      "lines": "130-130", 
+      "lines": "134-134", 
       "body": "Check that a just created seller belongs to the “example.com“ group", 
       "estimate": "0", 
       "role": "DEV"
