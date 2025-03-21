@@ -95,7 +95,7 @@ jobs:
           ./src/main/scripts/execute-command.sh integration-tests
       - name: Save RobotFramework reports
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v4.6.1 # https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v4.6.2 # https://github.com/actions/upload-artifact
         with:
           name: robotframework-reports
           path: target/robotframework-reports/
