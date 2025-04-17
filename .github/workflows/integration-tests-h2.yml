@@ -31,7 +31,7 @@ jobs:
   run-integration-tests:
     name: Integration Tests
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
       matrix:

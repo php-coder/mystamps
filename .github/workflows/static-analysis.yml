@@ -30,7 +30,7 @@ jobs:
   check-license:
     name: Check license in file headers
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Clone source code
         uses: actions/checkout@v4.2.2 # https://github.com/actions/checkout
@@ -55,7 +55,7 @@ jobs:
   run-enforcer:
     name: Run maven-enforcer-plugin
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Clone source code
         uses: actions/checkout@v4.2.2 # https://github.com/actions/checkout

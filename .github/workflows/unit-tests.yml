@@ -29,7 +29,7 @@ jobs:
   run-jest:
     name: Unit Tests (Java Script)
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Clone source code
         uses: actions/checkout@v4.2.2 # https://github.com/actions/checkout
@@ -54,7 +54,7 @@ jobs:
   run-unit-tests:
     name: Unit Tests (Java)
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Clone source code
         uses: actions/checkout@v4.2.2 # https://github.com/actions/checkout
