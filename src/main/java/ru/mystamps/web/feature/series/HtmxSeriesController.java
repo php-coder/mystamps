@@ -132,5 +132,30 @@ public class HtmxSeriesController {
 		
 		return null;
 	}
+
+	@PatchMapping(
+		path = SeriesUrl.INFO_SERIES_PAGE,
+		headers = "HX-Trigger=add-catalog-price-form"
+	)
+	public String addCatalogPrice(
+		@PathVariable("id") Integer seriesId,
+		HttpServletResponse response
+	) throws IOException {
+		
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		if (!seriesService.isSeriesExist(seriesId)) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		// XXX: implement
+		System.out.println("PATCH add catalog price");
+		
+		return null;
+	}
 	
 }

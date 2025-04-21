@@ -411,7 +411,9 @@
 							
 							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')">
 								<div class="col-sm-12 form-group">
-									<form id="add-catalog-price-form" class="form-horizontal">
+									<form id="add-catalog-price-form"
+										class="form-horizontal"
+										th:hx-patch="@{${INFO_SERIES_PAGE}(id=${seriesId})}">
 										<div class="form-group form-group-sm">
 											<label for="price-catalog-name" class="control-label col-sm-3" th:text="#{t_catalog}">
 												Catalog
