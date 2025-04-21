@@ -44,7 +44,6 @@ class RestSeriesController {
 	private final SeriesService seriesService;
 	private final SeriesImageService seriesImageService;
 	
-	// @todo #1340 Update series: add validation for a price
 	// @todo #1343 Update series: add validation for a release year
 	@PatchMapping(SeriesUrl.INFO_SERIES_PAGE)
 	public ResponseEntity<Void> updateSeries(

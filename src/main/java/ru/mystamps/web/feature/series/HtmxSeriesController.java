@@ -140,6 +140,8 @@ public class HtmxSeriesController {
 	)
 	public String addCatalogPrice(
 		@PathVariable("id") Integer seriesId,
+		@Valid AddCatalogPriceForm form,
+		BindingResult result,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
 		HttpServletResponse response
 	) throws IOException {
@@ -154,14 +156,20 @@ public class HtmxSeriesController {
 			return null;
 		}
 		
+		if (result.hasErrors()) {
+			response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			// XXX: implement
+			return null;
+		}
+		
 		// XXX: implement
 		System.out.println("PATCH add catalog price");
 		
 		Integer currentUserId = currentUser.getUserId();
 		seriesService.addCatalogPrice(
-			StampsCatalog.MICHEL, // XXX
+			form.getCatalogName(),
 			seriesId,
-			BigDecimal.TEN, // XXX
+			form.getPrice(),
 			currentUserId
 		);
 		
