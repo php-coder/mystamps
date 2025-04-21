@@ -34,6 +34,7 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 @Controller
 @RequiredArgsConstructor
@@ -139,6 +140,7 @@ public class HtmxSeriesController {
 	)
 	public String addCatalogPrice(
 		@PathVariable("id") Integer seriesId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		HttpServletResponse response
 	) throws IOException {
 		
@@ -154,6 +156,14 @@ public class HtmxSeriesController {
 		
 		// XXX: implement
 		System.out.println("PATCH add catalog price");
+		
+		Integer currentUserId = currentUser.getUserId();
+		seriesService.addCatalogPrice(
+			StampsCatalog.MICHEL, // XXX
+			seriesId,
+			BigDecimal.TEN, // XXX
+			currentUserId
+		);
 		
 		return null;
 	}
