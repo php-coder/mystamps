@@ -414,6 +414,7 @@
 									<form id="add-catalog-price-form"
 										class="form-horizontal"
 										hx-target="#add-catalog-price"
+										hx-disabled-elt="#add-catalog-price-btn"
 										th:hx-patch="@{${INFO_SERIES_PAGE}(id=${seriesId})}">
 										<div class="alert alert-danger text-center col-sm-8 col-sm-offset-3 hidden server-error-msg"
 											th:text="#{t_server_error}">
@@ -452,7 +453,7 @@
 											</div>
 										</div>
 										<div class="col-sm-offset-3 col-sm-4">
-											<button
+											<button id="add-catalog-price-btn"
 												type="submit"
 												class="btn btn-primary btn-sm"
 												th:text="#{t_add}">
