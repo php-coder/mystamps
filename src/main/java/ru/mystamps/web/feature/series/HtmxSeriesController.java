@@ -162,9 +162,6 @@ public class HtmxSeriesController {
 			return null;
 		}
 		
-		// XXX: implement
-		System.out.println("PATCH add catalog price");
-		
 		Integer currentUserId = currentUser.getUserId();
 		seriesService.addCatalogPrice(
 			form.getCatalogName(),
@@ -172,6 +169,9 @@ public class HtmxSeriesController {
 			form.getPrice(),
 			currentUserId
 		);
+		
+		// @todo #1671 AddCatalogPriceForm: update a page without full reload
+		response.addHeader("HX-Refresh", "true");
 		
 		return null;
 	}
