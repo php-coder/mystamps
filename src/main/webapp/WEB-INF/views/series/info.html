@@ -1053,7 +1053,7 @@
 					event.detail.isError = false;
 				
 				} else if (event.detail.xhr.status !== 200) {
-					var errorMessage = event.originalTarget.querySelector('.server-error-msg');
+					var errorMessage = event.target.querySelector('.server-error-msg');
 					if (errorMessage != null) {
 						errorMessage.classList.remove('hidden');
 					} else {
