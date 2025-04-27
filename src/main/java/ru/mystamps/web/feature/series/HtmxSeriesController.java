@@ -143,6 +143,7 @@ public class HtmxSeriesController {
 		@Valid AddCatalogPriceForm form,
 		BindingResult result,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
+		Model model,
 		HttpServletResponse response
 	) throws IOException {
 		
@@ -158,8 +159,9 @@ public class HtmxSeriesController {
 		
 		if (result.hasErrors()) {
 			response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
-			// XXX: implement
-			return null;
+			model.addAttribute("isHtmx", true);
+			model.addAttribute("seriesId", seriesId);
+			return "series/info :: AddCatalogPriceForm";
 		}
 		
 		Integer currentUserId = currentUser.getUserId();
