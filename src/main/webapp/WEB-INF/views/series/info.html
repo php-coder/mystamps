@@ -436,13 +436,11 @@
 													<option value="ZAGORSKI" th:text="#{t_zagorski}">Zagorski</option>
 												</select>
 												<!--/*/
-												<th:block th:if="${isHtmx}">
-													<span id="price-catalog-name.errors"
-														class="help-block"
-														th:if="${#fields.hasErrors('catalogName')}"
-														th:each="error : ${#fields.errors('catalogName')}" th:text="${error}">
-													</span>
-												</th:block>
+												<span id="price-catalog-name.errors"
+													class="help-block"
+													th:if="${isHtmx and #fields.hasErrors('catalogName')}"
+													th:each="error : ${#fields.errors('catalogName')}" th:text="${error}">
+												</span>
 												/*/-->
 											</div>
 										</div>
@@ -531,13 +529,11 @@
 													</option>
 												</select>
 												<!--/*/
-												<th:block th:if="${isHtmx}">
-													<span id="catalog-name.errors"
-														class="help-block"
-														th:if="${#fields.hasErrors('catalogName')}"
-														th:each="error : ${#fields.errors('catalogName')}" th:text="${error}">
-													</span>
-												</th:block>
+												<span id="catalog-name.errors"
+													class="help-block"
+													th:if="${isHtmx and #fields.hasErrors('catalogName')}"
+													th:each="error : ${#fields.errors('catalogName')}" th:text="${error}">
+												</span>
 												/*/-->
 											</div>
 										</div>
@@ -560,13 +556,11 @@
 														th:placeholder="|#{t_example}: 90-92,117|"
 														th:value="${addCatalogNumbersForm != null ? addCatalogNumbersForm.catalogNumbers : ''}" />
 													<!--/*/
-													<th:block th:if="${isHtmx}">
-														<span id="catalog-numbers.errors"
-															class="help-block"
-															th:if="${#fields.hasErrors('catalogNumbers')}"
-															th:each="error : ${#fields.errors('catalogNumbers')}" th:text="${error}">
-														</span>
-													</th:block>
+													<span id="catalog-numbers.errors"
+														class="help-block"
+														th:if="${isHtmx and #fields.hasErrors('catalogNumbers')}"
+														th:each="error : ${#fields.errors('catalogNumbers')}" th:text="${error}">
+													</span>
 													/*/-->
 												</div>
 											</div>
@@ -614,13 +608,11 @@
 													required="required"
 													th:text="${addCommentForm != null ? addCommentForm.comment : ''}"></textarea>
 												<!--/*/
-												<th:block th:if="${isHtmx}">
-													<span id="new-comment.errors"
-														class="help-block"
-														th:if="${#fields.hasErrors('comment')}"
-														th:each="error : ${#fields.errors('comment')}" th:text="${error}">
-													</span>
-												</th:block>
+												<span id="new-comment.errors"
+													class="help-block"
+													th:if="${isHtmx and #fields.hasErrors('comment')}"
+													th:each="error : ${#fields.errors('comment')}" th:text="${error}">
+												</span>
 												/*/-->
 											</div>
 										</div>
