@@ -467,10 +467,9 @@
 												</div>
 											</div>
 											<!--/*/
-											<div class="col-sm-offset-3 col-sm-6" th:if="${isHtmx}">
+											<div class="col-sm-offset-3 col-sm-6" th:if="${isHtmx and #fields.hasErrors('price')}">
 												<span id="price.errors"
 													class="help-block"
-													th:if="${#fields.hasErrors('price')}"
 													th:each="error : ${#fields.errors('price')}" th:text="${error}">
 												</span>
 											</div>
