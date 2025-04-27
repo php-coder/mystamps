@@ -466,17 +466,15 @@
 														required="required" />
 												</div>
 											</div>
-											<div class="col-sm-offset-3 col-sm-6">
-												<!--/*/
-												<th:block th:if="${isHtmx}">
-													<span id="price.errors"
-														class="help-block"
-														th:if="${#fields.hasErrors('price')}"
-														th:each="error : ${#fields.errors('price')}" th:text="${error}">
-													</span>
-												</th:block>
-												/*/-->
+											<!--/*/
+											<div class="col-sm-offset-3 col-sm-6" th:if="${isHtmx}">
+												<span id="price.errors"
+													class="help-block"
+													th:if="${#fields.hasErrors('price')}"
+													th:each="error : ${#fields.errors('price')}" th:text="${error}">
+												</span>
 											</div>
+											/*/-->
 										</div>
 										<div class="col-sm-offset-3 col-sm-4">
 											<button id="add-catalog-price-btn"
