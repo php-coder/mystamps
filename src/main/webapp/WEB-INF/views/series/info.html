@@ -427,13 +427,29 @@
 												Catalog
 											</label>
 											<div class="col-sm-6">
-												<select id="price-catalog-name" name="catalogName" class="form-control">
-													<option value="MICHEL" th:text="#{t_michel}">Michel</option>
-													<option value="SCOTT" th:text="#{t_scott}">Scott</option>
-													<option value="YVERT" th:text="#{t_yvert}">Yvert et Tellier</option>
-													<option value="GIBBONS" th:text="#{t_sg}">Stanley Gibbons</option>
-													<option value="SOLOVYOV" th:text="#{t_solovyov}">Solovyov</option>
-													<option value="ZAGORSKI" th:text="#{t_zagorski}">Zagorski</option>
+												<select
+													id="price-catalog-name"
+													name="catalogName"
+													class="form-control"
+													th:with="chosenCatalogName=${addCatalogPriceForm != null and addCatalogPriceForm.catalogName != null ? addCatalogPriceForm.catalogName.name() : ''}">
+													<option value="MICHEL" th:text="#{t_michel}" th:selected="${chosenCatalogName == 'MICHEL'}">
+														Michel
+													</option>
+													<option value="SCOTT" th:text="#{t_scott}" th:selected="${chosenCatalogName == 'SCOTT'}">
+														Scott
+													</option>
+													<option value="YVERT" th:text="#{t_yvert}" th:selected="${chosenCatalogName == 'YVERT'}">
+														Yvert et Tellier
+													</option>
+													<option value="GIBBONS" th:text="#{t_sg}" th:selected="${chosenCatalogName == 'GIBBONS'}">
+														Stanley Gibbons
+													</option>
+													<option value="SOLOVYOV" th:text="#{t_solovyov}" th:selected="${chosenCatalogName == 'SOLOVYOV'}">
+														Solovyov
+													</option>
+													<option value="ZAGORSKI" th:text="#{t_zagorski}" th:selected="${chosenCatalogName == 'ZAGORSKI'}">
+														Zagorski
+													</option>
 												</select>
 												<!--/*/
 												<th:block th:if="${isHtmx}">
@@ -463,7 +479,8 @@
 														class="form-control"
 														size="5"
 														title="EUR"
-														required="required" />
+														required="required"
+														th:value="${addCatalogPriceForm != null ? addCatalogPriceForm.price : ''}" />
 												</div>
 											</div>
 											<!--/*/
