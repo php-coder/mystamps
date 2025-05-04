@@ -1571,7 +1571,7 @@
       "id": "995-71e1e7c8", 
       "ticket": "995", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "990-990", 
+      "lines": "1003-1003", 
       "body": "Series sale import: add support for new sellers", 
       "estimate": "0", 
       "role": "DEV"
@@ -1580,7 +1580,7 @@
       "id": "1057-afe1bb59", 
       "ticket": "1057", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "991-991", 
+      "lines": "1004-1004", 
       "body": "Series sale import form: show a message when JavaScript is disabled", 
       "estimate": "0", 
       "role": "DEV"
@@ -1589,7 +1589,7 @@
       "id": "1280-233d287d", 
       "ticket": "1280", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "1405-1405", 
+      "lines": "1418-1418", 
       "body": "Mark similar series: add integration tests", 
       "estimate": "0", 
       "role": "DEV"
