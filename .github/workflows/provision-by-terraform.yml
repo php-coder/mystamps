@@ -67,6 +67,8 @@ jobs:
         run: mise install
 
       - name: Show tools versions
+        # NOTE: a working directory is important here and must be set to the dir where mise is configured
+        working-directory: infra/ansible
         env:
           # https://developer.hashicorp.com/terraform/cli/commands#upgrade-and-security-bulletin-checks
           CHECKPOINT_DISABLE: true
