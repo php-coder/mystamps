@@ -1124,12 +1124,6 @@
 			src="../../../../javascript/series/info.js"
 			th:src="${SERIES_INFO_JS}"></script>
 		
-		<script sec:authorize="hasAuthority('CREATE_SERIES')">
-			window.addEventListener('DOMContentLoaded', function initPage() {
-				initPriceCatalog();
-			});
-		</script>
-		
 		<!--/*/
 		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES', 'CREATE_SERIES', 'ADD_COMMENTS_TO_SERIES', 'HIDE_IMAGE')">
 		/*/-->
@@ -1171,6 +1165,16 @@
 					} else {
 						console.error(event);
 					}
+				}
+			});
+			
+			// https://htmx.org/events/#htmx:load
+			document.body.addEventListener('htmx:load', function htmxLoadEventHandler(event) {
+				// NOTE: htmx:load event fires in the beginning, when a page has been loaded, and when a new element
+				// has been placed after AJAX request. In both cases we need to register custom event listener for the
+				// add catalog price form. Also, we don't need to do anything, if updated element belongs to another form.
+				if (event.detail.elt.querySelector('#price-catalog-name') != null) {
+					initPriceCatalog();
 				}
 			});
 		</script>
