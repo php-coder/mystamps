@@ -1,3 +1,27 @@
 [tools]
 java = "adoptopenjdk-8.0.442"
 maven = "3.6.3"
+
+#
+# Project tasks
+#
+# See for details:
+# - https://mise.jdx.dev/tasks/
+# - https://mise.jdx.dev/tasks/toml-tasks.html
+# - https://mise.jdx.dev/tasks/file-tasks.html
+# - https://mise.jdx.dev/tasks/running-tasks.html
+# - https://mise.jdx.dev/tasks/task-configuration.html
+#
+
+[tasks.clean]
+description = "Remove generated files"
+run = "mvn clean"
+
+[tasks.boot]
+description = "Run application"
+run = "mvn spring-boot:run"
+alias = [ "run", "bootRun" ]
+
+[tasks.fast]
+description = "Run application (but skips some checks)"
+run = "mvn spring-boot:run -Denforcer.skip=true -DskipMinify=true -Dmaven.resources.skip=true -Dmaven.test.skip=true"
