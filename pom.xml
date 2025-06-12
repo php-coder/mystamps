@@ -564,7 +564,7 @@
 		<disableXmlReport>true</disableXmlReport>
 		
 		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
-		<enforcer.plugin.version>3.0.0-M3</enforcer.plugin.version>
+		<enforcer.plugin.version>3.5.0</enforcer.plugin.version>
 		<frontend.plugin.version>1.7.6</frontend.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
