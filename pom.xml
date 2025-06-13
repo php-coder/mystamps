@@ -551,7 +551,7 @@
 		<bootstrap.version>3.4.1</bootstrap.version>
 		
 		<cglib.version>2.2.2</cglib.version>
-		<clean.plugin.version>3.0.0</clean.plugin.version>
+		<clean.plugin.version>3.5.0</clean.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<commons-lang3.version>3.17.0</commons-lang3.version>
