@@ -25,3 +25,16 @@ alias = [ "run", "bootRun" ]
 [tasks.fast]
 description = "Run application (but skips some checks)"
 run = "mvn spring-boot:run -Denforcer.skip=true -DskipMinify=true -Dmaven.resources.skip=true -Dmaven.test.skip=true"
+
+[tasks.test]
+description = "Execute unit tests"
+run = "mvn test -Denforcer.skip=true -DskipMinify=true"
+
+[tasks.verify]
+description = "Execute integration tests"
+run = "mvn verify"
+
+[tasks.war]
+description = "Build WAR file"
+run = "mvn package -Denforcer.skip=true -Dmaven.test.skip=true"
+alias = "package"
