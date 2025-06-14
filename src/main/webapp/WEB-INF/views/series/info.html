@@ -409,7 +409,103 @@
 							
 							<div id="add-release-year" sec:authorize="hasAuthority('CREATE_SERIES')" th:if="${series.releaseYear == null}"></div>
 							
-							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
+							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')">
+								<div class="col-sm-12 form-group" th:fragment="AddCatalogPriceForm">
+									<form id="add-catalog-price-form"
+										class="form-horizontal"
+										th:object="${addCatalogPriceForm}"
+										hx-target="#add-catalog-price"
+										hx-disabled-elt="#add-catalog-price-btn"
+										th:hx-patch="@{${INFO_SERIES_PAGE}(id=${seriesId})}">
+										<div class="alert alert-danger text-center col-sm-8 col-sm-offset-3 hidden server-error-msg"
+											th:text="#{t_server_error}">
+											Server error
+										</div>
+										<div class="form-group form-group-sm"
+											th:classappend="${isHtmx and #fields.hasErrors('catalogName') ? 'has-error' : ''}">
+											<label for="price-catalog-name" class="control-label col-sm-3" th:text="#{t_catalog}">
+												Catalog
+											</label>
+											<div class="col-sm-6">
+												<select
+													id="price-catalog-name"
+													name="catalogName"
+													class="form-control"
+													th:with="chosenCatalogName=${addCatalogPriceForm != null and addCatalogPriceForm.catalogName != null ? addCatalogPriceForm.catalogName.name() : ''}">
+													<option value="MICHEL" th:text="#{t_michel}" th:selected="${chosenCatalogName == 'MICHEL'}">
+														Michel
+													</option>
+													<option value="SCOTT" th:text="#{t_scott}" th:selected="${chosenCatalogName == 'SCOTT'}">
+														Scott
+													</option>
+													<option value="YVERT" th:text="#{t_yvert}" th:selected="${chosenCatalogName == 'YVERT'}">
+														Yvert et Tellier
+													</option>
+													<option value="GIBBONS" th:text="#{t_sg}" th:selected="${chosenCatalogName == 'GIBBONS'}">
+														Stanley Gibbons
+													</option>
+													<option value="SOLOVYOV" th:text="#{t_solovyov}" th:selected="${chosenCatalogName == 'SOLOVYOV'}">
+														Solovyov
+													</option>
+													<option value="ZAGORSKI" th:text="#{t_zagorski}" th:selected="${chosenCatalogName == 'ZAGORSKI'}">
+														Zagorski
+													</option>
+												</select>
+												<!--/*/
+												<th:block th:if="${isHtmx}">
+													<span id="price-catalog-name.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('catalogName')}"
+														th:each="error : ${#fields.errors('catalogName')}" th:text="${error}">
+													</span>
+												</th:block>
+												/*/-->
+											</div>
+										</div>
+										<div class="form-group form-group-sm"
+											th:classappend="${isHtmx and #fields.hasErrors('price') ? 'has-error' : ''}">
+											<label for="catalog-price" class="control-label col-sm-3 required-field" th:text="#{t_price}">
+												Price
+											</label>
+											<div class="col-sm-3">
+												<!--/* @todo #1388 AddCatalogPriceForm: consider using a tooltip for currency */-->
+												<div class="input-group">
+													<span id="js-catalog-price-symbol"
+														class="input-group-addon"
+														th:text="${addCatalogPriceForm != null and addCatalogPriceForm.catalogName != null ? addCatalogPriceForm.catalogName.getCurrencySymbol() : '&euro;'}">
+														&euro;
+													</span>
+													<input id="catalog-price"
+														name="price"
+														type="text"
+														class="form-control"
+														size="5"
+														title="EUR"
+														th:title="${addCatalogPriceForm != null and addCatalogPriceForm.catalogName != null ? addCatalogPriceForm.catalogName.getCurrencyCode() : 'EUR'}"
+														required="required"
+														th:value="${addCatalogPriceForm != null ? addCatalogPriceForm.price : ''}" />
+												</div>
+											</div>
+											<!--/*/
+											<div class="col-sm-offset-3 col-sm-6" th:if="${isHtmx and #fields.hasErrors('price')}">
+												<span id="price.errors"
+													class="help-block"
+													th:each="error : ${#fields.errors('price')}" th:text="${error}">
+												</span>
+											</div>
+											/*/-->
+										</div>
+										<div class="col-sm-offset-3 col-sm-4">
+											<button id="add-catalog-price-btn"
+												type="submit"
+												class="btn btn-primary btn-sm"
+												th:text="#{t_add}">
+												Add
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
 
 							<div id="add-catalog-numbers" class="row" sec:authorize="hasAuthority('CREATE_SERIES')">
 								<div class="col-sm-12 form-group" th:fragment="AddCatalogNumbersForm">
@@ -1027,7 +1123,7 @@
 			src="../../../../../../target/classes/js/utils/DateUtils.min.js"
 			th:src="${DATE_UTILS_JS}"></script>
 
-		<script sec:authorize="hasAuthority('VIEW_SERIES_SALES')"
+		<script sec:authorize="hasAnyAuthority('VIEW_SERIES_SALES', 'CREATE_SERIES')"
 			src="../../../../javascript/series/info.js"
 			th:src="${SERIES_INFO_JS}"></script>
 		
@@ -1072,6 +1168,16 @@
 					} else {
 						console.error(event);
 					}
+				}
+			});
+			
+			// https://htmx.org/events/#htmx:load
+			document.body.addEventListener('htmx:load', function htmxLoadEventHandler(event) {
+				// NOTE: htmx:load event fires in the beginning, when a page has been loaded, and when a new element
+				// has been placed after AJAX request. In both cases we need to register custom event listener for the
+				// add catalog price form. Also, we don't need to do anything, if updated element belongs to another form.
+				if (event.detail.elt.querySelector('#price-catalog-name') != null) {
+					initPriceCatalog();
 				}
 			});
 		</script>
@@ -1318,29 +1424,8 @@
 		<th:block sec:authorize="hasAuthority('CREATE_SERIES')">
 		/*/-->
 		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.min.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.min.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
 
 		<script th:inline="javascript">
-			/*[+
-			var addCatalogPriceProps = {
-				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
-				'csrfHeaderName': [[ ${_csrf.headerName} ]],
-				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {
-					't_server_error': [[ #{t_server_error} ]],
-					't_catalog':      [[ #{t_catalog} ]],
-					't_michel':       [[ #{t_michel} ]],
-					't_scott':        [[ #{t_scott} ]],
-					't_yvert':        [[ #{t_yvert} ]],
-					't_sg':           [[ #{t_sg} ]],
-					't_solovyov':     [[ #{t_solovyov} ]],
-					't_zagorski':     [[ #{t_zagorski} ]],
-					't_price':        [[ #{t_price} ]],
-					't_add':          [[ #{t_add} ]]
-				}
-			};
-			+]*/
-			
 			/*[- */
 			var addReleaseYearProps = {
 				'url': '/series/100',
@@ -1348,13 +1433,7 @@
 				'sinceYear': 1840,
 				'tillYear': new Date().getFullYear()
 			};
-			var addCatalogPriceProps = {
-				'url': '/series/100',
-				'l10n': {}
-			};
 			/* -]*/
-			
-			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
 			
 			/*[# th:if="${series.releaseYear == null}"]*/
 			/*[+

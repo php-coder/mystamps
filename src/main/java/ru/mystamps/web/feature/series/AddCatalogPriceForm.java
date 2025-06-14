@@ -15,21 +15,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
+
 package ru.mystamps.web.feature.series;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Getter
-@RequiredArgsConstructor
-public enum StampsCatalog {
-	MICHEL("EUR", "\u20AC"),
-	SCOTT("USD", "$"),
-	YVERT("EUR", "\u20AC"),
-	GIBBONS("GBP", "\u00A3"),
-	SOLOVYOV("RUB", "\u20BD"),
-	ZAGORSKI("RUB", "\u20BD");
-
-	private final String currencyCode;
-	private final String currencySymbol;
+@Setter
+public class AddCatalogPriceForm {
+	@NotNull
+	private StampsCatalog catalogName;
+	
+	// @todo #1340 Update series: add validation for a price
+	@NotNull
+	private BigDecimal price;
 }

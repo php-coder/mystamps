@@ -132,5 +132,49 @@ public class HtmxSeriesController {
 		
 		return null;
 	}
+
+	@PatchMapping(
+		path = SeriesUrl.INFO_SERIES_PAGE,
+		headers = "HX-Trigger=add-catalog-price-form"
+	)
+	public String addCatalogPrice(
+		@PathVariable("id") Integer seriesId,
+		@Valid AddCatalogPriceForm form,
+		BindingResult result,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
+		Model model,
+		HttpServletResponse response
+	) throws IOException {
+		
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		if (!seriesService.isSeriesExist(seriesId)) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		if (result.hasErrors()) {
+			response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			model.addAttribute("isHtmx", true);
+			model.addAttribute("seriesId", seriesId);
+			return "series/info :: AddCatalogPriceForm";
+		}
+		
+		Integer currentUserId = currentUser.getUserId();
+		seriesService.addCatalogPrice(
+			form.getCatalogName(),
+			seriesId,
+			form.getPrice(),
+			currentUserId
+		);
+		
+		// @todo #1671 AddCatalogPriceForm: update a page without full reload
+		response.addHeader("HX-Refresh", "true");
+		
+		return null;
+	}
 	
 }
