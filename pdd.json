@@ -119,24 +119,6 @@
       "role": "DEV"
     },
   {
-      "id": "1342-c6d2f2ba", 
-      "ticket": "1342", 
-      "file": "src/main/frontend/src/components/AddCatalogPriceForm.js", 
-      "lines": "5-5", 
-      "body": "AddCatalogPriceForm: add tests", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
-      "id": "1388-110ff48f", 
-      "ticket": "1388", 
-      "file": "src/main/frontend/src/components/AddCatalogPriceForm.js", 
-      "lines": "6-6", 
-      "body": "AddCatalogPriceForm: consider using a tooltip for currency", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "1344-fb12fdf0", 
       "ticket": "1344", 
       "file": "src/main/frontend/src/components/AddReleaseYearForm.js", 
@@ -416,6 +398,15 @@
       "role": "DEV"
     },
   {
+      "id": "1340-34ef47fe", 
+      "ticket": "1340", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/AddCatalogPriceForm.java", 
+      "lines": "33-33", 
+      "body": "Update series: add validation for a price", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "1303-015294f3", 
       "ticket": "1303", 
       "file": "src/main/java/ru/mystamps/web/feature/series/AddImageForm.java", 
@@ -560,6 +551,15 @@
       "role": "DEV"
     },
   {
+      "id": "1671-50404b77", 
+      "ticket": "1671", 
+      "file": "src/main/java/ru/mystamps/web/feature/series/HtmxSeriesController.java", 
+      "lines": "174-174", 
+      "body": "AddCatalogPriceForm: update a page without full reload", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "785-c33d2a08", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java", 
@@ -587,19 +587,10 @@
       "role": "DEV"
     },
   {
-      "id": "1340-34ef47fe", 
-      "ticket": "1340", 
-      "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "49-49", 
-      "body": "Update series: add validation for a price", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "1343-a893935d", 
       "ticket": "1343", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "50-50", 
+      "lines": "47-47", 
       "body": "Update series: add validation for a release year", 
       "estimate": "0", 
       "role": "DEV"
@@ -608,7 +599,7 @@
       "id": "785-37a48219", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "70-70", 
+      "lines": "67-67", 
       "body": "Update series: properly fail on non-supported operations", 
       "estimate": "0", 
       "role": "DEV"
@@ -617,7 +608,7 @@
       "id": "785-a8e6066a", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java", 
-      "lines": "94-94", 
+      "lines": "78-78", 
       "body": "Update series: properly fail on invalid path", 
       "estimate": "0", 
       "role": "DEV"
@@ -1319,7 +1310,7 @@
       "id": "785-4e1225ab", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
-      "lines": "39-39", 
+      "lines": "38-38", 
       "body": "Update series: add integration test for required “op“ field", 
       "estimate": "0", 
       "role": "DEV"
@@ -1328,7 +1319,7 @@
       "id": "785-140bc7bd", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
-      "lines": "43-43", 
+      "lines": "42-42", 
       "body": "Update series: add integration test for non-empty “path“ field", 
       "estimate": "0", 
       "role": "DEV"
@@ -1337,7 +1328,7 @@
       "id": "785-c0b6c3f6", 
       "ticket": "785", 
       "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
-      "lines": "47-47", 
+      "lines": "46-46", 
       "body": "Update series: add integration test for non-empty “value“ field", 
       "estimate": "0", 
       "role": "DEV"
@@ -1346,7 +1337,7 @@
       "id": "1447-3c055652", 
       "ticket": "1447", 
       "file": "src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java", 
-      "lines": "52-52", 
+      "lines": "51-51", 
       "body": "Add test to ensure that catalog numbers are trimmed", 
       "estimate": "0", 
       "role": "DEV"
@@ -1568,10 +1559,19 @@
       "role": "DEV"
     },
   {
+      "id": "1388-110ff48f", 
+      "ticket": "1388", 
+      "file": "src/main/webapp/WEB-INF/views/series/info.html", 
+      "lines": "471-471", 
+      "body": "AddCatalogPriceForm: consider using a tooltip for currency", 
+      "estimate": "0", 
+      "role": "DEV"
+    },
+  {
       "id": "995-71e1e7c8", 
       "ticket": "995", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "1003-1003", 
+      "lines": "1099-1099", 
       "body": "Series sale import: add support for new sellers", 
       "estimate": "0", 
       "role": "DEV"
@@ -1580,7 +1580,7 @@
       "id": "1057-afe1bb59", 
       "ticket": "1057", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "1004-1004", 
+      "lines": "1100-1100", 
       "body": "Series sale import form: show a message when JavaScript is disabled", 
       "estimate": "0", 
       "role": "DEV"
@@ -1589,7 +1589,7 @@
       "id": "1280-233d287d", 
       "ticket": "1280", 
       "file": "src/main/webapp/WEB-INF/views/series/info.html", 
-      "lines": "1418-1418", 
+      "lines": "1497-1497", 
       "body": "Mark similar series: add integration tests", 
       "estimate": "0", 
       "role": "DEV"
