@@ -583,7 +583,7 @@
 		<htmlunit.version>2.70.0</htmlunit.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/info.html -->
-		<htmx.version>2.0.4</htmx.version>
+		<htmx.version>2.0.6</htmx.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<jakarta-mail.version>1.6.7</jakarta-mail.version>
