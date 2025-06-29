@@ -16,6 +16,7 @@ updates:
       - dependency-name: "org.apache.maven.plugins:maven-clean-plugin"
       - dependency-name: "org.apache.maven.plugins:maven-enforcer-plugin"
       - dependency-name: "org.apache.maven.plugins:maven-resources-plugin"
+      - dependency-name: "org.apache.maven.plugins:maven-surefire-plugin"
       - dependency-name: "org.apache.maven.plugins:maven-war-plugin"
       - dependency-name: "org.jsoup:jsoup"
       - dependency-name: "org.liquibase:liquibase-core"
