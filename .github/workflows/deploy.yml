@@ -58,7 +58,7 @@ jobs:
       - name: Install mise to set up Ansible
         uses: jdx/mise-action@v2.4.0 # https://github.com/jdx/mise-action
         with:
-          version: 2025.6.8                # [default: latest] mise version to install
+          version: 2025.7.8                # [default: latest] mise version to install
           install: true                    # [default: true] run `mise install`
           cache: true                      # [default: true] cache mise using GitHub's cache
           log_level: info                  # [default: info] log level
