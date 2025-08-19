@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
 
       - name: Install mise to set up Ansible
-        uses: jdx/mise-action@v2.4.0 # https://github.com/jdx/mise-action
+        uses: jdx/mise-action@v3.0.2 # https://github.com/jdx/mise-action
         with:
           version: 2025.7.8                # [default: latest] mise version to install
           install: true                    # [default: true] run `mise install`
