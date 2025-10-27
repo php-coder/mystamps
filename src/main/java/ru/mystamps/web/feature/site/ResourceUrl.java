@@ -53,7 +53,7 @@ public final class ResourceUrl {
 	private static final String AXIOS_JS           = "0.19.2/dist/axios.min.js";
 	private static final String BOOTSTRAP_CSS      = "/bootstrap/3.4.1/css/bootstrap.min.css";
 	private static final String BOOTSTRAP_JS       = "/bootstrap/3.4.1/js/bootstrap.min.js";
-	private static final String HTMX_JS            = "2.0.4/dist/htmx.min.js";
+	private static final String HTMX_JS            = "2.0.8/dist/htmx.min.js";
 	private static final String JQUERY_JS          = "/jquery/1.9.1/jquery.min.js";
 	private static final String REACT_JS           = "16.8.6/umd/react.production.min.js";
 	private static final String REACT_DOM_JS       = "16.8.6/umd/react-dom.production.min.js";
