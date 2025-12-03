@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.image;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,7 +55,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		String extension = extractExtensionFromContentType(contentType);
 		Validate.validState(
-				StringUtils.equalsAny(extension, "png", "jpeg"),
+				Strings.CI.equalsAny(extension, "png", "jpeg"),
 				"File type must be PNG or JPEG image, but '%s' (%s) were passed",
 				contentType, extension
 		);
@@ -95,7 +96,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		String extension = extractExtensionFromContentType(contentType);
 		Validate.validState(
-			StringUtils.equalsAny(extension, "png", "jpeg"),
+			Strings.CI.equalsAny(extension, "png", "jpeg"),
 			"File type must be PNG or JPEG image, but '%s' (%s) were passed",
 			contentType, extension
 		);

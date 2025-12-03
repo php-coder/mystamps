@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.common.Currency;
@@ -293,7 +294,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determine perforation from '{}'", fragment);
 		
-		boolean withoutPerforation = StringUtils.containsAny(
+		boolean withoutPerforation = Strings.CS.containsAny(
 			StringUtils.upperCase(fragment, LocaleUtils.RUSSIAN),
 			"Б/З",
 			"Б\\З",

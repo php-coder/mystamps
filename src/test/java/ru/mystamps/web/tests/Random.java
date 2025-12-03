@@ -19,7 +19,7 @@ package ru.mystamps.web.tests;
 
 import io.qala.datagen.RandomElements;
 import io.qala.datagen.RandomShortApi;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.feature.account.AccountValidation;
 import ru.mystamps.web.feature.category.CategoryValidation;
@@ -84,7 +84,7 @@ public final class Random {
 			.with(multipleOf(" -_"))
 			.alphanumeric();
 		
-		if (StringUtils.containsAny(login, SPACE, "--", "__")) {
+		if (Strings.CS.containsAny(login, SPACE, "--", "__")) {
 			return login();
 		}
 		
@@ -119,8 +119,7 @@ public final class Random {
 			.with(oneOf(" -"))
 			.english();
 		
-		if (StringUtils.startsWithAny(name, SPACE, "-")
-			|| StringUtils.endsWithAny(name, SPACE, "-")) {
+		if (Strings.CS.startsWithAny(name, SPACE, "-") || Strings.CS.endsWithAny(name, SPACE, "-")) {
 			return countryName();
 		}
 		
@@ -135,8 +134,7 @@ public final class Random {
 			.with(oneOf(" -"))
 			.english();
 		
-		if (StringUtils.startsWithAny(name, SPACE, "-")
-			|| StringUtils.endsWithAny(name, SPACE, "-")) {
+		if (Strings.CS.startsWithAny(name, SPACE, "-") || Strings.CS.endsWithAny(name, SPACE, "-")) {
 			return countryName();
 		}
 		

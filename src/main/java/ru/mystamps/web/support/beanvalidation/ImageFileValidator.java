@@ -18,6 +18,7 @@
 package ru.mystamps.web.support.beanvalidation;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -90,7 +91,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		}
 
 		String contentType = file.getContentType();
-		if (!StringUtils.equalsAny(contentType, IMAGE_PNG_VALUE, IMAGE_JPEG_VALUE)) {
+		if (!Strings.CS.equalsAny(contentType, IMAGE_PNG_VALUE, IMAGE_JPEG_VALUE)) {
 			LOG.debug("Reject file with content type '{}'", contentType);
 			return false;
 		}
