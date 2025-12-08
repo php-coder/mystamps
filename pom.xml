@@ -571,7 +571,7 @@
 		<groovy-old.version>2.0.8</groovy-old.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<h2.version>2.2.224</h2.version>
+		<h2.version>2.4.240</h2.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
