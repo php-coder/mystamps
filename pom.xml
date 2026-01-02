@@ -599,9 +599,6 @@
 		
 		<javassist.version>3.21.0-GA</javassist.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<jetty.version>9.4.19.v20190610</jetty.version>
-		
 		<!-- Don't forget to update version in the ResourceUrl class -->
 		<jquery.version>1.9.1</jquery.version>
 		
