@@ -106,7 +106,7 @@ Id	Ticket	"Title"	File	Lines
 1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	1100-1100
 1057-ea0a43ea	1057	"SeriesSaleImportForm: wait until setState() finishes"	src/main/frontend/src/components/SeriesSaleImportForm.js	32-32
 1060-c9ead0b8	1060	"Add a workaround for GitHub search by filtering out issues with titles that don't match exactly"	src/main/scripts/ci/connect-todos-to-issues.sh	129-129
-1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1209-1209
+1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1206-1206
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	618-618
 1123-42494b3d	1123	"/collection/{slug}: show “New“ badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
 1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	104-104
@@ -149,9 +149,9 @@ Id	Ticket	"Title"	File	Lines
 1326-d460ac09	1326	"SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	523-523
 1326-e5faca08	1326	"Series import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	51-51
 1329-5cbf2e5d	1329	"SeriesSalesList: add tests"	src/main/frontend/src/components/SeriesSalesList.js	6-6
-1339-9a7986f1	1339	"Update series: add validation for catalog numbers"	src/main/java/ru/mystamps/web/feature/series/AddCatalogNumbersForm.java	33-33
+1339-9a7986f1	1339	"Update series: add validation for catalog numbers"	src/main/java/ru/mystamps/web/feature/series/AddCatalogNumbersForm.java	32-32
 1340-1b97f079	1340	"Update series: handle refuse to update an existing price gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	370-370
-1340-34ef47fe	1340	"Update series: add validation for a price"	src/main/java/ru/mystamps/web/feature/series/AddCatalogPriceForm.java	33-33
+1340-34ef47fe	1340	"Update series: add validation for a price"	src/main/java/ru/mystamps/web/feature/series/AddCatalogPriceForm.java	32-32
 1343-a893935d	1343	"Update series: add validation for a release year"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	47-47
 1343-c710f5d6	1343	"Update series: handle refuse to update an existing release year gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	161-161
 1344-fb12fdf0	1344	"AddReleaseYearForm: add tests"	src/main/frontend/src/components/AddReleaseYearForm.js	6-6
@@ -175,7 +175,7 @@ Id	Ticket	"Title"	File	Lines
 1610-3bdaa3a0	1610	"Close an issue or post a comment when a puzzle got removed from code"	.github/workflows/todos-extract-from-code.yml	68-68
 1610-40bd5b91	1610	"Post a comment when issue got closed without removing a puzzle"	.github/workflows/todos-extract-from-code.yml	69-69
 1621-b132f9e0	1621	"Add 3 integration tests to check that the last added series is shown first"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	63-63
-1671-479aeb53	1671	"Fix integration tests because of unsupported HTMX in htmlunit"	pom.xml	1001-1001
-1671-50404b77	1671	"AddCatalogPriceForm: update a page without full reload"	src/main/java/ru/mystamps/web/feature/series/HtmxSeriesController.java	174-174
-1671-ff8788b3	1671	"AddCatalogNumbersForm: update a page without full reload"	src/main/java/ru/mystamps/web/feature/series/HtmxSeriesController.java	130-130
+1671-479aeb53	1671	"Fix integration tests because of unsupported HTMX in htmlunit"	pom.xml	998-998
+1671-50404b77	1671	"AddCatalogPriceForm: update a page without full reload"	src/main/java/ru/mystamps/web/feature/series/HtmxSeriesController.java	173-173
+1671-ff8788b3	1671	"AddCatalogNumbersForm: update a page without full reload"	src/main/java/ru/mystamps/web/feature/series/HtmxSeriesController.java	129-129
 1720-e0777ce4	1720	"Terraform: automate import of the existing resources"	infra/terraform/README.md	4-4
