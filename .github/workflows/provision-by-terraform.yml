@@ -33,7 +33,7 @@ jobs:
     steps:
 
       - name: Clone source code
-        uses: actions/checkout@v6.0.0 # https://github.com/actions/checkout
+        uses: actions/checkout@v6.0.1 # https://github.com/actions/checkout
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
