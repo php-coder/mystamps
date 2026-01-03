@@ -32,9 +32,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import static org.apache.commons.lang3.StringUtils.substringAfter;
-import static org.apache.commons.lang3.StringUtils.substringBefore;
-
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
 	
@@ -211,7 +208,7 @@ public class ImageServiceImpl implements ImageService {
 	
 	private static String extractExtensionFromContentType(String contentType) {
 		// "image/jpeg; charset=UTF-8" -> "jpeg"
-		return substringBefore(substringAfter(contentType, "/"), ";");
+		return StringUtils.substringBefore(StringUtils.substringAfter(contentType, "/"), ";");
 	}
 	
 	private String abbreviateIfLengthGreaterThan(String text, int maxLength) {
