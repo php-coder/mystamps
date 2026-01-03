@@ -338,7 +338,7 @@
       "id": "1303-7320596f", 
       "ticket": "1303", 
       "file": "src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java", 
-      "lines": "81-81", 
+      "lines": "79-79", 
       "body": "ImageServiceImpl: reduce duplication between add() and replace()", 
       "estimate": "0", 
       "role": "DEV"
@@ -347,7 +347,7 @@
       "id": "1303-fbc787d3", 
       "ticket": "1303", 
       "file": "src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java", 
-      "lines": "82-82", 
+      "lines": "80-80", 
       "body": "ImageServiceImpl.replace(): ensure that method cleanups file after exception", 
       "estimate": "0", 
       "role": "DEV"
@@ -1058,7 +1058,7 @@
       "id": "803-64628226", 
       "ticket": "803", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "102-102", 
+      "lines": "103-103", 
       "body": "SeriesInfoExtractorServiceImpl.extract(): add unit tests", 
       "estimate": "0", 
       "role": "DEV"
@@ -1067,7 +1067,7 @@
       "id": "1287-00d4c9e9", 
       "ticket": "1287", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "250-251", 
+      "lines": "251-252", 
       "body": "SeriesInfoExtractorServiceImpl.extractIssueDate(): filter out invalid day/month", 
       "estimate": "0", 
       "role": "DEV"
@@ -1076,7 +1076,7 @@
       "id": "782-a11927bd", 
       "ticket": "782", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "288-288", 
+      "lines": "289-289", 
       "body": "Series import: add integration test for extracting perforation flag", 
       "estimate": "0", 
       "role": "DEV"
@@ -1085,7 +1085,7 @@
       "id": "694-5ff627a7", 
       "ticket": "694", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "323-323", 
+      "lines": "324-324", 
       "body": "SeriesInfoExtractorServiceImpl: support for a single Michel number", 
       "estimate": "0", 
       "role": "DEV"
@@ -1094,7 +1094,7 @@
       "id": "694-d39599f4", 
       "ticket": "694", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "324-324", 
+      "lines": "325-325", 
       "body": "SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers", 
       "estimate": "0", 
       "role": "DEV"
@@ -1103,7 +1103,7 @@
       "id": "695-acc3d320", 
       "ticket": "695", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "352-352", 
+      "lines": "353-353", 
       "body": "SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)", 
       "estimate": "0", 
       "role": "DEV"
@@ -1112,7 +1112,7 @@
       "id": "978-63d2b8ea", 
       "ticket": "978", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "360-360", 
+      "lines": "361-361", 
       "body": "SeriesInfoExtractorServiceImpl.extractSeller(): validate name", 
       "estimate": "0", 
       "role": "DEV"
@@ -1121,7 +1121,7 @@
       "id": "695-ee1c9a1a", 
       "ticket": "695", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "401-401", 
+      "lines": "402-402", 
       "body": "SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names", 
       "estimate": "0", 
       "role": "DEV"
@@ -1130,7 +1130,7 @@
       "id": "695-b081f579", 
       "ticket": "695", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "402-402", 
+      "lines": "403-403", 
       "body": "SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names", 
       "estimate": "0", 
       "role": "DEV"
@@ -1139,7 +1139,7 @@
       "id": "695-1c6fc247", 
       "ticket": "695", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "413-413", 
+      "lines": "414-414", 
       "body": "SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls", 
       "estimate": "0", 
       "role": "DEV"
@@ -1148,7 +1148,7 @@
       "id": "695-c38ae205", 
       "ticket": "695", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "414-414", 
+      "lines": "415-415", 
       "body": "SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls", 
       "estimate": "0", 
       "role": "DEV"
@@ -1157,7 +1157,7 @@
       "id": "695-30836e69", 
       "ticket": "695", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "461-461", 
+      "lines": "462-462", 
       "body": "SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0", 
       "estimate": "0", 
       "role": "DEV"
@@ -1166,7 +1166,7 @@
       "id": "1326-d460ac09", 
       "ticket": "1326", 
       "file": "src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java", 
-      "lines": "523-523", 
+      "lines": "524-524", 
       "body": "SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests", 
       "estimate": "0", 
       "role": "DEV"
