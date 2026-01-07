@@ -688,7 +688,7 @@
 		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.6.1.Final</togglz.version>
-		<war.plugin.version>3.4.0</war.plugin.version>
+		<war.plugin.version>3.5.1</war.plugin.version>
 		<wiremock.plugin.version>7.3.0</wiremock.plugin.version>
 		<wiremock.version>2.35.1</wiremock.version>
 	</properties>
