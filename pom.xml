@@ -677,7 +677,7 @@
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
 		<surefire.plugin.version>3.5.4</surefire.plugin.version>
-		<thumbnailator.version>0.4.20</thumbnailator.version>
+		<thumbnailator.version>0.4.21</thumbnailator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version>
