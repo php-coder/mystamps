@@ -4,7 +4,7 @@
 		Comment
 	</dt>
 	<dd id="comment"
-		th:utext="${#strings.replace(#strings.escapeXml(comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
+		th:utext="${#strings.replace(#strings.escapeXml(comment), '&#10;', '&lt;br /&gt;')}">
 		My favorite series.
 	</dd>
 </dl>
