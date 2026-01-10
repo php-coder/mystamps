@@ -574,7 +574,7 @@
 		<h2.version>2.2.224</h2.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<hibernate-validator.version>6.1.7.Final</hibernate-validator.version>
+		<hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<hikaricp.version>4.0.3</hikaricp.version>
