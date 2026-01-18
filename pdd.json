@@ -14,7 +14,7 @@
       "id": "1154-3fe7f1f2", 
       "ticket": "1154", 
       "file": ".github/workflows/integration-tests-mysql.yml", 
-      "lines": "81-81", 
+      "lines": "82-82", 
       "body": "Set charset of MySQL container by providing a custom my.cnf", 
       "estimate": "0", 
       "role": "DEV"
