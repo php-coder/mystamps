@@ -14,7 +14,7 @@ on:
   # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onschedule
   schedule:
     # Every Friday at 00:30 UTC
-    - cron: '0 30 * * FRI'
+    - cron: '30 0 * * FRI'
 
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions:
