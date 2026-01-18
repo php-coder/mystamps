@@ -28,8 +28,8 @@ defaults:
     shell: bash
 
 jobs:
-  setup-server:
-    name: Setup a server
+  run-production-tests:
+    name: Production Tests
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-22.04
     steps:
