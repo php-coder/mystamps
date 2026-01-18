@@ -13,6 +13,7 @@ on:
       - 'src/main/config/nginx/*'
       - 'src/main/scripts/**'
       - '!src/main/scripts/execute-command.sh'
+      - 'src/test/hurl/**'
 
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
 permissions:
