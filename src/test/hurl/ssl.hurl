@@ -23,7 +23,7 @@ certificate "Issuer" contains "Let's Encrypt"
 certificate "Expire-Date" daysAfterNow > 10
 
 GET https://stamps.filezz.ru
-HTTP 200
+HTTP 301
 [Asserts]
 certificate "Subject" == "CN = my-stamps.ru"
 certificate "Issuer" contains "Let's Encrypt"
