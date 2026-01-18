@@ -1,0 +1,68 @@
+name: Production tests
+
+on:
+  push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
+    branches:
+      - master
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushpull_requestpull_request_targetpathspaths-ignore
+    paths:
+      - .github/workflows/production-tests.yml
+      - 'src/test/hurl/**'
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onworkflow_dispatch
+  workflow_dispatch:
+  # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onschedule
+  schedule:
+    # Every Friday at 00:30 UTC
+    - cron: '0 30 * * FRI'
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  contents: read # for "git clone"
+
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
+jobs:
+  setup-server:
+    name: Setup a server
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-22.04
+    steps:
+
+      - name: Clone source code
+        uses: actions/checkout@v6.0.1 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+
+      - name: Install mise to set up Hurl
+        uses: jdx/mise-action@v3.5.1 # https://github.com/jdx/mise-action
+        with:
+          version: 2025.11.11              # [default: latest] mise version to install
+          install: true                    # [default: true] run `mise install`
+          cache: true                      # [default: true] cache mise using GitHub's cache
+          log_level: info                  # [default: info] log level
+          working_directory: src/test/hurl # [default: .] directory to run mise in
+        env:
+          # Workaround: don't install parent's dependencies as we don't use them
+          # See: https://github.com/jdx/mise-action/issues/183
+          # https://mise.jdx.dev/configuration/settings.html#disable_tools
+          MISE_DISABLE_TOOLS: java,maven
+
+      - name: Show Hurl version
+        # NOTE: a working directory is important here and must be set to the dir where mise is configured
+        working-directory: src/test/hurl
+        run: hurl --version
+
+      - name: Run production tests
+        working-directory: src/test/hurl
+        run: >-
+          hurl \
+            --error-format long \
+            --test \
+            *.hurl
