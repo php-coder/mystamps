@@ -15,6 +15,13 @@ certificate "Subject" == "CN = my-stamps.ru"
 certificate "Issuer" == "C = US, O = Let's Encrypt, CN = R13"
 certificate "Expire-Date" daysAfterNow > 10
 
+GET https://www.my-stamps.ru
+HTTP 200
+[Asserts]
+certificate "Subject" == "CN = www.my-stamps.ru"
+certificate "Issuer" == "C = US, O = Let's Encrypt, CN = R13"
+certificate "Expire-Date" daysAfterNow > 10
+
 GET https://stamps.filezz.ru
 HTTP 200
 [Asserts]
