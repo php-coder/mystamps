@@ -1469,24 +1469,6 @@
       "role": "DEV"
     },
   {
-      "id": "1244-070a6baf", 
-      "ticket": "1244", 
-      "file": "src/main/scripts/show-spring-boot-version-diff.sh", 
-      "lines": "3-3", 
-      "body": "Retrofit show-spring-boot-version-diff.sh script to work with a new format of the file", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
-      "id": "869-90e5e0f1", 
-      "ticket": "869", 
-      "file": "src/main/scripts/show-spring-boot-version-diff.sh", 
-      "lines": "20-20", 
-      "body": "show-spring-boot-version-diff.sh: properly handle recursive properties", 
-      "estimate": "0", 
-      "role": "DEV"
-    },
-  {
       "id": "884-03637f5c", 
       "ticket": "884", 
       "file": "src/main/webapp/WEB-INF/views/collection/estimation.html", 
