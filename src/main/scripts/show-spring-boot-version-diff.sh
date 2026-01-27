@@ -12,14 +12,11 @@ set -o pipefail
 CURRENT_DIR="$(dirname "$0")"
 PROJECT_POM="$CURRENT_DIR/../../../pom.xml"
 
-# Workaround for https://github.com/mrbusche/spring-boot-dependency-checker/issues/188
-cp "$PROJECT_POM" .
-
 (
 	printf 'Dependency\tProject\tSpring Boot\n';
 	# Workarounds for https://github.com/mrbusche/spring-boot-dependency-checker/issues/189
 	# and https://github.com/mrbusche/spring-boot-dependency-checker/issues/190
-	spring-boot-dependency-checker pom.xml |
+	spring-boot-dependency-checker "$PROJECT_POM" |
 		sed -e '/^Processing xml file/d' \
 			-e '/^Detected Spring Boot Version/d' \
 			-e '/^Declared Pom Package Count/d' \
