@@ -54,6 +54,8 @@ jobs:
             -Denforcer.skip=true \
             -Dmaven.test.skip=true \
             package
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'
 
       - name: Install mise to set up Ansible
         uses: jdx/mise-action@v3.5.1 # https://github.com/jdx/mise-action

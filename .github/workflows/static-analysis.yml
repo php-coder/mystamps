@@ -51,6 +51,8 @@ jobs:
           restore-keys: maven-repository-
       - name: Check license header
         run: ./src/main/scripts/execute-command.sh check-license
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'
 
   run-enforcer:
     name: Run maven-enforcer-plugin
@@ -76,3 +78,5 @@ jobs:
           restore-keys: maven-repository-
       - name: Run maven-enforcer-plugin
         run: ./src/main/scripts/execute-command.sh enforcer
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'

@@ -65,6 +65,8 @@ jobs:
           restore-keys: maven-repository-
       - name: Run integration tests
         run: ./src/main/scripts/execute-command.sh integration-tests
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'
       - name: Save RobotFramework reports
         if: ${{ failure() }}
         uses: actions/upload-artifact@v6.0.0 # https://github.com/actions/upload-artifact

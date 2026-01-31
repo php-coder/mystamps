@@ -50,6 +50,8 @@ jobs:
           restore-keys: maven-repository-
       - name: Run Jest
         run: ./src/main/scripts/execute-command.sh jest
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'
 
   run-unit-tests:
     name: Unit Tests (Java)
@@ -75,3 +77,5 @@ jobs:
           restore-keys: maven-repository-
       - name: Run unit tests
         run: ./src/main/scripts/execute-command.sh unit-tests
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'

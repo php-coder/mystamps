@@ -53,9 +53,13 @@ jobs:
 
       - name: Download all dependencies
         run: mvn dependency:go-offline
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'
 
       - name: Install NodeJS and npm
         run: mvn frontend:install-node-and-npm --activate-profiles frontend
+        env:
+          MAVEN_ARGS: '--no-transfer-progress'
 
       - name: List downloaded artifacts
         run: find ~/.m2/repository -type f -name '*.jar'
