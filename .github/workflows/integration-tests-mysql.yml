@@ -89,12 +89,11 @@ jobs:
       - name: Run integration tests
         env:
           SPRING_PROFILES_ACTIVE: travis
+          MAVEN_ARGS: '--no-transfer-progress'
         run: |
           mkdir -p /tmp/uploads /tmp/preview
           cp src/main/resources/test/test.png /tmp/uploads/1.png
           ./src/main/scripts/execute-command.sh integration-tests
-        env:
-          MAVEN_ARGS: '--no-transfer-progress'
       - name: Save RobotFramework reports
         if: ${{ failure() }}
         uses: actions/upload-artifact@v6.0.0 # https://github.com/actions/upload-artifact
