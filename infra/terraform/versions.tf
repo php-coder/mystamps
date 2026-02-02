@@ -4,7 +4,7 @@ terraform {
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "2.73.0"
+      version = "2.74.0"
     }
     uptimerobot = {
       source  = "vexxhost/uptimerobot"
