@@ -475,7 +475,7 @@
 		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
-			<version>${spock.version}</version>
+			<version>1.0-groovy-2.0</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -632,8 +632,6 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<slf4j.version>1.7.36</slf4j.version>
-		
-		<spock.version>1.0-groovy-2.0</spock.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
 		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
