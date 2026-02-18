@@ -614,7 +614,6 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<mysql.version>5.1.49</mysql.version>
 		
-		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<nodejs.version>v10.16.0</nodejs.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
@@ -1263,7 +1262,7 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>native2ascii-maven-plugin</artifactId>
-						<version>${native2ascii.plugin.version}</version>
+						<version>2.0.1</version>
 						<configuration>
 							<srcDir>${basedir}/src/main/resources/ru/mystamps/i18n</srcDir>
 							<targetDir>${project.build.outputDirectory}/ru/mystamps/i18n</targetDir>
