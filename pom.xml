@@ -563,7 +563,6 @@
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
 		
-		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
 		<enforcer.plugin.version>3.6.2</enforcer.plugin.version>
 		<frontend.plugin.version>1.7.6</frontend.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
@@ -797,7 +796,7 @@
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>${dockerfile.plugin.version}</version>
+				<version>1.4.6</version>
 				<configuration>
 					<repository>phpcoder/mystamps</repository>
 					<!-- FIXME: set it to docker/ after https://github.com/spotify/dockerfile-maven/pull/89 will be merged -->
