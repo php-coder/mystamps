@@ -681,7 +681,6 @@
 		
 		<togglz.version>2.6.1.Final</togglz.version>
 		<war.plugin.version>3.5.1</war.plugin.version>
-		<wiremock.plugin.version>7.3.0</wiremock.plugin.version>
 		<wiremock.version>2.35.1</wiremock.version>
 	</properties>
 	
@@ -1056,7 +1055,7 @@
 			<plugin>
 				<groupId>uk.co.automatictester</groupId>
 				<artifactId>wiremock-maven-plugin</artifactId>
-				<version>${wiremock.plugin.version}</version>
+				<version>7.3.0</version>
 				<configuration>
 					<dir>${basedir}/src/test/wiremock</dir>
 					<!--
