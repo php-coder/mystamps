@@ -564,7 +564,6 @@
 		<disableXmlReport>true</disableXmlReport>
 		
 		<enforcer.plugin.version>3.6.2</enforcer.plugin.version>
-		<frontend.plugin.version>1.7.6</frontend.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<groovy-old.version>2.0.8</groovy-old.version>
@@ -1213,7 +1212,7 @@
 					<plugin>
 						<groupId>com.github.eirslett</groupId>
 						<artifactId>frontend-maven-plugin</artifactId>
-						<version>${frontend.plugin.version}</version>
+						<version>1.7.6</version>
 						<configuration>
 							<nodeVersion>${nodejs.version}</nodeVersion>
 							<workingDirectory>${basedir}/src/main/frontend</workingDirectory>
