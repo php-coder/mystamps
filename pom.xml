@@ -268,7 +268,8 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>${bootstrap.version}</version>
+			<!-- Don't forget to update version in the ResourceUrl class -->
+			<version>3.4.1</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -548,9 +549,6 @@
 		
 		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/info.html -->
 		<axios.version>0.19.2</axios.version>
-		
-		<!-- Don't forget to update version in the ResourceUrl class -->
-		<bootstrap.version>3.4.1</bootstrap.version>
 		
 		<clean.plugin.version>3.5.0</clean.plugin.version>
 		
