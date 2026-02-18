@@ -611,8 +611,6 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<lombok.version>1.18.42</lombok.version>
 		
-		<minify.plugin.version>1.7.6</minify.plugin.version>
-		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<mysql.version>5.1.49</mysql.version>
 		
@@ -748,7 +746,7 @@
 			<plugin>
 				<groupId>com.samaxes.maven</groupId>
 				<artifactId>minify-maven-plugin</artifactId>
-				<version>${minify.plugin.version}</version>
+				<version>1.7.6</version>
 				<configuration>
 					<!-- Put minified versions to the same directory so that spring-boot:run can pick it -->
 					<webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
