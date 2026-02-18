@@ -411,7 +411,7 @@
 		<dependency>
 			<groupId>com.teketik</groupId>
 			<artifactId>spring-test-context-cache-limiter</artifactId>
-			<version>${spring-test-context-cache-limiter.version}</version>
+			<version>boot2-v1.2</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -640,8 +640,6 @@
 		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
 		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
 		<spring-security.version>5.3.13.RELEASE</spring-security.version>
-		
-		<spring-test-context-cache-limiter.version>boot2-v1.2</spring-test-context-cache-limiter.version>
 		
 		<!--
 			Define default value for spring-boot-starter-parent:
