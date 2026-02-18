@@ -438,7 +438,7 @@
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
-			<version>${groovy-old.version}</version>
+			<version>2.0.8</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -559,8 +559,6 @@
 		<disableXmlReport>true</disableXmlReport>
 		
 		<enforcer.plugin.version>3.6.2</enforcer.plugin.version>
-		
-		<groovy-old.version>2.0.8</groovy-old.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<h2.version>2.2.224</h2.version>
