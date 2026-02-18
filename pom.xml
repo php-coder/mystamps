@@ -605,8 +605,6 @@
 		<junit-jupiter.version>5.3.2</junit-jupiter.version>
 		<junit.version>4.13.2</junit.version>
 		
-		<license.plugin.version>3.0</license.plugin.version>
-		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<liquibase.version>4.31.1</liquibase.version>
 		
@@ -725,7 +723,7 @@
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>${license.plugin.version}</version>
+				<version>3.0</version>
 				<configuration>
 					<basedir>src</basedir>
 					<header>${basedir}/src/main/config/license_header.txt</header>
