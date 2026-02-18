@@ -564,7 +564,6 @@
 		<disableXmlReport>true</disableXmlReport>
 		
 		<enforcer.plugin.version>3.6.2</enforcer.plugin.version>
-		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<groovy-old.version>2.0.8</groovy-old.version>
 		
@@ -943,7 +942,7 @@
 			<plugin>
 				<groupId>org.codehaus.gmavenplus</groupId>
 				<artifactId>gmavenplus-plugin</artifactId>
-				<version>${gmavenplus.plugin.version}</version>
+				<version>1.5</version>
 				<configuration>
 					<!--
 						Groovy compiler warning level. Should be one of:
