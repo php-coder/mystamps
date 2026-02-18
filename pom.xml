@@ -292,7 +292,8 @@
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>axios</artifactId>
-			<version>${axios.version}</version>
+			<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/info.html -->
+			<version>0.19.2</version>
 			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
@@ -546,9 +547,6 @@
 	<properties>
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<assertj.version>3.14.0</assertj.version>
-		
-		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/info.html -->
-		<axios.version>0.19.2</axios.version>
 		
 		<clean.plugin.version>3.5.0</clean.plugin.version>
 		
