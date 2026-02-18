@@ -282,7 +282,8 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>selectize.js</artifactId>
-			<version>${selectizejs.version}</version>
+			<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
+			<version>0.13.3</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -628,9 +629,6 @@
 		<robotframework-plugin.version>1.7.2</robotframework-plugin.version>
 		<robotframework-selenium.version>3.141.59.26535</robotframework-selenium.version>
 		<robotframework.version>3.2.2</robotframework.version>
-		
-		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
-		<selectizejs.version>0.13.3</selectizejs.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<selenium-htmlunit.version>2.70.0</selenium-htmlunit.version>
