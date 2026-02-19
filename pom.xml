@@ -585,8 +585,6 @@
 		-->
 		<java.version>1.8</java.version>
 		
-		<javassist.version>3.21.0-GA</javassist.version>
-		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<junit-jupiter.version>5.3.2</junit-jupiter.version>
 		<junit.version>4.13.2</junit.version>
@@ -971,7 +969,7 @@
 					<dependency>
 						<groupId>org.javassist</groupId>
 						<artifactId>javassist</artifactId>
-						<version>${javassist.version}</version>
+						<version>3.21.0-GA</version>
 					</dependency>
 					<dependency>
 						<groupId>org.robotframework</groupId>
