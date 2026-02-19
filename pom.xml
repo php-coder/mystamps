@@ -386,7 +386,7 @@
 		<dependency>
 			<groupId>com.github.hi-fi</groupId>
 			<artifactId>robotframework-seleniumlibrary</artifactId>
-			<version>${robotframework-selenium.version}</version>
+			<version>3.141.59.26535</version>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
@@ -612,7 +612,6 @@
 		<react.version>16.8.6</react.version>
 		
 		<resources.plugin.version>3.4.0</resources.plugin.version>
-		<robotframework-selenium.version>3.141.59.26535</robotframework-selenium.version>
 		<robotframework.version>3.2.2</robotframework.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
