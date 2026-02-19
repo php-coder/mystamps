@@ -612,7 +612,6 @@
 		<react.version>16.8.6</react.version>
 		
 		<resources.plugin.version>3.4.0</resources.plugin.version>
-		<robotframework.version>3.2.2</robotframework.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<selenium-htmlunit.version>2.70.0</selenium-htmlunit.version>
@@ -971,7 +970,7 @@
 					<dependency>
 						<groupId>org.robotframework</groupId>
 						<artifactId>robotframework</artifactId>
-						<version>${robotframework.version}</version>
+						<version>3.2.2</version>
 					</dependency>
 				</dependencies>
 				<executions>
