@@ -612,7 +612,6 @@
 		<react.version>16.8.6</react.version>
 		
 		<resources.plugin.version>3.4.0</resources.plugin.version>
-		<robotframework-plugin.version>1.7.2</robotframework-plugin.version>
 		<robotframework-selenium.version>3.141.59.26535</robotframework-selenium.version>
 		<robotframework.version>3.2.2</robotframework.version>
 		
@@ -933,7 +932,7 @@
 			<plugin>
 				<groupId>org.robotframework</groupId>
 				<artifactId>robotframework-maven-plugin</artifactId>
-				<version>${robotframework-plugin.version}</version>
+				<version>1.7.2</version>
 				<configuration>
 					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
 					<xunitFile>NONE</xunitFile>
