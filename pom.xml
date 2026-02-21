@@ -571,6 +571,7 @@
 		<lombok.version>1.18.42</lombok.version>
 		<maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+		<maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
 		<mysql.version>5.1.49</mysql.version>
 		<postgresql.version>9.4.1212.jre7</postgresql.version>
 		<selenium-htmlunit.version>2.70.0</selenium-htmlunit.version>
@@ -587,8 +588,6 @@
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
-		
-		<enforcer.plugin.version>3.6.2</enforcer.plugin.version>
 		
 		<nodejs.version>v10.16.0</nodejs.version>
 		
@@ -761,7 +760,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>${enforcer.plugin.version}</version>
+				<version>${maven-enforcer-plugin.version}</version>
 				<configuration>
 					<rules>
 						<bannedDependencies>
