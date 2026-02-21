@@ -77,7 +77,7 @@
       "id": "1671-479aeb53", 
       "ticket": "1671", 
       "file": "pom.xml", 
-      "lines": "958-958", 
+      "lines": "911-911", 
       "body": "Fix integration tests because of unsupported HTMX in htmlunit", 
       "estimate": "0", 
       "role": "DEV"
@@ -86,7 +86,7 @@
       "id": "1060-e52eab60", 
       "ticket": "1060", 
       "file": "pom.xml", 
-      "lines": "1166-1166", 
+      "lines": "1119-1119", 
       "body": "Document usage of frontend-maven-plugin", 
       "estimate": "0", 
       "role": "DEV"
