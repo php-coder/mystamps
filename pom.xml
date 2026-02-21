@@ -570,6 +570,7 @@
 		<liquibase.version>4.31.1</liquibase.version>
 		<lombok.version>1.18.42</lombok.version>
 		<maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
 		<mysql.version>5.1.49</mysql.version>
 		<postgresql.version>9.4.1212.jre7</postgresql.version>
 		<selenium-htmlunit.version>2.70.0</selenium-htmlunit.version>
@@ -583,8 +584,6 @@
 		<thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version>
 		<thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
 		
-		
-		<compiler.plugin.version>3.14.1</compiler.plugin.version>
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
@@ -748,7 +747,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler.plugin.version}</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<showDeprecation>true</showDeprecation>
 					<debug>false</debug>
