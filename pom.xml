@@ -541,19 +541,39 @@
 		<version>2.3.12.RELEASE</version>
 	</parent>
 	
-	<!--
-		All default versions from Spring Boot can be found there:
-		https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-dependencies/build.gradle
-	-->
 	<properties>
-		<!-- Redefine default value from spring-boot-dependencies -->
+		<!--
+			Redefine default values from spring-boot-dependencies:
+			- https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-dependencies/build.gradle
+			- https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/appendix-dependency-versions.html#dependency-versions-properties
+		-->
 		<assertj.version>3.14.0</assertj.version>
+		<commons-lang3.version>3.20.0</commons-lang3.version>
+		<h2.version>2.2.224</h2.version>
+		<hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
+		<hikaricp.version>4.0.3</hikaricp.version>
+		<htmlunit.version>2.70.0</htmlunit.version>
+		<jakarta-mail.version>1.6.7</jakarta-mail.version>
+		<jakarta-validation.version>2.0.2</jakarta-validation.version>
+		<junit-jupiter.version>5.3.2</junit-jupiter.version>
+		<junit.version>4.13.2</junit.version>
+		<liquibase.version>4.31.1</liquibase.version>
+		<lombok.version>1.18.42</lombok.version>
+		<mysql.version>5.1.49</mysql.version>
+		<postgresql.version>9.4.1212.jre7</postgresql.version>
+		<selenium-htmlunit.version>2.70.0</selenium-htmlunit.version>
+		<selenium.version>3.141.59</selenium.version>
+		<servlet-api.version>4.0.1</servlet-api.version>
+		<slf4j.version>1.7.36</slf4j.version>
+		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
+		<spring-framework.version>5.2.25.RELEASE</spring-framework.version>
+		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
+		<spring-security.version>5.3.13.RELEASE</spring-security.version>
+		<thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version>
+		<thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
+		
 		
 		<clean.plugin.version>3.5.0</clean.plugin.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<commons-lang3.version>3.20.0</commons-lang3.version>
-		
 		<compiler.plugin.version>3.14.1</compiler.plugin.version>
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
@@ -561,47 +581,13 @@
 		
 		<enforcer.plugin.version>3.6.2</enforcer.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<h2.version>2.2.224</h2.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<hikaricp.version>4.0.3</hikaricp.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<htmlunit.version>2.70.0</htmlunit.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<jakarta-mail.version>1.6.7</jakarta-mail.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<jakarta-validation.version>2.0.2</jakarta-validation.version>
-		
 		<!--
 			Redefine default value from spring-boot-starter-parent:
 			https://github.com/spring-projects/spring-boot/blob/v2.3.12.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/build.gradle
 		-->
 		<java.version>1.8</java.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<junit-jupiter.version>5.3.2</junit-jupiter.version>
-		<junit.version>4.13.2</junit.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<liquibase.version>4.31.1</liquibase.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<lombok.version>1.18.42</lombok.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<mysql.version>5.1.49</mysql.version>
-		
 		<nodejs.version>v10.16.0</nodejs.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<postgresql.version>9.4.1212.jre7</postgresql.version>
 		
 		<!--
 			Don't forget to update version in the following places:
@@ -613,27 +599,7 @@
 		
 		<resources.plugin.version>3.4.0</resources.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<selenium-htmlunit.version>2.70.0</selenium-htmlunit.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<selenium.version>3.141.59</selenium.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<servlet-api.version>4.0.1</servlet-api.version>
-		
 		<skipUnitTests>false</skipUnitTests>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<slf4j.version>1.7.36</slf4j.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
-		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
-		<spring-framework.version>5.2.25.RELEASE</spring-framework.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
-		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
-		<spring-security.version>5.3.13.RELEASE</spring-security.version>
 		
 		<!--
 			Define default value for spring-boot-starter-parent:
@@ -642,13 +608,6 @@
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
 		<surefire.plugin.version>3.5.4</surefire.plugin.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
-		
 		<togglz.version>2.6.1.Final</togglz.version>
 		<war.plugin.version>3.5.1</war.plugin.version>
 	</properties>
