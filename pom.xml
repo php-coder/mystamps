@@ -592,8 +592,11 @@
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
 		
-		<nodejs.version>v10.16.0</nodejs.version>
+		<skipUnitTests>false</skipUnitTests>
 		
+		
+		<nodejs.version>v10.16.0</nodejs.version>
+		<togglz.version>2.6.1.Final</togglz.version>
 		<!--
 			Don't forget to update version in the following places:
 			- ResourceUrl class
@@ -601,10 +604,6 @@
 			- src/main/frontend/package.json
 		-->
 		<react.version>16.8.6</react.version>
-		
-		<skipUnitTests>false</skipUnitTests>
-		
-		<togglz.version>2.6.1.Final</togglz.version>
 	</properties>
 	
 	<build>
