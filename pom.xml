@@ -884,6 +884,7 @@
 				<artifactId>robotframework-maven-plugin</artifactId>
 				<version>2.1.0</version>
 				<configuration>
+					<name>MyStamps</name>
 					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
 					<xunitFile>NONE</xunitFile>
 					<randomize>suite</randomize>
