@@ -2,6 +2,11 @@
 java = "adoptopenjdk-8.0.442"
 maven = "3.9.12"
 
+# for integration tests
+python = "3.6.15"
+# must match version in .github/workflows/integration-tests-h2.yml
+chromedriver = "145.0.7632.117"
+
 #
 # Project tasks
 #
