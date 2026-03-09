@@ -2,7 +2,7 @@
 Documentation   Verify account registration scenario
 Library         String
 Library         SeleniumLibrary
-Library         HttpRequestLibrary
+Library         RequestsLibrary
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Force Tags      account  registration  logic
