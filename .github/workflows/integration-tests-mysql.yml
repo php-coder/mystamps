@@ -63,11 +63,13 @@ jobs:
         with:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
+
       - name: Install JDK
         uses: actions/setup-java@v5.1.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
+
       - name: Restore existing cache
         uses: actions/cache@v5.0.2 # https://github.com/actions/cache
         with:
@@ -75,6 +77,7 @@ jobs:
           key: maven-repository-${{ hashFiles('pom.xml') }}
           path: ~/.m2/repository
           restore-keys: maven-repository-
+
       # This is a workaround for github action limitation: we can't specify command for the service (--character-set-server=utf8)
       # and have to modify database manually. See also:
       # https://github.com/actions/runner/discussions/1872 and https://github.com/orgs/community/discussions/26688
@@ -86,6 +89,7 @@ jobs:
               --user mystamps \
               --password=secret \
               --execute 'ALTER DATABASE mystamps CHARACTER SET utf8'
+
       - name: Run integration tests
         env:
           SPRING_PROFILES_ACTIVE: travis
@@ -94,6 +98,7 @@ jobs:
           mkdir -p /tmp/uploads /tmp/preview
           cp src/main/resources/test/test.png /tmp/uploads/1.png
           ./src/main/scripts/execute-command.sh integration-tests
+
       - name: Save RobotFramework reports
         if: ${{ failure() }}
         uses: actions/upload-artifact@v6.0.0 # https://github.com/actions/upload-artifact
