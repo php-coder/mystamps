@@ -30,8 +30,12 @@ run = "mvn spring-boot:run -Denforcer.skip=true -DskipMinify=true -Dmaven.resour
 description = "Execute unit tests"
 run = "mvn test -Denforcer.skip=true -DskipMinify=true"
 
-[tasks.verify]
+[tasks.fast-verify]
 description = "Execute integration tests"
+run = "mvn verify -Denforcer.skip=true -DskipUnitTests"
+
+[tasks.verify]
+description = "Execute unit and integration tests"
 run = "mvn verify"
 
 [tasks.war]
