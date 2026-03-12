@@ -68,9 +68,10 @@ jobs:
       - name: Install Robot Framework
         run: pip install -r requirements.txt
 
+      # Workaround: robot --version returns 255 exit code
       - name: Show tools versions
         run: |
-          robot --version
+          robot --version || :
           chrome --version
 
       - name: Restore existing cache
