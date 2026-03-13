@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation  Verify CSP report submission scenario
-Library        HttpRequestLibrary
+Library        RequestsLibrary
 Force Tags     site  csp  logic
 
 *** Test Cases ***
