@@ -25,7 +25,7 @@ Country Field Should Have Option
 	Click Element                     id:country-selectized
 	${dropdownXpath}=                 Set Variable  //*[contains(@class, "selectize-dropdown-content")]
 	Wait Until Page Contains Element  xpath:${dropdownXpath}/*[contains(@class, "option")]
-	Xpath Should Match X Times        xpath:${dropdownXpath}/*[text() = "${value}"]  expectedXpathCount=1
+	Page Should Contain Element       xpath:${dropdownXpath}/*[text() = "${value}"]  limit=1
 
 Link Should Point To
 	[Documentation]  Verify that "href" attribute of the element refers to a link
