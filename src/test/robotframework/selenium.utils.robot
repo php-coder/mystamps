@@ -51,7 +51,7 @@ Select Random Option From List
 	[Arguments]                ${locator}
 	${options}=                Get List Items  ${locator}
 	${size}=                   Get Length  ${options}
-	${randomIndex}=            Evaluate  random.randint(0, ${size}-1)  modules=random
+	${randomIndex}=            Evaluate  str(random.randint(0, ${size}-1))  modules=random
 	Select From List By Index  ${locator}  ${randomIndex}
 
 Disable Client Validation
