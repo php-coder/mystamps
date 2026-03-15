@@ -845,10 +845,6 @@
 					<nonCriticalTags>
 						<!-- Allow to tests with this tag to fail without changing final status -->
 						<nonCriticalTag>unstable</nonCriticalTag>
-						<!--
-							@todo #1671 Fix integration tests because of unsupported HTMX in htmlunit
-						-->
-						<nonCriticalTag>htmx</nonCriticalTag>
 					</nonCriticalTags>
 					<externalRunner>
 						<runWithPython>true</runWithPython>

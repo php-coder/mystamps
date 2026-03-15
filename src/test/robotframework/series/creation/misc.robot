@@ -47,12 +47,12 @@ Catalog numbers should be stripped from any spaces
 	Textfield Value Should Be      id:zagorskiNumbers  11,12
 
 Catalog numbers should ignore duplicate values
-	[Tags]                     htmx
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id:category  Sport
 	Input Text                 id:quantity  2
 	Choose File                id:image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Click Element              id:add-catalog-numbers-link
+	Scroll Element Into View   id:michelNumbers
 	Input Text                 id:michelNumbers    104,105,104
 	Input Text                 id:scottNumbers     114,115,114
 	Input Text                 id:yvertNumbers     124,125,124
@@ -68,12 +68,12 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id:zagorski_catalog_info  \#154, 155
 
 Catalog numbers should accept existing numbers
-	[Tags]                     htmx
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id:category  Sport
 	Input Text                 id:quantity  2
 	Choose File                id:image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Click Element              id:add-catalog-numbers-link
+	Scroll Element Into View   id:michelNumbers
 	Input Text                 id:michelNumbers    99
 	Input Text                 id:scottNumbers     99
 	Input Text                 id:yvertNumbers     99
@@ -90,9 +90,11 @@ Catalog numbers should accept existing numbers
 
 *** Keywords ***
 Before Test Suite
-	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
-	Log In As     login=coder  password=test
-	Go To         ${SITE_URL}/series/add
+	Open Browser     ${SITE_URL}/account/auth  ${BROWSER}
+	# @todo #1749 Adjust browser window size globally
+	Set Window Size  width=1024  height=768
+	Log In As        login=coder  password=test
+	Go To            ${SITE_URL}/series/add
 
 Valid Catalog Numbers Should Be Accepted
 	[Arguments]                      ${catalogNumbers}
