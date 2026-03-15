@@ -39,10 +39,6 @@ jobs:
         include:
           - java-version: '8'
             allow-failure: false
-          - java-version: '11'
-            allow-failure: true
-          - java-version: '17'
-            allow-failure: true
     # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#handling-failures
     continue-on-error: ${{ matrix.allow-failure }}
     steps:
@@ -52,11 +48,42 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
 
+      - name: Install mise to set up tools
+        uses: jdx/mise-action@v3.5.1 # https://github.com/jdx/mise-action
+        with:
+          version: 2025.11.11                # [default: latest] mise version to install
+          install: true                    # [default: true] run `mise install`
+          cache: true                      # [default: true] cache mise using GitHub's cache
+          log_level: info                  # [default: info] log level
+          working_directory: .             # [default: .] directory to run mise in
+        env:
+          # Workaround: don't install some dependencies that we don't want (java)
+          # See: https://github.com/jdx/mise-action/issues/183
+          # https://mise.jdx.dev/configuration/settings.html#disable_tools
+          MISE_DISABLE_TOOLS: java
+
       - name: Install JDK
         uses: actions/setup-java@v5.1.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt'                    # https://github.com/actions/setup-java#supported-distributions
           java-version: ${{ matrix.java-version }} # https://github.com/actions/setup-java#supported-version-syntax
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v2.1.1 # https://github.com/browser-actions/setup-chrome
+        with:
+          chrome-version: '145.0.7632.117' # Must match version in mise.toml
+          install-dependencies: false      # Default: false
+          install-chromedriver: false      # Default: false
+
+      - name: Install Robot Framework
+        run: pip install -r requirements.txt
+
+      # Workaround: robot --version returns 255 exit code
+      - name: Show tools versions
+        run: |
+          robot --version || :
+          chrome --version
+          chromedriver --version
 
       - name: Restore existing cache
         uses: actions/cache@v5.0.2 # https://github.com/actions/cache

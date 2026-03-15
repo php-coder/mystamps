@@ -5,7 +5,7 @@ Resource        ../../auth.steps.robot
 Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-comment  validation  htmx
+Force Tags      series  add-comment  validation
 
 *** Test Cases ***
 Add comment with empty required field

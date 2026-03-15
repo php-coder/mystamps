@@ -25,12 +25,12 @@ Country Field Should Have Option
 	Click Element                     id:country-selectized
 	${dropdownXpath}=                 Set Variable  //*[contains(@class, "selectize-dropdown-content")]
 	Wait Until Page Contains Element  xpath:${dropdownXpath}/*[contains(@class, "option")]
-	Xpath Should Match X Times        xpath:${dropdownXpath}/*[text() = "${value}"]  expectedXpathCount=1
+	Page Should Contain Element       xpath:${dropdownXpath}/*[text() = "${value}"]  limit=1
 
 Link Should Point To
 	[Documentation]  Verify that "href" attribute of the element refers to a link
 	[Arguments]      ${locator}  ${expectedUrl}
-	${url}=          Get Element Attribute  ${locator}@href
+	${url}=          Get Element Attribute  ${locator}  href
 	Should Be Equal  ${expectedUrl}  ${url}
 
 # NOTE: this keyword should be used as a last resort. Prefer "Wait Until Page Contains Element"
@@ -51,7 +51,7 @@ Select Random Option From List
 	[Arguments]                ${locator}
 	${options}=                Get List Items  ${locator}
 	${size}=                   Get Length  ${options}
-	${randomIndex}=            Evaluate  random.randint(0, ${size}-1)  modules=random
+	${randomIndex}=            Evaluate  str(random.randint(0, ${size}-1))  modules=random
 	Select From List By Index  ${locator}  ${randomIndex}
 
 Disable Client Validation

@@ -6,7 +6,7 @@ Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Before Test
-Force Tags       series  logic  htmx
+Force Tags       series  logic
 
 *** Test Cases ***
 Create series by filling only required fields and providing an image
