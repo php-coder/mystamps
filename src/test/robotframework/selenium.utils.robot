@@ -30,7 +30,7 @@ Country Field Should Have Option
 Link Should Point To
 	[Documentation]  Verify that "href" attribute of the element refers to a link
 	[Arguments]      ${locator}  ${expectedUrl}
-	${url}=          Get Element Attribute  ${locator}@href
+	${url}=          Get Element Attribute  ${locator}  href
 	Should Be Equal  ${expectedUrl}  ${url}
 
 # NOTE: this keyword should be used as a last resort. Prefer "Wait Until Page Contains Element"
