@@ -118,7 +118,11 @@
 							<!--/* @todo #884 /collection/{slug}/estimation: optimize summing of prices */-->
 							<tr class="info">
 								<th th:text="|#{t_total}:|">Total:</th>
-								<th
+								<!--/*
+									Workaround for "Table Footer Should Contain" keyword from SeleniumLibrary that unable to find values within <th> tag.
+									See for details: https://github.com/robotframework/SeleniumLibrary/issues/1436
+								*/-->
+								<td style="font-weight: bold"
 									th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])},totalCzk=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'CZK'].![price])},totalByn=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'BYN'].![price])},totalUah=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'UAH'].![price])}">
 									<span th:text="|${totalRub} RUB|" th:if="${totalRub != null}" th:remove="tag">14.4 RUB</span>
 									<br th:if="${totalUsd != null and totalRub != null}" />
@@ -131,7 +135,7 @@
 									<span th:text="|${totalByn} BYN|" th:if="${totalByn != null}" th:remove="tag">130 BYN</span>
 									<br th:if="${totalUah != null and (totalRub != null or totalUsd != null or totalEur != null or totalCzk != null or totalByn != null)}" />
 									<span th:text="|${totalUah} UAH|" th:if="${totalUah != null}" th:remove="tag">200 UAH</span>
-								</th>
+								</td>
 							</tr>
 						</tfoot>
 					</table>

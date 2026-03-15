@@ -13,21 +13,19 @@ Message should be shown when a collection is empty
 	Element Text Should Be  id:empty-collection-msg  In this collection is no stamps
 
 Series with its price should be taken into account
-	[Tags]                       htmx
 	Go To                        ${SITE_URL}/series/1
 	Input Text                   id:paid-price  100
 	Select From List By Value    id:paid-currency  ${expectedCurrency}
 	Submit Form                  id:add-series-form
 	Go To                        ${SITE_URL}/collection/paid/estimation
-	Table Cell Should Contain    collection-estimation  row=2  column=2  text=100.00 ${expectedCurrency}
+	Table Cell Should Contain    collection-estimation  row=2  column=2  expected=100.00 ${expectedCurrency}
 	Table Footer Should Contain  collection-estimation  100.00 ${expectedCurrency}
 
 Series without price should be shown but not taken into account
-	[Tags]                       htmx
 	Go To                        ${SITE_URL}/series/2
 	Submit Form                  id:add-series-form
 	Go To                        ${SITE_URL}/collection/paid/estimation
-	Table Cell Should Contain    collection-estimation  row=3  column=2  text=${EMPTY}
+	Table Cell Should Contain    collection-estimation  row=3  column=2  expected=${EMPTY}
 	Table Footer Should Contain  collection-estimation  100.00 ${expectedCurrency}
 
 *** Keywords ***

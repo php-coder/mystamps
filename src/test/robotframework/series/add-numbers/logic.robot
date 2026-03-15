@@ -5,7 +5,7 @@ Library         String
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-numbers  logic  htmx
+Force Tags      series  add-numbers  logic
 
 *** Test Cases ***
 Add catalog numbers
