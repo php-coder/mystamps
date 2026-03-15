@@ -18,7 +18,7 @@ Remove the first instance of a series from user's collection
 
 Remove the last instance of a series from user's collection
 	Go To                         ${SITE_URL}/series/3
-	Xpath Should Match X Times    xpath://input[@value="Remove from collection"]  expectedXpathCount=1
+	Page Should Contain Element   xpath://input[@value="Remove from collection"]  limit=1
 	Element Text Should Be        css:.remove-series-form .label-default  2 out of 3
 	Submit Form                   css:.remove-series-form
 	Page Should Not Contain Link  css:[href="/series/3"]
