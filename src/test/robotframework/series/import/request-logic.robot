@@ -96,7 +96,7 @@ Import series and series sale with existing seller from an external site
 	List Selection Should Be    id:seller        Eicca Toppinen
 	Textfield Value Should Be   id:price         111
 	List Selection Should Be    id:currency      RUB
-	Textfield Value Should Be   id:alt-price     1.5
+	Textfield Value Should Be   id:alt-price     1.50
 	List Selection Should Be    id:alt-currency  EUR
 	Submit Form                 id:create-series-form
 	# after importing a series, sale info should be shown at the info page
