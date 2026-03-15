@@ -4,7 +4,7 @@ Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-price  logic  htmx
+Force Tags      series  add-price  logic
 
 *** Test Cases ***
 Add a price by a catalog

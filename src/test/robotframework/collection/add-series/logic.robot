@@ -4,7 +4,7 @@ Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Force Tags       collection  series  logic  htmx
+Force Tags       collection  series  logic
 
 *** Test Cases ***
 Add a series to user's collection (all stamps)
