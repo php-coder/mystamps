@@ -20,7 +20,7 @@ package ru.mystamps.web.feature.series;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import static ru.mystamps.web.feature.series.SeriesValidation.MAX_SERIES_COMMENT_LENGTH;
@@ -28,7 +28,7 @@ import static ru.mystamps.web.feature.series.SeriesValidation.MAX_SERIES_COMMENT
 @Getter
 @Setter
 public class AddCommentForm {
-	@NotBlank
+	@NotEmpty
 	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
 	private String comment;
 }

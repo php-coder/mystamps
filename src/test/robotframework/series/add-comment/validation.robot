@@ -12,13 +12,13 @@ Add comment with empty required field
 	[Setup]                           Disable Client Validation  add-comment-form
 	Submit Form                       id:add-comment-form
 	Wait Until Page Contains Element  id:new-comment.errors
-	Element Text Should Be            id:new-comment.errors  must not be empty
+	Element Text Should Be            id:new-comment.errors  Value must not be empty
 
 Add a blank comment
 	Input Text                        id:new-comment  ${SPACE}${SPACE}
 	Submit Form                       id:add-comment-form
 	Wait Until Page Contains Element  id:new-comment.errors
-	Element Text Should Be            id:new-comment.errors  must not be empty
+	Element Text Should Be            id:new-comment.errors  Value must not be empty
 
 Add too long comment
 	${letter}=                        Set Variable  x
