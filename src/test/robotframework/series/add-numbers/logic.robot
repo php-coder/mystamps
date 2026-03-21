@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation   Verify scenarios of adding catalog numbers to a series
 Library         SeleniumLibrary
+Library         String
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
@@ -26,7 +27,8 @@ Before Test Suite
 Add numbers
 	[Arguments]                       ${catalog}  ${numbers}  ${expectedNumbers}
 	Wait Until Page Contains Element  id:add-catalog-numbers-form
-	Select From List By Value         id:catalog-name  ${catalog}
+	${optionValue}=                   Convert To Upper Case  ${catalog}
+	Select From List By Value         id:catalog-name  ${optionValue}
 	Input Text                        id:catalog-numbers  ${numbers}
 	Submit Form                       id:add-catalog-numbers-form
 	Wait Until Page Contains Element  id:${catalog}_catalog_info
