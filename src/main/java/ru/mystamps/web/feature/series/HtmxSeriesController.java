@@ -76,7 +76,7 @@ public class HtmxSeriesController {
 		if (result.hasErrors()) {
 			model.addAttribute("isHtmx", true);
 			model.addAttribute("seriesId", seriesId);
-			response.sendError(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
 			return "series/info :: AddCommentForm";
 		}
 		
