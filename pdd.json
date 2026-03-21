@@ -14,7 +14,7 @@
       "id": "1154-3fe7f1f2", 
       "ticket": "1154", 
       "file": ".github/workflows/integration-tests-mysql.yml", 
-      "lines": "81-81", 
+      "lines": "84-84", 
       "body": "Set charset of MySQL container by providing a custom my.cnf", 
       "estimate": "0", 
       "role": "DEV"
@@ -1436,7 +1436,7 @@
       "id": "1054-1c349c8e", 
       "ticket": "1054", 
       "file": "src/main/resources/application-postgres.properties", 
-      "lines": "47-47", 
+      "lines": "48-48", 
       "body": "Extract list of exclusions to a common profile", 
       "estimate": "0", 
       "role": "DEV"
