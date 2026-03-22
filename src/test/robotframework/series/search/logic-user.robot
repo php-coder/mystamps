@@ -29,7 +29,7 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=seriesowner  password=test
-    Go To                               ${SITE_URL}
+	Go To                               ${SITE_URL}
 
 Search Series By Catalog Name And Number In Collection
 	[Arguments]                  ${name}  ${number}
