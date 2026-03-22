@@ -2,6 +2,7 @@
 Documentation    Verify series removal from a user's collection
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       collection  series  logic
