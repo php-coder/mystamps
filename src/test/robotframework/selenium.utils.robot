@@ -2,6 +2,10 @@
 Documentation  Keywords (and workarounds) that are missing in the SeleniumLibrary for Robot Framework
 
 *** Keywords ***
+Save Screenshot and Log Source
+	Capture Page Screenshot  EMBED
+	Log Source
+
 Element Text Should Match Regexp
 	[Documentation]      Verify the text of the element identified by locator matches the given pattern
 	[Arguments]          ${locator}  ${regexp}
