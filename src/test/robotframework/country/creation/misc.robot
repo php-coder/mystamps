@@ -37,8 +37,7 @@ Country name in Russian should accept all allowed characters
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=coder  password=test
-	Go To                               ${SITE_URL}/country/add
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=coder  password=test
+	Go To         ${SITE_URL}/country/add
 

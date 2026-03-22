@@ -32,9 +32,8 @@ Series without price should be shown but not taken into account
 
 *** Keywords ***
 Before Test Suite
-	@{currencies}=                      Create List  USD  EUR  RUB  CZK  BYN  UAH
-	${randomCurrency}=                  Evaluate  random.choice(${currencies})  modules=random
-	Set Suite Variable                  ${expectedCurrency}  ${randomCurrency}
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=paid  password=test
+	@{currencies}=      Create List  USD  EUR  RUB  CZK  BYN  UAH
+	${randomCurrency}=  Evaluate  random.choice(${currencies})  modules=random
+	Set Suite Variable  ${expectedCurrency}  ${randomCurrency}
+	Open Browser        ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As           login=paid  password=test

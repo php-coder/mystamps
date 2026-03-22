@@ -18,6 +18,5 @@ Price and currency should be optional when seller information isn't provided
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=admin  password=test
+	Open Browser   ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As      login=admin  password=test

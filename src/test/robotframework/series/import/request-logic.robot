@@ -159,9 +159,8 @@ Retry of downloading allows the import to be succeed
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=admin  password=test
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=admin  password=test
 
 Before Test
 	Go To  ${SITE_URL}/series/import/request

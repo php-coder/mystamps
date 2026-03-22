@@ -24,8 +24,7 @@ Search series by existing catalog number
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  ${SITE_URL}/  ${BROWSER}
 
 Search Series By Catalog Name And Number
 	[Arguments]                  ${name}  ${number}

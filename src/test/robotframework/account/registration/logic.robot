@@ -29,6 +29,5 @@ After account creation an e-mail with activation link should be send
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/register  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  ${SITE_URL}/account/register  ${BROWSER}
 

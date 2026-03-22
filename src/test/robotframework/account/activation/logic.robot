@@ -29,8 +29,7 @@ Activate account with only required info (fill only mandatory fields)
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        about:blank  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  about:blank  ${BROWSER}
 
 Before Test
 	Go To  ${SITE_URL}/account/activate

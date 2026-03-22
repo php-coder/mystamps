@@ -14,5 +14,4 @@ Search the series with empty required field
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  ${SITE_URL}/  ${BROWSER}

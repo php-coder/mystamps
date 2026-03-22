@@ -14,7 +14,6 @@ User don't have access to Togglz console
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=coder  password=test
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=coder  password=test
 

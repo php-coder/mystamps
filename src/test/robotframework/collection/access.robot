@@ -14,6 +14,5 @@ Opening a page of non-existing collection show an error
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        about:blank  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  about:blank  ${BROWSER}
 

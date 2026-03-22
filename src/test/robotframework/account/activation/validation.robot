@@ -102,8 +102,7 @@ Activate account with wrong activation key
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/activate  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  ${SITE_URL}/account/activate  ${BROWSER}
 
 Login should not contain repeated special characters
 	[Arguments]                ${login}

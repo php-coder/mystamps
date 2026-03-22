@@ -22,6 +22,5 @@ Authenticate with invalid credentials
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
 

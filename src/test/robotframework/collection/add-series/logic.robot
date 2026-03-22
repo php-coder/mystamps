@@ -36,6 +36,5 @@ Add the same series to user's collection again (incomplete series)
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=seriesowner  password=test
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=seriesowner  password=test

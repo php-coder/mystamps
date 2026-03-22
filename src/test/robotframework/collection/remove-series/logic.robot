@@ -25,6 +25,5 @@ Remove the last instance of a series from user's collection
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=seriesowner  password=test
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=seriesowner  password=test

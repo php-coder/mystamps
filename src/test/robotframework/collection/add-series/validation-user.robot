@@ -27,9 +27,8 @@ Add a series with too many number of stamps
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=coder  password=test
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=coder  password=test
 	# We need a series with more than 1 stamp, so the number-of-stamps field won't be hidden.
 	# We also need a series with no more than 4 stamps, so the 5 stamps will lead to an error.
-	Go To                               ${SITE_URL}/series/2
+	Go To         ${SITE_URL}/series/2

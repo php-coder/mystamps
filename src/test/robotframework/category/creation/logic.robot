@@ -32,9 +32,8 @@ Create category with name in English and Russian
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=coder  password=test
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=coder  password=test
 
 Before Test
 	Go To  ${SITE_URL}/category/add

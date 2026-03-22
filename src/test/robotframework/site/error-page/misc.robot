@@ -13,6 +13,5 @@ Client should see a custom page for Bad Request error
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/series/info  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  ${SITE_URL}/series/info  ${BROWSER}
 

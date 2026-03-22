@@ -26,10 +26,9 @@ Search series by existing catalog number in a collection
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=seriesowner  password=test
-	Go To                               ${SITE_URL}
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=seriesowner  password=test
+	Go To         ${SITE_URL}
 
 Search Series By Catalog Name And Number In Collection
 	[Arguments]                  ${name}  ${number}

@@ -19,10 +19,9 @@ Add catalog numbers
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=admin  password=test
-	Go To                               ${SITE_URL}/series/5
+	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
+	Log In As     login=admin  password=test
+	Go To         ${SITE_URL}/series/5
 
 Add numbers
 	[Arguments]                       ${catalog}  ${numbers}  ${expectedNumbers}

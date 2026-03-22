@@ -35,6 +35,5 @@ Admin has access to everyone's estimation page
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        about:blank  ${BROWSER}
-	Register Keyword To Run On Failure  Log Source
+	Open Browser  about:blank  ${BROWSER}
 
