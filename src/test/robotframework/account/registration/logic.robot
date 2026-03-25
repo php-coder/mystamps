@@ -9,7 +9,6 @@ Force Tags      account  registration  logic
 
 *** Test Cases ***
 After account creation an e-mail with activation link should be send
-	[Tags]                  unstable
 	Input Text              id:email  coder@rock.home
 	Submit Form             id:register-account-form
 	Element Text Should Be  id:msg-success  Instructions to finish registration have been sent to your e-mail
@@ -33,6 +32,6 @@ Search For Request
 	Create Session    mailserver  ${MOCK_SERVER}
 	# See http://wiremock.org/docs/verifying/
 	${response}=      Post Request  mailserver  /__admin/requests/find  data=${requestSignature}
-	Log               ${response.json}
-	Length Should Be  ${response.json['requests']}  1
-	[Return]          ${response.json['requests']}
+	Log               ${response.json()}
+	Length Should Be  ${response.json()['requests']}  1
+	[Return]          ${response.json()['requests']}
