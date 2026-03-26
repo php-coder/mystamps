@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation   Verify scenarios of adding a catalog price to a series
 Library         SeleniumLibrary
+Library         String
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
@@ -25,7 +26,8 @@ Before Test Suite
 
 Add a price
 	[Arguments]                       ${catalog}  ${price}  ${currency}
-	Select From List By Value         id:price-catalog-name  ${catalog}
+	${optionValue}=                   Convert To Upper Case  ${catalog}
+	Select From List By Value         id:price-catalog-name  ${optionValue}
 	Input Text                        id:catalog-price  ${price}
 	Submit Form                       id:add-catalog-price-form
 	Wait Until Page Does Not Contain  id:add-catalog-price-form
