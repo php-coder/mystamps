@@ -14,7 +14,7 @@ After account creation an e-mail with activation link should be send
 	Submit Form             id:register-account-form
 	Element Text Should Be  id:msg-success  Instructions to finish registration have been sent to your e-mail
 	# check that e-mail has been sent by querying Wiremock
-	${capturedRequests}=    Search For Request  { "method": "POST", "url": "/mailgun/send-message" }
+	${capturedRequests}=    Wait Until Keyword Succeeds  3x  1s  Search For Request  { "method": "POST", "url": "/mailgun/send-message" }
 	${body}=                Set Variable  ${capturedRequests[0]['body']}
 	Should Contain          ${body}  coder@rock.home
 	Should Contain          ${body}  My Stamps <dont-reply@my-stamps.ru>
