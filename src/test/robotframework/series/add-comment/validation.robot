@@ -29,6 +29,7 @@ Add too long comment
 
 *** Keywords ***
 Before Test Suite
-	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
-	Log In As     login=coder  password=test
-	Go To         ${SITE_URL}/series/5
+	Open Browser     ${SITE_URL}/account/auth  ${BROWSER}
+	Set Window Size  width=1024  height=768
+	Log In As        login=coder  password=test
+	Go To            ${SITE_URL}/series/5
