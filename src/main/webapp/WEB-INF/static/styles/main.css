@@ -173,3 +173,7 @@ label {
 		column-count: 5;
 	}
 }
+
+.total_price {
+	font-weight: bold;
+}
