@@ -117,7 +117,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	// - 'sha256-bsV...' is required for '.htmx-indicator{opacity:0} ...' inline CSS
 	private static final String STYLE_HTMX =
-		" 'sha256-bsV5JivYxvGywDAZ22EZJKBFip65Ng9xoJVLbBg7bdo='";
+		" 'sha256-faU7yAF8NxuMTNEwVmBz+VcYeIoBQ2EMHW3WaVxCvnk='";
 	
 	// - 'unsafe-inline' is required by jquery.min.js (that is using code inside of
 	// event handlers. We can't use hashing algorithms because they aren't supported
