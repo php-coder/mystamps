@@ -9,23 +9,20 @@ Force Tags      series  add-comment  validation
 
 *** Test Cases ***
 Add comment with empty required field
-	[Setup]                           Disable Client Validation  add-comment-form
-	Submit Form                       id:add-comment-form
-	Wait Until Page Contains Element  id:new-comment.errors
-	Element Text Should Be            id:new-comment.errors  Value must not be empty
+	[Setup]                     Disable Client Validation  add-comment-form
+	Submit Form                 id:add-comment-form
+	Wait Until Element Text Is  new-comment.errors  Value must not be empty
 
 Add a blank comment
-	Input Text                        id:new-comment  ${SPACE}${SPACE}
-	Submit Form                       id:add-comment-form
-	Wait Until Page Contains Element  id:new-comment.errors
-	Element Text Should Be            id:new-comment.errors  Value must not be empty
+	Input Text                  id:new-comment  ${SPACE}${SPACE}
+	Submit Form                 id:add-comment-form
+	Wait Until Element Text Is  new-comment.errors  Value must not be empty
 
 Add too long comment
-	${letter}=                        Set Variable  x
-	Input Text                        id:new-comment  ${letter * 1025}
-	Submit Form                       id:add-comment-form
-	Wait Until Page Contains Element  id:new-comment.errors
-	Element Text Should Be            id:new-comment.errors  Value is greater than allowable maximum of 1024 characters
+	${letter}=                  Set Variable  x
+	Input Text                  id:new-comment  ${letter * 1025}
+	Submit Form                 id:add-comment-form
+	Wait Until Element Text Is  new-comment.errors  Value is greater than allowable maximum of 1024 characters
 
 *** Keywords ***
 Before Test Suite
