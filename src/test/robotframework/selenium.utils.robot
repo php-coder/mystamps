@@ -50,6 +50,17 @@ Wait Until Element Value Is
 	...                 ';
 	Wait For Condition  ${elemHasValue}
 
+Wait Until Element Text Is
+	[Documentation]     Hybrid of "Wait Until Page Contains Element" and "Element Text Should Be" keywords
+	[Arguments]         ${id}  ${text}
+	${elemHasText}=     Catenate  SEPARATOR=
+	...                 var el = window.document.getElementById('
+	...                 ${id}
+	...                 '); return el != null && el.innerText == '
+	...                 ${text}
+	...                 ';
+	Wait For Condition  ${elemHasText}
+
 Select Random Option From List
 	[Documentation]            Choose a random option from a select element
 	[Arguments]                ${locator}
