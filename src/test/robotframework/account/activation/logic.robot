@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation   Verify account activation scenarios
 Library         SeleniumLibrary
+Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Test Setup      Before Test
