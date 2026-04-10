@@ -87,7 +87,7 @@ jobs:
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v2.1.1 # https://github.com/browser-actions/setup-chrome
         with:
-          chrome-version: '145.0.7632.117' # Must match version in mise.toml
+          chrome-version: '147.0.7727.56' # Must match version in mise.toml
           install-dependencies: false      # Default: false
           install-chromedriver: false      # Default: false
 
