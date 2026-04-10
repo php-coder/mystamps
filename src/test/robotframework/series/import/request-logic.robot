@@ -160,4 +160,4 @@ Before Test Suite
 
 Before Test
 	Go To            ${SITE_URL}/series/import/request
-	Set Window Size  width=1024  height=768
+	Set Window Size  width=1366  height=768
