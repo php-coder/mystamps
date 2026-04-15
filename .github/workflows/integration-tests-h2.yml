@@ -76,6 +76,7 @@ jobs:
 
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v2.1.1 # https://github.com/browser-actions/setup-chrome
+        id: setup-chrome
         with:
           chrome-version: '147.0.7727.56' # Must match version in mise.toml
           install-dependencies: false      # Default: false
@@ -93,7 +94,13 @@ jobs:
         run: |
           robot --version || :
           chrome --version
+          google-chrome --version
           chromedriver --version
+
+      # Workaround: chrome installed by setup-chrome clashes with chrome bundled with runner
+      # See: https://github.com/browser-actions/setup-chrome/issues/619
+      - name: Override system Chrome
+        run: sudo ln -svf ${{steps.setup-chrome.outputs.chrome-path}} /usr/bin/google-chrome
 
       - name: Restore existing cache
         uses: actions/cache@v5.0.2 # https://github.com/actions/cache
