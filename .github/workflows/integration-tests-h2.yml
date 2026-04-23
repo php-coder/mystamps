@@ -74,6 +74,9 @@ jobs:
           distribution: 'adopt'                    # https://github.com/actions/setup-java#supported-distributions
           java-version: ${{ matrix.java-version }} # https://github.com/actions/setup-java#supported-version-syntax
 
+      - name: Show java version before
+        run: java -version
+
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v2.1.1 # https://github.com/browser-actions/setup-chrome
         id: setup-chrome
@@ -81,6 +84,11 @@ jobs:
           chrome-version: '147.0.7727.56' # Must match version in mise.toml
           install-dependencies: false      # Default: false
           install-chromedriver: false      # Default: false
+
+      - name: Show java version after
+        run: |
+          java -version
+          echo "$PATH"
 
       - name: Install Robot Framework
         run: pip install -r requirements.txt
@@ -100,7 +108,6 @@ jobs:
       # See: https://github.com/browser-actions/setup-chrome/issues/619
       - name: Override system Chrome
         run: |
-          echo "$PATH"
           set -x
           which chrome
           which google-chrome
