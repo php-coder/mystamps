@@ -12,7 +12,7 @@ Add a series to user's collection (all stamps)
 	Go To                             ${SITE_URL}/series/2
 	Element Text Should Be            id:series-status-msg  You don't have this series. Add one instance:
 	Textfield Value Should Be         id:number-of-stamps  2
-	Element Text Should Match Regexp  id:number-of-stamps-block  I have[\\n\\r]+out of 2 stamps
+	Element Text Should Match Regexp  id:number-of-stamps-block  I have[\\n \\r]+out of 2 stamps
 	Submit Form                       id:add-series-form
 	Page Should Contain Link          css:.image-gallery figcaption [href="/series/2"]
 	# See https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
