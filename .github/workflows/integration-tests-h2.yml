@@ -94,13 +94,19 @@ jobs:
         run: |
           robot --version || :
           chrome --version
-          google-chrome --version
           chromedriver --version
 
       # Workaround: chrome installed by setup-chrome clashes with chrome bundled with runner
       # See: https://github.com/browser-actions/setup-chrome/issues/619
       - name: Override system Chrome
-        run: sudo ln -svf ${{steps.setup-chrome.outputs.chrome-path}} /usr/bin/google-chrome
+        run: |
+          echo "$PATH"
+          set -x
+          which chrome
+          which google-chrome
+          google-chrome --version
+          sudo ln -svf ${{steps.setup-chrome.outputs.chrome-path}} /usr/bin/google-chrome
+          google-chrome --version
 
       - name: Restore existing cache
         uses: actions/cache@v5.0.2 # https://github.com/actions/cache
