@@ -5,7 +5,7 @@
       "id": "1154-ac29fbc0", 
       "ticket": "1154", 
       "file": ".github/workflows/deploy.yml", 
-      "lines": "20-20", 
+      "lines": "22-22", 
       "body": "Deploy should depend on successful execution of the other pipelines", 
       "estimate": "0", 
       "role": "DEV"
