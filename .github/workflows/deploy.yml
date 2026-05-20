@@ -1,6 +1,8 @@
 name: Deploy
 
 on:
+  # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onworkflow_dispatch
+  workflow_dispatch:
   push:
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
     branches:
