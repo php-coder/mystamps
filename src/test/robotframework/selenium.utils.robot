@@ -2,6 +2,10 @@
 Documentation  Keywords (and workarounds) that are missing in the SeleniumLibrary for Robot Framework
 
 *** Keywords ***
+Save Screenshot and Log Source
+	Capture Page Screenshot  EMBED
+	Log Source
+
 Element Text Should Match Regexp
 	[Documentation]      Verify the text of the element identified by locator matches the given pattern
 	[Arguments]          ${locator}  ${regexp}
@@ -25,12 +29,12 @@ Country Field Should Have Option
 	Click Element                     id:country-selectized
 	${dropdownXpath}=                 Set Variable  //*[contains(@class, "selectize-dropdown-content")]
 	Wait Until Page Contains Element  xpath:${dropdownXpath}/*[contains(@class, "option")]
-	Xpath Should Match X Times        xpath:${dropdownXpath}/*[text() = "${value}"]  expectedXpathCount=1
+	Page Should Contain Element       xpath:${dropdownXpath}/*[text() = "${value}"]  limit=1
 
 Link Should Point To
 	[Documentation]  Verify that "href" attribute of the element refers to a link
 	[Arguments]      ${locator}  ${expectedUrl}
-	${url}=          Get Element Attribute  ${locator}@href
+	${url}=          Get Element Attribute  ${locator}  href
 	Should Be Equal  ${expectedUrl}  ${url}
 
 # NOTE: this keyword should be used as a last resort. Prefer "Wait Until Page Contains Element"
@@ -46,12 +50,23 @@ Wait Until Element Value Is
 	...                 ';
 	Wait For Condition  ${elemHasValue}
 
+Wait Until Element Text Is
+	[Documentation]     Hybrid of "Wait Until Page Contains Element" and "Element Text Should Be" keywords
+	[Arguments]         ${id}  ${text}
+	${elemHasText}=     Catenate  SEPARATOR=
+	...                 var el = window.document.getElementById('
+	...                 ${id}
+	...                 '); return el != null && el.innerText == '
+	...                 ${text}
+	...                 ';
+	Wait For Condition  ${elemHasText}
+
 Select Random Option From List
 	[Documentation]            Choose a random option from a select element
 	[Arguments]                ${locator}
 	${options}=                Get List Items  ${locator}
 	${size}=                   Get Length  ${options}
-	${randomIndex}=            Evaluate  random.randint(0, ${size}-1)  modules=random
+	${randomIndex}=            Evaluate  str(random.randint(0, ${size}-1))  modules=random
 	Select From List By Index  ${locator}  ${randomIndex}
 
 Disable Client Validation

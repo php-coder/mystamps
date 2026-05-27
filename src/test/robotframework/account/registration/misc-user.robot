@@ -2,6 +2,7 @@
 Documentation   Verify miscellaneous aspects of account registration from user
 Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
+Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Test Setup      Before Test

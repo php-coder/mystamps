@@ -5,11 +5,10 @@ Library         String
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-price  logic  htmx
+Force Tags      series  add-price  logic
 
 *** Test Cases ***
 Add a price by a catalog
-	[Tags]      unstable
 	[Template]  Add a price
 	michel      10  EUR
 	scott       20  USD

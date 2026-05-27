@@ -3,10 +3,11 @@ Documentation    Verify participant creation scenarios
 Library          Collections
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Before Test
-Force Tags       participant  logic  htmx
+Force Tags       participant  logic
 
 *** Test Cases ***
 Create participant with name only (fill only mandatory fields)

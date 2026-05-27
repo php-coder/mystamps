@@ -12,7 +12,7 @@ Successful authentication
 	Submit Form                 id:auth-account-form
 	Location Should Be          ${SITE_URL}/
 	Page Should Contain Link    link:Test Suite
-	Page Should Contain Button  value:Sign out
+	Page Should Contain Button  Sign out
 
 Log out
 	Go To                     ${SITE_URL}/account/auth
