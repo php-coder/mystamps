@@ -1,0 +1,19 @@
+Changelogs:
+- https://github.com/jdx/mise-action/releases/tag/v3.6.0
+- https://github.com/jdx/mise-action/releases/tag/v3.6.1
+- https://github.com/jdx/mise-action/releases/tag/v3.6.2
+- https://github.com/jdx/mise-action/releases/tag/v3.6.3
+- https://github.com/jdx/mise-action/releases/tag/v4.0.0
+  - Update Node.js from 20 to 24
+- https://github.com/jdx/mise-action/releases/tag/v4.0.1
+- https://github.com/jdx/mise-action/releases/tag/v4.1.0
+  - Automatic --locked install when mise.lock exists
+- https://github.com/jdx/mise-action/releases/tag/v4.2.0
+  - Bootstrap mode
+- https://github.com/jdx/mise-action/releases/tag/v4.2.1
+- https://github.com/jdx/mise-action/releases/tag/v4.2.2
+- https://github.com/jdx/mise-action/releases/tag/v4.2.3
+- https://github.com/jdx/mise-action/releases/tag/v4.2.4
+- https://github.com/jdx/mise-action/releases/tag/v4.2.5
+- https://github.com/jdx/mise-action/releases/tag/v4.3.0
+  - minimum_release_age input
