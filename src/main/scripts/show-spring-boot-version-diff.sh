@@ -13,14 +13,14 @@ CURRENT_DIR="$(dirname "$0")"
 PROJECT_POM="$CURRENT_DIR/../../../pom.xml"
 
 (
-	printf 'Dependency\tProject\tSpring Boot\n';
+	printf 'Dependency\tSpring Boot\tProject\n';
 	spring-boot-dependency-checker "$PROJECT_POM" |
 		jq --raw-output '
 			.packages
 			| sort_by(.group, .name)
 			| .[]
 			| select(.versionComparison != "same")
-			| [ "\(.group):\(.name)", .inputFileVersion, .bootVersion ]
+			| [ "\(.group):\(.name)", .bootVersion, .inputFileVersion ]
 			| @tsv
 			'
 ) | column -t -s $'\t'
