@@ -19,7 +19,7 @@ PROJECT_POM="$CURRENT_DIR/../../../pom.xml"
 			.packages
 			| sort_by(.group, .name)
 			| .[]
-			| select(.bootVersion != .inputFileVersion)
+			| select(.versionComparison != "same")
 			| [ "\(.group):\(.name)", .inputFileVersion, .bootVersion ]
 			| @tsv
 			'
