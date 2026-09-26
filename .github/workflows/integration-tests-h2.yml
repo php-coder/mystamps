@@ -104,18 +104,17 @@ jobs:
 
       # Workaround: chrome installed by setup-chrome clashes with chrome bundled with runner
       # See: https://github.com/browser-actions/setup-chrome/issues/619
-      # When chromedriver looks for Chrome, it uses its own algorithm instead of $PATH and
-      # one of the ways to tweak it, is to set CHROME_BIN
       - name: Override system Chrome
         run: |
           echo "$PATH"
           set -x
           which chrome
           which google-chrome
+          /opt/google/chrome/chrome --version
           google-chrome --version
-          sudo ln -svf ${{steps.setup-chrome.outputs.chrome-path}} /usr/bin/google-chrome
+          sudo ln -svf ${{steps.setup-chrome.outputs.chrome-path}} /opt/google/chrome/chrome
+          /opt/google/chrome/chrome --version
           google-chrome --version
-          echo "CHROME_BIN=${{steps.setup-chrome.outputs.chrome-path}}" | tee -a "$GITHUB_ENV"
 
       - name: Restore existing cache
         uses: actions/cache@v5.0.2 # https://github.com/actions/cache
