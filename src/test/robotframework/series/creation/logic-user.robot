@@ -6,7 +6,7 @@ Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Before Test
-Force Tags       series  logic  htmx
+Force Tags       series  logic
 
 *** Test Cases ***
 Create series by filling only required fields
@@ -30,6 +30,7 @@ Create series by filling all fields
 	Select From List By Value  id:month  9
 	Select From List By Value  id:year   1999
 	Click Element              id:add-catalog-numbers-link
+	Scroll Element Into View   id:michelNumbers
 	Input Text                 id:michelNumbers    1, 2, 3
 	Input Text                 id:michelPrice      10.5
 	Input Text                 id:scottNumbers     10, 11, 12
@@ -59,8 +60,9 @@ Create series by filling all fields
 
 *** Keywords ***
 Before Test Suite
-	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
-	Log In As     login=coder  password=test
+	Open Browser     ${SITE_URL}/account/auth  ${BROWSER}
+	Set Window Size  width=1024  height=768
+	Log In As        login=coder  password=test
 
 Before Test
 	Go To  ${SITE_URL}/series/add
