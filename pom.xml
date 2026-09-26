@@ -570,7 +570,7 @@
 		<liquibase.version>4.31.1</liquibase.version>
 		<lombok.version>1.18.42</lombok.version>
 		<maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
-		<maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
 		<maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
 		<maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
 		<maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
