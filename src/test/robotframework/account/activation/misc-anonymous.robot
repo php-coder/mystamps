@@ -39,9 +39,9 @@ Name with allowed characters should be accepted
 	Семён Якушев
 
 Name should be striped from leading and trailing spaces
-	Input Text                 id:name  ${SPACE * 2}test${SPACE * 2}
-	Submit Form                id:activate-account-form
-	Textfield Value Should Be  id:name  test
+	Input Text                   id:name  ${SPACE * 2}test${SPACE * 2}
+	Submit Form                  id:activate-account-form
+	Wait Until Element Value Is  name  test
 
 Most short password should be accepted
 	Input Text                       id:password  1234
