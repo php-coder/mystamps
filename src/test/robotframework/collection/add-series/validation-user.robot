@@ -20,10 +20,11 @@ Add a series with too few number of stamps
 	Element Text Should Be  id:number-of-stamps.errors  Value must be greater than or equal to 1
 
 Add a series with too many number of stamps
-	Input Text              id:number-of-stamps  5
-	Submit Form             id:add-series-form
-	${msg}=                 Set Variable  Number of stamps must be less than or equal to a stamps quantity in the series
-	Element Text Should Be  id:number-of-stamps.errors  ${msg}
+	Input Text                        id:number-of-stamps  5
+	Submit Form                       id:add-series-form
+	Wait Until Page Contains Element  id:number-of-stamps.errors
+	${msg}=                           Set Variable  Number of stamps must be less than or equal to a stamps quantity in the series
+	Element Text Should Be            id:number-of-stamps.errors  ${msg}
 
 *** Keywords ***
 Before Test Suite
