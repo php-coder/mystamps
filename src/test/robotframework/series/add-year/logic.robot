@@ -4,7 +4,7 @@ Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-year  logic  htmx
+Force Tags      series  add-year  logic
 
 *** Test Cases ***
 Add a release year
