@@ -16,11 +16,11 @@ Category name should be stripped from leading and trailing spaces
 	Textfield Value Should Be  id:nameRu  т3ст
 
 Category name should be modified by replacing multiple spaces by one
-	Input Text                 id:name  t3${SPACE * 2}st
-	Input Text                 id:nameRu  т3${SPACE * 2}ст
-	Submit Form                id:add-category-form
-	Textfield Value Should Be  id:name  t3 st
-	Textfield Value Should Be  id:nameRu  т3 ст
+	Input Text                   id:name  t3${SPACE * 2}st
+	Input Text                   id:nameRu  т3${SPACE * 2}ст
+	Submit Form                  id:add-category-form
+	Wait Until Element Value Is  name  t3 st
+	Textfield Value Should Be    id:nameRu  т3 ст
 
 Category name in English should accept all allowed characters
 	Input Text                       id:name  Valid-Name Category
