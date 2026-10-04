@@ -559,7 +559,7 @@
 		-->
 		<assertj.version>3.14.0</assertj.version>
 		<commons-lang3.version>3.20.0</commons-lang3.version>
-		<h2.version>2.2.224</h2.version>
+		<h2.version>2.5.250</h2.version>
 		<hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
 		<hikaricp.version>4.0.3</hikaricp.version>
 		<htmlunit.version>2.70.0</htmlunit.version>
