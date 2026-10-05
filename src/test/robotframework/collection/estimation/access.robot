@@ -2,12 +2,13 @@
 Documentation   Verify access to a collection estimation page
 Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
+Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Force Tags      collection  estimation  access
 
 *** Test Cases ***
-Anonymouser user doesn't have access to someone's estimation page
+Anonymous user doesn't have access to someone's estimation page
 	Go To                   ${SITE_URL}/collection/paid/estimation
 	Element Text Should Be  id:error-msg  Forbidden
 
@@ -20,6 +21,7 @@ User doesn't have access to someone's estimation page
 Paid user has access only to its own estimation page
 	Log In As               login=paid  password=test  openPage=${true}
 	Go To                   ${SITE_URL}/collection/paid/estimation
+	Wait Until Location Is  ${SITE_URL}/collection/paid/estimation
 	Element Text Should Be  tag:h3  Paid User's collection
 	Go To                   ${SITE_URL}/collection/admin/estimation
 	Element Text Should Be  id:error-msg  Forbidden
