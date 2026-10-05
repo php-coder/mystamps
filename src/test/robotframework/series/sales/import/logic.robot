@@ -11,7 +11,7 @@ Force Tags      series  sales  import-sales  logic  htmx
 Import a series sale with an existing seller
 	Input Text                   id:series-sale-url  ${MOCK_SERVER}/series/sales/import/logic/existing-seller.html
 	Submit Form                  id:import-series-sale-form
-	# the original field is emptied after successful request,  so we wait for it
+	# the original field is emptied after successful request, so we wait for it
 	Wait Until Element Value Is  series-sale-url     ${EMPTY}
 	Textfield Value Should Be    id:url              ${MOCK_SERVER}/series/sales/import/logic/existing-seller.html
 	List Selection Should Be     id:seller           Eicca Toppinen
