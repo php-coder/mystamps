@@ -21,6 +21,7 @@ User doesn't have access to someone's estimation page
 Paid user has access only to its own estimation page
 	Log In As               login=paid  password=test  openPage=${true}
 	Go To                   ${SITE_URL}/collection/paid/estimation
+	Wait Until Location Is  ${SITE_URL}/collection/paid/estimation
 	Element Text Should Be  tag:h3  Paid User's collection
 	Go To                   ${SITE_URL}/collection/admin/estimation
 	Element Text Should Be  id:error-msg  Forbidden
