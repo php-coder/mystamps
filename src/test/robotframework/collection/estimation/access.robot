@@ -7,7 +7,7 @@ Suite Teardown  Close Browser
 Force Tags      collection  estimation  access
 
 *** Test Cases ***
-Anonymouser user doesn't have access to someone's estimation page
+Anonymous user doesn't have access to someone's estimation page
 	Go To                   ${SITE_URL}/collection/paid/estimation
 	Element Text Should Be  id:error-msg  Forbidden
 
