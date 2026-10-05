@@ -15,9 +15,10 @@ Add a series without required field
 	Element Text Should Be  id:number-of-stamps.errors  Value must not be empty
 
 Add a series with too few number of stamps
-	Input Text              id:number-of-stamps  0
-	Submit Form             id:add-series-form
-	Element Text Should Be  id:number-of-stamps.errors  Value must be greater than or equal to 1
+	Input Text                        id:number-of-stamps  0
+	Submit Form                       id:add-series-form
+	Wait Until Page Contains Element  id:number-of-stamps.errors
+	Element Text Should Be            id:number-of-stamps.errors  Value must be greater than or equal to 1
 
 Add a series with too many number of stamps
 	Input Text                        id:number-of-stamps  5
