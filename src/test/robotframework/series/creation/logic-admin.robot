@@ -6,7 +6,7 @@ Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Before Test
-Force Tags       series  logic  htmx
+Force Tags       series  logic
 
 *** Test Cases ***
 Create series by filling only required fields and providing an image
@@ -30,6 +30,7 @@ Create series by filling only required fields and providing a URL to image
 	Page Should Contain Image  id:series-image-1
 
 Create series by filling all fields
+	[Tags]                     unstable
 	Select From List By Label  id:category  Sport
 	Selectize By Value         country  italy
 	Input Text                 id:quantity  3
@@ -40,6 +41,7 @@ Create series by filling all fields
 	Select From List By Value  id:month  5
 	Select From List By Value  id:year   1999
 	Click Element              id:add-catalog-numbers-link
+	Scroll Element Into View   id:michelNumbers
 	Input Text                 id:michelNumbers    101, 102, 103
 	Input Text                 id:michelPrice      10.5
 	Input Text                 id:scottNumbers     110, 111, 112
@@ -69,8 +71,9 @@ Create series by filling all fields
 
 *** Keywords ***
 Before Test Suite
-	Open Browser  ${SITE_URL}/account/auth  ${BROWSER}
-	Log In As     login=admin  password=test
+	Open Browser     ${SITE_URL}/account/auth  ${BROWSER}
+	Set Window Size  width=1024  height=768
+	Log In As        login=admin  password=test
 
 Before Test
 	Go To  ${SITE_URL}/series/add

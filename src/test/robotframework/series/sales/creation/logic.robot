@@ -5,7 +5,7 @@ Resource         ../../../auth.steps.robot
 Resource         ../../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Force Tags       series  sales  logic  htmx
+Force Tags       series  sales  logic
 
 *** Test Cases ***
 Add a sale with only required fields

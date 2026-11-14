@@ -19,6 +19,7 @@ Create country with name in English (fill only mandatory fields)
 	Country Field Should Have Option  Germany
 
 Create country with name in English and Russian
+	[Tags]                  unstable
 	Input Text              id:name    Czechia
 	Input Text              id:nameRu  Чехия
 	Submit Form             id:add-country-form

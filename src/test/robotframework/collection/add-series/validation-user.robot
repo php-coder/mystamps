@@ -6,7 +6,7 @@ Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Disable Client Validation  add-series-form
-Force Tags       collection  validation  htmx
+Force Tags       collection  validation
 
 *** Test Cases ***
 Add a series without required field
@@ -15,15 +15,17 @@ Add a series without required field
 	Element Text Should Be  id:number-of-stamps.errors  Value must not be empty
 
 Add a series with too few number of stamps
-	Input Text              id:number-of-stamps  0
-	Submit Form             id:add-series-form
-	Element Text Should Be  id:number-of-stamps.errors  Value must be greater than or equal to 1
+	Input Text                        id:number-of-stamps  0
+	Submit Form                       id:add-series-form
+	Wait Until Page Contains Element  id:number-of-stamps.errors
+	Element Text Should Be            id:number-of-stamps.errors  Value must be greater than or equal to 1
 
 Add a series with too many number of stamps
-	Input Text              id:number-of-stamps  5
-	Submit Form             id:add-series-form
-	${msg}=                 Set Variable  Number of stamps must be less than or equal to a stamps quantity in the series
-	Element Text Should Be  id:number-of-stamps.errors  ${msg}
+	Input Text                        id:number-of-stamps  5
+	Submit Form                       id:add-series-form
+	Wait Until Page Contains Element  id:number-of-stamps.errors
+	${msg}=                           Set Variable  Number of stamps must be less than or equal to a stamps quantity in the series
+	Element Text Should Be            id:number-of-stamps.errors  ${msg}
 
 *** Keywords ***
 Before Test Suite

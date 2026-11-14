@@ -5,7 +5,7 @@ Resource        ../../auth.steps.robot
 Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  add-comment  logic  htmx
+Force Tags      series  add-comment  logic
 
 *** Test Cases ***
 Add a comment

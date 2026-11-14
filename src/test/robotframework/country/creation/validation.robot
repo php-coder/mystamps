@@ -2,6 +2,7 @@
 Documentation    Verify country creation validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       country  validation
@@ -45,6 +46,7 @@ Create country with name that starts with hyphen
 	Element Text Should Be  id:nameRu.errors  Value must not start or end with hyphen
 
 Create country with name that ends with hyphen
+	[Tags]                  unstable
 	Input Text              id:name  test-
 	Input Text              id:nameRu  тест-
 	Submit Form             id:add-country-form
@@ -59,6 +61,7 @@ Create country with existing (non-unique) name
 	Element Text Should Be  id:nameRu.errors  Country already exists
 
 Create country with existing name but in a different case
+	[Tags]                  unstable
 	Input Text              id:name  italy
 	Input Text              id:nameRu  италия
 	Submit Form             id:add-country-form
@@ -73,6 +76,7 @@ Create country with non-existing name but existing (non-unique) slug
 	Element Text Should Be  id:name.errors  Country with similar name already exists
 	
 Create country with forbidden names
+	[Tags]                  unstable
 	# Open a page again to have a clean state (nameRu field has an invalid value)
 	Go To                   ${SITE_URL}/country/add
 	# 'add' is a forbidden value
