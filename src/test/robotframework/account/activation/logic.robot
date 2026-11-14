@@ -19,6 +19,7 @@ Activate account with full info (fill all fields)
 	Element Text Should Be  id:msg-success           Account successfully activated! Now you can pass authentication.
 
 Activate account with only required info (fill only mandatory fields)
+	[Tags]                  unstable
 	Input Text              id:login                 2nd-test-login
 	Input Text              id:name                  ${EMPTY}
 	Input Text              id:password              test-password

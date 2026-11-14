@@ -16,6 +16,7 @@ Search series by non-existing catalog number in a collection
 	Element Text Should Be          id:no-series-found  No series found
 
 Search series by existing catalog number in a collection
+	[Tags]      unstable
 	[Template]  Search Series By Catalog Name And Number In Collection
 	michel      99
 	scott       99

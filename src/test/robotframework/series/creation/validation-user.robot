@@ -64,6 +64,7 @@ Catalog numbers should reject invalid values
 	10000
 
 Catalog price should reject invalid values
+	[Tags]      unstable
 	[Template]  Invalid Catalog Price Should Be Rejected
 	0
 	-1

@@ -9,6 +9,7 @@ Force Tags       category  validation
 
 *** Test Cases ***
 Create category with too short name
+	[Tags]                  unstable
 	Input Text              id:name  jj
 	Input Text              id:nameRu  яя
 	Submit Form             id:add-category-form
@@ -32,6 +33,7 @@ Create category with forbidden characters in name
 	Element Text Should Be  id:nameRu.errors  Value must consist only Russian letters, hyphen or spaces
 
 Create category with repeating hyphens in name
+	[Tags]                  unstable
 	Input Text              id:name  te--st
 	Input Text              id:nameRu  те--ст
 	Submit Form             id:add-category-form

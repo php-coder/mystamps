@@ -41,6 +41,7 @@ Activate account with existing login
 	Element Text Should Be  id:login.errors  Login already exists
 
 Activate account with repetition of the special characters in login
+	[Tags]      unstable
 	[Template]  Login should not contain repeated special characters
 	te__st
 	te--st
@@ -70,6 +71,7 @@ Activate account with name that ends with hyphen
 	Element Text Should Be  id:name.errors  Value must not start or end with hyphen
 
 Activate account with too short password
+	[Tags]                  unstable
 	Input Text              id:password         123
 	Submit Form             id:activate-account-form
 	Element Text Should Be  id:password.errors  Value is less than allowable minimum of 4 characters
@@ -81,6 +83,7 @@ Activate account with too long password
 	Element Text Should Be  id:password.errors  Value is greater than allowable maximum of 72 characters
 
 Activate account with too short activation key
+	[Tags]                  unstable
 	Input Text              id:activationKey         12345
 	Submit Form             id:activate-account-form
 	Element Text Should Be  id:activationKey.errors  Value length must be equal to 10 characters

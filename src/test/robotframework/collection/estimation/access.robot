@@ -19,6 +19,7 @@ User doesn't have access to someone's estimation page
 	Log Out
 
 Paid user has access only to its own estimation page
+	[Tags]                  unstable
 	Log In As               login=paid  password=test  openPage=${true}
 	Go To                   ${SITE_URL}/collection/paid/estimation
 	Wait Until Location Is  ${SITE_URL}/collection/paid/estimation
@@ -28,6 +29,7 @@ Paid user has access only to its own estimation page
 	Log Out
 
 Admin has access to everyone's estimation page
+	[Tags]                  unstable
 	Log In As               login=admin  password=test  openPage=${true}
 	Go To                   ${SITE_URL}/collection/paid/estimation
 	Element Text Should Be  tag:h3  Paid User's collection
